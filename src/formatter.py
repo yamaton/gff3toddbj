@@ -1,6 +1,7 @@
 from typing import Any, Dict, List, Tuple, Iterable, Union
 from Bio.SeqRecord import SeqRecord
-from Bio.SeqFeature import CompoundLocation, FeatureLocation
+from Bio.SeqFeature import CompoundLocation, FeatureLocation, SeqFeature
+import yaml
 
 Location = Union[FeatureLocation, CompoundLocation]
 
@@ -27,7 +28,7 @@ def format_location(loc: Location) -> str:
     return s
 
 
-def to_ddbj_table(rec: SeqRecord) -> List[List[str]]:
+def record_to_ddbj_table(rec: SeqRecord) -> List[List[str]]:
     """Convert GFF.SeqRecord into DDBJ annotation table format
 
     DDBJ annotation table format is TSV (tab-separated variables) with 5 columns
@@ -50,23 +51,44 @@ def to_ddbj_table(rec: SeqRecord) -> List[List[str]]:
     ]
 
     """
-    lines = sum(
-        len(vals)
+    num_lines = sum(
+        len(vals) if isinstance(vals, list) else 1
         for feature in rec.features
         for vals in feature.qualifiers.values()
     )
-    print("lines: {}".format(lines))
-    table = [["" for _ in range(5)] for _ in range(lines)]
+    table = [["" for _ in range(5)] for _ in range(num_lines)]
+    table[0][0] = str(rec.id)
 
     idx = 0
     for feature in rec.features:
-        for (qualifier_idx, (qualifier_key, values)) in enumerate(feature.qualifiers.items()):
+        is_first_line = True
+        for (qualifier_key, values) in feature.qualifiers.items():
+            values = values if isinstance(values, list) else [values]
             for qualifier_value in values:
-                if qualifier_idx == 0:
+                if is_first_line:
+                    is_first_line = False
                     table[idx][1] = feature.type
                     if feature.location is not None:
                         table[idx][2] = format_location(feature.location)
                 table[idx][3] = qualifier_key
-                table[idx][4] = qualifier_value
+                table[idx][4] = str(qualifier_value)
                 idx += 1
+
     return table
+
+
+def table_to_tsv(table: List[List[str]]) -> str:
+    """Convert from table (list of list) to tab-separated variables (TSV)
+    """
+    return "\n".join("\t".join(items) for items in table)
+
+
+def load_common(path) -> SeqRecord:
+    """Create COMMON entry as SeqRecord
+    """
+    with open(path, "r") as f:
+        header_info = yaml.safe_load(f)
+
+    features = [SeqFeature(type=key, qualifiers=xs) for (key, xs) in header_info.items()]
+    record = SeqRecord("", id="COMMON", features=features)
+    return record

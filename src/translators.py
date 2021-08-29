@@ -1,5 +1,5 @@
 from typing import Any, Dict, List, Tuple, Iterable
-import json
+import yaml
 import re
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
@@ -7,10 +7,10 @@ from Bio.SeqFeature import SeqFeature
 
 def load_as_dict(filepath) -> Dict[str, Any]:
     """
-    Load JSON file as python dictionary
+    Load YAML as python dictionary
     """
     with open(filepath) as fp:
-        d = json.load(fp)
+        d = yaml.load(fp)
     return d
 
 

@@ -1,0 +1,6 @@
+numpy
+biopython
+bcbio-gff
+openpyxl
+pandas
+pyyaml
