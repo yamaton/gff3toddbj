@@ -2,12 +2,42 @@ from typing import Any, Dict, List, Tuple, Iterable
 import collections
 import yaml
 import re
+import pathlib
+import gzip
+import Bio
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import SeqFeature, CompoundLocation
+from BCBio import GFF
 
 
-def load_as_dict(filepath) -> Dict[str, Any]:
+def load_gff3_as_seqrecords(filepath) -> List[SeqRecord]:
+    """
+    Load GFF3 as iterable of SeqRecord
+    """
+    p = pathlib.Path(filepath)
+    if p.suffix == ".gz":
+        with gzip.open(filepath, "rt") as f:
+            recs = list(GFF.parse(f))
+    else:
+        recs = list(GFF.parse(filepath))
+    return recs
+
+
+def load_fasta_as_seq(filepath) -> Seq:
+    """
+    Load FASTA file as Seq
+    """
+    p = pathlib.Path(filepath)
+    if p.suffix == ".gz":
+        with gzip.open(filepath, "rt") as f:
+            return Bio.SeqIO.parse(f, "fasta")
+    else:
+        recs = Bio.SeqIO.parse(filepath, "fasta")
+    return recs
+
+
+def load_yaml_as_dict(filepath) -> Dict[str, Any]:
     """
     Load YAML as python dictionary
     """
@@ -76,7 +106,7 @@ class TranslateQualifiers(object):
 
     def __init__(self, filepaths: Iterable[str]):
         self.paths = filepaths
-        ds = [load_as_dict(p) for p in filepaths]
+        ds = [load_yaml_as_dict(p) for p in filepaths]
         self.trans_table = merge_dicts(ds)
 
     def run(self, record: SeqRecord) -> SeqRecord:
@@ -132,7 +162,7 @@ class TranslateFeatures(object):
 
     def __init__(self, filepaths: Iterable[str]):
         self.paths = filepaths
-        ds = [load_as_dict(p) for p in filepaths]
+        ds = [load_yaml_as_dict(p) for p in filepaths]
         self.d = merge_dicts(ds)
 
     def run(self, record: SeqRecord) -> SeqRecord:
