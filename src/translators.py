@@ -238,3 +238,26 @@ def join_features(record: SeqRecord, joinable=["CDS"]) -> SeqRecord:
 
     record.features = _helper(record.features)
     return record
+
+
+
+def fix_codon_start_values(rec: SeqRecord):
+    """Convert `codon_start` qualifier value
+    from 0-based (in GFF3 'phase' column)
+    to   1-based (in INSDC table definition)
+    """
+    def _fix_feature(feature: SeqFeature):
+        trans = {'0': '1', '1': '2', '2': '3'}
+
+        if hasattr(feature, "sub_features"):
+            for f in feature.sub_features:
+                _fix_feature(f)
+
+        if "codon_start" in feature.qualifiers:
+            x = feature.qualifiers["codon_start"][0]
+            y = trans[x]
+            feature.qualifiers["codon_start"] = [y]
+
+    for f in rec.features:
+        _fix_feature(f)
+
