@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Tuple, Iterable, Union, Generator
+from typing import Any, Dict, FrozenSet, List, Tuple, Iterable, Union, Generator
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import CompoundLocation, FeatureLocation, SeqFeature
 import yaml
@@ -32,52 +32,6 @@ def format_location(loc: Location) -> str:
     return s
 
 
-def record_to_ddbj_table(rec: SeqRecord, limit_to_ddbj=True) -> List[List[str]]:
-    """Convert GFF.SeqRecord into DDBJ annotation table format
-
-    DDBJ annotation table format is TSV (tab-separated variables) with 5 columns
-        - Column 1: Sequence ID
-        - Column 2: Feature Key
-        - Column 3: Location
-        - Column 4: Qualifier Key
-        - Column 5: Qualifier Value
-
-    Example:
-        ["CLN01", "source", "1..12297"                         , "organism"   ,  "Mus musculus"  ],
-        [       ,         ,                                    , "mol_type"   ,  "genomic DNA"   ],
-        [       ,         ,                                    , "clone"      ,  "PC0110"        ],
-    ...
-    """
-    table = [
-        row
-        for feature in rec.features
-        for row in _gen_ddbj_table_feature_rows(feature, limit_to_ddbj)
-    ]
-    table[0][0] = rec.id
-    return table
-
-def _gen_ddbj_table_feature_rows(feature: SeqFeature, limit_to_ddbj=True) -> Generator[List[str], None, None]:
-    """Convert SeqFeature into DDBJ annotation table format
-    """
-    is_first_line = True
-    for (qualifier_key, values) in feature.qualifiers.items():
-        values = values if isinstance(values, list) else [values]
-        for qualifier_value in values:
-            xs = ["" for _ in range(5)]
-            if is_first_line:
-                is_first_line = False
-                xs[1] = feature.type
-                if feature.location is not None:
-                    xs[2] = format_location(feature.location)
-            xs[3] = qualifier_key
-            xs[4] = str(qualifier_value)
-            yield xs
-
-        if hasattr(feature, "sub_features"):
-            for subfeature in feature.sub_features:
-                yield from _gen_ddbj_table_feature_rows(subfeature)
-
-
 def table_to_tsv(table: List[List[str]]) -> str:
     """Convert from table (list of list) to tab-separated variables (TSV)"""
     return "\n".join("\t".join(items) for items in table)
@@ -93,4 +47,75 @@ def load_common(path) -> SeqRecord:
     ]
     record = SeqRecord("", id="COMMON", features=features)
     return record
+
+
+def load_rules(path: str) -> Dict[str, FrozenSet[str]]:
+    """Load DDBJ feature-qualifier rules in YAML
+    """
+    with open(path, "r") as f:
+        rules = yaml.safe_load(f)
+    for feature_key in rules:
+        rules[feature_key] = frozenset(rules[feature_key])
+    return rules
+
+
+class DDBJFormatter(object):
+    """Format SeqRecord to DDBJ annotation table.
+    """
+    def __init__(self, path: str):
+        self.rules = load_rules(path)
+
+    def is_allowed(self, feature_key, qualifier_key):
+        return (feature_key in self.rules) and (qualifier_key in self.rules[feature_key])
+
+    def to_ddbj_table(self, rec: SeqRecord, ignore_ddbj=False) -> List[List[str]]:
+        """Convert GFF.SeqRecord into DDBJ annotation table format
+
+        Args:
+            rec (SeqRecord): Annotated record to be converted
+            ignore_ddbj (bool): Ignore DDBJ-recommended feature-qualifier filtering if True
+
+        DDBJ annotation table format is TSV (tab-separated variables) with 5 columns
+            - Column 1: Sequence ID
+            - Column 2: Feature Key
+            - Column 3: Location
+            - Column 4: Qualifier Key
+            - Column 5: Qualifier Value
+
+        Example:
+            ["CLN01", "source", "1..12297"                         , "organism"   ,  "Mus musculus"  ],
+            [       ,         ,                                    , "mol_type"   ,  "genomic DNA"   ],
+            [       ,         ,                                    , "clone"      ,  "PC0110"        ],
+        ...
+        """
+        table = [
+            row
+            for feature in rec.features
+            for row in self._gen_ddbj_table_feature_rows(feature, ignore_ddbj)
+        ]
+        table[0][0] = rec.id
+        return table
+
+    def _gen_ddbj_table_feature_rows(self, feature: SeqFeature, ignore_ddbj=True) -> Generator[List[str], None, None]:
+        """Convert SeqFeature into DDBJ annotation table format
+        """
+        is_first_line = True
+        for (qualifier_key, values) in feature.qualifiers.items():
+            values = values if isinstance(values, list) else [values]
+            for qualifier_value in values:
+                xs = ["" for _ in range(5)]
+                feature_key = feature.type
+                if ignore_ddbj or self.is_allowed(feature_key, qualifier_key):
+                    if is_first_line:
+                        is_first_line = False
+                        xs[1] = feature_key
+                        if feature.location is not None:
+                            xs[2] = format_location(feature.location)
+                    xs[3] = qualifier_key
+                    xs[4] = str(qualifier_value)
+                    yield xs
+
+            if hasattr(feature, "sub_features"):
+                for subfeature in feature.sub_features:
+                    yield from self._gen_ddbj_table_feature_rows(subfeature, ignore_ddbj)
 
