@@ -10,10 +10,13 @@ def format_location(loc: Location) -> str:
     """Format location"""
 
     def _format_forward_segment(loc: FeatureLocation) -> str:
-        return "{start}..{end}".format(start=loc.start, end=loc.end)
+        start = min(loc.start, loc.end)
+        end = max(loc.start, loc.end)
+        return "{}..{}".format(start, end)
 
     def _format_forward_compound_segments(loc: CompoundLocation) -> str:
-        parts = ",".join(_format_forward_segment(x) for x in loc.parts)
+        locs = sorted(loc.parts, key=lambda feature_loc: min(feature_loc.start, feature_loc.end))
+        parts = ",".join(_format_forward_segment(x) for x in locs)
         s = "join({})".format(parts)
         return s
 
