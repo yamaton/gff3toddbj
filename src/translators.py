@@ -1,16 +1,18 @@
 from typing import Any, Dict, List, Tuple, Iterable
+import collections
 import yaml
 import re
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
-from Bio.SeqFeature import SeqFeature
+from Bio.SeqFeature import SeqFeature, CompoundLocation
+
 
 def load_as_dict(filepath) -> Dict[str, Any]:
     """
     Load YAML as python dictionary
     """
     with open(filepath) as fp:
-        d = yaml.load(fp)
+        d = yaml.safe_load(fp)
     return d
 
 
@@ -45,7 +47,7 @@ def get_assembly_gap(seq: Seq) -> List[Tuple[int, int]]:
     segments = []
     for m in matches:
         a, b = m.span()  # 0-based, left-inclusive, right-exclusive
-        tup = (a + 1, b) # 1-based, both-inclusive
+        tup = (a + 1, b)  # 1-based, both-inclusive
         segments.append(tup)
 
     return segments
@@ -71,40 +73,40 @@ class TranslateQualifiers(object):
 
     Empty "target" value means the name key is dropped.
     """
+
     def __init__(self, filepaths: Iterable[str]):
         self.paths = filepaths
         ds = [load_as_dict(p) for p in filepaths]
-        self.d = merge_dicts(ds)
+        self.trans_table = merge_dicts(ds)
 
     def run(self, record: SeqRecord) -> SeqRecord:
-        """Modifies record according to the GFF3-attributes-to-qualifiers translation JSON data.
-        """
+        """Modifies record according to the GFF3-attributes-to-qualifiers translation JSON data."""
         record.features = self._run_on_features(record.features)
         return record
 
     def _run_on_features(self, features: List[SeqFeature]) -> List[SeqFeature]:
         for feature in features:
-            if hasattr(feature, 'sub_features'):
+            if hasattr(feature, "sub_features"):
                 feature.sub_features = self._run_on_features(feature.sub_features)
-            if hasattr(feature, 'qualifiers'):
+            if hasattr(feature, "qualifiers"):
                 feature.qualifiers = self._run_on_qualifiers(feature.qualifiers)
         return features
 
     def _run_on_qualifiers(self, qualifiers: Dict) -> Dict:
-        res = dict()
+        res = collections.defaultdict(list)
         for name, vals in qualifiers.items():
-            if name in self.d:
+            if name in self.trans_table:
                 # Replace the item name
-                new_name = self.d[name]["target"]
+                new_name = self.trans_table[name]["target"]
                 if new_name:
-                    prefix = self.d[name].get("prefix", "")
-                    res[new_name] = [prefix + v for v in vals]
+                    prefix = self.trans_table[name].get("prefix", "")
+                    res[new_name] += [prefix + v for v in vals]
                 else:
                     # Remove the item from qualifiers if "target" is not set, or emtpy
                     pass
             else:
-                res[name] = vals
-        return res
+                res[name] += vals
+        return dict(res)
 
 
 class TranslateFeatures(object):
@@ -127,20 +129,20 @@ class TranslateFeatures(object):
     Empty "target" value means the name key is dropped.
     Unlike qualifiers, "prefix" is not supported here.
     """
+
     def __init__(self, filepaths: Iterable[str]):
         self.paths = filepaths
         ds = [load_as_dict(p) for p in filepaths]
         self.d = merge_dicts(ds)
 
     def run(self, record: SeqRecord) -> SeqRecord:
-        """Modifies record according to the GFF3-types-to-features translation JSON data.
-        """
+        """Modifies record according to the GFF3-types-to-features translation JSON data."""
         record.features = self._run_on_features(record.features)
         return record
 
     def _run_on_features(self, features: List[SeqFeature]) -> List[SeqFeature]:
         for feature in features:
-            if hasattr(feature, 'sub_features'):
+            if hasattr(feature, "sub_features"):
                 feature.sub_features = self._run_on_features(feature.sub_features)
             name = feature.type
             if name in self.d:
@@ -148,3 +150,61 @@ class TranslateFeatures(object):
                 feature.type = new_name
         return features
 
+
+def join_features(record: SeqRecord, joinable=["CDS"]) -> SeqRecord:
+    """
+    Join features
+    """
+
+    def _join(features: List[SeqFeature]) -> SeqFeature:
+        assert len(features) > 1
+        locations = []
+        qualifiers = collections.OrderedDict()
+        sub_features = []
+        for f in features:
+            locations.append(f.location)
+            qualifiers.update(f.qualifiers)
+            if hasattr(f, "sub_features") and f.sub_features:
+                sub_features.extend(f.sub_features)
+        if not sub_features:
+            sub_features = None
+
+        compound_loc = CompoundLocation(locations)
+
+        return SeqFeature(
+            compound_loc,
+            type=features[0].type,
+            qualifiers=qualifiers,
+            sub_features=sub_features,
+        )
+
+    def _helper(features: List[SeqFeature]) -> List[SeqFeature]:
+        triples_or_features = collections.defaultdict(list)
+        for f in features:
+            if f.type not in joinable:
+                triples_or_features[f] = [True]
+            else:
+                prod = f.qualifiers.get("product", None)
+                triple = (f.type, f.id, prod)
+                triples_or_features[triple].append(f)
+
+        res = []
+        seen = set()
+        for triple_or_f, fs in triples_or_features.items():
+            if isinstance(triple_or_f, SeqFeature):
+                res.append(triple_or_f)
+            else:
+                if triple_or_f not in seen:
+                    seen.add(triple_or_f)
+                    joined_feature = _join(fs)
+                    res.append(joined_feature)
+
+        # join after upper levels
+        for f in res:
+            if hasattr(f, "sub_features") and f.sub_features:
+                f.sub_features = _helper(f.sub_features)
+
+        return res
+
+    record.features = _helper(record.features)
+    return record
