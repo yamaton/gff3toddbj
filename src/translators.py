@@ -125,9 +125,14 @@ class TranslateQualifiers(object):
     Empty "target" value means the name key is dropped.
     """
 
-    def __init__(self, filepath: str):
+    def __init__(self, filepath: str, locus_tag_prefix: str):
         self.path = filepath
+        self.locus_tag_prefix = locus_tag_prefix
         self.trans_table = load_toml_tables(filepath)
+
+        # modify the table by inserting locus_tag prefix
+        assert "locus_tag" in self.trans_table
+        self.trans_table["locus_tag"]["prefix"] = locus_tag_prefix
 
     def run(self, record: SeqRecord) -> SeqRecord:
         """Modifies record according to the GFF3-attributes-to-qualifiers translation JSON data."""
@@ -287,13 +292,13 @@ def fix_codon_start_values(rec: SeqRecord):
         _fix_feature(f)
 
 
-def run(path_to_gff3, path_to_fasta, trans_features, trans_qualifiers, joinables) -> List[SeqRecord]:
+def run(path_to_gff3, path_to_fasta, trans_features, trans_qualifiers, locus_tag_prefix, joinables) -> List[SeqRecord]:
     """
     Create SeqRecord and run all translations
     """
     records = load_gff3_as_seqrecords(path_to_gff3)
     f = TranslateFeatures(trans_features).run
-    g = TranslateQualifiers(trans_qualifiers).run
+    g = TranslateQualifiers(trans_qualifiers, locus_tag_prefix).run
 
     # translate features and qualifiers
     records = [g(f(rec)) for rec in records]

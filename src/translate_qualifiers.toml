@@ -47,6 +47,12 @@ target = "product"
 description = "N/A"
 target = "EC_number"
 
+[locus_tag]
+description = "This entry is to add locus tag prefix"
+target = "locus_tag"
+prefix = "<dummy>"
+
 [_Description]
 description = "N/A"
 target = "product"
+
