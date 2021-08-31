@@ -7,7 +7,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 TRANS_FEATURES = "src/translate_features.yaml"
 TRANS_QUALIFIERS = "src/translate_qualifiers.yaml"
-DDBJ_RULES = "src/ddbj_feature-qualifier_lists.yaml"
+DDBJ_RULES = "src/ddbj_rules.yaml"
 COMMON = "samples/common.yaml"
 
 def main():
@@ -28,7 +28,7 @@ def main():
     logging.info("Records: {}".format(records))
 
     fmt = formatter.DDBJFormatter(args.common, DDBJ_RULES)
-    gen = fmt.run(records, ignore_ddbj=True)
+    gen = fmt.run(records, ignore_rules=False)
     for line in gen:
         print(line)
 

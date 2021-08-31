@@ -5,6 +5,8 @@ from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import CompoundLocation, FeatureLocation, SeqFeature
 import yaml
 
+import utils
+
 Location = Union[FeatureLocation, CompoundLocation]
 
 
@@ -72,17 +74,20 @@ class DDBJFormatter(object):
         self.common = load_common(common_header_path)
         self.rules = load_rules(ddbj_rule_path)
 
-    def is_allowed(self, feature_key, qualifier_key):
-        return (feature_key in self.rules) and (
+    def _is_allowed_feature(self, feature_key):
+        return feature_key in self.rules
+
+    def _is_allowed_pair(self, feature_key, qualifier_key):
+        return self._is_allowed_feature(feature_key) and (
             qualifier_key in self.rules[feature_key]
         )
 
-    def to_ddbj_table(self, rec: SeqRecord, ignore_ddbj=False) -> List[List[str]]:
+    def to_ddbj_table(self, rec: SeqRecord, ignore_rules=False) -> List[List[str]]:
         """Convert GFF.SeqRecord into DDBJ annotation table format
 
         Args:
             rec (SeqRecord): Annotated record to be converted
-            ignore_ddbj (bool): Ignore DDBJ-recommended feature-qualifier filtering if True
+            ignore_rules (bool): Ignore DDBJ-recommended feature-qualifier choices if True
 
         DDBJ annotation table format is TSV (tab-separated variables) with 5 columns
             - Column 1: Sequence ID
@@ -97,16 +102,25 @@ class DDBJFormatter(object):
             [       ,         ,                                    , "clone"      ,  "PC0110"        ],
         ...
         """
+        # Display skipped features according to the rule
+
+        if not ignore_rules:
+            feature_keys = {f.type for f in utils.flatten_features(rec.features)}
+            for k in feature_keys:
+                if not self._is_allowed_feature(k):
+                    logging.info("skipping (feature): {}\t(in Seq {})".format(k, rec.id))
+
         table = [
             row
             for feature in rec.features
-            for row in self._gen_ddbj_table_feature_rows(feature, ignore_ddbj)
+            if ignore_rules or (not self._is_allowed_feature(feature.type))
+            for row in self._gen_ddbj_table_feature_rows(feature, ignore_rules)
         ]
         table[0][0] = rec.id
         return table
 
     def _gen_ddbj_table_feature_rows(
-        self, feature: SeqFeature, ignore_ddbj=True
+        self, feature: SeqFeature, ignore_rules=True
     ) -> Generator[List[str], None, None]:
         """Convert SeqFeature into DDBJ annotation table format"""
         is_first_line = True
@@ -115,8 +129,8 @@ class DDBJFormatter(object):
             for qualifier_value in values:
                 xs = ["" for _ in range(5)]
                 feature_key = feature.type
-                is_keeping = self.is_allowed(feature_key, qualifier_key)
-                if ignore_ddbj or is_keeping:
+                is_keeping = self._is_allowed_pair(feature_key, qualifier_key)
+                if ignore_rules or is_keeping:
                     if is_first_line:
                         is_first_line = False
                         xs[1] = feature_key
@@ -125,23 +139,23 @@ class DDBJFormatter(object):
                     xs[3] = qualifier_key
                     xs[4] = str(qualifier_value)
                     yield xs
-                elif not ignore_ddbj and not is_keeping:
+                elif not ignore_rules and not is_keeping:
                     troika = (feature_key, qualifier_key, qualifier_value)
-                    logging.warn("skipping:  {}, {}, {}\n".format(*troika))
+                    logging.warn("skipping (qualifier):  {}\t{}\t{}".format(*troika))
 
             if hasattr(feature, "sub_features"):
                 for subfeature in feature.sub_features:
                     yield from self._gen_ddbj_table_feature_rows(
-                        subfeature, ignore_ddbj
+                        subfeature, ignore_rules
                     )
 
-    def run(self, records: Iterable[SeqRecord], ignore_ddbj: bool) -> Generator[str, None, None]:
+    def run(self, records: Iterable[SeqRecord], ignore_rules: bool) -> Generator[str, None, None]:
         """Format records and generate string line by line."""
-        table_header = self.to_ddbj_table(self.common, ignore_ddbj=True)
+        table_header = self.to_ddbj_table(self.common, ignore_rules=True)
         for rows in table_header:
             yield "\t".join(rows)
 
         for rec in records:
-            tbl = self.to_ddbj_table(rec, ignore_ddbj)
+            tbl = self.to_ddbj_table(rec, ignore_rules)
             for rows in tbl:
                 yield "\t".join(rows)
