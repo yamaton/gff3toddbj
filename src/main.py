@@ -13,9 +13,12 @@ def main():
     parser.add_argument("fasta", help="Input FASTA file")
     args = parser.parse_args()
 
+    records = translators.run(
+        args.gff3, args.fasta, TRANS_FEATURES, TRANS_QUALIFIERS, is_joining=False
+    )
 
-
-
-    t_features = translators.TranslateFeatures(TRANS_FEATURES)
-    t_qualifiers = translators.TranslateQualifiers(TRANS_QUALIFIERS)
-
+    fmt = formatter.DDBJFormatter(DDBJ_RULES)
+    for rec in records:
+        gen = fmt.run(rec)
+        for line in gen:
+            print(line)

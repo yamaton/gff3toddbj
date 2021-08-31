@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Tuple, Iterable
+from typing import Any, Dict, Generator, List, Tuple, Iterable
 import collections
 import yaml
 import re
@@ -7,9 +7,10 @@ import gzip
 import Bio
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
-from Bio.SeqFeature import SeqFeature, CompoundLocation
+from Bio.SeqFeature import FeatureLocation, SeqFeature, CompoundLocation
 from BCBio import GFF
 
+Interval = Tuple[int, int]
 
 def load_gff3_as_seqrecords(filepath) -> List[SeqRecord]:
     """
@@ -24,7 +25,7 @@ def load_gff3_as_seqrecords(filepath) -> List[SeqRecord]:
     return recs
 
 
-def load_fasta_as_seq(filepath) -> Seq:
+def load_fasta_as_seq(filepath) -> Generator[Seq]:
     """
     Load FASTA file as Seq
     """
@@ -60,7 +61,23 @@ def merge_dicts(dict_args: Iterable[Dict]):
     return res
 
 
-def get_assembly_gap(seq: Seq) -> List[Tuple[int, int]]:
+def get_assembly_gap(seq: Seq) -> List[SeqFeature]:
+    """
+    Get assembly_gap features from seq.
+
+    [NOTE] A location is of format (begin, end)
+    with 1-based indexing, and inclusive in both sides.
+
+    >>> s = Seq("atatnnngattacanccc")
+    >>> get_assembly_gap(s)
+    [(5, 7), (15, 15)]
+    """
+    locs = [FeatureLocation(start, end, strand=1) for (start, end) in _get_assembly_gap_locations(seq)]
+    features = [SeqFeature(loc, type="assembly_gap") for loc in locs]
+    return features
+
+
+def _get_assembly_gap_locations(seq: Seq) -> List[Interval]:
     """
     Get assembly_gap locations from seq.
 
@@ -68,6 +85,7 @@ def get_assembly_gap(seq: Seq) -> List[Tuple[int, int]]:
     with 1-based indexing, and inclusive in both sides.
 
     >>> s = Seq("atatnnngattacanccc")
+    >>> _get_assembly_gap_locations(s)
     [(5, 7), (15, 15)]
     """
     s = str(seq)
@@ -240,7 +258,6 @@ def join_features(record: SeqRecord, joinable=["CDS"]) -> SeqRecord:
     return record
 
 
-
 def fix_codon_start_values(rec: SeqRecord):
     """Convert `codon_start` qualifier value
     from 0-based (in GFF3 'phase' column)
@@ -261,3 +278,31 @@ def fix_codon_start_values(rec: SeqRecord):
     for f in rec.features:
         _fix_feature(f)
 
+
+def run(path_to_gff3, path_to_fasta, trans_features, trans_qualifiers, is_joining=False) -> List[SeqRecord]:
+    """
+    Create SeqRecord and run all translations
+    """
+    records = load_gff3_as_seqrecords(path_to_gff3)
+    f = TranslateFeatures(trans_features).run
+    g = TranslateQualifiers(trans_qualifiers).run
+
+    # translate features and qualifiers
+    records = [g(f(rec)) for rec in records]
+
+    # fix codon_start
+    for rec in records:
+        fix_codon_start_values(rec)
+
+    # add assembly_gap
+    seqs = load_fasta_as_seq(path_to_fasta)
+    gaps = {seq.id: get_assembly_gap(seq) for seq in seqs}
+    for rec in records:
+        if rec.id in gaps:
+            rec.features.extend(gaps[rec.id])
+
+    # join features (such as CDS)
+    if is_joining:
+        records = [join_features(rec, joinable=["CDS"]) for rec in records]
+
+    return records
