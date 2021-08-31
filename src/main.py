@@ -1,24 +1,37 @@
 import argparse
-from . import formatter
-from . import translators
+import formatter
+import translators
+import logging
 
-TRANS_FEATURES = "./translate_features.yaml"
-TRANS_QUALIFIERS = "./translate_qualifiers.yaml"
-DDBJ_RULES = "./ddbj_feature-qualifier_lists.yaml"
+logging.basicConfig(level=logging.DEBUG)
 
+TRANS_FEATURES = "src/translate_features.yaml"
+TRANS_QUALIFIERS = "src/translate_qualifiers.yaml"
+DDBJ_RULES = "src/ddbj_feature-qualifier_lists.yaml"
+COMMON = "samples/common.yaml"
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("gff3", help="Input GFF3 file")
     parser.add_argument("fasta", help="Input FASTA file")
+    parser.add_argument("common", help="Input COMMON file in YAML or TSV", nargs='?', default=COMMON)
     args = parser.parse_args()
+
+    logging.info("Input GFF   : {}".format(args.gff3))
+    logging.info("Input FASTA : {}".format(args.fasta))
+    logging.info("Input COMMON: {}".format(args.common))
 
     records = translators.run(
         args.gff3, args.fasta, TRANS_FEATURES, TRANS_QUALIFIERS, is_joining=False
     )
 
-    fmt = formatter.DDBJFormatter(DDBJ_RULES)
-    for rec in records:
-        gen = fmt.run(rec)
-        for line in gen:
-            print(line)
+    logging.info("Records: {}".format(records))
+
+    fmt = formatter.DDBJFormatter(args.common, DDBJ_RULES)
+    gen = fmt.run(records, ignore_ddbj=True)
+    for line in gen:
+        print(line)
+
+
+if __name__ == "__main__":
+    main()

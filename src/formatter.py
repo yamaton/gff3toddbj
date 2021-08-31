@@ -1,3 +1,4 @@
+from io import UnsupportedOperation
 import logging
 from typing import Any, Dict, FrozenSet, List, Tuple, Iterable, Union, Generator
 from Bio.SeqRecord import SeqRecord
@@ -42,8 +43,11 @@ def table_to_tsv(table: List[List[str]]) -> str:
 
 def load_common(path) -> SeqRecord:
     """Create COMMON entry as SeqRecord"""
-    with open(path, "r") as f:
-        header_info = yaml.safe_load(f)
+    try:
+        with open(path, "r") as f:
+            header_info = yaml.safe_load(f)
+    except:
+        raise UnsupportedOperation("COMMON input other than YAML is not implemented yet!")
 
     features = [
         SeqFeature(type=key, qualifiers=xs) for (key, xs) in header_info.items()
@@ -131,7 +135,7 @@ class DDBJFormatter(object):
                         subfeature, ignore_ddbj
                     )
 
-    def run(self, records: Iterable[SeqRecord], ignore_ddbj: bool) -> Generator[str]:
+    def run(self, records: Iterable[SeqRecord], ignore_ddbj: bool) -> Generator[str, None, None]:
         """Format records and generate string line by line."""
         table_header = self.to_ddbj_table(self.common, ignore_ddbj=True)
         for rows in table_header:

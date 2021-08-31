@@ -25,7 +25,7 @@ def load_gff3_as_seqrecords(filepath) -> List[SeqRecord]:
     return recs
 
 
-def load_fasta_as_seq(filepath) -> Generator[Seq]:
+def load_fasta_as_seq(filepath) -> Generator[Seq, None, None]:
     """
     Load FASTA file as Seq
     """
@@ -122,10 +122,9 @@ class TranslateQualifiers(object):
     Empty "target" value means the name key is dropped.
     """
 
-    def __init__(self, filepaths: Iterable[str]):
-        self.paths = filepaths
-        ds = [load_yaml_as_dict(p) for p in filepaths]
-        self.trans_table = merge_dicts(ds)
+    def __init__(self, filepath: str):
+        self.path = filepath
+        self.trans_table = load_yaml_as_dict(filepath)
 
     def run(self, record: SeqRecord) -> SeqRecord:
         """Modifies record according to the GFF3-attributes-to-qualifiers translation JSON data."""
@@ -178,10 +177,9 @@ class TranslateFeatures(object):
     Unlike qualifiers, "prefix" is not supported here.
     """
 
-    def __init__(self, filepaths: Iterable[str]):
-        self.paths = filepaths
-        ds = [load_yaml_as_dict(p) for p in filepaths]
-        self.d = merge_dicts(ds)
+    def __init__(self, filepath: str):
+        self.path = filepath
+        self.d = load_yaml_as_dict(filepath)
 
     def run(self, record: SeqRecord) -> SeqRecord:
         """Modifies record according to the GFF3-types-to-features translation JSON data."""
