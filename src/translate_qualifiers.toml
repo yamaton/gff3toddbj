@@ -43,6 +43,10 @@ target = "gene"
 description = "N/A"
 target = "product"
 
+[eC_number]
+description = "N/A"
+target = "EC_number"
+
 [_Description]
 description = "N/A"
 target = "product"
