@@ -3,7 +3,7 @@ import logging
 from typing import Any, Dict, FrozenSet, List, Tuple, Iterable, Union, Generator
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import CompoundLocation, FeatureLocation, SeqFeature
-import yaml
+import toml
 
 import utils
 
@@ -47,9 +47,9 @@ def load_common(path) -> SeqRecord:
     """Create COMMON entry as SeqRecord"""
     try:
         with open(path, "r") as f:
-            header_info = yaml.safe_load(f)
+            header_info = toml.load(f)
     except:
-        raise UnsupportedOperation("COMMON input other than YAML is not implemented yet!")
+        raise UnsupportedOperation("COMMON input other than TOML is not implemented yet!")
 
     features = [
         SeqFeature(type=key, qualifiers=xs) for (key, xs) in header_info.items()
@@ -59,9 +59,9 @@ def load_common(path) -> SeqRecord:
 
 
 def load_rules(path: str) -> Dict[str, FrozenSet[str]]:
-    """Load DDBJ feature-qualifier rules in YAML"""
+    """Load DDBJ feature-qualifier rules in TOML"""
     with open(path, "r") as f:
-        rules = yaml.safe_load(f)
+        rules = toml.load(f)
     for feature_key in rules:
         rules[feature_key] = frozenset(rules[feature_key])
     return rules

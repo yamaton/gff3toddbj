@@ -1,0 +1,11 @@
+## Originally prepared by EMBLmyGFF3
+
+[five_prime_UTR]
+target = "5'UTR"
+
+[three_prime_UTR]
+target = "3'UTR"
+
+[transcript]
+# GFF.parse() converts 'transcript' type -> 'mRNA' qualifier automatically
+target = "mRNA"

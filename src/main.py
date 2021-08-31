@@ -5,16 +5,16 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-TRANS_FEATURES = "src/translate_features.yaml"
-TRANS_QUALIFIERS = "src/translate_qualifiers.yaml"
-DDBJ_RULES = "src/ddbj_rules.yaml"
-COMMON = "samples/common.yaml"
+TRANS_FEATURES = "src/translate_features.toml"
+TRANS_QUALIFIERS = "src/translate_qualifiers.toml"
+DDBJ_RULES = "src/ddbj_rules.toml"
+COMMON = "samples/common.toml"
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("gff3", help="Input GFF3 file")
     parser.add_argument("fasta", help="Input FASTA file")
-    parser.add_argument("common", help="Input COMMON file in YAML or TSV", nargs='?', default=COMMON)
+    parser.add_argument("common", help="Input COMMON file in TOML (or TSV ... be be implemented)", nargs='?', default=COMMON)
     args = parser.parse_args()
 
     logging.info("Input GFF   : {}".format(args.gff3))

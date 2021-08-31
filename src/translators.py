@@ -1,6 +1,6 @@
 from typing import Any, Dict, Generator, List, Optional, Tuple, Iterable
 import collections
-import yaml
+import toml
 import re
 import pathlib
 import gzip
@@ -38,12 +38,12 @@ def load_fasta_as_seq(filepath) -> Generator[Seq, None, None]:
     return recs
 
 
-def load_yaml_as_dict(filepath) -> Dict[str, Any]:
+def load_toml_tables(filepath) -> Dict[str, Any]:
     """
-    Load YAML as python dictionary
+    Load TOML as python dictionary
     """
     with open(filepath) as fp:
-        d = yaml.safe_load(fp)
+        d = toml.load(fp)
     return d
 
 
@@ -124,7 +124,7 @@ class TranslateQualifiers(object):
 
     def __init__(self, filepath: str):
         self.path = filepath
-        self.trans_table = load_yaml_as_dict(filepath)
+        self.trans_table = load_toml_tables(filepath)
 
     def run(self, record: SeqRecord) -> SeqRecord:
         """Modifies record according to the GFF3-attributes-to-qualifiers translation JSON data."""
@@ -179,7 +179,7 @@ class TranslateFeatures(object):
 
     def __init__(self, filepath: str):
         self.path = filepath
-        self.d = load_yaml_as_dict(filepath)
+        self.d = load_toml_tables(filepath)
 
     def run(self, record: SeqRecord) -> SeqRecord:
         """Modifies record according to the GFF3-types-to-features translation JSON data."""

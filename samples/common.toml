@@ -1,0 +1,19 @@
+[SUBMITTER]
+ab_name = ["Robertson,G.R.", "Mishima,H."]
+contact = "Hanako Mishima"
+email = "mishima@ddbj.nig.ac.jp"
+phone = "81-55-981-6853"
+institute = "National Institute of Genetics"
+country = "Japan"
+city = "Mishima"
+street = "Yata 1111"
+zip = "411-8540"
+
+[REFERENCE]
+title = "Mouse Genome Sequencing"
+ab_name = ["Robertson,G.R.", "Mishima,H."]
+year = 2017
+status = "Unpublished"
+
+[COMMENT]
+line = ["Please visit our website URL", "http://www.ddbj.nig.ac.jp/"]

@@ -3,4 +3,4 @@ biopython
 bcbio-gff
 openpyxl
 pandas
-pyyaml
+toml
