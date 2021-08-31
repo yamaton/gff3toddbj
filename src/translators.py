@@ -1,4 +1,4 @@
-from typing import Any, Dict, Generator, List, Tuple, Iterable
+from typing import Any, Dict, Generator, List, Optional, Tuple, Iterable
 import collections
 import yaml
 import re
@@ -197,10 +197,11 @@ class TranslateFeatures(object):
         return features
 
 
-def join_features(record: SeqRecord, joinable=["CDS"]) -> SeqRecord:
+def join_features(record: SeqRecord, joinables: Optional[Tuple[str]]) -> SeqRecord:
     """
     Join features
     """
+    joinables = [] if joinables is None else joinables
 
     def _join(features: List[SeqFeature]) -> SeqFeature:
         assert len(features) > 1
@@ -224,11 +225,12 @@ def join_features(record: SeqRecord, joinable=["CDS"]) -> SeqRecord:
             sub_features=sub_features,
         )
 
-    def _helper(features: List[SeqFeature]) -> List[SeqFeature]:
+    def _join_helper(features: List[SeqFeature]) -> List[SeqFeature]:
+        # triples_of_features takes SeqFeature OR tuple (str, str, str) as its key
         triples_or_features = collections.defaultdict(list)
         for f in features:
-            if f.type not in joinable:
-                triples_or_features[f] = [True]
+            if f.type not in joinables:
+                triples_or_features[f] = [True]   # dummy values
             else:
                 prod = f.qualifiers.get("product", None)
                 triple = (f.type, f.id, prod)
@@ -239,6 +241,8 @@ def join_features(record: SeqRecord, joinable=["CDS"]) -> SeqRecord:
         for triple_or_f, fs in triples_or_features.items():
             if isinstance(triple_or_f, SeqFeature):
                 res.append(triple_or_f)
+            elif len(fs) == 1:
+                res.append(fs[0])
             else:
                 if triple_or_f not in seen:
                     seen.add(triple_or_f)
@@ -248,11 +252,11 @@ def join_features(record: SeqRecord, joinable=["CDS"]) -> SeqRecord:
         # join after upper levels
         for f in res:
             if hasattr(f, "sub_features") and f.sub_features:
-                f.sub_features = _helper(f.sub_features)
+                f.sub_features = _join_helper(f.sub_features)
 
         return res
 
-    record.features = _helper(record.features)
+    record.features = _join_helper(record.features)
     return record
 
 
@@ -277,7 +281,7 @@ def fix_codon_start_values(rec: SeqRecord):
         _fix_feature(f)
 
 
-def run(path_to_gff3, path_to_fasta, trans_features, trans_qualifiers, is_joining=False) -> List[SeqRecord]:
+def run(path_to_gff3, path_to_fasta, trans_features, trans_qualifiers, joinables) -> List[SeqRecord]:
     """
     Create SeqRecord and run all translations
     """
@@ -300,7 +304,7 @@ def run(path_to_gff3, path_to_fasta, trans_features, trans_qualifiers, is_joinin
             rec.features.extend(gaps[rec.id])
 
     # join features (such as CDS)
-    if is_joining:
-        records = [join_features(rec, joinable=["CDS"]) for rec in records]
+    if joinables:
+        records = [join_features(rec, joinables=("CDS", "exon", "intron")) for rec in records]
 
     return records

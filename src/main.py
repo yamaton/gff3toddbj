@@ -22,7 +22,7 @@ def main():
     logging.info("Input COMMON: {}".format(args.common))
 
     records = translators.run(
-        args.gff3, args.fasta, TRANS_FEATURES, TRANS_QUALIFIERS, is_joining=False
+        args.gff3, args.fasta, TRANS_FEATURES, TRANS_QUALIFIERS, joinables=("CDS", "exon", "intron")
     )
 
     logging.info("Records: {}".format(records))
