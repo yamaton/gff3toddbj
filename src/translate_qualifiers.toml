@@ -48,7 +48,7 @@ description = "N/A"
 target = "EC_number"
 
 [locus_tag]
-description = "This entry is to add locus tag prefix"
+description = "This entry is to handle the locus tag prefix. DO NOT EDIT THIS."
 target = "locus_tag"
 prefix = "<dummy>"
 
