@@ -49,7 +49,9 @@ def load_common(path) -> SeqRecord:
         with open(path, "r") as f:
             header_info = toml.load(f)
     except:
-        raise UnsupportedOperation("COMMON input other than TOML is not implemented yet!")
+        raise UnsupportedOperation(
+            "COMMON input other than TOML is not implemented yet!"
+        )
 
     features = [
         SeqFeature(type=key, qualifiers=xs) for (key, xs) in header_info.items()
@@ -64,6 +66,8 @@ def load_rules(path: str) -> Dict[str, FrozenSet[str]]:
         rules = toml.load(f)
     for feature_key in rules:
         rules[feature_key] = frozenset(rules[feature_key])
+
+    logging.debug("rules = {}".format(rules))
     return rules
 
 
@@ -103,59 +107,67 @@ class DDBJFormatter(object):
         ...
         """
         # Display skipped features according to the rule
-
         if not ignore_rules:
             feature_keys = {f.type for f in utils.flatten_features(rec.features)}
             for k in feature_keys:
                 if not self._is_allowed_feature(k):
-                    logging.info("skipping (feature): {}\t(in Seq {})".format(k, rec.id))
+                    logging.info(
+                        "skipping (feature): {}\t(in Seq {})".format(k, rec.id)
+                    )
 
         table = [
             row
             for feature in rec.features
-            if ignore_rules or (not self._is_allowed_feature(feature.type))
             for row in self._gen_ddbj_table_feature_rows(feature, ignore_rules)
         ]
-        table[0][0] = rec.id
+
+        if table:
+            table[0][0] = rec.id
+
         return table
 
     def _gen_ddbj_table_feature_rows(
         self, feature: SeqFeature, ignore_rules=True
     ) -> Generator[List[str], None, None]:
         """Convert SeqFeature into DDBJ annotation table format"""
-        is_first_line = True
-        for (qualifier_key, values) in feature.qualifiers.items():
-            values = values if isinstance(values, list) else [values]
-            for qualifier_value in values:
-                xs = ["" for _ in range(5)]
-                feature_key = feature.type
-                is_keeping = self._is_allowed_pair(feature_key, qualifier_key)
-                if ignore_rules or is_keeping:
-                    if is_first_line:
-                        is_first_line = False
-                        xs[1] = feature_key
-                        if feature.location is not None:
-                            xs[2] = format_location(feature.location)
-                    xs[3] = qualifier_key
-                    xs[4] = str(qualifier_value)
-                    yield xs
-                elif not ignore_rules and not is_keeping:
-                    troika = (feature_key, qualifier_key, qualifier_value)
-                    logging.warn("skipping (qualifier):  {}\t{}\t{}".format(*troika))
+        if ignore_rules or self._is_allowed_feature(feature.type):
+            is_first_line = True
+            for (qualifier_key, values) in feature.qualifiers.items():
+                values = values if isinstance(values, list) else [values]
+                for qualifier_value in values:
+                    xs = ["" for _ in range(5)]
+                    feature_key = feature.type
+                    is_keeping = self._is_allowed_pair(feature_key, qualifier_key)
+                    if ignore_rules or is_keeping:
+                        if is_first_line:
+                            is_first_line = False
+                            xs[1] = feature_key
+                            if feature.location is not None:
+                                xs[2] = format_location(feature.location)
+                        xs[3] = qualifier_key
+                        xs[4] = str(qualifier_value)
+                        yield xs
+                    elif not ignore_rules and not is_keeping:
+                        troika = (feature_key, qualifier_key, qualifier_value)
+                        logging.warn(
+                            "skipping (qualifier):  {}\t{}\t{}".format(*troika)
+                        )
 
-            if hasattr(feature, "sub_features"):
-                for subfeature in feature.sub_features:
-                    yield from self._gen_ddbj_table_feature_rows(
-                        subfeature, ignore_rules
-                    )
+        if hasattr(feature, "sub_features"):
+            for subfeature in feature.sub_features:
+                yield from self._gen_ddbj_table_feature_rows(subfeature, ignore_rules)
 
-    def run(self, records: Iterable[SeqRecord], ignore_rules: bool) -> Generator[str, None, None]:
+    def run(
+        self, records: Iterable[SeqRecord], ignore_rules: bool
+    ) -> Generator[str, None, None]:
         """Format records and generate string line by line."""
         table_header = self.to_ddbj_table(self.common, ignore_rules=True)
         for rows in table_header:
             yield "\t".join(rows)
 
         for rec in records:
+            logging.debug("processing record: {}".format(rec.id))
             tbl = self.to_ddbj_table(rec, ignore_rules)
-            for rows in tbl:
+            for i, rows in enumerate(tbl):
+                logging.debug("    i = {}".format(i))
                 yield "\t".join(rows)

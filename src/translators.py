@@ -4,6 +4,7 @@ import toml
 import re
 import pathlib
 import gzip
+import logging
 import Bio
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
@@ -44,6 +45,8 @@ def load_toml_tables(filepath) -> Dict[str, Any]:
     """
     with open(filepath) as fp:
         d = toml.load(fp)
+
+    logging.debug("TOML table: {}".format(d))
     return d
 
 
@@ -232,7 +235,10 @@ def join_features(record: SeqRecord, joinables: Optional[Tuple[str]]) -> SeqReco
             if f.type not in joinables:
                 triples_or_features[f] = [True]   # dummy values
             else:
-                prod = f.qualifiers.get("product", None)
+                if "product" in f.qualifiers:
+                    prod = tuple(f.qualifiers["product"])
+                else:
+                    prod = None
                 triple = (f.type, f.id, prod)
                 triples_or_features[triple].append(f)
 

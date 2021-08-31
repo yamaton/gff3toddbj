@@ -10,6 +10,11 @@ TRANS_QUALIFIERS = "src/translate_qualifiers.toml"
 DDBJ_RULES = "src/ddbj_rules.toml"
 COMMON = "samples/common.toml"
 
+IGNORE_FEATURE_QUALIFIER_RULE = False
+# JOINABLES = ("CDS", "exon", "intron")
+JOINABLES = None
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("gff3", help="Input GFF3 file")
@@ -22,13 +27,13 @@ def main():
     logging.info("Input COMMON: {}".format(args.common))
 
     records = translators.run(
-        args.gff3, args.fasta, TRANS_FEATURES, TRANS_QUALIFIERS, joinables=("CDS", "exon", "intron")
+        args.gff3, args.fasta, TRANS_FEATURES, TRANS_QUALIFIERS, joinables=JOINABLES
     )
 
     logging.info("Records: {}".format(records))
 
     fmt = formatter.DDBJFormatter(args.common, DDBJ_RULES)
-    gen = fmt.run(records, ignore_rules=False)
+    gen = fmt.run(records, ignore_rules=IGNORE_FEATURE_QUALIFIER_RULE)
     for line in gen:
         print(line)
 
