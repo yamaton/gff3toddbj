@@ -17,3 +17,7 @@ status = "Unpublished"
 
 [COMMENT]
 line = ["Please visit our website URL", "http://www.ddbj.nig.ac.jp/"]
+
+[source]
+mol_type = "genomic DNA"
+organism = "Drosophila melanogaster"
