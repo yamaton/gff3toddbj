@@ -333,7 +333,6 @@ def run(
         gaps[seq.id] = get_assembly_gap(seq, meta_info["assembly_gap"])
         seq_ids.append(seq.id)
 
-
     # create record form GFF3 (or dummy if unavailable)
     if path_gff3 is not None:
         records = load_gff3_as_seqrecords(path_gff3)
@@ -350,18 +349,18 @@ def run(
         # dummy SeqRecord list with ID only
         records = [SeqRecord("", id=seq_id) for seq_id in seq_ids]
 
-
-    # add assembly_gap
+    # add "assembly_gap" feature
     for rec in records:
         if rec.id in gaps:
             rec.features.extend(gaps[rec.id])
 
-    # add source feature
+    # add "source" feature if a record does not have one
     for rec in records:
-        src_length = seq_lengths[rec.id]
-        src_qualifiers = meta_info["source"]
-        src = get_source(src_length, src_qualifiers)
-        rec.features.insert(0, src)
+        if (not rec.features) or (rec.features[0].type != "source"):
+            src_length = seq_lengths[rec.id]
+            src_qualifiers = meta_info["source"]
+            src = get_source(src_length, src_qualifiers)
+            rec.features.insert(0, src)
 
     # join features (such as CDS)
     if joinables:
