@@ -355,12 +355,15 @@ def run(
             rec.features.extend(gaps[rec.id])
 
     # add "source" feature if a record does not have one
+    # [NOTE] GFF3's "region" type corresponds to annotation's "source" feature
     for rec in records:
-        if (not rec.features) or (rec.features[0].type != "source"):
+        if (not rec.features) or (rec.features[0].type != "region"):
             src_length = seq_lengths[rec.id]
             src_qualifiers = meta_info["source"]
             src = get_source(src_length, src_qualifiers)
             rec.features.insert(0, src)
+        else:
+            logging.warn('Ignore [source] in metadata as GFF3 already has "region" line at SeqID = {}'.format(rec.id))
 
     # join features (such as CDS)
     if joinables:

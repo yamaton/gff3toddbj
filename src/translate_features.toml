@@ -9,3 +9,8 @@ target = "3'UTR"
 [transcript]
 # GFF.parse() converts 'transcript' type -> 'mRNA' qualifier automatically
 target = "mRNA"
+
+[region]
+# "region" in GFF3 column 3 corresponds to "source"
+# https://https.ncbi.nlm.nih.gov/datasets/docs/reference-docs/file-formats/about-ncbi-gff3/#the-source-region-feature
+target = "source"
