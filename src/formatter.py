@@ -1,7 +1,11 @@
 import logging
+import pprint
+
 from typing import Any, Dict, FrozenSet, List, Tuple, Iterable, Union, Generator
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import CompoundLocation, FeatureLocation, SeqFeature
+
+
 import toml
 
 import utils
@@ -49,7 +53,7 @@ def load_rules(path: str) -> Dict[str, FrozenSet[str]]:
     for feature_key in rules:
         rules[feature_key] = frozenset(rules[feature_key])
 
-    logging.debug("rules = {}".format(rules))
+    logging.debug("rules:\n{}".format(pprint.pformat(rules)))
     return rules
 
 
@@ -159,7 +163,7 @@ class DDBJFormatter(object):
             yield "\t".join(rows)
 
         for rec in records:
-            logging.debug("processing record: {}".format(rec.id))
+            logging.debug("processing record:{}".format(rec.id))
             tbl = self.to_ddbj_table(rec, ignore_rules)
             for rows in tbl:
                 yield "\t".join(rows)

@@ -1,3 +1,4 @@
+import pprint
 from typing import Any, Dict, Generator, List, Optional, Tuple, Iterable
 import collections
 import toml
@@ -47,7 +48,7 @@ def load_toml_tables(filepath) -> Dict[str, Any]:
     with open(filepath) as fp:
         d = toml.load(fp)
 
-    logging.debug("TOML table: {}".format(d))
+    logging.debug("TOML table:\n{}".format(pprint.pformat(d)))
     return d
 
 
