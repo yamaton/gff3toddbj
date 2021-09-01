@@ -1,4 +1,3 @@
-from io import UnsupportedOperation
 import logging
 from typing import Any, Dict, FrozenSet, List, Tuple, Iterable, Union, Generator
 from Bio.SeqRecord import SeqRecord
@@ -43,23 +42,6 @@ def table_to_tsv(table: List[List[str]]) -> str:
     return "\n".join("\t".join(items) for items in table)
 
 
-def load_common(path) -> SeqRecord:
-    """Create COMMON entry as SeqRecord"""
-    try:
-        with open(path, "r") as f:
-            header_info = toml.load(f)
-    except:
-        raise UnsupportedOperation(
-            "COMMON input other than TOML is not implemented yet!"
-        )
-
-    features = [
-        SeqFeature(type=key, qualifiers=xs) for (key, xs) in header_info.items()
-    ]
-    record = SeqRecord("", id="COMMON", features=features)
-    return record
-
-
 def load_rules(path: str) -> Dict[str, FrozenSet[str]]:
     """Load DDBJ feature-qualifier rules in TOML"""
     with open(path, "r") as f:
@@ -71,11 +53,22 @@ def load_rules(path: str) -> Dict[str, FrozenSet[str]]:
     return rules
 
 
+def get_common(header_info: Dict[str, Dict[str, Any]]):
+    """Load header info as SeqRecord for COMMON entry"""
+    features = [
+        SeqFeature(type=key, qualifiers=xs)
+        for (key, xs) in header_info.items()
+        if key != "source"  # exclude "source" info
+    ]
+    record = SeqRecord("", id="COMMON", features=features)
+    return record
+
+
 class DDBJFormatter(object):
     """Format SeqRecord to DDBJ annotation table."""
 
-    def __init__(self, common_header_path, ddbj_rule_path: str):
-        self.common = load_common(common_header_path)
+    def __init__(self, header_info, ddbj_rule_path: str):
+        self.common = get_common(header_info)
         self.rules = load_rules(ddbj_rule_path)
 
     def _is_allowed_feature(self, feature_key):

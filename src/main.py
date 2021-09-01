@@ -3,12 +3,14 @@ import formatter
 import translators
 import logging
 
+import utils
+
 logging.basicConfig(level=logging.DEBUG)
 
 TRANS_FEATURES = "src/translate_features.toml"
 TRANS_QUALIFIERS = "src/translate_qualifiers.toml"
 DDBJ_RULES = "src/ddbj_rules.toml"
-COMMON = "samples/common.toml"
+META_INFO = "samples/common.toml"
 
 LOCUS_TAG_PREFIX = "LOCUSTAGPREFIX_"
 
@@ -25,7 +27,7 @@ def main():
         "common",
         help="Input COMMON file in TOML (or TSV ... be be implemented)",
         nargs="?",
-        default=COMMON,
+        default=META_INFO,
     )
     parser.add_argument(
         "-p",
@@ -40,18 +42,21 @@ def main():
     logging.info("Input COMMON: {}".format(args.common))
     logging.info("Prefix of locus_tag: {}".format(args.locus_tag_prefix))
 
+    meta_info = utils.load_header_info(args.common)
+
     records = translators.run(
         args.gff3,
         args.fasta,
         TRANS_FEATURES,
         TRANS_QUALIFIERS,
+        meta_info,
         args.locus_tag_prefix,
         joinables=JOINABLES,
     )
 
     logging.info("Records: {}".format(records))
 
-    fmt = formatter.DDBJFormatter(args.common, DDBJ_RULES)
+    fmt = formatter.DDBJFormatter(meta_info, DDBJ_RULES)
     gen = fmt.run(records, ignore_rules=IGNORE_FEATURE_QUALIFIER_RULE)
     for line in gen:
         print(line)

@@ -13,6 +13,7 @@ from BCBio import GFF
 
 Interval = Tuple[int, int]
 
+
 def load_gff3_as_seqrecords(filepath) -> List[SeqRecord]:
     """
     Load GFF3 as iterable of SeqRecord
@@ -50,7 +51,7 @@ def load_toml_tables(filepath) -> Dict[str, Any]:
     return d
 
 
-def merge_dicts(dict_args: Iterable[Dict]):
+def merge_dicts(dict_args: Iterable[Dict]) -> Dict:
     """
     Given any number of dictionaries, shallow copy and merge into a new dict,
     precedence goes to key-value pairs in latter dictionaries.
@@ -75,7 +76,10 @@ def get_assembly_gap(seq: Seq) -> List[SeqFeature]:
     >>> get_assembly_gap(s)
     [(5, 7), (15, 15)]
     """
-    locs = [FeatureLocation(start, end, strand=1) for (start, end) in _get_assembly_gap_locations(seq)]
+    locs = [
+        FeatureLocation(start, end, strand=1)
+        for (start, end) in _get_assembly_gap_locations(seq)
+    ]
     features = [SeqFeature(loc, type="assembly_gap") for loc in locs]
     return features
 
@@ -102,6 +106,12 @@ def _get_assembly_gap_locations(seq: Seq) -> List[Interval]:
         segments.append(tup)
 
     return segments
+
+
+def get_source(length: int, source_qualifiers: Dict[str, Any]) -> SeqFeature:
+    """Create "source" feature"""
+    loc = FeatureLocation(1, length, strand=1)
+    return SeqFeature(loc, type="source", qualifiers=source_qualifiers)
 
 
 class TranslateQualifiers(object):
@@ -238,7 +248,7 @@ def join_features(record: SeqRecord, joinables: Optional[Tuple[str]]) -> SeqReco
         triples_or_features = collections.defaultdict(list)
         for f in features:
             if f.type not in joinables:
-                triples_or_features[f] = [True]   # dummy values
+                triples_or_features[f] = [True]  # dummy values
             else:
                 if "product" in f.qualifiers:
                     prod = tuple(f.qualifiers["product"])
@@ -271,13 +281,14 @@ def join_features(record: SeqRecord, joinables: Optional[Tuple[str]]) -> SeqReco
     return record
 
 
-def fix_codon_start_values(rec: SeqRecord):
+def fix_codon_start_values(rec: SeqRecord) -> None:
     """Convert `codon_start` qualifier value
     from 0-based (in GFF3 'phase' column)
     to   1-based (in INSDC table definition)
     """
-    def _fix_feature(feature: SeqFeature):
-        trans = {'0': '1', '1': '2', '2': '3'}
+
+    def _fix_feature(feature: SeqFeature) -> None:
+        trans = {"0": "1", "1": "2", "2": "3"}
 
         if hasattr(feature, "sub_features"):
             for f in feature.sub_features:
@@ -292,13 +303,21 @@ def fix_codon_start_values(rec: SeqRecord):
         _fix_feature(f)
 
 
-def run(path_to_gff3, path_to_fasta, trans_features, trans_qualifiers, locus_tag_prefix, joinables) -> List[SeqRecord]:
+def run(
+    path_gff3: str,
+    path_fasta: str,
+    path_trans_features: str,
+    path_trans_qualifiers: str,
+    meta_info: Dict[str, Dict[str, Any]],
+    locus_tag_prefix: str,
+    joinables: Tuple[str, ...],
+) -> List[SeqRecord]:
     """
     Create SeqRecord and run all translations
     """
-    records = load_gff3_as_seqrecords(path_to_gff3)
-    f = TranslateFeatures(trans_features).run
-    g = TranslateQualifiers(trans_qualifiers, locus_tag_prefix).run
+    records = load_gff3_as_seqrecords(path_gff3)
+    f = TranslateFeatures(path_trans_features).run
+    g = TranslateQualifiers(path_trans_qualifiers, locus_tag_prefix).run
 
     # translate features and qualifiers
     records = [g(f(rec)) for rec in records]
@@ -308,14 +327,25 @@ def run(path_to_gff3, path_to_fasta, trans_features, trans_qualifiers, locus_tag
         fix_codon_start_values(rec)
 
     # add assembly_gap
-    seqs = load_fasta_as_seq(path_to_fasta)
-    gaps = {seq.id: get_assembly_gap(seq) for seq in seqs}
+    seqs = load_fasta_as_seq(path_fasta)
+    seq_lengths = dict()
+    gaps = dict()
+    for seq in seqs:
+        seq_lengths[seq.id] = len(seq)
+        gaps[seq.id] = get_assembly_gap(seq)
     for rec in records:
         if rec.id in gaps:
             rec.features.extend(gaps[rec.id])
 
+    # add source feature
+    for record in records:
+        src_length = seq_lengths[record.id]
+        src_qualifiers = meta_info["source"]
+        src = get_source(src_length, src_qualifiers)
+        record.features.insert(0, src)
+
     # join features (such as CDS)
     if joinables:
-        records = [join_features(rec, joinables=("CDS", "exon", "intron")) for rec in records]
+        records = [join_features(rec, joinables) for rec in records]
 
     return records
