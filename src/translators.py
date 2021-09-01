@@ -33,8 +33,8 @@ def load_fasta_as_seq(filepath) -> Generator[Seq, None, None]:
     """
     p = pathlib.Path(filepath)
     if p.suffix == ".gz":
-        with gzip.open(filepath, "rt") as f:
-            return Bio.SeqIO.parse(f, "fasta")
+        f = gzip.open(filepath, "rt")
+        return Bio.SeqIO.parse(f, "fasta")
     else:
         recs = Bio.SeqIO.parse(filepath, "fasta")
     return recs
@@ -51,12 +51,12 @@ def load_toml_tables(filepath) -> Dict[str, Any]:
     return d
 
 
-def merge_dicts(dict_args: Iterable[Dict]) -> Dict:
+def merge_dicts(*dict_args) -> Dict:
     """
     Given any number of dictionaries, shallow copy and merge into a new dict,
     precedence goes to key-value pairs in latter dictionaries.
 
-    >>> merge_dicts([{'us', 1, 'canada, 1}, {'egypt': 20}, {'greece': 30, 'netherlands', 31}])
+    >>> merge_dicts({'us', 1, 'canada, 1}, {'egypt': 20}, {'greece': 30, 'netherlands', 31})
     {'us', 1, 'canada, 1, 'egypt': 20, 'greece': 30, 'netherlands', 31}
     """
     res = {}
@@ -65,7 +65,7 @@ def merge_dicts(dict_args: Iterable[Dict]) -> Dict:
     return res
 
 
-def get_assembly_gap(seq: Seq) -> List[SeqFeature]:
+def get_assembly_gap(seq: Seq, qualifiers: Dict[str, Any]) -> List[SeqFeature]:
     """
     Get assembly_gap features from seq.
 
@@ -80,7 +80,7 @@ def get_assembly_gap(seq: Seq) -> List[SeqFeature]:
         FeatureLocation(start, end, strand=1)
         for (start, end) in _get_assembly_gap_locations(seq)
     ]
-    features = [SeqFeature(loc, type="assembly_gap") for loc in locs]
+    features = [SeqFeature(loc, type="assembly_gap", qualifiers=qualifiers) for loc in locs]
     return features
 
 
@@ -304,7 +304,7 @@ def fix_codon_start_values(rec: SeqRecord) -> None:
 
 
 def run(
-    path_gff3: str,
+    path_gff3: Optional[str],
     path_fasta: str,
     path_trans_features: str,
     path_trans_qualifiers: str,
@@ -315,34 +315,45 @@ def run(
     """
     Create SeqRecord and run all translations
     """
-    records = load_gff3_as_seqrecords(path_gff3)
-    f = TranslateFeatures(path_trans_features).run
-    g = TranslateQualifiers(path_trans_qualifiers, locus_tag_prefix).run
-
-    # translate features and qualifiers
-    records = [g(f(rec)) for rec in records]
-
-    # fix codon_start
-    for rec in records:
-        fix_codon_start_values(rec)
-
-    # add assembly_gap
+    # get sequence info
     seqs = load_fasta_as_seq(path_fasta)
     seq_lengths = dict()
     gaps = dict()
+    seq_ids = []
     for seq in seqs:
         seq_lengths[seq.id] = len(seq)
-        gaps[seq.id] = get_assembly_gap(seq)
+        gaps[seq.id] = get_assembly_gap(seq, meta_info["assembly_gap"])
+        seq_ids.append(seq.id)
+
+
+    # create record form GFF3 (or dummy if unavailable)
+    if path_gff3 is not None:
+        records = load_gff3_as_seqrecords(path_gff3)
+        f = TranslateFeatures(path_trans_features).run
+        g = TranslateQualifiers(path_trans_qualifiers, locus_tag_prefix).run
+
+        # translate features and qualifiers
+        records = [g(f(rec)) for rec in records]
+
+        # fix codon_start
+        for rec in records:
+            fix_codon_start_values(rec)
+    else:
+        # dummy SeqRecord list with ID only
+        records = [SeqRecord("", id=seq_id) for seq_id in seq_ids]
+
+
+    # add assembly_gap
     for rec in records:
         if rec.id in gaps:
             rec.features.extend(gaps[rec.id])
 
     # add source feature
-    for record in records:
-        src_length = seq_lengths[record.id]
+    for rec in records:
+        src_length = seq_lengths[rec.id]
         src_qualifiers = meta_info["source"]
         src = get_source(src_length, src_qualifiers)
-        record.features.insert(0, src)
+        rec.features.insert(0, src)
 
     # join features (such as CDS)
     if joinables:

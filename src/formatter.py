@@ -58,7 +58,7 @@ def get_common(header_info: Dict[str, Dict[str, Any]]):
     features = [
         SeqFeature(type=key, qualifiers=xs)
         for (key, xs) in header_info.items()
-        if key != "source"  # exclude "source" info
+        if key in ("SUBMITTER", "REFERENCE", "COMMENT")
     ]
     record = SeqRecord("", id="COMMON", features=features)
     return record
@@ -161,6 +161,5 @@ class DDBJFormatter(object):
         for rec in records:
             logging.debug("processing record: {}".format(rec.id))
             tbl = self.to_ddbj_table(rec, ignore_rules)
-            for i, rows in enumerate(tbl):
-                logging.debug("    i = {}".format(i))
+            for rows in tbl:
                 yield "\t".join(rows)

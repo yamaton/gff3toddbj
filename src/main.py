@@ -7,10 +7,10 @@ import utils
 
 logging.basicConfig(level=logging.DEBUG)
 
-TRANS_FEATURES = "src/translate_features.toml"
-TRANS_QUALIFIERS = "src/translate_qualifiers.toml"
-DDBJ_RULES = "src/ddbj_rules.toml"
-META_INFO = "samples/common.toml"
+PATH_TRANS_FEATURES = "src/translate_features.toml"
+PATH_TRANS_QUALIFIERS = "src/translate_qualifiers.toml"
+PATH_DDBJ_RULES = "src/ddbj_rules.toml"
+PATH_METADATA = "samples/common.toml"
 
 LOCUS_TAG_PREFIX = "LOCUSTAGPREFIX_"
 
@@ -21,13 +21,12 @@ JOINABLES = None
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("gff3", help="Input GFF3 file")
-    parser.add_argument("fasta", help="Input FASTA file")
+    parser.add_argument("--gff3", help="Input GFF3 file")
+    parser.add_argument("--fasta", help="Input FASTA file", required=True)
     parser.add_argument(
-        "common",
+        "--metadata",
         help="Input COMMON file in TOML (or TSV ... be be implemented)",
-        nargs="?",
-        default=META_INFO,
+        default=PATH_METADATA,
     )
     parser.add_argument(
         "-p",
@@ -39,24 +38,24 @@ def main():
 
     logging.info("Input GFF   : {}".format(args.gff3))
     logging.info("Input FASTA : {}".format(args.fasta))
-    logging.info("Input COMMON: {}".format(args.common))
+    logging.info("Input meta info: {}".format(args.metadata))
     logging.info("Prefix of locus_tag: {}".format(args.locus_tag_prefix))
 
-    meta_info = utils.load_header_info(args.common)
+    metadata = utils.load_header_info(args.metadata)
 
     records = translators.run(
         args.gff3,
         args.fasta,
-        TRANS_FEATURES,
-        TRANS_QUALIFIERS,
-        meta_info,
+        PATH_TRANS_FEATURES,
+        PATH_TRANS_QUALIFIERS,
+        metadata,
         args.locus_tag_prefix,
         joinables=JOINABLES,
     )
 
     logging.info("Records: {}".format(records))
 
-    fmt = formatter.DDBJFormatter(meta_info, DDBJ_RULES)
+    fmt = formatter.DDBJFormatter(metadata, PATH_DDBJ_RULES)
     gen = fmt.run(records, ignore_rules=IGNORE_FEATURE_QUALIFIER_RULE)
     for line in gen:
         print(line)
