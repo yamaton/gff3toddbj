@@ -3,12 +3,13 @@ from io import UnsupportedOperation
 import toml
 from Bio.SeqFeature import SeqFeature
 
-# currently supporting metadata keys
+# Supported metadata keys
 METADATA_KEYS = {"SUBMITTER", "REFERENCE", "COMMENT", "source", "assembly_gap"}
 
 
 def load_header_info(path) -> Dict[str, Dict[str, Any]]:
-    """Create COMMON entry as SeqRecord"""
+    """Load metadata as dictionary from TOML file.
+    """
     try:
         with open(path, "r") as f:
             header_info = toml.load(f)

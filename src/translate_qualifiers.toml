@@ -2,7 +2,7 @@
 
 # -------------------------------------------
 # Found in GFF3 columns
-# GFF.parse() stores 'source' (2nd column), 'score' (6th column), and 'phase' (8th columns) as qualifiers of the corresponding SeqFeature
+# GFF.parse() stores 'source' (2nd column), 'score' (6th column), and 'phase' (8th columns) as qualifiers
 [source]
 description = 'Typically this is the name of a piece of software, such as "Genescan" or a database name, such as "Genbank." In effect, the source is used to extend the feature ontology by adding a qualifier to the type creating a new composite type that is a subclass of the type in the type column.'
 target = "note"
@@ -14,7 +14,7 @@ target = "score"
 
 [phase]
 description = 'For features of type "CDS", the phase indicates where the feature begins with reference to the reading frame. The phase is one of the integers 0, 1, or 2, indicating the number of bases that should be removed from the beginning of this feature to reach the first base of the next codon.'
-target = "codon_start"
+target = "codon_start"  # 0-based in GFF3. Will be transformed to 1-based.
 
 # --------------------------------------------
 # Found in GFF3 attributes

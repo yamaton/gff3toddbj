@@ -52,7 +52,7 @@ def load_toml_tables(filepath) -> Dict[str, Any]:
     return d
 
 
-def merge_dicts(*dict_args) -> Dict:
+def _merge_dicts(*dict_args) -> Dict:
     """
     Given any number of dictionaries, shallow copy and merge into a new dict,
     precedence goes to key-value pairs in latter dictionaries.
@@ -66,7 +66,7 @@ def merge_dicts(*dict_args) -> Dict:
     return res
 
 
-def get_assembly_gap(seq: Seq, qualifiers: Dict[str, Any]) -> List[SeqFeature]:
+def _get_assembly_gap(seq: Seq, qualifiers: Dict[str, Any]) -> List[SeqFeature]:
     """
     Get assembly_gap features from seq.
 
@@ -116,13 +116,13 @@ def _get_assembly_gap_locations(seq: Seq) -> List[Interval]:
     return segments
 
 
-def get_source(length: int, source_qualifiers: Dict[str, Any]) -> SeqFeature:
+def _get_source(length: int, source_qualifiers: Dict[str, Any]) -> SeqFeature:
     """Create "source" feature"""
     loc = FeatureLocation(1, length, strand=1)
     return SeqFeature(loc, type="source", qualifiers=source_qualifiers)
 
 
-class TranslateQualifiers(object):
+class RenameQualifiers(object):
     """Translate annotation qualifiers according to table given in JSON.
 
     Meant for renaming GFF3 attributes to DDBJ annotation qualifier keys.
@@ -182,7 +182,7 @@ class TranslateQualifiers(object):
         return dict(res)
 
 
-class TranslateFeatures(object):
+class RenameFeatures(object):
     """Translate annotation features according to table given in JSON.
 
     Meant for renaming GFF3 types to DDBJ annotation feature keys.
@@ -223,7 +223,7 @@ class TranslateFeatures(object):
         return features
 
 
-def join_features(record: SeqRecord, joinables: Optional[Tuple[str]]) -> SeqRecord:
+def _join_features(record: SeqRecord, joinables: Optional[Tuple[str]]) -> SeqRecord:
     """
     Join features
     """
@@ -289,7 +289,7 @@ def join_features(record: SeqRecord, joinables: Optional[Tuple[str]]) -> SeqReco
     return record
 
 
-def fix_codon_start_values(rec: SeqRecord) -> None:
+def _fix_codon_start_values(rec: SeqRecord) -> None:
     """Convert `codon_start` qualifier value
     from 0-based (in GFF3 'phase' column)
     to   1-based (in INSDC table definition)
@@ -320,8 +320,7 @@ def run(
     locus_tag_prefix: str,
     joinables: Tuple[str, ...],
 ) -> List[SeqRecord]:
-    """
-    Create SeqRecord and run all translations
+    """Create a list of `SeqRecord`s and apply various transformations
     """
     # get sequence info
     seqs = load_fasta_as_seq(path_fasta)
@@ -330,43 +329,43 @@ def run(
     seq_ids = []
     for seq in seqs:
         seq_lengths[seq.id] = len(seq)
-        gaps[seq.id] = get_assembly_gap(seq, meta_info["assembly_gap"])
+        gaps[seq.id] = _get_assembly_gap(seq, meta_info["assembly_gap"])
         seq_ids.append(seq.id)
 
-    # create record form GFF3 (or dummy if unavailable)
+    # Create record from GFF3 (or dummy if unavailable)
     if path_gff3 is not None:
         records = load_gff3_as_seqrecords(path_gff3)
-        f = TranslateFeatures(path_trans_features).run
-        g = TranslateQualifiers(path_trans_qualifiers, locus_tag_prefix).run
+        f = RenameFeatures(path_trans_features).run
+        g = RenameQualifiers(path_trans_qualifiers, locus_tag_prefix).run
 
-        # translate features and qualifiers
+        # Rename feature and qualifier keys
         records = [g(f(rec)) for rec in records]
 
-        # fix codon_start
+        # Fix codon_start value to 1-based indexing
         for rec in records:
-            fix_codon_start_values(rec)
+            _fix_codon_start_values(rec)
     else:
-        # dummy SeqRecord list with ID only
+        # Create dummy SeqRecords with IDs from FASTA
         records = [SeqRecord("", id=seq_id) for seq_id in seq_ids]
 
-    # add "assembly_gap" feature
+    # Add "assembly_gap" feature
     for rec in records:
         if rec.id in gaps:
             rec.features.extend(gaps[rec.id])
 
-    # add "source" feature if a record does not have one
+    # Add "source" feature if unavailable
     # [NOTE] GFF3's "region" type corresponds to annotation's "source" feature
     for rec in records:
         if (not rec.features) or (rec.features[0].type != "region"):
             src_length = seq_lengths[rec.id]
             src_qualifiers = meta_info["source"]
-            src = get_source(src_length, src_qualifiers)
+            src = _get_source(src_length, src_qualifiers)
             rec.features.insert(0, src)
         else:
             logging.warn('Ignore [source] in metadata as GFF3 already has "region" line at SeqID = {}'.format(rec.id))
 
-    # join features (such as CDS)
+    # Join features in `joinables` tuple
     if joinables:
-        records = [join_features(rec, joinables) for rec in records]
+        records = [_join_features(rec, joinables) for rec in records]
 
     return records
