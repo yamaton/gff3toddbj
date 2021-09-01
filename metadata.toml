@@ -1,3 +1,5 @@
+## -----------------------------------------------------------------------
+##        COMMON entry
 [SUBMITTER]
 ab_name = ["Robertson,G.R.", "Mishima,H."]
 contact = "Hanako Mishima"
@@ -17,12 +19,28 @@ status = "Unpublished"
 
 [COMMENT]
 line = ["Please visit our website URL", "http://www.ddbj.nig.ac.jp/"]
+##
+## -----------------------------------------------------------------------
+
 
 [source]
+## -----------------------------------------------------------------------
+##        "source" feature
+##
+##  DDBJ-recommended qualifiers:
+##    https://www.ddbj.nig.ac.jp/assets/files/pdf/ddbj/fq-e.pdf
+##
 mol_type = "genomic DNA"
 organism = "Drosophila melanogaster"
+##
+## -----------------------------------------------------------------------
+
 
 [assembly_gap]
-estimated_length = "unknown"
+## -----------------------------------------------------------------------
+##        "assembly_gap" feature
+estimated_length = "<COMPUTE>"    # "<COMPUTE>" or "unknown"
 gap_type = "within scaffold"
-linkage_evidence = "paired-ends"
+linkage_evidence = "paired-ends"  # mandatory if gap_type is "within scaffold" or "repeat within scaffold"
+##
+## -----------------------------------------------------------------------

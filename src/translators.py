@@ -81,7 +81,14 @@ def get_assembly_gap(seq: Seq, qualifiers: Dict[str, Any]) -> List[SeqFeature]:
         FeatureLocation(start, end, strand=1)
         for (start, end) in _get_assembly_gap_locations(seq)
     ]
-    features = [SeqFeature(loc, type="assembly_gap", qualifiers=qualifiers) for loc in locs]
+
+    features = []
+    for loc in locs:
+        f = SeqFeature(loc, type="assembly_gap", qualifiers=qualifiers)
+        if f.qualifiers.get("estimated_length", None) == "<COMPUTE>":
+            length = loc.end - loc.start + 1
+            f.qualifiers["estimated_length"] = length
+        features.append(f)
     return features
 
 
