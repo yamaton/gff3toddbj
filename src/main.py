@@ -35,12 +35,18 @@ def main():
         help="Prefix of locus_tag. See https://www.ddbj.nig.ac.jp/ddbj/locus_tag-e.html",
         default=LOCUS_TAG_PREFIX,
     )
+    parser.add_argument(
+        "--transl_table",
+        help="Genetic Code ID. 1 by default, and 11 for bacteria. See https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi",
+        type=int,
+    )
     args = parser.parse_args()
 
     logging.info("Input GFF   : {}".format(args.gff3))
     logging.info("Input FASTA : {}".format(args.fasta))
     logging.info("Input meta info: {}".format(args.metadata))
     logging.info("Prefix of locus_tag: {}".format(args.prefix))
+    logging.info("--transl_table: {}".format(args.transl_table))
 
     metadata = utils.load_header_info(args.metadata)
 
@@ -51,6 +57,7 @@ def main():
         PATH_TRANS_QUALIFIERS,
         metadata,
         args.prefix,
+        args.transl_table,
         joinables=JOINABLES,
     )
 

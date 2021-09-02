@@ -279,7 +279,11 @@ def _join_features(record: SeqRecord, joinables: Optional[Tuple[str]]) -> SeqRec
                 res.extend(fs)
             # Don't join CDS features with different codon_start
             elif triple_or_f[0] == "CDS" and having_different_codon_starts(fs):
-                logging.warn("Skip joining CDSs because of non-unique codon_start: {}".format(triple_or_f))
+                logging.warn(
+                    "Skip joining CDSs because of non-unique codon_start: {}".format(
+                        triple_or_f
+                    )
+                )
                 res.extend(fs)
             else:
                 if triple_or_f not in seen:
@@ -320,6 +324,19 @@ def _fix_codon_start_values(rec: SeqRecord) -> None:
         _fix_feature(f)
 
 
+def _add_transl_table(rec: SeqRecord, transl_table: int) -> None:
+    """Add transl_table qualifier to all CDS"""
+
+    def _apply(feature: SeqFeature) -> None:
+        if hasattr(feature, "sub_features"):
+            for f in feature.sub_features:
+                _apply(f)
+        feature.qualifiers["transl_table"] = transl_table
+
+    for f in rec.features:
+        _apply(f)
+
+
 def run(
     path_gff3: Optional[str],
     path_fasta: str,
@@ -327,10 +344,11 @@ def run(
     path_trans_qualifiers: str,
     meta_info: Dict[str, Dict[str, Any]],
     locus_tag_prefix: str,
+    transl_table: int,
     joinables: Tuple[str, ...],
 ) -> List[SeqRecord]:
-    """Create a list of `SeqRecord`s and apply various transformations
-    """
+    """Create a list of `SeqRecord`s and apply various transformations"""
+
     # get sequence info
     fasta_records = load_fasta_as_seq(path_fasta)
     seq_lengths = dict()
@@ -362,6 +380,10 @@ def run(
         if rec.id in gaps:
             rec.features.extend(gaps[rec.id])
 
+    # Add transl_table qualifier to CDS
+    for rec in records:
+        _add_transl_table(rec, transl_table)
+
     # Add "source" feature if unavailable
     # [NOTE] GFF3's "region" type corresponds to annotation's "source" feature
     for rec in records:
@@ -371,7 +393,11 @@ def run(
             src = _get_source(src_length, src_qualifiers)
             rec.features.insert(0, src)
         else:
-            logging.warn('Ignore [source] in metadata as GFF3 already has "region" line at SeqID = {}'.format(rec.id))
+            logging.warn(
+                'Ignore [source] in metadata as GFF3 already has "region" line at SeqID = {}'.format(
+                    rec.id
+                )
+            )
 
     # Join features in `joinables` tuple
     if joinables:
