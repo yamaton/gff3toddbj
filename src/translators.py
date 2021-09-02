@@ -251,6 +251,11 @@ def _join_features(record: SeqRecord, joinables: Optional[Tuple[str]]) -> SeqRec
             sub_features=sub_features,
         )
 
+    def having_different_codon_starts(features: List[SeqFeature]) -> bool:
+        dummy = 99
+        codon_starts = {f.qualifiers.get("codon_start", dummy) for f in features}
+        return len(codon_starts) > 1 or dummy in codon_starts
+
     def _join_helper(features: List[SeqFeature]) -> List[SeqFeature]:
         # triples_of_features takes SeqFeature OR tuple (str, str, str) as its key
         triples_or_features = collections.defaultdict(list)
@@ -271,7 +276,11 @@ def _join_features(record: SeqRecord, joinables: Optional[Tuple[str]]) -> SeqRec
             if isinstance(triple_or_f, SeqFeature):
                 res.append(triple_or_f)
             elif len(fs) == 1:
-                res.append(fs[0])
+                res.extend(fs)
+            # Don't join CDS features with different codon_start
+            elif triple_or_f[0] == "CDS" and having_different_codon_starts(fs):
+                logging.warn("Skip joining CDSs because of non-unique codon_start: {}".format(triple_or_f))
+                res.extend(fs)
             else:
                 if triple_or_f not in seen:
                     seen.add(triple_or_f)
