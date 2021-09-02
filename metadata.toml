@@ -1,8 +1,20 @@
 ## -----------------------------------------------------------------------
 ##        COMMON entry
+[DATATYPE]
+type = "WGS"
+
+[KEYWORD]
+keyword = ["WGS", "NON_GONTIGUOUS_FINISHED"]
+
+[DBLINK]
+project = "PRJDB12345"
+biosample = "SAMD90000001"
+"sequence read archive" = "DRR990000"
+
 [SUBMITTER]
-ab_name = ["Robertson,G.R.", "Mishima,H."]
 contact = "Hanako Mishima"
+consrtm = "Zimmermannella faecalis genome sequencing consortium"
+ab_name = ["Robertson,G.R.", "Mishima,H."]
 email = "mishima@ddbj.nig.ac.jp"
 phone = "81-55-981-6853"
 institute = "National Institute of Genetics"
@@ -19,6 +31,12 @@ status = "Unpublished"
 
 [COMMENT]
 line = ["Please visit our website URL", "http://www.ddbj.nig.ac.jp/"]
+
+[ST_COMMENT]
+"Assembly Method" = "Velvet v.2.0"
+"Assembly Name" = "Sfl_assembly01"
+"Genome Coverage" = "60x"
+"Sequencing Technology" = "454 GS FLX; ABI 3730"
 ##
 ## -----------------------------------------------------------------------
 
@@ -39,8 +57,16 @@ organism = "Drosophila melanogaster"
 [assembly_gap]
 ## -----------------------------------------------------------------------
 ##        "assembly_gap" feature
-estimated_length = "unknown"      # counts N's if the value is "<COMPUTE>"
+estimated_length = "unknown"     # counts N's if the value is "<COMPUTE>"
 gap_type = "within scaffold"
-linkage_evidence = "paired-ends"  # mandatory if gap_type is "within scaffold" or "repeat within scaffold"
+linkage_evidence = "paired-ends" # mandatory if gap_type is "within scaffold" or "repeat within scaffold"
+##
+## -----------------------------------------------------------------------
+
+
+[CDS]
+## -----------------------------------------------------------------------
+##        Extra qualifiers for "CDS" feature
+trans_table = 11
 ##
 ## -----------------------------------------------------------------------

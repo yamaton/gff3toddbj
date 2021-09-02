@@ -13,7 +13,6 @@ import utils
 
 Location = Union[FeatureLocation, CompoundLocation]
 
-
 def format_location(loc: Location) -> str:
     """Format location"""
 
@@ -67,7 +66,7 @@ def get_common(header_info: Dict[str, Dict[str, Any]]):
     features = [
         SeqFeature(type=key, qualifiers=xs)
         for (key, xs) in header_info.items()
-        if key in ("SUBMITTER", "REFERENCE", "COMMENT")
+        if key in utils.METADATA_COMMON_KEYS
     ]
     record = SeqRecord("", id="COMMON", features=features)
     return record

@@ -4,12 +4,30 @@ import toml
 from Bio.SeqFeature import SeqFeature
 
 # Supported metadata keys
-METADATA_KEYS = {"SUBMITTER", "REFERENCE", "COMMENT", "source", "assembly_gap"}
+METADATA_COMMON_KEYS = {
+    "DIVISION",
+    "DATATYPE",
+    "KEYWORD",
+    "DBLINK",
+    "SUBMITTER",
+    "REFERENCE",
+    "DATE",
+    "TOPOLOGY",
+    "COMMENT",
+    "ST_COMMENT",
+}
+
+METADATA_KEYS_AS_FEATURES = {
+    "source",
+    "assembly_gap",
+    "CDS",
+}
+
+METADATA_KEYS = METADATA_COMMON_KEYS | METADATA_KEYS_AS_FEATURES
 
 
 def load_header_info(path) -> Dict[str, Dict[str, Any]]:
-    """Load metadata as dictionary from TOML file.
-    """
+    """Load metadata as dictionary from TOML file."""
     try:
         with open(path, "r") as f:
             header_info = toml.load(f)
@@ -18,12 +36,12 @@ def load_header_info(path) -> Dict[str, Dict[str, Any]]:
             "COMMON input other than TOML is not implemented yet!"
         )
 
-    validate_metadata(header_info)
+    validate_metadata_keys(header_info)
 
     return header_info
 
 
-def validate_metadata(d: Dict[str, Dict[str, Any]]) -> None:
+def validate_metadata_keys(d: Dict[str, Dict[str, Any]]) -> None:
     """Check if metadata has proper table keys."""
     keys = set(d.keys())
     msg = "Some meta-info keys are invalid: {}".format(keys - METADATA_KEYS)
