@@ -39,7 +39,7 @@ organism = "Drosophila melanogaster"
 [assembly_gap]
 ## -----------------------------------------------------------------------
 ##        "assembly_gap" feature
-estimated_length = "<COMPUTE>"    # "<COMPUTE>" or "unknown"
+estimated_length = "unknown"      # counts N's if the value is "<COMPUTE>"
 gap_type = "within scaffold"
 linkage_evidence = "paired-ends"  # mandatory if gap_type is "within scaffold" or "repeat within scaffold"
 ##

@@ -28,16 +28,16 @@ def load_gff3_as_seqrecords(filepath) -> List[SeqRecord]:
     return recs
 
 
-def load_fasta_as_seq(filepath) -> Generator[Seq, None, None]:
+def load_fasta_as_seq(filepath) -> List[SeqRecord]:
     """
     Load FASTA file as Seq
     """
     p = pathlib.Path(filepath)
     if p.suffix == ".gz":
-        f = gzip.open(filepath, "rt")
-        return Bio.SeqIO.parse(f, "fasta")
+        with gzip.open(filepath, "rt") as f:
+            recs = list(Bio.SeqIO.parse(f, "fasta"))
     else:
-        recs = Bio.SeqIO.parse(filepath, "fasta")
+        recs = list(Bio.SeqIO.parse(filepath, "fasta"))
     return recs
 
 
@@ -332,14 +332,14 @@ def run(
     """Create a list of `SeqRecord`s and apply various transformations
     """
     # get sequence info
-    seqs = load_fasta_as_seq(path_fasta)
+    fasta_records = load_fasta_as_seq(path_fasta)
     seq_lengths = dict()
     gaps = dict()
     seq_ids = []
-    for seq in seqs:
-        seq_lengths[seq.id] = len(seq)
-        gaps[seq.id] = _get_assembly_gap(seq, meta_info["assembly_gap"])
-        seq_ids.append(seq.id)
+    for rec in fasta_records:
+        seq_lengths[rec.id] = len(rec)
+        gaps[rec.id] = _get_assembly_gap(rec.seq, meta_info["assembly_gap"])
+        seq_ids.append(rec.id)
 
     # Create record from GFF3 (or dummy if unavailable)
     if path_gff3 is not None:
