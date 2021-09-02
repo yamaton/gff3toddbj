@@ -5,7 +5,7 @@ import logging
 
 import utils
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 PATH_TRANS_FEATURES = "src/translate_features.toml"
 PATH_TRANS_QUALIFIERS = "src/translate_qualifiers.toml"

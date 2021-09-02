@@ -1,3 +1,4 @@
+import collections
 import logging
 import pprint
 
@@ -78,11 +79,25 @@ class DDBJFormatter(object):
     def __init__(self, header_info, ddbj_rule_path: str):
         self.common = get_common(header_info)
         self.rules = load_rules(ddbj_rule_path)
+        ## Counter of ignored feature keys
+        self.ignored_feature_count = collections.defaultdict(int)
+        ## Counter of ignored (feature key, qualifier key) pairs
+        self.ignored_pair_count = collections.defaultdict(int)
 
-    def _is_allowed_feature(self, feature_key):
+    def _is_allowed_feature(self, feature_key: str) -> bool:
+        """
+        Check if feature_key is good for DDBJ annotation
+            See DDBJ's feature-qualifier matrix for the detail.
+            https://www.ddbj.nig.ac.jp/assets/files/pdf/ddbj/fq-e.pdf
+        """
         return feature_key in self.rules
 
-    def _is_allowed_pair(self, feature_key, qualifier_key):
+    def _is_allowed_pair(self, feature_key: str, qualifier_key: str) -> bool:
+        """
+        Check if (feature_key, qualifier_key) pair is good for DDBJ annotation
+            See DDBJ's feature-qualifier matrix for the detail.
+            https://www.ddbj.nig.ac.jp/assets/files/pdf/ddbj/fq-e.pdf
+        """
         return self._is_allowed_feature(feature_key) and (
             qualifier_key in self.rules[feature_key]
         )
@@ -107,14 +122,14 @@ class DDBJFormatter(object):
             [       ,         ,                                    , "clone"      ,  "PC0110"        ],
         ...
         """
-        # Display skipped features according to the rule
+        logging.info("processing record:{}".format(rec.id))
+
+        # Check skipped features according to the rule
         if not ignore_rules:
             feature_keys = {f.type for f in utils.flatten_features(rec.features)}
             for k in feature_keys:
                 if not self._is_allowed_feature(k):
-                    logging.info(
-                        "skipping (feature): {}\t(in Seq {})".format(k, rec.id)
-                    )
+                    self.ignored_feature_count[k] += 1  # update ignored feature count
 
         table = [
             row
@@ -149,14 +164,33 @@ class DDBJFormatter(object):
                         xs[4] = str(qualifier_value)
                         yield xs
                     elif not ignore_rules and not is_keeping:
-                        troika = (feature_key, qualifier_key, qualifier_value)
-                        logging.warn(
-                            "skipping (qualifier):  {}\t{}\t{}".format(*troika)
-                        )
+                        pair = (feature_key, qualifier_key)
+                        self.ignored_pair_count[pair] += 1
 
         if hasattr(feature, "sub_features"):
             for subfeature in feature.sub_features:
                 yield from self._gen_ddbj_table_feature_rows(subfeature, ignore_rules)
+
+
+    def _log_ignored_items(self):
+        """Log tally of ignore feature keys, and feature-qualifier pairs
+        """
+        ## feature keys
+        for fkey, cnt in self.ignored_feature_count.items():
+            logging.warn(
+                "[Ignored] feature ------->  {}  <------- \t (count: {})".format(
+                    fkey, cnt
+                )
+            )
+
+        ## feature-qualifier pairs
+        for (fkey, qkey), cnt in self.ignored_pair_count.items():
+            logging.warn(
+                "[Ignored] (Feature, Qualifier) = ({}, {}) \t (count: {})".format(
+                    fkey, qkey, cnt
+                )
+            )
+
 
     def run(
         self, records: Iterable[SeqRecord], ignore_rules: bool
@@ -167,7 +201,8 @@ class DDBJFormatter(object):
             yield "\t".join(rows)
 
         for rec in records:
-            logging.debug("processing record:{}".format(rec.id))
             tbl = self.to_ddbj_table(rec, ignore_rules)
             for rows in tbl:
                 yield "\t".join(rows)
+
+        self._log_ignored_items()
