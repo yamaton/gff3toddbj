@@ -1,42 +1,54 @@
 ## -----------------------------------------------------------------------
 ##        COMMON entry
 [DATATYPE]
-type = "WGS"
+type = "WGS  <-- THIS IS AN EXAMPLE"
 
 [KEYWORD]
-keyword = ["WGS", "NON_GONTIGUOUS_FINISHED"]
+keyword = [
+    "WGS  <-- THIS IS AN EXAMPLE",
+    "NON_GONTIGUOUS_FINISHED  <-- THIS IS AN EXAMPLE"
+]
 
 [DBLINK]
-project = "PRJDB12345"
-biosample = "SAMD90000001"
-"sequence read archive" = "DRR990000"
+project = "PRJDB12345  <-- THIS IS AN EXAMPLE"
+biosample = "SAMD90000001  <-- THIS IS AN EXAMPLE"
+"sequence read archive" = "DRR990000  <-- THIS IS AN EXAMPLE"
 
 [SUBMITTER]
-contact = "Hanako Mishima"
-consrtm = "Zimmermannella faecalis genome sequencing consortium"
-ab_name = ["Robertson,G.R.", "Mishima,H."]
-email = "mishima@ddbj.nig.ac.jp"
-phone = "81-55-981-6853"
-institute = "National Institute of Genetics"
-country = "Japan"
-city = "Mishima"
-street = "Yata 1111"
-zip = "411-8540"
+contact = "Hanako Mishima  <-- THIS IS AN EXAMPLE"
+consrtm = "Zimmermannella faecalis genome sequencing consortium  <-- THIS IS AN EXAMPLE"
+ab_name = [
+    "Robertson,G.R.  <-- THIS IS AN EXAMPLE",
+    "Mishima,H.  <-- THIS IS AN EXAMPLE"
+]
+email = "mishima@ddbj.nig.ac.jp  <-- THIS IS AN EXAMPLE"
+phone = "81-55-981-6853  <-- THIS IS AN EXAMPLE"
+institute = "National Institute of Genetics  <-- THIS IS AN EXAMPLE"
+country = "Japan  <-- THIS IS AN EXAMPLE"
+city = "Mishima  <-- THIS IS AN EXAMPLE"
+street = "Yata 1111  <-- THIS IS AN EXAMPLE"
+zip = "411-8540  <-- THIS IS AN EXAMPLE"
 
 [REFERENCE]
-title = "Mouse Genome Sequencing"
-ab_name = ["Robertson,G.R.", "Mishima,H."]
-year = 2017
-status = "Unpublished"
+title = "Mouse Genome Sequencing  <-- THIS IS AN EXAMPLE"
+ab_name = [
+    "Robertson,G.R.  <-- THIS IS AN EXAMPLE",
+    "Mishima,H.  <-- THIS IS AN EXAMPLE"
+]
+year = "2021  <-- THIS IS AN EXAMPLE"
+status = "Unpublished  <-- THIS IS AN EXAMPLE"
+
+# [TOPOLOGY]
+# circular = ""
 
 [COMMENT]
 line = ["Please visit our website URL", "http://www.ddbj.nig.ac.jp/"]
 
 [ST_COMMENT]
-"Assembly Method" = "Velvet v.2.0"
-"Assembly Name" = "Sfl_assembly01"
-"Genome Coverage" = "60x"
-"Sequencing Technology" = "454 GS FLX; ABI 3730"
+"Assembly Method" = "Velvet v.2.0  <-- THIS IS AN EXAMPLE"
+"Assembly Name" = "Sfl_assembly01  <-- THIS IS AN EXAMPLE"
+"Genome Coverage" = "60x  <-- THIS IS AN EXAMPLE"
+"Sequencing Technology" = "454 GS FLX; ABI 3730  <-- THIS IS AN EXAMPLE"
 ##
 ## -----------------------------------------------------------------------
 
@@ -48,8 +60,15 @@ line = ["Please visit our website URL", "http://www.ddbj.nig.ac.jp/"]
 ##  DDBJ-recommended qualifiers:
 ##    https://www.ddbj.nig.ac.jp/assets/files/pdf/ddbj/fq-e.pdf
 ##
-mol_type = "genomic DNA"
-organism = "Drosophila melanogaster"
+organism = "Drosophila melanogaster  <-- THIS IS AN EXAMPLE"
+mol_type = "genomic DNA  <-- THIS IS AN EXAMPLE"
+
+# isolate = "FC-12"
+# country = "Japan:Kanagawa, Sagamihara city"
+# metagenome_source = "soil metagenome"
+# isolation_source = "farm soil fertilized by coffee compost"
+# plasmid = "pSF_02"
+
 ##
 ## -----------------------------------------------------------------------
 
@@ -57,16 +76,8 @@ organism = "Drosophila melanogaster"
 [assembly_gap]
 ## -----------------------------------------------------------------------
 ##        "assembly_gap" feature
-estimated_length = "unknown"     # counts N's if the value is "<COMPUTE>"
-gap_type = "within scaffold"
-linkage_evidence = "paired-ends" # mandatory if gap_type is "within scaffold" or "repeat within scaffold"
-##
-## -----------------------------------------------------------------------
-
-
-[CDS]
-## -----------------------------------------------------------------------
-##        Extra qualifiers for "CDS" feature
-trans_table = 11
+estimated_length = "unknown  <-- THIS IS AN EXAMPLE"     # counts N's if the value is "<COMPUTE>"
+gap_type = "within scaffold  <-- THIS IS AN EXAMPLE"
+linkage_evidence = "paired-ends  <-- THIS IS AN EXAMPLE" # mandatory if gap_type is "within scaffold" or "repeat within scaffold"
 ##
 ## -----------------------------------------------------------------------
