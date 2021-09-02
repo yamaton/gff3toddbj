@@ -69,13 +69,6 @@ def _merge_dicts(*dict_args) -> Dict:
 def _get_assembly_gap(seq: Seq, qualifiers: Dict[str, Any]) -> List[SeqFeature]:
     """
     Get assembly_gap features from seq.
-
-    [NOTE] A location is of format (begin, end)
-    with 1-based indexing, and inclusive in both sides.
-
-    >>> s = Seq("atatnnngattacanccc")
-    >>> get_assembly_gap(s)
-    [(5, 7), (15, 15)]
     """
     locs = [
         FeatureLocation(start, end, strand=1)
@@ -94,14 +87,14 @@ def _get_assembly_gap(seq: Seq, qualifiers: Dict[str, Any]) -> List[SeqFeature]:
 
 def _get_assembly_gap_locations(seq: Seq) -> List[Interval]:
     """
-    Get assembly_gap locations from seq.
+    Get assembly_gap locations from seq as a list of intervals.
 
-    [NOTE] A location is of format (begin, end)
-    with 1-based indexing, and inclusive in both sides.
+    [NOTE] This interval format [begin, end) is for Biopython
+    such that 0-based, left-inclusive and right-exclusive.
 
     >>> s = Seq("atatnnngattacanccc")
     >>> _get_assembly_gap_locations(s)
-    [(5, 7), (15, 15)]
+    [(4, 7), (14, 15)]
     """
     s = str(seq)
     patt = re.compile("n+")
@@ -109,8 +102,7 @@ def _get_assembly_gap_locations(seq: Seq) -> List[Interval]:
 
     segments = []
     for m in matches:
-        a, b = m.span()  # 0-based, left-inclusive, right-exclusive
-        tup = (a + 1, b)  # 1-based, both-inclusive
+        tup = m.span()  # 0-based, left-inclusive, right-exclusive
         segments.append(tup)
 
     return segments
@@ -118,7 +110,7 @@ def _get_assembly_gap_locations(seq: Seq) -> List[Interval]:
 
 def _get_source(length: int, source_qualifiers: Dict[str, Any]) -> SeqFeature:
     """Create "source" feature"""
-    loc = FeatureLocation(1, length, strand=1)
+    loc = FeatureLocation(0, length, strand=1)  # 0-based and [0, length)
     return SeqFeature(loc, type="source", qualifiers=source_qualifiers)
 
 

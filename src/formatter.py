@@ -14,15 +14,19 @@ import utils
 Location = Union[FeatureLocation, CompoundLocation]
 
 def format_location(loc: Location) -> str:
-    """Format location"""
+    """Format location
+
+    Note that BioPython's indexing is 0-based, left-inclusive, right-exclusive
+    while Annotation is 1-based, both-inclusive.
+    """
 
     def _format_forward_segment(loc: FeatureLocation) -> str:
         start = min(loc.start, loc.end)
         end = max(loc.start, loc.end)
-        if start == end:
-            s = "{}".format(start)
+        if start + 1 == end:
+            s = "{}".format(start + 1)  # convert to 1-based
         else:
-            s = "{}..{}".format(start, end)
+            s = "{}..{}".format(start + 1, end)  # convert to 1-based, both-inclusive
         return s
 
     def _format_forward_compound_segments(loc: CompoundLocation) -> str:
