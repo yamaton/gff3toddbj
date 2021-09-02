@@ -3,7 +3,7 @@ import pprint
 
 from typing import Any, Dict, FrozenSet, List, Tuple, Iterable, Union, Generator
 from Bio.SeqRecord import SeqRecord
-from Bio.SeqFeature import CompoundLocation, FeatureLocation, SeqFeature
+from Bio.SeqFeature import CompoundLocation, ExactPosition, FeatureLocation, SeqFeature
 
 
 import toml
@@ -19,7 +19,11 @@ def format_location(loc: Location) -> str:
     def _format_forward_segment(loc: FeatureLocation) -> str:
         start = min(loc.start, loc.end)
         end = max(loc.start, loc.end)
-        return "{}..{}".format(start, end)
+        if start == end:
+            s = "{}".format(start)
+        else:
+            s = "{}..{}".format(start, end)
+        return s
 
     def _format_forward_compound_segments(loc: CompoundLocation) -> str:
         locs = sorted(
