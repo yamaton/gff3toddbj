@@ -15,15 +15,14 @@ METADATA_COMMON_KEYS = {
     "TOPOLOGY",
     "COMMENT",
     "ST_COMMENT",
+    "source"
 }
 
-METADATA_KEYS_AS_FEATURES = {
+METADATA_KEYS = {
+    "COMMON",
     "source",
     "assembly_gap",
 }
-
-METADATA_KEYS = METADATA_COMMON_KEYS | METADATA_KEYS_AS_FEATURES
-
 
 def load_header_info(path) -> Dict[str, Dict[str, Any]]:
     """Load metadata as dictionary from TOML file."""
@@ -45,6 +44,10 @@ def validate_metadata_keys(d: Dict[str, Dict[str, Any]]) -> None:
     keys = set(d.keys())
     msg = "Some meta-info keys are invalid: {}".format(keys - METADATA_KEYS)
     assert keys.issubset(METADATA_KEYS), msg
+
+    common_keys = set(d["COMMON"])
+    msg2 = "Some COMMON keys are invalid: {}".format(common_keys - METADATA_COMMON_KEYS)
+    assert common_keys.issubset(METADATA_COMMON_KEYS), msg2
 
 
 def flatten_features(

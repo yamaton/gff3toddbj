@@ -376,20 +376,25 @@ def run(
     for rec in records:
         _add_transl_table(rec, transl_table)
 
-    # Add "source" feature if unavailable
-    # [NOTE] GFF3's "region" type corresponds to annotation's "source" feature
-    for rec in records:
-        if (not rec.features) or (rec.features[0].type != "region"):
-            src_length = seq_lengths[rec.id]
-            src_qualifiers = meta_info["source"]
-            src = _get_source(src_length, src_qualifiers)
-            rec.features.insert(0, src)
-        else:
-            logging.warn(
-                'Ignore [source] in metadata as GFF3 already has "region" line at SeqID = {}'.format(
-                    rec.id
-                )
-            )
+    # Add "source" feature if unavailable:
+    #   [NOTE] GFF3's "region" type corresponds to annotation's "source" feature
+    #   [NOTE] User-input metadata may contain "source" feature under the COMMON entry
+    #   In either case, a "source" feature is NOT added for each entry.
+
+    if ("source" in meta_info) and ("source" in meta_info["COMMON"]):
+        msg = "Ignore [source] in metadata because [COMMON.source] overrides."
+        logging.warn(msg)
+    else:
+        for rec in records:
+            if not rec.features:
+                if rec.features[0].type == "source":
+                    msg = 'Ignore [source] in metadata as GFF3 already has "region" line at SeqID = {}'.format(rec.id)
+                    logging.warn(msg)
+                else:
+                    src_length = seq_lengths[rec.id]
+                    src_qualifiers = meta_info["source"]
+                    src = _get_source(src_length, src_qualifiers)
+                    rec.features.insert(0, src)
 
     # Join features in `joinables` tuple
     if joinables:

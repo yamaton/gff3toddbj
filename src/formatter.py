@@ -65,11 +65,18 @@ def load_rules(path: str) -> Dict[str, FrozenSet[str]]:
     return rules
 
 
-def get_common(header_info: Dict[str, Dict[str, Any]]):
-    """Load header info as SeqRecord for COMMON entry"""
+def get_common(header_info: Dict[str, Dict[str, Any]]) -> SeqRecord:
+    """Load header info as SeqRecord for COMMON entry
+
+    [NOTE] COMMON entry can take "source" feature in DDBJ.
+    https://www.ddbj.nig.ac.jp/ddbj/file-format.html#common
+    But this "source" feature with id "source" does not carry
+    location in current implementation. Need to insert 1..E
+    as the location somewhere else..
+    """
     features = [
         SeqFeature(type=key, qualifiers=xs)
-        for (key, xs) in header_info.items()
+        for (key, xs) in header_info["COMMON"].items()
         if key in utils.METADATA_COMMON_KEYS
     ]
     record = SeqRecord("", id="COMMON", features=features)
@@ -199,10 +206,15 @@ class DDBJFormatter(object):
         self, records: Iterable[SeqRecord], ignore_rules: bool
     ) -> Generator[str, None, None]:
         """Format records and generate string line by line."""
+        # Format COMMON
         table_header = self.to_ddbj_table(self.common, ignore_rules=True)
+        ## this is an ad-hoc handling to insert Location of "source" in "COMMON"
         for rows in table_header:
+            if rows[1] == "source":
+                rows[2] = "1..E"
             yield "\t".join(rows)
 
+        # Format main genome entries
         for rec in records:
             tbl = self.to_ddbj_table(rec, ignore_rules)
             for rows in tbl:
