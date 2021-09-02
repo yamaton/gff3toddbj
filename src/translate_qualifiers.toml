@@ -47,6 +47,10 @@ target = "product"
 description = "N/A"
 target = "EC_number"
 
+[ec_number]
+description = "N/A"
+target = "EC_number"
+
 [locus_tag]
 description = "This entry is to handle the locus tag prefix. DO NOT EDIT THIS."
 target = "locus_tag"
