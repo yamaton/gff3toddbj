@@ -78,9 +78,9 @@ def _get_assembly_gap(seq: Seq, qualifiers: Dict[str, Any]) -> List[SeqFeature]:
     features = []
     for loc in locs:
         f = SeqFeature(loc, type="assembly_gap", qualifiers=qualifiers)
-        if f.qualifiers.get("estimated_length", None) == "<COMPUTE>":
+        if f.qualifiers.get("estimated_length", None) == ["<COMPUTE>"]:
             length = loc.end - loc.start + 1
-            f.qualifiers["estimated_length"] = length
+            f.qualifiers["estimated_length"] = [length]
         features.append(f)
     return features
 
@@ -323,7 +323,7 @@ def _add_transl_table(rec: SeqRecord, transl_table: int) -> None:
         if hasattr(feature, "sub_features"):
             for f in feature.sub_features:
                 _apply(f)
-        feature.qualifiers["transl_table"] = transl_table
+        feature.qualifiers["transl_table"] = [transl_table]
 
     for f in rec.features:
         _apply(f)
@@ -373,7 +373,7 @@ def run(
     # get sequence info
     fasta_records = load_fasta_as_seq(path_fasta)
     seq_lengths = dict()
-    gaps = dict()
+    gaps: Dict[str, List[SeqFeature]] = dict()
     seq_ids = []
     for rec in fasta_records:
         seq_lengths[rec.id] = len(rec)

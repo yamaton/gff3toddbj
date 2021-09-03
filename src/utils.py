@@ -34,6 +34,13 @@ def load_header_info(path) -> Dict[str, Dict[str, Any]]:
             "COMMON input other than TOML is not implemented yet!"
         )
 
+    # Change qualifier type to list
+    for k in header_info:
+        if k != "COMMON":
+            for qkey, qval in header_info[k].items():
+                if not isinstance(qval, list):
+                    header_info[k][qkey] = [qval]
+
     validate_metadata_keys(header_info)
 
     return header_info
