@@ -35,9 +35,9 @@ def load_fasta_as_seq(filepath) -> List[SeqRecord]:
     p = pathlib.Path(filepath)
     if p.suffix == ".gz":
         with gzip.open(filepath, "rt") as f:
-            recs = list(Bio.SeqIO.parse(f, "fasta"))
+            recs = [seq.upper() for seq in Bio.SeqIO.parse(f, "fasta")]
     else:
-        recs = list(Bio.SeqIO.parse(filepath, "fasta"))
+        recs = [seq.upper() for seq in Bio.SeqIO.parse(filepath, "fasta")]
     return recs
 
 
@@ -97,7 +97,7 @@ def _get_assembly_gap_locations(seq: Seq) -> List[Interval]:
     [(4, 7), (14, 15)]
     """
     s = str(seq)
-    patt = re.compile("n+")
+    patt = re.compile("N+")
     matches = patt.finditer(s)
 
     segments = []
