@@ -329,6 +329,35 @@ def _add_transl_table(rec: SeqRecord, transl_table: int) -> None:
         _apply(f)
 
 
+def _fix_qualifier_values(rec: SeqRecord) -> None:
+    """Fix qualifier values by removing backslash \ or double quote "
+    """
+    def _run(features: Iterable[SeqFeature]):
+        for f in features:
+            for (key, xs) in f.qualifiers.items():
+                if isinstance(xs, list):
+                    for i, x in enumerate(xs):
+                        if isinstance(x, str):
+                            if '"' in x:
+                                msg = "Rename by removing double quotes: ({}, {})".format(key, x)
+                                logging.warn(msg)
+                                f.qualifiers[key][i] = x.replace('"', "")
+                            elif "\\" in x:
+                                msg = "Rename by replacing backslash with space: ({}, {})".format(key, x)
+                                logging.warn(msg)
+                                f.qualifiers[key][i] = x.replace('\\', " ")
+                else:
+                    logging.warn("WTF?? qualifier value type is not a list:  ({}, {}, {})".format(f.type, key, xs))
+
+    _run(rec.features)
+
+def fix_location_or_start_codon(rec: SeqRecord, transl_table: int) -> None:
+    """Fix location or start_codon according to the DDBJ FAQ
+    https://www.ddbj.nig.ac.jp/faq/en/how-to-fix-error-msg-codon-start-e.html
+    """
+    ...
+
+
 def run(
     path_gff3: Optional[str],
     path_fasta: str,
@@ -395,6 +424,11 @@ def run(
                     src_qualifiers = meta_info["source"]
                     src = _get_source(src_length, src_qualifiers)
                     rec.features.insert(0, src)
+
+
+    # Remove invalid characters from qualifier values
+    for rec in records:
+        _fix_qualifier_values(rec)
 
     # Join features in `joinables` tuple
     if joinables:

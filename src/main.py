@@ -46,7 +46,7 @@ def main():
     logging.info("Input FASTA : {}".format(args.fasta))
     logging.info("Input meta info: {}".format(args.metadata))
     logging.info("Prefix of locus_tag: {}".format(args.prefix))
-    logging.info("--transl_table: {}".format(args.transl_table))
+    logging.info("transl_table (The Genome Code): {}".format(args.transl_table))
 
     metadata = utils.load_header_info(args.metadata)
 
