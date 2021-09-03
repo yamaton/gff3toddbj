@@ -329,7 +329,7 @@ def _add_transl_table(rec: SeqRecord, transl_table: int) -> None:
         _apply(f)
 
 
-def _fix_qualifier_values(rec: SeqRecord) -> None:
+def _regularize_qualifier_value_letters(rec: SeqRecord) -> None:
     """Fix qualifier values by removing backslash \ or double quote "
     """
     def _run(features: Iterable[SeqFeature]):
@@ -409,12 +409,12 @@ def run(
         # Create dummy SeqRecords with IDs from FASTA
         records = [SeqRecord("", id=seq_id) for seq_id in seq_ids]
 
-    # Add "assembly_gap" feature
+    # Add "assembly_gap" features
     for rec in records:
         if rec.id in gaps:
             rec.features.extend(gaps[rec.id])
 
-    # Add transl_table qualifier to CDS
+    # Add the transl_table qualifier to CDS feature each
     for rec in records:
         _add_transl_table(rec, transl_table)
 
@@ -441,7 +441,7 @@ def run(
 
     # Remove invalid characters from qualifier values
     for rec in records:
-        _fix_qualifier_values(rec)
+        _regularize_qualifier_value_letters(rec)
 
     # Join features in `joinables` tuple
     if joinables:
