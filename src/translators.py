@@ -351,6 +351,19 @@ def _fix_qualifier_values(rec: SeqRecord) -> None:
 
     _run(rec.features)
 
+
+def _remove_duplicates_in_qualifiers(rec: SeqRecord) -> None:
+    """Remove duplicate values within a qualifier
+    """
+    def _run(features: SeqFeature) -> None:
+        for f in features:
+            f.qualifiers = {qkey: list(set(qval)) for (qkey, qval) in f.qualifiers.items()}
+            if hasattr(f, "sub_features"):
+                _run(f.sub_features)
+
+    _run(rec.features)
+
+
 def fix_location_or_start_codon(rec: SeqRecord, transl_table: int) -> None:
     """Fix location or start_codon according to the DDBJ FAQ
     https://www.ddbj.nig.ac.jp/faq/en/how-to-fix-error-msg-codon-start-e.html
@@ -433,5 +446,9 @@ def run(
     # Join features in `joinables` tuple
     if joinables:
         records = [_join_features(rec, joinables) for rec in records]
+
+    # Remove duplicates within a qualifier
+    for rec in records:
+        _remove_duplicates_in_qualifiers(rec)
 
     return records
