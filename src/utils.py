@@ -1,7 +1,10 @@
 from typing import Iterable, Generator, Dict, Any
 from io import UnsupportedOperation
 import toml
+from Bio.Data import CodonTable
 from Bio.SeqFeature import SeqFeature
+from Bio.Seq import Seq
+from Bio.SeqFeature import ExactPosition
 
 # Supported metadata keys
 METADATA_COMMON_KEYS = {
@@ -15,7 +18,7 @@ METADATA_COMMON_KEYS = {
     "TOPOLOGY",
     "COMMENT",
     "ST_COMMENT",
-    "source"
+    "source",
 }
 
 METADATA_KEYS = {
@@ -23,6 +26,7 @@ METADATA_KEYS = {
     "source",
     "assembly_gap",
 }
+
 
 def load_header_info(path) -> Dict[str, Dict[str, Any]]:
     """Load metadata as dictionary from TOML file."""
@@ -68,3 +72,15 @@ def flatten_features(
         yield x
         if hasattr(x, "sub_features"):
             yield from flatten_features(x.sub_features)
+
+
+def has_start_codon(seq: Seq, position: ExactPosition, transl_table: int) -> bool:
+    """Check if the codon starting at index_location in seq
+    is start codon according to the Genetic Code transl_table.
+
+    >>> has_start_codon(Seq("GAATTCGAGGGG"), 1, 11)
+    True
+    """
+    codon = seq[position : position + 3]
+    start_codons = CodonTable.unambiguous_dna_by_id[transl_table].start_codons
+    return codon in start_codons
