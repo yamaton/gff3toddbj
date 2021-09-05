@@ -25,7 +25,7 @@ def main():
     parser.add_argument("--fasta", help="Input FASTA file", required=True)
     parser.add_argument(
         "--metadata",
-        help="Input COMMON file in TOML (or TSV ... be be implemented)",
+        help="Input metadata in TOML describing COMMON and other entires",
         default=PATH_METADATA,
     )
     parser.add_argument(

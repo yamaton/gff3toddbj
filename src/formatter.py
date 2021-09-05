@@ -65,7 +65,7 @@ def load_rules(path: str) -> Dict[str, FrozenSet[str]]:
     return rules
 
 
-def get_common(header_info: Dict[str, Dict[str, Any]]) -> SeqRecord:
+def get_common(header_info: Dict[str, Dict[str, Any]]) -> Optional[SeqRecord]:
     """Load header info as SeqRecord for COMMON entry
 
     [NOTE] COMMON entry can take "source" feature in DDBJ.
@@ -79,7 +79,10 @@ def get_common(header_info: Dict[str, Dict[str, Any]]) -> SeqRecord:
         for (key, xs) in header_info["COMMON"].items()
         if key in utils.METADATA_COMMON_KEYS
     ]
-    record = SeqRecord("", id="COMMON", features=features)
+
+    record = None
+    if features:
+        record = SeqRecord("", id="COMMON", features=features)
     return record
 
 
@@ -207,12 +210,15 @@ class DDBJFormatter(object):
     ) -> Generator[str, None, None]:
         """Format records and generate string line by line."""
         # Format COMMON
-        table_header = self.to_ddbj_table(self.common, ignore_rules=True)
-        ## this is an ad-hoc handling to insert Location of "source" in "COMMON"
-        for rows in table_header:
-            if rows[1] == "source":
-                rows[2] = "1..E"
-            yield "\t".join(rows)
+        if self.common is not None:
+            table_common = self.to_ddbj_table(self.common, ignore_rules=True)
+            ## this is an ad-hoc handling to insert Location of "source" in "COMMON"
+            for rows in table_common:
+                if rows[1] == "source":
+                    rows[2] = "1..E"
+                yield "\t".join(rows)
+        else:
+            logging.warn("COMMON is unavailable. Skipping...")
 
         # Format main genome entries
         for rec in records:
