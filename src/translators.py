@@ -12,6 +12,8 @@ from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import FeatureLocation, SeqFeature, CompoundLocation
 from BCBio import GFF
 
+import utils
+
 Interval = Tuple[int, int]
 
 
@@ -28,16 +30,16 @@ def load_gff3_as_seqrecords(filepath) -> List[SeqRecord]:
     return recs
 
 
-def load_fasta_as_seq(filepath) -> List[SeqRecord]:
+def load_fasta_as_seq(filepath) -> Dict[str, SeqRecord]:
     """
     Load FASTA file as Seq
     """
     p = pathlib.Path(filepath)
     if p.suffix == ".gz":
         with gzip.open(filepath, "rt") as f:
-            recs = [seq.upper() for seq in Bio.SeqIO.parse(f, "fasta")]
+            recs = {seq.id: seq.upper() for seq in Bio.SeqIO.parse(f, "fasta")}
     else:
-        recs = [seq.upper() for seq in Bio.SeqIO.parse(filepath, "fasta")]
+        recs = {seq.id: seq.upper() for seq in Bio.SeqIO.parse(filepath, "fasta")}
     return recs
 
 
@@ -245,7 +247,9 @@ def _join_features(record: SeqRecord, joinables: Optional[Tuple[str]]) -> SeqRec
 
     def having_different_codon_starts(features: List[SeqFeature]) -> bool:
         dummy = 99
-        codon_starts = {f.qualifiers.get("codon_start", dummy) for f in features}
+        codon_starts = {
+            x for f in features for x in f.qualifiers.get("codon_start", [dummy])
+        }
         return len(codon_starts) > 1 or dummy in codon_starts
 
     def _join_helper(features: List[SeqFeature]) -> List[SeqFeature]:
@@ -301,7 +305,7 @@ def _fix_codon_start_values(rec: SeqRecord) -> None:
     """
 
     def _fix_feature(feature: SeqFeature) -> None:
-        trans = {"0": "1", "1": "2", "2": "3"}
+        trans = {"0": 1, "1": 2, "2": 3}
 
         if hasattr(feature, "sub_features"):
             for f in feature.sub_features:
@@ -330,8 +334,8 @@ def _add_transl_table(rec: SeqRecord, transl_table: int) -> None:
 
 
 def _regularize_qualifier_value_letters(rec: SeqRecord) -> None:
-    """Fix qualifier values by removing backslash \ or double quote "
-    """
+    """Fix qualifier values by removing backslash \ or double quote " """
+
     def _run(features: Iterable[SeqFeature]):
         for f in features:
             for (key, xs) in f.qualifiers.items():
@@ -339,36 +343,55 @@ def _regularize_qualifier_value_letters(rec: SeqRecord) -> None:
                     for i, x in enumerate(xs):
                         if isinstance(x, str):
                             if '"' in x:
-                                msg = "Rename by removing double quotes: ({}, {})".format(key, x)
+                                msg = (
+                                    "Rename by removing double quotes: ({}, {})".format(
+                                        key, x
+                                    )
+                                )
                                 logging.warn(msg)
                                 f.qualifiers[key][i] = x.replace('"', "")
                             elif "\\" in x:
-                                msg = "Rename by replacing backslash with space: ({}, {})".format(key, x)
+                                msg = "Rename by replacing backslash with space: ({}, {})".format(
+                                    key, x
+                                )
                                 logging.warn(msg)
-                                f.qualifiers[key][i] = x.replace('\\', " ")
+                                f.qualifiers[key][i] = x.replace("\\", " ")
                 else:
-                    logging.warn("WTF?? qualifier value type is not a list:  ({}, {}, {})".format(f.type, key, xs))
+                    logging.warn(
+                        "WTF?? qualifier value type is not a list:  ({}, {}, {})".format(
+                            f.type, key, xs
+                        )
+                    )
 
     _run(rec.features)
 
 
 def _remove_duplicates_in_qualifiers(rec: SeqRecord) -> None:
-    """Remove duplicate values within a qualifier
-    """
+    """Remove duplicate values within a qualifier"""
+
     def _run(features: SeqFeature) -> None:
         for f in features:
-            f.qualifiers = {qkey: list(set(qval)) for (qkey, qval) in f.qualifiers.items()}
+            f.qualifiers = {
+                qkey: list(set(qval)) for (qkey, qval) in f.qualifiers.items()
+            }
             if hasattr(f, "sub_features"):
                 _run(f.sub_features)
 
     _run(rec.features)
 
 
-def fix_location_or_start_codon(rec: SeqRecord, transl_table: int) -> None:
+def fix_location_or_start_codon(
+    rec: SeqRecord, fasta_record: Dict[str, SeqRecord], transl_table: int
+) -> None:
     """Fix location or start_codon according to the DDBJ FAQ
     https://www.ddbj.nig.ac.jp/faq/en/how-to-fix-error-msg-codon-start-e.html
+
+    Args:
+        seq may contain CDSs as features to be fixed.
+        seq_dict is {SeqID: Record} dict containing sequence info.
+        transl_table is the Genetic Code.
     """
-    ...
+    utils.fix_cds(rec, fasta_record, transl_table)
 
 
 def run(
@@ -387,11 +410,9 @@ def run(
     fasta_records = load_fasta_as_seq(path_fasta)
     seq_lengths = dict()
     gaps: Dict[str, List[SeqFeature]] = dict()
-    seq_ids = []
-    for rec in fasta_records:
-        seq_lengths[rec.id] = len(rec)
-        gaps[rec.id] = _get_assembly_gap(rec.seq, meta_info["assembly_gap"])
-        seq_ids.append(rec.id)
+    for rec_id, rec in fasta_records.items():
+        seq_lengths[rec_id] = len(rec)
+        gaps[rec_id] = _get_assembly_gap(rec.seq, meta_info["assembly_gap"])
 
     # Create record from GFF3 (or dummy if unavailable)
     if path_gff3 is not None:
@@ -407,7 +428,7 @@ def run(
             _fix_codon_start_values(rec)
     else:
         # Create dummy SeqRecords with IDs from FASTA
-        records = [SeqRecord("", id=seq_id) for seq_id in seq_ids]
+        records = [SeqRecord("", id=seq_id) for seq_id in fasta_records.keys()]
 
     # Add "assembly_gap" features
     for rec in records:
@@ -417,6 +438,9 @@ def run(
     # Add the transl_table qualifier to CDS feature each
     for rec in records:
         _add_transl_table(rec, transl_table)
+
+    # fix CDS codon_start or location (not implemented yet)
+    fix_location_or_start_codon(rec, fasta_records, transl_table)
 
     # Add "source" feature if unavailable:
     #   [NOTE] GFF3's "region" type corresponds to annotation's "source" feature
@@ -430,14 +454,15 @@ def run(
         for rec in records:
             if not rec.features:
                 if rec.features[0].type == "source":
-                    msg = 'Ignore [source] in metadata as GFF3 already has "region" line at SeqID = {}'.format(rec.id)
+                    msg = 'Ignore [source] in metadata as GFF3 already has "region" line at SeqID = {}'.format(
+                        rec.id
+                    )
                     logging.warn(msg)
                 else:
                     src_length = seq_lengths[rec.id]
                     src_qualifiers = meta_info["source"]
                     src = _get_source(src_length, src_qualifiers)
                     rec.features.insert(0, src)
-
 
     # Remove invalid characters from qualifier values
     for rec in records:

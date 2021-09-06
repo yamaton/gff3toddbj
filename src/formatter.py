@@ -2,7 +2,7 @@ import collections
 import logging
 import pprint
 
-from typing import Any, Dict, FrozenSet, List, Tuple, Iterable, Union, Generator
+from typing import Any, Dict, FrozenSet, List, Optional, Tuple, Iterable, Union, Generator
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import CompoundLocation, ExactPosition, FeatureLocation, SeqFeature
 
