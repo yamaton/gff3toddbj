@@ -91,9 +91,11 @@ def has_start_codon(
     seq = rec.seq
 
     if strand > 0:
-        codon = seq[location.start + phase : location.start + phase + 3]
+        p = location.start + phase
+        codon = seq[p : p + 3]
     elif strand < 0:
-        codon = seq[location.end - 3 - phase : location.end - phase].complement()
+        p = location.end - phase
+        codon = seq[p - 3 : p].reverse_complement()
     else:
         raise ValueError("Cannot determine as strand = {}".format(strand))
     return codon in start_codons
@@ -102,39 +104,38 @@ def has_start_codon(
 def fix_cds(
     rec: SeqRecord, fasta_record: Dict[str, SeqRecord], transl_table: int
 ) -> None:
-    """ """
+    """
+    Find an inconsistency in codon_start qualifier and displays suggestion as WARNING log.
+    """
     fasta_seq = fasta_record[rec.id]
 
     def helper(features: List[SeqFeature]):
         for f in features:
-            if f.type == "CDS" and f.qualifiers["codon_start"] != [1]:
-                assert len(f.qualifiers["codon_start"]) == 1
-                assert isinstance(f.qualifiers["codon_start"][0], int)
+            if f.type == "CDS" and f.qualifiers["codon_start"][0] != 1:
+                cs_list = f.qualifiers["codon_start"]
+                codon_start = cs_list[0]
+                msg = "f.qualifiers['codon_start'] = {}".format(cs_list)
+                assert len(cs_list) == 1, msg
+                assert isinstance(cs_list[0], int)
                 try:
-                    codon_start = f.qualifiers["codon_start"]
-                    shift = int(codon_start[0]) - 1  # 1-based indexing to shift
+                    shift = codon_start - 1  # 1-based indexing to shift
                     if not has_start_codon(fasta_seq, f.location, transl_table, shift):
-                        logging.warn(
-                            "A start codon NOTFOUND at {} with shift={}, transl_table={}".format(
-                                f.location, shift, transl_table
-                            )
+                        msg = "A start codon NOTFOUND with shift={}, transl_table={}".format(
+                            shift, transl_table
                         )
+                        logging.warn(msg)
+                        logging.warn("   CDS: location = {}".format(f.location))
                         if has_start_codon(fasta_seq, f.location, transl_table):
-                            logging.warn(
-                                "Found a start codon with codon_start=1 (currently codon_start={}). Fix it?".format(
-                                    codon_start
-                                )
-                            )
+                            template = "Found a start codon with codon_start=1 (currently codon_start={}). Fix it?"
+                            msg = template.format(codon_start)
+                            logging.warn(msg)
                         else:
-                            logging.warn(
-                                "A start codon NOTFOUND with codon_start=1. Fix the feature location?"
-                            )
+                            msg = "A start codon NOTFOUND with codon_start=1. Fix the feature location?"
+                            logging.warn(msg)
                     else:
-                        logging.info(
-                            "Found a start codon as indicated by codon_start={}".format(
-                                codon_start
-                            )
-                        )
+                        temp = "Found a start codon as indicated by codon_start={}"
+                        msg = temp.format(codon_start)
+                        logging.info(msg)
                 except:
                     raise ValueError(
                         "fix_cds...codon_start = {}".format(f.qualifiers["codon_start"])

@@ -39,6 +39,7 @@ def main():
         "--transl_table",
         help="Genetic Code ID. 1 by default, and 11 for bacteria. See https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi",
         type=int,
+        default=1,
     )
     args = parser.parse_args()
 
