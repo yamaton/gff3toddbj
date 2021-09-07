@@ -3,6 +3,7 @@ from io import UnsupportedOperation
 import logging
 
 from Bio.SeqRecord import SeqRecord
+import re
 import toml
 from Bio.Data import CodonTable
 from Bio.SeqFeature import FeatureLocation, SeqFeature
@@ -28,6 +29,9 @@ METADATA_KEYS = {
     "source",
     "assembly_gap",
 }
+
+INVALID_LETTERS_AS_SEQID = '[=|>" \[\]]'
+INVALID_PATTERN_AS_SEQID = re.compile(INVALID_LETTERS_AS_SEQID)
 
 
 def load_header_info(path) -> Dict[str, Dict[str, Any]]:
@@ -74,6 +78,19 @@ def flatten_features(
         yield x
         if hasattr(x, "sub_features"):
             yield from flatten_features(x.sub_features)
+
+
+def is_invalid_as_seqid(name: str) -> bool:
+    """Check if `name` has a invalid characters as SeqID.
+    [NOTE] DDBJ annotation disallows names including =|>" []
+
+    >>> is_invalid_as_seqid("hello|world")
+    True
+
+    >>> is_invalid_as_seqid("baba+keke")
+    False
+    """
+    return bool(INVALID_PATTERN_AS_SEQID.search(name))
 
 
 def has_start_codon(

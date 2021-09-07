@@ -8,6 +8,7 @@ import gzip
 import logging
 import urllib
 import tempfile
+import sys
 import Bio
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
@@ -441,10 +442,21 @@ def run(
     # Create record from GFF3 (or dummy if unavailable)
     if path_gff3 is not None:
         records = load_gff3_as_seqrecords(path_gff3)
-        f = RenameFeatures(path_trans_features).run
-        g = RenameQualifiers(path_trans_qualifiers, locus_tag_prefix).run
+
+        # Check if SeqID uses valid characters
+        msg1 = "Found invalid letter(s) in the 1st column of the GFF3: {}"
+        msg2 = "Run following script to generate corrected GFF3 and FASTA files:\n"
+        msg3 = "  $ tools/regularize_seqids.py --gff3={} --fasta={}\n".format(path_gff3, path_fasta)
+        for rec in records:
+            if utils.is_invalid_as_seqid(rec.id):
+                logging.error(msg1.format(rec.id))
+                logging.error(msg2)
+                logging.error(msg3)
+                sys.exit(1)
 
         # Rename feature and qualifier keys
+        f = RenameFeatures(path_trans_features).run
+        g = RenameQualifiers(path_trans_qualifiers, locus_tag_prefix).run
         records = [g(f(rec)) for rec in records]
 
         # Fix codon_start value to 1-based indexing
