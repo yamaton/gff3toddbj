@@ -40,6 +40,7 @@ ab_name = [
 year = "2021"
 status = "Unpublished"
 
+### uncomment following if the DNA topology is circular
 # [COMMON.TOPOLOGY]
 # circular = ""
 
@@ -53,8 +54,10 @@ tagset_id = "Genome-Assembly-Data"
 "Genome Coverage" = "60x"
 "Sequencing Technology" = "454 GS FLX; ABI 3730"
 
-## "source" feature under COMMON has its own macro processing
-##   https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#common
+
+## -----------------------------------------------------------------------
+## Following is invoke DDBJ's macro-processing feature.
+##   See https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#common
 [COMMON.source]
 submitter_seqid = "@@[entry]@@"
 ff_definition =	"@@[organism]@@ DNA, @@[submitter_seqid]@@"
@@ -74,7 +77,6 @@ mol_type = "genomic DNA"
 ## [WARNING] qualifiers for "source" are IGNORED IF [COMMON.source] is defined in this file.
 organism = "Drosophila melanogaster"
 mol_type = "genomic DNA"
-
 ##
 ## -----------------------------------------------------------------------
 

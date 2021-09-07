@@ -1,0 +1,37 @@
+## -----------------------------------------------------------------------
+##        COMMON entry
+[COMMON]
+## "source" feature under COMMON has its own macro processing
+##   https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#common
+[COMMON.source]
+submitter_seqid = "@@[entry]@@"
+ff_definition =	"@@[organism]@@ DNA, @@[submitter_seqid]@@"
+organism = "Drosophila melanogaster"
+mol_type = "genomic DNA"
+##
+## -----------------------------------------------------------------------
+
+
+[source]
+## -----------------------------------------------------------------------
+##        "source" feature
+##
+##  DDBJ-recommended qualifiers:
+##    https://www.ddbj.nig.ac.jp/assets/files/pdf/ddbj/fq-e.pdf
+##
+## [WARNING] qualifiers for "source" are IGNORED IF [COMMON.source] is defined in this file.
+organism = "Drosophila melanogaster"
+mol_type = "genomic DNA"
+
+##
+## -----------------------------------------------------------------------
+
+
+[assembly_gap]
+## -----------------------------------------------------------------------
+##        "assembly_gap" feature
+estimated_length = "unknown"     # counts N's if the value is "<COMPUTE>"
+gap_type = "within scaffold"
+linkage_evidence = "paired-ends" # mandatory if gap_type is "within scaffold" or "repeat within scaffold"
+##
+## -----------------------------------------------------------------------
