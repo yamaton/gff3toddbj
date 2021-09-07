@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """
 Regularize SeqIDs and FASTA headers
 
@@ -12,6 +13,7 @@ import re
 import csv
 import pathlib
 import logging
+import sys
 
 INVALID_LETTERS = '[=|>" \[\]]'  # =|>" [] in regular expression
 NEW_DELIMITER = ":"
@@ -98,10 +100,9 @@ def main():
     seqids_only = seqids - headers
 
     if seqids_only:
-        msg = "Some SeqIDs in the GFF3 file are not found in the FASTA file: {}".format(
-            seqids_only
-        )
-        raise ValueError(msg)
+        msg = "------> Following SeqID is not found in the FASTA file: {} <------"
+        for name in seqids_only:
+            logging.warning(msg.format(name))
     else:
         logging.info("GFF3 and FASTA have matching IDs!")
 
@@ -111,15 +112,21 @@ def main():
         for key, value in table.items():
             logging.info("  {} \t ---> \t {}".format(key, value))
 
-    p_gff3 = pathlib.Path(args.gff3)
-    path_output_gff3 = p_gff3.parent / (p_gff3.stem + out_filename_suffix + p_gff3.suffix)
-    logging.info("Output GFF   : {}".format(str(path_output_gff3)))
-    save_renamed_gff3(path_input_gff3, path_output_gff3, table)
+        p_gff3 = pathlib.Path(args.gff3)
+        path_output_gff3 = p_gff3.parent / (p_gff3.stem + out_filename_suffix + p_gff3.suffix)
+        logging.info("Output GFF   : {}".format(str(path_output_gff3)))
+        save_renamed_gff3(path_input_gff3, path_output_gff3, table)
 
-    p_fasta = pathlib.Path(args.fasta)
-    path_output_fasta = p_fasta.parent / (p_fasta.stem + out_filename_suffix + p_fasta.suffix)
-    logging.info("Output FASTA : {}".format(str(path_output_fasta)))
-    save_renamed_fasta(path_input_fasta, path_output_fasta, table)
+        p_fasta = pathlib.Path(args.fasta)
+        path_output_fasta = p_fasta.parent / (p_fasta.stem + out_filename_suffix + p_fasta.suffix)
+        logging.info("Output FASTA : {}".format(str(path_output_fasta)))
+        save_renamed_fasta(path_input_fasta, path_output_fasta, table)
+
+    else:
+        logging.info("=====================================================")
+        logging.info("      IDs are fine: No need to regularize them.      ")
+        logging.info("=====================================================")
+
 
 if __name__ == "__main__":
     main()
