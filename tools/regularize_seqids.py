@@ -6,7 +6,6 @@ DDBJ annotation disallow SeqIDs containing characters  =|>" []
 1st column in GFF3 file (= SeqID) and headers in FASTA file (= headers) must match.
 
 """
-from os import supports_effective_ids
 from typing import Dict, Iterable, Set
 import argparse
 import re
@@ -84,11 +83,13 @@ def main():
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--gff3", "--gff", help="Input GFF3 file", required=True)
-    parser.add_argument("--fasta", help="Input FASTA file", required=True)
+    parser.add_argument("--fasta", "--fa", help="Input FASTA file", required=True)
+    parser.add_argument("--suffix", help="Suffix to output filenames", default="_renamed_ids")
     args = parser.parse_args()
 
     path_input_gff3 = args.gff3
     path_input_fasta = args.fasta
+    out_filename_suffix = args.suffix
     logging.info("Input GFF   : {}".format(path_input_gff3))
     logging.info("Input FASTA : {}".format(path_input_fasta))
 
@@ -111,13 +112,13 @@ def main():
             logging.info("  {} \t ---> \t {}".format(key, value))
 
     p_gff3 = pathlib.Path(args.gff3)
-    path_output_gff3 = p_gff3.parent / (p_gff3.stem + "_fixed" + p_gff3.suffix)
-    p_fasta = pathlib.Path(args.fasta)
-    path_output_fasta = p_fasta.parent / (p_fasta.stem + "_fixed" + p_fasta.suffix)
+    path_output_gff3 = p_gff3.parent / (p_gff3.stem + out_filename_suffix + p_gff3.suffix)
     logging.info("Output GFF   : {}".format(str(path_output_gff3)))
-    logging.info("Output FASTA : {}".format(str(path_output_fasta)))
-
     save_renamed_gff3(path_input_gff3, path_output_gff3, table)
+
+    p_fasta = pathlib.Path(args.fasta)
+    path_output_fasta = p_fasta.parent / (p_fasta.stem + out_filename_suffix + p_fasta.suffix)
+    logging.info("Output FASTA : {}".format(str(path_output_fasta)))
     save_renamed_fasta(path_input_fasta, path_output_fasta, table)
 
 if __name__ == "__main__":
