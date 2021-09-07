@@ -6,8 +6,8 @@ target = "5'UTR"
 [three_prime_UTR]
 target = "3'UTR"
 
+# GFF.parse() used in this tool converts this way already: 'transcript' -> 'mRNA'
 [transcript]
-# GFF.parse() converts 'transcript' type -> 'mRNA' qualifier automatically
 target = "mRNA"
 
 [region]

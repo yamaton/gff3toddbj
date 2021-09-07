@@ -2,7 +2,8 @@
 
 # -------------------------------------------
 # Found in GFF3 columns
-# GFF.parse() stores 'source' (2nd column), 'score' (6th column), and 'phase' (8th columns) as qualifiers
+# GFF.parse() used in this tool stores the 2nd, the 6th, and the 8th column
+# as qualifiers with name 'source', 'score', and 'phase', respectively.
 [source]
 description = 'Typically this is the name of a piece of software, such as "Genescan" or a database name, such as "Genbank." In effect, the source is used to extend the feature ontology by adding a qualifier to the type creating a new composite type that is a subclass of the type in the type column.'
 target = "note"
