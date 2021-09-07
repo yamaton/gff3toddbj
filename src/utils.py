@@ -107,6 +107,10 @@ def fix_cds(
     """
     Find an inconsistency in codon_start qualifier and displays suggestion as WARNING log.
     """
+    if rec.id not in fasta_record:
+        logging.error("Following SeqID from GFF3 not found in FASTA: {}".format(rec.id))
+        return
+
     fasta_seq = fasta_record[rec.id]
 
     def helper(features: List[SeqFeature]):

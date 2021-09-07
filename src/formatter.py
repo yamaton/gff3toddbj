@@ -135,8 +135,6 @@ class DDBJFormatter(object):
             [       ,         ,                                    , "clone"      ,  "PC0110"        ],
         ...
         """
-        logging.info("processing record:{}".format(rec.id))
-
         # Check skipped features according to the rule
         if not ignore_rules:
             feature_keys = {f.type for f in utils.flatten_features(rec.features)}
