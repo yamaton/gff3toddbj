@@ -127,15 +127,15 @@ def fix_cds(
                         msg = "A start codon NOTFOUND with shift={}, transl_table={}".format(
                             shift, transl_table
                         )
-                        logging.warn(msg)
-                        logging.warn("   CDS: location = {}".format(f.location))
+                        logging.warning(msg)
+                        logging.warning("   CDS: location = {}".format(f.location))
                         if has_start_codon(fasta_seq, f.location, transl_table):
                             template = "Found a start codon with codon_start=1 (currently codon_start={}). Fix it?"
                             msg = template.format(codon_start)
-                            logging.warn(msg)
+                            logging.warning(msg)
                         else:
                             msg = "A start codon NOTFOUND with codon_start=1. Fix the feature location?"
-                            logging.warn(msg)
+                            logging.warning(msg)
                     else:
                         temp = "Found a start codon as indicated by codon_start={}"
                         msg = temp.format(codon_start)

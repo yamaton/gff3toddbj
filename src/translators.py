@@ -299,7 +299,7 @@ def _join_features(record: SeqRecord, joinables: Optional[Tuple[str]]) -> SeqRec
                 res.extend(fs)
             # Don't join CDS features with different codon_start
             elif triple_or_f[0] == "CDS" and having_different_codon_starts(fs):
-                logging.warn(
+                logging.warning(
                     "Skip joining CDSs because of non-unique codon_start: {}".format(
                         triple_or_f
                     )
@@ -372,16 +372,16 @@ def _regularize_qualifier_value_letters(rec: SeqRecord) -> None:
                                         key, x
                                     )
                                 )
-                                logging.warn(msg)
+                                logging.warning(msg)
                                 f.qualifiers[key][i] = x.replace('"', "")
                             elif "\\" in x:
                                 msg = "Rename by replacing backslash with space: ({}, {})".format(
                                     key, x
                                 )
-                                logging.warn(msg)
+                                logging.warning(msg)
                                 f.qualifiers[key][i] = x.replace("\\", " ")
                 else:
-                    logging.warn(
+                    logging.warning(
                         "WTF?? qualifier value type is not a list:  ({}, {}, {})".format(
                             f.type, key, xs
                         )
@@ -473,7 +473,7 @@ def run(
 
     if ("source" in meta_info) and ("source" in meta_info["COMMON"]):
         msg = "Ignore [source] in metadata because [COMMON.source] overrides."
-        logging.warn(msg)
+        logging.warning(msg)
     else:
         for rec in records:
             if not rec.features:
@@ -481,7 +481,7 @@ def run(
                     msg = 'Ignore [source] in metadata as GFF3 already has "region" line at SeqID = {}'.format(
                         rec.id
                     )
-                    logging.warn(msg)
+                    logging.warning(msg)
                 else:
                     src_length = seq_lengths[rec.id]
                     src_qualifiers = meta_info["source"]

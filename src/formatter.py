@@ -188,19 +188,13 @@ class DDBJFormatter(object):
         """
         ## feature keys
         for fkey, cnt in self.ignored_feature_count.items():
-            logging.warn(
-                "[Ignored] feature ------->  {}  <------- \t (count: {})".format(
-                    fkey, cnt
-                )
-            )
+            msg = "[Ignored] feature ------->  {}  <------- \t (count: {})".format(fkey, cnt)
+            logging.warning(msg)
 
         ## feature-qualifier pairs
         for (fkey, qkey), cnt in self.ignored_pair_count.items():
-            logging.warn(
-                "[Ignored] (Feature, Qualifier) = ({}, {}) \t (count: {})".format(
-                    fkey, qkey, cnt
-                )
-            )
+            msg = "[Ignored] (Feature, Qualifier) = ({}, {}) \t (count: {})".format(fkey, qkey, cnt)
+            logging.warning(msg)
 
 
     def run(
@@ -216,7 +210,7 @@ class DDBJFormatter(object):
                     rows[2] = "1..E"
                 yield "\t".join(rows)
         else:
-            logging.warn("COMMON is unavailable. Skipping...")
+            logging.warning("COMMON is unavailable. Skipping...")
 
         # Format main genome entries
         for rec in records:
