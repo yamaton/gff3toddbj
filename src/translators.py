@@ -6,6 +6,8 @@ import re
 import pathlib
 import gzip
 import logging
+import urllib
+import tempfile
 import Bio
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
@@ -17,16 +19,38 @@ import utils
 Interval = Tuple[int, int]
 
 
-def load_gff3_as_seqrecords(filepath) -> List[SeqRecord]:
+def load_gff3_as_seqrecords(filepath, unquoting=False) -> List[SeqRecord]:
+    """Load GFF3 as iterable of SeqRecord
+
+    Args:
+        filepath: path to load GFF3
+        unquoting (bool): unquote characters.
+
+    Unquoting means converesions like this:
+        from %3B to ;
+        from %2C to ,
     """
-    Load GFF3 as iterable of SeqRecord
-    """
-    p = pathlib.Path(filepath)
-    if p.suffix == ".gz":
-        with gzip.open(filepath, "rt") as f:
-            recs = list(GFF.parse(f))
+    ext = pathlib.Path(filepath).suffix
+
+    if unquoting:
+        # Save unquoted content to tempfile before feeding GFF.parse()
+        with tempfile.TemporaryFile(mode="w+") as ftemp:
+            if ext == ".gz":
+                with gzip.open(filepath, "rt") as fin:
+                    ftemp.write(urllib.parse.unquote(fin.read()))
+            else:
+                with open(filepath, "r") as fin:
+                    ftemp.write(urllib.parse.unquote(fin.read()))
+            ftemp.seek(0)
+            recs = list(GFF.parse(ftemp))
     else:
-        recs = list(GFF.parse(filepath))
+        # If unquoting is unnecessary
+        if ext == ".gz":
+            with gzip.open(filepath, "rt") as fin:
+                recs = list(GFF.parse(fin))
+        else:
+            recs = list(GFF.parse(filepath))
+
     return recs
 
 
