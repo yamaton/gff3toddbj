@@ -188,12 +188,12 @@ class DDBJFormatter(object):
         """
         ## feature keys
         for fkey, cnt in self.ignored_feature_count.items():
-            msg = "[Ignored] feature ------->  {}  <------- \t (count: {})".format(fkey, cnt)
+            msg = "[Discarded] feature ------->  {}  <------- \t (count: {})".format(fkey, cnt)
             logging.warning(msg)
 
         ## feature-qualifier pairs
         for (fkey, qkey), cnt in self.ignored_pair_count.items():
-            msg = "[Ignored] (Feature, Qualifier) = ({}, {}) \t (count: {})".format(fkey, qkey, cnt)
+            msg = "[Discarded] (Feature, Qualifier) = ({}, {}) \t (count: {})".format(fkey, qkey, cnt)
             logging.warning(msg)
 
 

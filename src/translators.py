@@ -485,7 +485,7 @@ def run(
     #   In either case, a "source" feature is NOT added for each entry.
 
     if ("source" in meta_info) and ("source" in meta_info["COMMON"]):
-        msg = "Ignore [source] in metadata because [COMMON.source] overrides."
+        msg = "[COMMON.source] overrides [source] items in metadata."
         logging.warning(msg)
     else:
         for rec in records:
