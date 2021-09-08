@@ -41,13 +41,20 @@ def main():
         type=int,
         default=1,
     )
+    parser.add_argument(
+        "-o", "--output",
+        help="Specify annotation file name as output",
+    )
     args = parser.parse_args()
+    output = args.output
 
     logging.info("Input GFF   : {}".format(args.gff3))
     logging.info("Input FASTA : {}".format(args.fasta))
     logging.info("Input meta info: {}".format(args.metadata))
     logging.info("Prefix of locus_tag: {}".format(args.prefix))
     logging.info("transl_table (The Genome Code): {}".format(args.transl_table))
+    if output:
+        logging.info("Output  : {}".format(output))
 
     metadata = utils.load_header_info(args.metadata)
 
@@ -66,8 +73,14 @@ def main():
 
     fmt = formatter.DDBJFormatter(metadata, PATH_DDBJ_RULES)
     gen = fmt.run(records, ignore_rules=IGNORE_FEATURE_QUALIFIER_RULE)
-    for line in gen:
-        print(line)
+
+    if output:
+        with open(output, "w") as f:
+            for line in gen:
+                print(line, file=f)
+    else:
+        for line in gen:
+            print(line)
 
 
 if __name__ == "__main__":
