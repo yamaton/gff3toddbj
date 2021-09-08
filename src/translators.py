@@ -352,7 +352,8 @@ def _add_transl_table(rec: SeqRecord, transl_table: int) -> None:
         if hasattr(feature, "sub_features"):
             for f in feature.sub_features:
                 _apply(f)
-        feature.qualifiers["transl_table"] = [transl_table]
+        if feature.type == "CDS":
+            feature.qualifiers["transl_table"] = [transl_table]
 
     for f in rec.features:
         _apply(f)
