@@ -2,6 +2,7 @@ import argparse
 import formatter
 import translators
 import logging
+import pathlib
 
 import utils
 
@@ -77,6 +78,8 @@ def main():
     gen = fmt.run(records, ignore_rules=IGNORE_FEATURE_QUALIFIER_RULE)
 
     if output:
+        parent_dir = pathlib.Path(output).parent
+        parent_dir.mkdir(exist_ok=True)
         with open(output, "w") as f:
             for line in gen:
                 print(line, file=f)
