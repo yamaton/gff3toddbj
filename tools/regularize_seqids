@@ -62,13 +62,16 @@ def save_renamed_fasta(infile: str, outfile: str, table: Dict[str, str]):
     with open(infile, "r") as f, open(outfile, "w") as outfile:
         s = f.readlines()
         for line in s:
-            header = line[1:].strip()
-            name = header.split()[0]
-            rest = header[len(name):]
-            if name in table:
-                renamed = table[name]
-                s = renamed + rest
-                print(">{}".format(s), file=outfile)
+            if line.startswith(">"):
+                header = line[1:].strip()
+                name = header.split()[0]
+                rest = header[len(name):]
+                if name in table:
+                    renamed = table[name]
+                    s = renamed + rest
+                    print(">{}".format(s), file=outfile)
+                else:
+                    print(line, file=outfile, end="")
             else:
                 print(line, file=outfile, end="")
 
