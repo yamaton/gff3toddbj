@@ -401,7 +401,7 @@ def _remove_duplicates_in_qualifiers(rec: SeqRecord) -> None:
     _run(rec.features)
 
 
-def fix_location_or_start_codon(
+def _check_start_codons(
     rec: SeqRecord, fasta_record: Dict[str, SeqRecord], transl_table: int
 ) -> None:
     """Fix location or start_codon according to the DDBJ FAQ
@@ -412,7 +412,7 @@ def fix_location_or_start_codon(
         seq_dict is {SeqID: Record} dict containing sequence info.
         transl_table is the Genetic Code.
     """
-    utils.fix_cds(rec, fasta_record, transl_table)
+    utils.check_cds(rec, fasta_record, transl_table)
 
 
 def run(
@@ -471,8 +471,6 @@ def run(
     for rec in records:
         _add_transl_table(rec, transl_table)
 
-    # fix CDS codon_start or location (not implemented yet)
-    fix_location_or_start_codon(rec, fasta_records, transl_table)
 
     # Add "source" feature if unavailable:
     #   [NOTE] GFF3's "region" type corresponds to annotation's "source" feature
@@ -503,6 +501,9 @@ def run(
     # Join features in `joinables` tuple
     if joinables:
         records = [_join_features(rec, joinables) for rec in records]
+
+    # check start codons in CDSs
+    _check_start_codons(rec, fasta_records, transl_table)
 
     # Remove duplicates within a qualifier
     for rec in records:

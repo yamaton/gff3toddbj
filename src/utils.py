@@ -118,7 +118,7 @@ def has_start_codon(
     return codon in start_codons
 
 
-def fix_cds(
+def check_cds(
     rec: SeqRecord, fasta_record: Dict[str, SeqRecord], transl_table: int
 ) -> None:
     """
@@ -132,7 +132,7 @@ def fix_cds(
 
     def helper(features: List[SeqFeature]):
         for f in features:
-            if f.type == "CDS" and f.qualifiers["codon_start"][0] != 1:
+            if f.type == "CDS" and int(f.qualifiers["codon_start"][0]) != 1:
                 cs_list = f.qualifiers["codon_start"]
                 codon_start = cs_list[0]
                 msg = "f.qualifiers['codon_start'] = {}".format(cs_list)
@@ -147,11 +147,11 @@ def fix_cds(
                         logging.warning(msg)
                         logging.warning("   CDS: location = {}".format(f.location))
                         if has_start_codon(fasta_seq, f.location, transl_table):
-                            template = "Found a start codon with codon_start=1 (currently codon_start={}). Fix it?"
+                            template = "Found a start codon with zero shift (while codon_start={} currently). Fix /codon_start?"
                             msg = template.format(codon_start)
                             logging.warning(msg)
                         else:
-                            msg = "A start codon NOTFOUND with codon_start=1. Fix the feature location?"
+                            msg = "A start codon NOTFOUND. Fix the feature location?"
                             logging.warning(msg)
                     else:
                         temp = "Found a start codon as indicated by codon_start={}"
