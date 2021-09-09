@@ -442,7 +442,7 @@ def run(
         # Check if SeqID uses valid characters
         msg1 = "Found invalid letter(s) in the 1st column of the GFF3: {}"
         msg2 = "Run following script to generate corrected GFF3 and FASTA files:\n"
-        msg3 = "  $ tools/regularize_seqids.py --gff3={} --fasta={}\n".format(path_gff3, path_fasta)
+        msg3 = "  $ tools/regularize_seqids --gff3={} --fasta={}\n".format(path_gff3, path_fasta)
         for rec in records:
             if utils.is_invalid_as_seqid(rec.id):
                 logging.error(msg1.format(rec.id))
