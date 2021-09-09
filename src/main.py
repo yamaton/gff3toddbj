@@ -17,8 +17,8 @@ PATH_METADATA = "metadata.toml"
 LOCUS_TAG_PREFIX = "LOCUSTAGPREFIX_"
 
 IGNORE_FEATURE_QUALIFIER_RULE = False
-# JOINABLES = ("CDS", "exon", "intron")
-JOINABLES = None
+JOINABLES = ("CDS", "exon", "intron")
+# JOINABLES = None
 
 
 def main():
