@@ -244,20 +244,26 @@ class RenameFeatures(object):
 
 def _join_features(record: SeqRecord, joinables: Optional[Tuple[str]]) -> SeqRecord:
     """
-    Join features
+    Join features of the same hierarchy if the type is found in `joinables`.
     """
     joinables = [] if joinables is None else joinables
 
     def _join(features: List[SeqFeature]) -> SeqFeature:
+        """Join features into a single feature assuming the list already has right members
+        """
         assert len(features) > 1
         locations = []
         qualifiers = collections.OrderedDict()
         sub_features = []
         for f in features:
             locations.append(f.location)
-            qualifiers.update(f.qualifiers)
             if hasattr(f, "sub_features") and f.sub_features:
                 sub_features.extend(f.sub_features)
+
+        # this is how to set qualifiers of the joined feature
+        # and this matters in setting /codon_start right.
+        qualifiers = features[0].qualifiers
+
         if not sub_features:
             sub_features = None
 
@@ -271,7 +277,11 @@ def _join_features(record: SeqRecord, joinables: Optional[Tuple[str]]) -> SeqRec
         )
 
     def _join_helper(features: List[SeqFeature]) -> List[SeqFeature]:
-        # triples_of_features takes SeqFeature OR tuple (str, str, str) as its key
+        """
+        """
+        # `triples_or_features` has either `SeqFeature` or (type, id, product) as its key.
+        # An item with a `SeqFeature` key has dummy while an item with a tuple key has
+        # List[SeqFeature] as its value.
         triples_or_features = collections.defaultdict(list)
         for f in features:
             if f.type not in joinables:
