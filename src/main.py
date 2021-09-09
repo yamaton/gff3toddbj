@@ -5,7 +5,9 @@ import logging
 
 import utils
 
-logging.basicConfig(level=logging.INFO)
+FORMAT = '%(levelname)s: %(message)s'
+
+logging.basicConfig(level=logging.INFO, format=FORMAT)
 
 PATH_TRANS_FEATURES = "src/translate_features.toml"
 PATH_TRANS_QUALIFIERS = "src/translate_qualifiers.toml"
