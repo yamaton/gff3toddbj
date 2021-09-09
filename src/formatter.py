@@ -54,15 +54,6 @@ def table_to_tsv(table: List[List[str]]) -> str:
     return "\n".join("\t".join(items) for items in table)
 
 
-def load_rules(path: str) -> Dict[str, FrozenSet[str]]:
-    """Load DDBJ feature-qualifier rules in TOML"""
-    with open(path, "r") as f:
-        rules = toml.load(f)
-    for feature_key in rules:
-        rules[feature_key] = frozenset(rules[feature_key])
-
-    logging.debug("rules:\n{}".format(pprint.pformat(rules)))
-    return rules
 
 
 def get_common(header_info: Dict[str, Dict[str, Any]]) -> Optional[SeqRecord]:
@@ -91,7 +82,7 @@ class DDBJFormatter(object):
 
     def __init__(self, header_info, ddbj_rule_path: str):
         self.common = get_common(header_info)
-        self.rules = load_rules(ddbj_rule_path)
+        self.rules = utils.load_rules(ddbj_rule_path)
         ## Counter of ignored feature keys
         self.ignored_feature_count = collections.defaultdict(int)
         ## Counter of ignored (feature key, qualifier key) pairs

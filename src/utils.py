@@ -1,13 +1,13 @@
-from typing import Iterable, Generator, Dict, List, Optional, Any
+from typing import Iterable, Generator, Dict, List, Optional, FrozenSet, Any
 from io import UnsupportedOperation
 import logging
-
+import pprint
 from Bio.SeqRecord import SeqRecord
 import re
 import toml
 from Bio.Data import CodonTable
 from Bio.SeqFeature import FeatureLocation, SeqFeature
-from Bio.Seq import Seq
+
 
 # Supported metadata keys
 METADATA_COMMON_KEYS = {
@@ -21,17 +21,26 @@ METADATA_COMMON_KEYS = {
     "TOPOLOGY",
     "COMMENT",
     "ST_COMMENT",
-    "source",
 }
 
 METADATA_KEYS = {
     "COMMON",
-    "source",
-    "assembly_gap",
 }
 
 INVALID_LETTERS_AS_SEQID = '[=|>" \[\]]'
 INVALID_PATTERN_AS_SEQID = re.compile(INVALID_LETTERS_AS_SEQID)
+
+
+
+def load_rules(path: str) -> Dict[str, FrozenSet[str]]:
+    """Load DDBJ feature-qualifier rules in TOML"""
+    with open(path, "r") as f:
+        rules = toml.load(f)
+    for feature_key in rules:
+        rules[feature_key] = frozenset(rules[feature_key])
+
+    logging.debug("rules:\n{}".format(pprint.pformat(rules)))
+    return rules
 
 
 def load_header_info(path) -> Dict[str, Dict[str, Any]]:
@@ -51,13 +60,17 @@ def load_header_info(path) -> Dict[str, Dict[str, Any]]:
                 if not isinstance(qval, list):
                     header_info[k][qkey] = [qval]
 
-    validate_metadata_keys(header_info)
+    # [FIXME] Disabled till DDBJ rule is counted in the validation
+    # validate_metadata_keys(header_info)
 
     return header_info
 
 
 def validate_metadata_keys(d: Dict[str, Dict[str, Any]]) -> None:
-    """Check if metadata has proper table keys."""
+    """Check if metadata has proper table keys.
+
+    [FIXME] Need to take care of DDBJ features used in main.py
+    """
     keys = set(d.keys())
     msg = "Some meta-info keys are invalid: {}".format(keys - METADATA_KEYS)
     assert keys.issubset(METADATA_KEYS), msg
