@@ -1,14 +1,18 @@
-## Originally prepared by EMBLmyGFF3
+## ============== BEGIN ========================
+## DO NOT EDIT [mRNA] and [exon] entries
+## Special treatment to handle exons -> mRNA
+[mRNA]
+target = "__mRNA"
+
+[exon]
+target = "mRNA"
+## ============== END ==========================
 
 [five_prime_UTR]
 target = "5'UTR"
 
 [three_prime_UTR]
 target = "3'UTR"
-
-# GFF.parse() used in this tool converts this way already: 'transcript' -> 'mRNA'
-[transcript]
-target = "mRNA"
 
 [region]
 # "region" in GFF3 column 3 corresponds to "source"
