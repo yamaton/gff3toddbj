@@ -485,7 +485,7 @@ def _sort_features(features: List[SeqFeature]) -> None:
             "CDS": 2,
             "exon": 3,
             "intron": 3,
-            "assembly_gap": 4
+            "assembly_gap": 4,
         }
         return d[type_name] if (type_name in d) else 10
 
@@ -557,17 +557,17 @@ def run(
 
     # Add "source" feature if unavailable:
     #   [NOTE] GFF3's "region" type corresponds to annotation's "source" feature
-    #   [NOTE] User-input metadata may contain "source" feature under the COMMON entry
-    #   In either case, a "source" feature is NOT added for each entry.
-
+    #   [NOTE] User-input metadata may contain "[COMMON.source]" items.
+    #   In either case, a "source" feature is NOT added to each entry.
+    #   Only [source] in metadata input inserts "source" entry by entry.
     if ("source" in meta_info) and ("source" in meta_info["COMMON"]):
         msg = "[COMMON.source] overrides [source] items in metadata."
         logging.warning(msg)
-    else:
+    elif "source" in meta_info:
         for rec in records:
             if not rec.features:
                 if rec.features[0].type == "source":
-                    msg = 'Ignore [source] in metadata as GFF3 already has "region" line at SeqID = {}'.format(
+                    msg = 'Skip [source] in metadata as GFF3 already has "region" line at SeqID = {}'.format(
                         rec.id
                     )
                     logging.warning(msg)
