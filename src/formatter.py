@@ -68,7 +68,6 @@ def get_common(header_info: Dict[str, Dict[str, Any]]) -> Optional[SeqRecord]:
     features = [
         SeqFeature(type=key, qualifiers=xs)
         for (key, xs) in header_info["COMMON"].items()
-        if key in utils.METADATA_COMMON_KEYS
     ]
 
     record = None

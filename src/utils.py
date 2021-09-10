@@ -25,6 +25,7 @@ METADATA_COMMON_KEYS = {
 
 METADATA_KEYS = {
     "COMMON",
+    "source"
 }
 
 INVALID_LETTERS_AS_SEQID = '[=|>" \[\]]'
