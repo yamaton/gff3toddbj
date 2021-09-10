@@ -1,0 +1,81 @@
+## -----------------------------------------------------------------------
+##        COMMON entry
+[COMMON]
+[COMMON.DATATYPE]
+type = "WGS"
+
+[COMMON.KEYWORD]
+# Choose from following: https://www.insdc.org/documents/methodological-keywords
+keyword = [
+    "WGS",
+    "STANDARD_DRAFT"
+]
+
+[COMMON.DBLINK]
+project = "PRJDB12345"
+biosample = "SAMD90000001"
+"sequence read archive" = "DRR990000"
+
+[COMMON.SUBMITTER]
+contact = "Hanako Mishima"
+consrtm = "Zimmermannella faecalis genome sequencing consortium"
+ab_name = [
+    "Robertson,G.R.",
+    "Mishima,H."
+]
+email = "mishima@ddbj.nig.ac.jp"
+phone = "81-55-981-6853"
+institute = "National Institute of Genetics"
+country = "Japan"
+city = "Mishima"
+street = "Yata 1111"
+zip = "411-8540"
+
+[COMMON.REFERENCE]
+title = "Mouse Genome Sequencing"
+ab_name = [
+    "Robertson,G.R.",
+    "Mishima,H."
+]
+year = "2021"
+status = "Unpublished"
+
+### uncomment following if the DNA topology is circular
+# [COMMON.TOPOLOGY]
+# circular = ""
+
+[COMMON.COMMENT]
+line = ["Please visit our website URL", "http://www.ddbj.nig.ac.jp/"]
+
+[COMMON.ST_COMMENT]
+tagset_id = "Genome-Assembly-Data"
+"Assembly Method" = "Velvet v.2.0"
+"Assembly Name" = "Sfl_assembly01"
+"Genome Coverage" = "60x"
+"Sequencing Technology" = "454 GS FLX; ABI 3730"
+
+
+## -----------------------------------------------------------------------
+## Following innvokes DDBJ's macro-processing feature in COMMON.
+##   See https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#common
+[COMMON.source]
+organism = "Drosophila melanogaster"
+mol_type = "genomic DNA"
+submitter_seqid = "@@[entry]@@"
+ff_definition =	"@@[organism]@@ DNA, @@[submitter_seqid]@@"
+
+
+[assembly_gap]
+## -----------------------------------------------------------------------
+##        "assembly_gap" feature
+##
+## Note that COMMON.assembly_gap items will be inserted to
+## EVERY assembly_gap features by DDBJ.
+## https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#common
+##
+estimated_length = "unknown"     # counts N's if the value is "<COMPUTE>"
+gap_type = "within scaffold"
+# linkage_evidence is mandatory if gap_type is "within scaffold" or "repeat within scaffold"
+linkage_evidence = "paired-ends"  # "paired-ends", "unspecified"
+##
+## -----------------------------------------------------------------------
