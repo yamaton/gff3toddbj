@@ -1,6 +1,6 @@
 import argparse
 import formatter
-import translators
+import transforms
 import logging
 import pathlib
 
@@ -59,7 +59,7 @@ def main():
 
     metadata = utils.load_header_info(args.metadata)
 
-    records = translators.run(
+    records = transforms.run(
         args.gff3,
         args.fasta,
         PATH_TRANS_FEATURES,
