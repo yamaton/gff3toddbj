@@ -66,7 +66,7 @@ def load_fasta_as_seq(filepath) -> OrderedDict[str, SeqRecord]:
             for seq in Bio.SeqIO.parse(f, "fasta"):
                 recs[seq.id] = seq.upper()
     else:
-        for seq in Bio.SeqIO.parse(f, "fasta"):
+        for seq in Bio.SeqIO.parse(filepath, "fasta"):
             recs[seq.id] = seq.upper()
     return recs
 
