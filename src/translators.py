@@ -453,6 +453,31 @@ def _assign_single_product(rec: SeqRecord) -> None:
     _helper(rec.features)
 
 
+def _sort_features(features: List[SeqFeature]) -> None:
+    """Sort features
+    """
+    def type_priority(type_name: str) -> int:
+        d = {
+            "gene": 0,
+            "mRNA": 1,
+            "5'UTR": 2,
+            "3'UTR": 2,
+            "CDS": 2,
+            "exon": 3,
+            "intron": 3,
+            "assembly_gap": 4
+        }
+        return d[type_name] if (type_name in d) else 10
+
+    def keyfunc(f: SeqFeature) -> Tuple[int, int, int, str]:
+        return (f.location.start, type_priority(f.type), f.location.end, f.id)
+
+    features.sort(key=keyfunc)
+    for f in features:
+        if hasattr(f, "sub_features"):
+            _sort_features(f.sub_features)
+
+
 def run(
     path_gff3: Optional[str],
     path_fasta: str,
@@ -554,5 +579,9 @@ def run(
     # Remove duplicates within a qualifier
     for rec in records:
         _remove_duplicates_in_qualifiers(rec)
+
+    # Sort features
+    for rec in records:
+        _sort_features(rec.features)
 
     return records
