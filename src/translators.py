@@ -1,5 +1,5 @@
 import pprint
-from typing import Any, Dict, Generator, List, Optional, Tuple, Iterable
+from typing import Any, Dict, Generator, List, Optional, Tuple, Iterable, OrderedDict
 import collections
 import toml
 import re
@@ -55,42 +55,31 @@ def load_gff3_as_seqrecords(filepath, unquoting=False) -> List[SeqRecord]:
     return recs
 
 
-def load_fasta_as_seq(filepath) -> Dict[str, SeqRecord]:
+def load_fasta_as_seq(filepath) -> OrderedDict[str, SeqRecord]:
     """
     Load FASTA file as Seq
     """
     p = pathlib.Path(filepath)
+    recs = collections.OrderedDict()
     if p.suffix == ".gz":
         with gzip.open(filepath, "rt") as f:
-            recs = {seq.id: seq.upper() for seq in Bio.SeqIO.parse(f, "fasta")}
+            for seq in Bio.SeqIO.parse(f, "fasta"):
+                recs[seq.id] = seq.upper()
     else:
-        recs = {seq.id: seq.upper() for seq in Bio.SeqIO.parse(filepath, "fasta")}
+        for seq in Bio.SeqIO.parse(f, "fasta"):
+            recs[seq.id] = seq.upper()
     return recs
 
 
-def load_toml_tables(filepath) -> Dict[str, Any]:
+def load_toml_tables(filepath) -> OrderedDict[str, Any]:
     """
     Load TOML as python dictionary
     """
     with open(filepath) as fp:
-        d = toml.load(fp)
+        d = toml.load(fp, _dict=collections.OrderedDict)
 
     logging.debug("TOML table:\n{}".format(pprint.pformat(d)))
     return d
-
-
-def _merge_dicts(*dict_args) -> Dict:
-    """
-    Given any number of dictionaries, shallow copy and merge into a new dict,
-    precedence goes to key-value pairs in latter dictionaries.
-
-    >>> merge_dicts({'us', 1, 'canada, 1}, {'egypt': 20}, {'greece': 30, 'netherlands', 31})
-    {'us', 1, 'canada, 1, 'egypt': 20, 'greece': 30, 'netherlands', 31}
-    """
-    res = {}
-    for d in dict_args:
-        res.update(d)
-    return res
 
 
 def _get_assembly_gap(seq: Seq, qualifiers: Dict[str, Any]) -> List[SeqFeature]:
@@ -221,7 +210,6 @@ class RenameFeatures(object):
     Empty "target" value means the name key is dropped.
     Unlike qualifiers, "prefix" is not supported here.
     """
-
     def __init__(self, filepath: str):
         self.path = filepath
         self.d = load_toml_tables(filepath)
@@ -291,7 +279,7 @@ def _join_features(record: SeqRecord, joinables: Optional[Tuple[str]]) -> SeqRec
                     prod = tuple(f.qualifiers["product"])
                 else:
                     prod = None
-                triple = (f.type, f.id, prod)
+                triple = (f.type, prod)
                 triples_or_features[triple].append(f)
 
         res = []
@@ -415,6 +403,29 @@ def _check_start_codons(
     utils.check_cds(rec, fasta_record, transl_table)
 
 
+def _merge_mrna_qualifiers(rec: SeqRecord) -> None:
+    """Set qualifiers in __mRNA (orignally mRNA type)
+    as the qualifiers of the merged mRNA feature.
+    """
+    def _helper(features: List[SeqFeature]) -> None:
+        for f in features:
+            if f.type == "__mRNA":
+                mrnas = [subf for subf in f.sub_features if subf.type == "mRNA"]
+                if len(mrnas) != 1:
+                    logging.warning("Something is wrong with mRNA and exons: {}".format(f))
+                    return
+                for subf in f.sub_features:
+                    if subf.type == "mRNA":
+                        for key, val in f.qualifiers.items():
+                            subf.qualifiers[key] = val
+
+            if hasattr(f, "sub_features"):
+                _helper(f.sub_features)
+
+    # just call the _helper
+    _helper(rec.features)
+
+
 def run(
     path_gff3: Optional[str],
     path_fasta: str,
@@ -501,6 +512,10 @@ def run(
     # Join features in `joinables` tuple
     if joinables:
         records = [_join_features(rec, joinables) for rec in records]
+
+    # Merge __mRNA with mRNAs (originally mRNA and exons)
+    for rec in records:
+        _merge_mrna_qualifiers(rec)
 
     # check start codons in CDSs
     _check_start_codons(rec, fasta_records, transl_table)
