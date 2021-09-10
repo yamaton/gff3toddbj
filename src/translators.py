@@ -426,6 +426,33 @@ def _merge_mrna_qualifiers(rec: SeqRecord) -> None:
     _helper(rec.features)
 
 
+def _assign_single_product(rec: SeqRecord) -> None:
+    """Take the first item in /product values as the value of /product
+    and put the rest as /inference values
+    """
+    DEFAULT = ["hypothetical protein"]
+
+    def _helper(features: List[SeqFeature]) -> None:
+        for f in features:
+            if f.type == "CDS":
+                if ("product" not in f.qualifiers) or (not f.qualifiers["product"]):
+                    f.qualifiers["product"] = DEFAULT
+                elif len(f.qualifiers["product"]) > 1:
+                    head = f.qualifiers["product"][0]
+                    rest = f.qualifiers["product"][1:]
+                    f.qualifiers["product"] = [head]
+                    if "inference" in f.qualifiers:
+                        f.qualifiers["inference"].extend(rest)
+                    else:
+                        f.qualifiers["inference"] = rest
+
+            if hasattr(f, "sub_features"):
+                _helper(f.sub_features)
+
+    # just call the _helper
+    _helper(rec.features)
+
+
 def run(
     path_gff3: Optional[str],
     path_fasta: str,
@@ -519,6 +546,10 @@ def run(
 
     # check start codons in CDSs
     _check_start_codons(rec, fasta_records, transl_table)
+
+    # assign single value to /product and put the rest to /inference
+    for rec in records:
+        _assign_single_product(rec)
 
     # Remove duplicates within a qualifier
     for rec in records:
