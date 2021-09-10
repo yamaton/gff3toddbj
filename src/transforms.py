@@ -173,21 +173,28 @@ class RenameQualifiers(object):
                 feature.qualifiers = self._run_on_qualifiers(feature.qualifiers)
         return features
 
-    def _run_on_qualifiers(self, qualifiers: Dict) -> Dict:
-        res = collections.defaultdict(list)
+    def _run_on_qualifiers(self, qualifiers: OrderedDict) -> OrderedDict:
+        res = collections.OrderedDict()
         for name, vals in qualifiers.items():
             if name in self.trans_table:
                 # Replace the item name
-                new_name = self.trans_table[name]["target"]
+                new_name = self.trans_table[name].get("target", "")
                 if new_name:
                     prefix = self.trans_table[name].get("prefix", "")
-                    res[new_name] += [prefix + v for v in vals]
+                    if prefix:
+                        vals = [prefix + v for v in vals]
+
+                    if new_name not in res:
+                        res[new_name] = []
+                    res[new_name] += vals
                 else:
                     # Remove the item from qualifiers if "target" is not set, or emtpy
                     pass
             else:
+                if name not in res:
+                    res[name] = []
                 res[name] += vals
-        return dict(res)
+        return res
 
 
 class RenameFeatures(object):
@@ -378,10 +385,19 @@ def _regularize_qualifier_value_letters(rec: SeqRecord) -> None:
 def _remove_duplicates_in_qualifiers(rec: SeqRecord) -> None:
     """Remove duplicate values within a qualifier"""
 
+    def _unique(xs: List) -> List:
+        seen = set()
+        result = []
+        for x in xs:
+            if x not in seen:
+                result.append(x)
+                seen.add(x)
+        return result
+
     def _run(features: SeqFeature) -> None:
         for f in features:
             f.qualifiers = {
-                qkey: list(set(qval)) for (qkey, qval) in f.qualifiers.items()
+                qkey: _unique(qval) for (qkey, qval) in f.qualifiers.items()
             }
             if hasattr(f, "sub_features"):
                 _run(f.sub_features)
