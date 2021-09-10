@@ -57,7 +57,7 @@ def main():
     if output:
         logging.info("Output  : {}".format(output))
 
-    metadata = utils.load_header_info(args.metadata)
+    metadata = utils.load_metadata_info(args.metadata)
 
     records = transforms.run(
         args.gff3,

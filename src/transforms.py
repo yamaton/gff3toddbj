@@ -82,9 +82,13 @@ def load_toml_tables(filepath) -> OrderedDict[str, Any]:
     return d
 
 
-def _get_assembly_gap(seq: Seq, qualifiers: Dict[str, Any]) -> List[SeqFeature]:
+def _get_assembly_gap(seq: Seq, qualifiers: OrderedDict[str, Any]) -> List[SeqFeature]:
     """
     Get assembly_gap features from seq.
+
+    Args:
+        seq (Seq): sequence to check assembly gaps
+        qualifiers (dict): qualifier values
     """
     locs = [
         FeatureLocation(start, end, strand=1)
@@ -108,7 +112,7 @@ def _get_assembly_gap_locations(seq: Seq) -> List[Interval]:
     [NOTE] This interval format [begin, end) is for Biopython
     such that 0-based, left-inclusive and right-exclusive.
 
-    >>> s = Seq("atatnnngattacanccc")
+    >>> s = Seq("ATATNNNGATTACANCCC")
     >>> _get_assembly_gap_locations(s)
     [(4, 7), (14, 15)]
     """
@@ -499,7 +503,7 @@ def run(
     path_fasta: str,
     path_trans_features: str,
     path_trans_qualifiers: str,
-    meta_info: Dict[str, Dict[str, Any]],
+    meta_info: OrderedDict[str, OrderedDict[str, Any]],
     locus_tag_prefix: str,
     transl_table: int,
     joinables: Tuple[str, ...],

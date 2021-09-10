@@ -1,11 +1,13 @@
-from typing import Iterable, Generator, Dict, List, Optional, FrozenSet, Any
-from io import UnsupportedOperation
+from typing import Iterable, Generator, Dict, List, FrozenSet, OrderedDict, Any
 import logging
 import pprint
-from Bio.SeqRecord import SeqRecord
 import re
+import collections
 import toml
+
+from Bio.Seq import Seq
 from Bio.Data import CodonTable
+from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import FeatureLocation, SeqFeature
 
 
@@ -28,7 +30,7 @@ METADATA_KEYS = {
     "source"
 }
 
-INVALID_LETTERS_AS_SEQID = '[=|>" \[\]]'
+INVALID_LETTERS_AS_SEQID = r'[=|>" \[\]]'
 INVALID_PATTERN_AS_SEQID = re.compile(INVALID_LETTERS_AS_SEQID)
 
 
@@ -36,7 +38,7 @@ INVALID_PATTERN_AS_SEQID = re.compile(INVALID_LETTERS_AS_SEQID)
 def load_rules(path: str) -> Dict[str, FrozenSet[str]]:
     """Load DDBJ feature-qualifier rules in TOML"""
     with open(path, "r") as f:
-        rules = toml.load(f)
+        rules = toml.load(f, _dict=collections.OrderedDict)
     for feature_key in rules:
         rules[feature_key] = frozenset(rules[feature_key])
 
@@ -44,15 +46,14 @@ def load_rules(path: str) -> Dict[str, FrozenSet[str]]:
     return rules
 
 
-def load_header_info(path) -> Dict[str, Dict[str, Any]]:
+def load_metadata_info(path) -> OrderedDict[str, OrderedDict[str, Any]]:
     """Load metadata as dictionary from TOML file."""
     try:
         with open(path, "r") as f:
-            header_info = toml.load(f)
+            header_info = toml.load(f, _dict=collections.OrderedDict)
     except:
-        raise UnsupportedOperation(
-            "COMMON input other than TOML is not implemented yet!"
-        )
+        msg = "Failed to load metadata from {}:".format(path)
+        raise FileNotFoundError(msg)
 
     # Change qualifier type to list
     for k in header_info:
@@ -114,7 +115,10 @@ def has_start_codon(
     is start codon according to the Genetic Code transl_table.
     Location is shifted if phase is nonzero.
 
-    >>> has_start_codon(Seq("GAATTCGAGGGG"), 1, 1, 11)
+    >>> seq = Seq("GAATTCGAGGGG")
+    >>> rec = SeqRecord(seq)
+    >>> loc = FeatureLocation(1, 7, strand=1)
+    >>> has_start_codon(rec, loc, 11, phase=1)
     True
     """
     strand = location.strand
