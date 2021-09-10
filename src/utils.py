@@ -180,3 +180,16 @@ def check_cds(
                 helper(f.sub_features)
 
     helper(rec.features)
+
+
+def debug_checker(recs: List[SeqRecord], tag="", qual_key="note", qual_value="ID:cds-XP_008596228.1") -> None:
+
+    def _helper(features: List[SeqFeature]) -> None:
+        for f in features:
+            if qual_value in f.qualifiers.get(qual_key, []):
+                logging.info("{} f.qualifiers['{}'] = {}".format(tag, qual_key, f.qualifiers[qual_key]))
+            if hasattr(f, "sub_features"):
+                _helper(f.sub_features)
+
+    for rec in recs:
+        _helper(rec.features)
