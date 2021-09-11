@@ -448,7 +448,7 @@ def _merge_mrna_qualifiers(rec: SeqRecord) -> None:
 
 def _assign_single_product(rec: SeqRecord) -> None:
     """Take the first item in /product values as the value of /product
-    and put the rest as /inference values
+    and put the rest as /note values
     """
     DEFAULT = ["hypothetical protein"]
 
@@ -458,13 +458,16 @@ def _assign_single_product(rec: SeqRecord) -> None:
                 if ("product" not in f.qualifiers) or (not f.qualifiers["product"]):
                     f.qualifiers["product"] = DEFAULT
                 elif len(f.qualifiers["product"]) > 1:
-                    head = f.qualifiers["product"][0]
-                    rest = f.qualifiers["product"][1:]
+                    values = f.qualifiers["product"]
+                    head = values[0]
                     f.qualifiers["product"] = [head]
-                    if "inference" in f.qualifiers:
-                        f.qualifiers["inference"].extend(rest)
+
+                    prefix = "product:"
+                    rest = [prefix + x for x in values[1:]]
+                    if "note" in f.qualifiers:
+                        f.qualifiers["note"].extend(rest)
                     else:
-                        f.qualifiers["inference"] = rest
+                        f.qualifiers["note"] = rest
 
             if hasattr(f, "sub_features"):
                 _helper(f.sub_features)
@@ -577,7 +580,7 @@ def run(
                     src = _get_source(src_length, src_qualifiers)
                     rec.features.insert(0, src)
 
-    # Remove invalid characters from qualifier values
+    # Regularize characters in qualifier values
     for rec in records:
         _regularize_qualifier_value_letters(rec)
 
