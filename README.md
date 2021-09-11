@@ -1,5 +1,7 @@
 # GFF3_to_DDBJ
 
+[TOC]
+
 ## これは何？
 
 DDBJ への登録には指定された形式のアノテーションファイルが必要です。GFF3_to_DDBJ はその名前のとおり**GFF3ファイルからアノテーションファイルを作る**プログラムです（正確には FASTA も必要です。）**FASTA 単体から最小限のアノテーションファイルを作る**ことも実は可能です。
@@ -40,7 +42,8 @@ $ conda activate ddbj
 ```
 
 
-## アノテーションをつくる
+
+## GFF3 と FASTA から DDBJ アノテーションをつくる
 
 ### 0. GFF3 の正当性チェック
 
@@ -53,7 +56,7 @@ $ conda activate ddbj
 GFF3 ファイル中に `##FASTA` ディレクティヴをつかって FASTA が書き込まれている場合には、同梱のツールを使うなどして分割してください。`##FASTA` が無ければスキップして次へ進んでください。
 
 ```shell
-split_fasta_from_gff3 \
+tools/split_fasta_from_gff3 \
   --gff3=path/to/myfile.gff3 \
   --suffix="_modified"
 ```
@@ -66,18 +69,19 @@ split_fasta_from_gff3 \
 
 まずはスクリプトを動かしてみましょう。
 
-* `--gff3` には入力 GFF3ファイルへのパスを指定
-* `--fasta` には入力 FASTAファイルへのパスを指定
-* `--metadata` には４で使ったTOML ファイルを指定。（とりあえずは metadata.to
-* `--locus_tag_prefix` には [BioSampleの申請時に得られたもの](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#locus_tag)を指定。（とりあえずは省略してOK）
-* `--transl_table` は [The Genetic Codes](https://www.ddbj.nig.ac.jp/ddbj/geneticcode-e.html) から適切な番号を選ぶ。（とりあえずは１でOK）
-* `--output` には出力ファイル（＝アノテーション）のパスを指定
+* `--gff3 <FILE>` には入力 GFF3ファイルへのパスを指定
+* `--fasta <FILE>` には入力 FASTAファイルへのパスを指定
+* `--metadata <FILE>` には４でコピー＆編集するTOML ファイルを指定。（とりあえずはテンプレートを使ってみます。）
+* `--locus_tag_prefix <STRING>` には [BioSampleの申請時に得られたもの](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#locus_tag)を指定。（とりあえずは省略）
+* `--transl_table <INT>` は [The Genetic Codes](https://www.ddbj.nig.ac.jp/ddbj/geneticcode-e.html) から適切な数字を選ぶ。（とりあえずは１）
+* `--output <FILE>` には出力ファイル（＝アノテーション）のパスを指定
 
 ```shell
-gff3_to_ddbj
+# gff3_to_ddbj のような実行ファイルを用意する予定です…
+python src/main.py
   --gff3 myfile.gff3 \
   --fasta myfile.fa \
-  --metadata metadata.toml \
+  --metadata mymetadata.toml \
   --locus_tag_prefix MYOWNPREFIX \
   --transl_table 1 \
   --output myawesome_output.ann
@@ -92,7 +96,7 @@ gff3_to_ddbj
 DDBJ のアノテーションチェックソフトによると `=|>" []` といった文字は Entry として使えないとのこと。違反文字が含まれるときには GFF3の1列目 (= "SeqID") および FASTAのヘッダをリネームする必要があります。ステップ２でその旨のエラーを見かけたら以下を実行してください。
 
 ```shell
-regularize_seqids \
+tools/regularize_seqids \
   --gff3=path/to/foo.gff3 \
   --fasta=path/to/bar.fasta \
   --suffix="_renamed_ids"
@@ -127,54 +131,9 @@ GFF3 と DDBJ アノテーションには大まかに以下のような対応が
 
 
 
-### 6.  `/product`  qualifier value の選択
-
-Prokka などアノテーションソフトの一部は複数の値をもった `/product` を出してきます。いっぽう DDBJ アノテーションでは次のような規約があります。
-
-> * 一般名が複数ある場合でも, 複数の名称を記載しないで下さい。また, そのために不必要な区切り記号を使用しないで下さい。一般名の複数記載を希望される場合は, 代表的な名称を /product qualifier に記載し, その他の名称を /note qualifier に記載して下さい。
->
-> * 機能, 名称等が不明な蛋白質の場合は, hypothetical protein と記載することを推奨します。
-
-このため `proteins.txt`  という各行にひとつ名称を記述したリストを準備してもらいます。ある Feature に対し`/product` が複数あるばあいには、このリストを上からたどってはじめに一致する名前をもって `/product` qualifier value とします。 リストに一致が見つからないときまたは `protein.txt`が準備されないときには `/product` qualifier value を "hypothetical protein" とします。
 
 
-
-#### 例
-
-protein.txt
-
-```toml
-foo
-baba
-```
-
-
-
-GFF3
-
-```
-AAAA01000001.1  transdecoder    CDS 262788  262824  .   -   2   ID=cds.LOCUS000000100.1.p1;Parent=LOCUS000000100.1.p1;product=someprotein,another,baba,keke,gozilla,foo
-AAAA01000001.1  transdecoder    CDS 384063  384552  .   -   0   ID=cds.LOCUS000000100.1.p1;Parent=LOCUS000000100.1.p1;product=bar,baz,abyss,nanachi
-```
-
-
-
-Annotation output (showing the corresponding part only)
-
-|      |      |                            |             |                            |
-| ---- | ---- | -------------------------- | ----------- | -------------------------- |
-|      | CDS  | complement(262788..262824) | note        | ID:cds.LOCUS000000100.1.p1 |
-|      |      |                            | product     | foo                        |
-|      |      |                            | codon_start | 3                          |
-|      | CDS  | complement(384063..384552) | note        | ID:cds.LOCUS000000100.1.p1 |
-|      |      |                            | product     | hypothetical protein       |
-|      |      |                            | codon_start | 1                          |
-
-
-
-
-
-## FASTA 単体からアノテーションをつくる
+## FASTA単体 から DDBJ アノテーションをつくる
 
 GFF3+FASTA を使う前節のなかで、ステップ４のメタデータ情報の編集だけが事前に必要です。
 
@@ -184,9 +143,45 @@ GFF3+FASTA を使う前節のなかで、ステップ４のメタデータ情報
 * `--output` には出力ファイル（＝アノテーション）のパスを指定
 
 ```
-gff3_to_ddbj
+python src/main.py
   --fasta myfile.fa \
   --metadata metadata.toml \
   --locus_tag_prefix MYOWNPREFIX \
   --output myawesome_output.ann
 ```
+
+
+
+## 当プログラムが行っていること
+
+表示形式を変えるほかに以下のようなことをしています。
+
+* 変換テーブルに基づいた Features / Qualifiers のリネーム
+
+* assembly_gap の検索
+
+* /transl_table の CDS への追加
+
+* メタデータ中の source 情報を各エントリへの追加
+
+* Qualifier 値に使われる文字の正規化
+
+* 同じ親をもつ CDS を `join` 記法で結合
+
+* 入力GFF3 ファイル中の mRNA と exon を `join`記法で結合し mRNA Feature とする
+
+* Start codon まわり整合性チェック（ いまのところ /codon_start が 1でないときのみ）
+
+* CDS 下の /product が値をひとつだけ持つよう変更。複数値の残りは /note へ
+
+  * [DDBJ の/product 詳細](https://www.ddbj.nig.ac.jp/ddbj/qualifiers.html#product)を参照ください
+
+    > * 一般名が複数ある場合でも, 複数の名称を記載しないで下さい。また, そのために不必要な区切り記号を使用しないで下さい。一般名の複数記載を希望される場合は, 代表的な名称を /product qualifier に記載し, その他の名称を /note qualifier に記載して下さい。
+    > * 機能, 名称等が不明な蛋白質の場合は, hypothetical protein と記載することを推奨します。
+
+* Qualifier値に重複があるときに冗長分を削除
+
+* アノテーション行の並び替え
+
+* [DDBJ の Feature-Qualifier 一覧表](https://www.ddbj.nig.ac.jp/assets/files/pdf/ddbj/fq-j.pdf)に基づいた出力情報のフィルタリング
+
