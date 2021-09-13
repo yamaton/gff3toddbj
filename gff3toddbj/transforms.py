@@ -9,14 +9,14 @@ import logging
 import urllib
 import tempfile
 import sys
+
 import Bio
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import FeatureLocation, SeqFeature, CompoundLocation
 from BCBio import GFF
 
-import utils
-
+from . import utils
 Interval = Tuple[int, int]
 
 

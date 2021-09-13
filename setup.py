@@ -21,13 +21,17 @@ setuptools.setup(
         "Operating System :: OS Independent",
         "Development Status :: 3 - Alpha",
     ],
-    package_dir={"": "gff3toddbj"},
-    packages=setuptools.find_packages(where="gff3toddbj"),
+
+    packages=setuptools.find_packages(),
     python_requires=">=3.6",
     install_requires=[
         "biopython >= 1.75",
         "bcbio-gff >= 0.6.6",
         "toml",
     ],
-    entry_points={"console_scripts": ["gff3toddbj = main:main"]},
+    entry_points={"console_scripts":
+        [
+            "gff3toddbj = gff3toddbj:main",
+            "splitfasta = tools.splitfasta:main",
+        ]},
 )

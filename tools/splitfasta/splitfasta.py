@@ -78,7 +78,10 @@ def split(input_gff3, output_gff3, output_fasta) -> None:
 def main():
     logging.basicConfig(level=logging.INFO)
 
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        prog="splitfasta",
+        description="Split FASTA from GFF3",
+        )
     parser.add_argument("gff3", help="Input GFF3")
     parser.add_argument(
         "--suffix", help="Suffix added to the output filenames", default="_splitted"
@@ -97,6 +100,3 @@ def main():
 
     split(input_gff3=input_gff3, output_gff3=output_gff3, output_fasta=output_fasta)
 
-
-if __name__ == "__main__":
-    main()

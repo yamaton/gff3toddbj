@@ -1,0 +1,1 @@
+from .splitfasta import main

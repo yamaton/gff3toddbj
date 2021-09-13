@@ -10,7 +10,7 @@ DDBJ への登録には指定された形式のアノテーションファイル
 
 ## セットアップ
 
-### [未実装] bioconda経由で conda環境作成
+#### bioconda経由で conda環境をつくる場合
 
 ```shell
 # ddbjという名前でconda環境をつくってbiocondaからパッケージをインストール
@@ -22,7 +22,7 @@ $ conda activate ddbj
 
 
 
-### GitHub からダウンロードして conda 環境作成
+#### GitHub からダウンロードして conda環境で動かす場合
 
 ```shell
 # ファイルをダウンロード

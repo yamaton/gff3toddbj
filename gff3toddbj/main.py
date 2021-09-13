@@ -3,9 +3,9 @@ import argparse
 import logging
 import pathlib
 
-import transforms
-import annotation_formatter
-import utils
+from . import formatter
+from . import transforms
+from . import utils
 
 FORMAT = '%(levelname)s: %(message)s'
 
@@ -74,7 +74,7 @@ def main():
 
     logging.debug("Records: {}".format(records))
 
-    fmt = annotation_formatter.DDBJFormatter(metadata, PATH_DDBJ_RULES)
+    fmt = formatter.DDBJFormatter(metadata, PATH_DDBJ_RULES)
     gen = fmt.run(records, ignore_rules=IGNORE_FEATURE_QUALIFIER_RULE)
 
     if output:
