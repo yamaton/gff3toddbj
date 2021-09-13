@@ -21,8 +21,8 @@ setuptools.setup(
         "Operating System :: OS Independent",
         "Development Status :: 3 - Alpha",
     ],
-    package_dir={"": "src"},
-    packages=setuptools.find_packages(where="src"),
+    package_dir={"": "gff3toddbj"},
+    packages=setuptools.find_packages(where="gff3toddbj"),
     python_requires=">=3.6",
     install_requires=[
         "biopython >= 1.75",

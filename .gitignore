@@ -1,5 +1,5 @@
 .vscode
-src/modules
+gff3toddbj/modules
 examples
 
 # Byte-compiled / optimized / DLL files

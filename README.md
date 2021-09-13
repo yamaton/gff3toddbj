@@ -78,7 +78,7 @@ tools/split_fasta_from_gff3 \
 
 ```shell
 # gff3_to_ddbj のような実行ファイルを用意する予定です…
-python src/main.py
+python gff3toddbj/main.py
   --gff3 myfile.gff3 \
   --fasta myfile.fa \
   --metadata mymetadata.toml \
@@ -143,7 +143,7 @@ GFF3+FASTA を使う前節のなかで、ステップ４のメタデータ情報
 * `--output` には出力ファイル（＝アノテーション）のパスを指定
 
 ```
-python src/main.py
+python gff3toddbj/main.py
   --fasta myfile.fa \
   --metadata metadata.toml \
   --locus_tag_prefix MYOWNPREFIX \

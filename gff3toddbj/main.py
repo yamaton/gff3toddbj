@@ -11,10 +11,11 @@ FORMAT = '%(levelname)s: %(message)s'
 
 logging.basicConfig(level=logging.INFO, format=FORMAT)
 
-PATH_TRANS_FEATURES = "src/translate_features.toml"
-PATH_TRANS_QUALIFIERS = "src/translate_qualifiers.toml"
-PATH_DDBJ_RULES = "src/ddbj_rules.toml"
-PATH_METADATA = "metadata.toml"
+_DIR = pathlib.Path(__file__).parent
+PATH_TRANS_FEATURES = _DIR / "translate_features.toml"
+PATH_TRANS_QUALIFIERS = _DIR / "translate_qualifiers.toml"
+PATH_DDBJ_RULES = _DIR / "ddbj_rules.toml"
+PATH_METADATA = _DIR / "metadata.toml"
 
 LOCUS_TAG_PREFIX = "LOCUSTAGPREFIX_"
 

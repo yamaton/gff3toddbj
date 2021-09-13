@@ -5,7 +5,7 @@ import pathlib
 import uuid
 import os
 
-WORK_DIR = "tests/golden/"
+WORK_DIR = pathlib.Path(__file__).parent
 
 class BunchOfFiles(object):
     def __init__(self, reference, input_gff3, input_fasta, input_metadata, transl_table=1):
@@ -17,9 +17,8 @@ class BunchOfFiles(object):
 
 
 def get_command(data: BunchOfFiles, output: str):
-
     command = """\
-    python src/main.py \
+    gff3toddbj \
         --gff3={gff3} \
         --fasta={fasta} \
         --transl_table={transl_table} \
@@ -33,12 +32,11 @@ def get_command(data: BunchOfFiles, output: str):
         transl_table=data.transl_table,
         output=output,
     )
-
     return command
 
 
 def _runner(data: BunchOfFiles):
-    output_file = pathlib.Path(WORK_DIR) / (str(uuid.uuid1()) + ".ann")
+    output_file = WORK_DIR / (str(uuid.uuid1()) + ".ann")
     cmd = get_command(data, output_file)
     subprocess.run(cmd, shell=True)
 
@@ -55,10 +53,10 @@ def _runner(data: BunchOfFiles):
 
 def test_golden():
     testdata0 = BunchOfFiles(
-        WORK_DIR + "output_GCF_000280675.1_ASM28067v1_genomic.ann",
-        WORK_DIR + "GCF_000280675.1_ASM28067v1_genomic.gff.gz",
-        WORK_DIR + "GCF_000280675.1_ASM28067v1_genomic.fna.gz",
-        WORK_DIR + "metadata.toml",
+        WORK_DIR / "output_GCF_000280675.1_ASM28067v1_genomic.ann",
+        WORK_DIR / "GCF_000280675.1_ASM28067v1_genomic.gff.gz",
+        WORK_DIR / "GCF_000280675.1_ASM28067v1_genomic.fna.gz",
+        WORK_DIR / "metadata.toml",
         4,  # transl_table
     )
     _runner(testdata0)
