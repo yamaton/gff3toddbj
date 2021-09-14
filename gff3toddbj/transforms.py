@@ -519,7 +519,7 @@ def run(
     gaps: Dict[str, List[SeqFeature]] = dict()
     for rec_id, rec in fasta_records.items():
         seq_lengths[rec_id] = len(rec)
-        gaps[rec_id] = _get_assembly_gap(rec.seq, meta_info["assembly_gap"])
+        gaps[rec_id] = _get_assembly_gap(rec.seq, meta_info.get("assembly_gap", collections.OrderedDict()))
 
     # Create record from GFF3 (or dummy if unavailable)
     if path_gff3 is not None:

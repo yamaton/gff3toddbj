@@ -1,6 +1,6 @@
 import collections
 import logging
-from typing import Any, Dict, FrozenSet, List, Optional, Tuple, Iterable, Union, Generator
+from typing import Any, DefaultDict, FrozenSet, List, Optional, Tuple, Iterable, Union, Generator
 
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import CompoundLocation, ExactPosition, FeatureLocation, SeqFeature
@@ -52,7 +52,7 @@ def table_to_tsv(table: List[List[str]]) -> str:
 
 
 
-def get_common(header_info: Dict[str, Dict[str, Any]]) -> Optional[SeqRecord]:
+def get_common(header_info: DefaultDict[str, DefaultDict[str, Any]]) -> Optional[SeqRecord]:
     """Load header info as SeqRecord for COMMON entry
 
     [NOTE] COMMON entry can take "source" feature in DDBJ.
@@ -63,7 +63,7 @@ def get_common(header_info: Dict[str, Dict[str, Any]]) -> Optional[SeqRecord]:
     """
     features = [
         SeqFeature(type=key, qualifiers=xs)
-        for (key, xs) in header_info["COMMON"].items()
+        for (key, xs) in header_info.get("COMMON", collections.defaultdict()).items()
     ]
 
     record = None
@@ -145,6 +145,17 @@ class DDBJFormatter(object):
         """Convert SeqFeature into DDBJ annotation table format"""
         if ignore_rules or self._is_allowed_feature(feature.type):
             is_first_line = True
+
+            # special case when .qualifiers is empty
+            if not feature.qualifiers:
+                xs = ["" for _ in range(5)]
+                xs[1] = feature.type
+                if feature.location is not None:
+                    xs[2] = format_location(feature.location)
+                yield xs
+                return
+
+            # normal case listing up qualifier values
             for (qualifier_key, values) in feature.qualifiers.items():
                 values = values if isinstance(values, list) else [values]
                 for qualifier_value in values:
