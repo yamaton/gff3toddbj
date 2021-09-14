@@ -1,187 +1,215 @@
-# GFF3_to_DDBJ
+# GFF3-to-DDBJ
+日本語版は[こちら](https://github.com/yamaton/gff3toddbj/blob/main/README-ja.md)。
+
 
 [TOC]
 
-## これは何？
+## What is this?
 
-DDBJ への登録には指定された形式のアノテーションファイルが必要です。GFF3_to_DDBJ はその名前のとおり**GFF3ファイルからアノテーションファイルを作る**プログラムです（正確には FASTA も必要です。）**FASTA 単体から最小限のアノテーションファイルを作る**ことも実は可能です。
+GFF3-to-DDBJ creates [DDBJ's annotation file](https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#annotation) from GFF3 and FASTA files. It also works from FASTA alone.
 
 
 
-## セットアップ
 
-#### bioconda経由で conda環境をつくる場合
+## Initial setup
+
+### [NOT available yet] Install via bioconda
 
 ```shell
-# ddbjという名前でconda環境をつくってbiocondaからパッケージをインストール
+# Create a conda environment named "ddbj", and install relevant packages from bioconda channel
 $ conda create -n ddbj -c bioconda gff3toddbj
 
-# 環境ddbjをアクティベート
+# Activate the environment "ddbj"
 $ conda activate ddbj
 ```
 
 
 
-#### GitHub からダウンロードして conda環境で動かす場合
+### Install from the source
 
 ```shell
-# ファイルをダウンロード
+# Download
 $ wget https://github.com/yamaton/gff3_to_ddbj/archive/refs/heads/main.zip
 
-# zipを展開
-$ unzip main.zip
+# Extract, rename, and change directory
+$ unzip main.zip && mv gff3toddbj-main gff3toddbj && cd gff3toddbj
 
-# ddbjという名前でconda環境をつくる
+# Create a conda environment named "ddbj"
 $ conda create -n ddbj
 
-# ddbjへ environment に書かれたパッケージ群をインストール
-$ conda env update -n ddbj --file environment.yaml
-
-# 環境ddbjをアクティベート
+# Activate the environment "ddbj"
 $ conda activate ddbj
+
+# Install dependencies to "ddbj"
+$ conda install -c bioconda -c conda-forge biopython bcbio-gff
+
+# Install gff3-to-ddbj and extra tools
+$ python setup.py install
 ```
 
 
 
-## GFF3 と FASTA から DDBJ アノテーションをつくる
-
-### 0. GFF3 の正当性チェック
-
-アノテーションファイルへの変換を始めるまえに、手持ちのファイルがGFF3形式を満たしているかチェックをかけておくのが良いと思います。[GFF3 online validator](http://genometools.org/cgi-bin/gff3validator.cgi) が便利ですが、ファイル上限が 50MB なのが玉に瑕です。
+## Create DDBJ annotation from GFF3 and FASTA
 
 
 
-### 1. GFF3 と FASTA の分離
+### 3. Run `gff3-to-ddbj`
 
-GFF3 ファイル中に `##FASTA` ディレクティヴをつかって FASTA が書き込まれている場合には、同梱のツールを使うなどして分割してください。`##FASTA` が無ければスキップして次へ進んでください。
+Let's run the main program to get some ideas. Here is the options.
+
+* `--gff3 <FILE>` takes GFF3 file
+* `--fasta <FILE>` takes FASTA file
+
+* `--config <FILE>` takes the configuration file in TOML
+* `--locus_tag_prefix <STRING>` takes the prefix of locus tag [obtained from BioSample](https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#locus_tag). You can skip this for now.
+* `--transl_table <INT>`: Choose appropriate one from [The Genetic Codes](https://www.ddbj.nig.ac.jp/ddbj/geneticcode-e.html). The default value is 1 ("standard").
+* `--output <FILE>` sets the path the annotation output.
 
 ```shell
-tools/split_fasta_from_gff3 \
-  --gff3=path/to/myfile.gff3 \
-  --suffix="_modified"
+gff3-to-ddbj
+  --gff3 myfile.gff3 \                # produces the minimum without this line
+  --fasta myfile.fa \                 # <<REQUIRED>>
+  --config config.toml \              # produces the minimum without this line
+  --locus_tag_prefix MYOWNPREFIX_ \   # set to "LOCUSTAGPREFIX_" without this line
+  --transl_table 1 \                  # set to 1 without this line
+  --output myawesome_output.ann       # standard output without this line
 ```
 
-このばあい `myfile_modified.gff3` と `myfile_modified.fa` の2つのファイルが作られます。
+
+
+## Customize the behavior
+
+### Edit `config.toml`
+
+You need to edit a configuration file in TOML, say `config.toml`. Take a look at [the sample TOML file with COMMON](https://raw.githubusercontent.com/yamaton/gff3toddbj/main/gff3toddbj/config.toml), or [the one without COMMON](https://raw.githubusercontent.com/yamaton/gff3toddbj/main/gff3toddbj/config_without_COMMON.toml). The configuration contains following items. They are all optional, and **GFF3-to-DDBJ works even without `config.toml`.**
+
+* Basic features in COMMON
+
+* "meta-description" in COMMON
+
+  * DDBJ annotation supports features under COMMON that are inserted to each of repeatedly-occurring features in the resulting flat file.
+
+  * Here is an example.
+
+    ```toml
+    [COMMON.assembly_gap]
+    estimated_length = "unknown"
+    gap_type = "within scaffold"
+    linkage_evidence = "paired-ends"
+    ```
+
+* Feature-Qualifier information inserted to each occurrence by done GFF3-to-DDBJ
+
+  * This should work effectively the same purpose as the "meta-description" item above. But this repeated insertions are done by GFF3-to-DDBJ, and appears in the annotation output. **This configuration is mutually exclusive with the "metadata-description" configuration.** I'm keeping both simply because I'm undecided yet.
+
+  * Here is an example: Difference from the previous one is only at `[assembly_gap]` as opposed to`[COMMON.assembly_gap]`.
+
+    ```toml
+    [assembly_gap]
+    estimated_length = "unknown"   # Set it "<COMPUTE>" to count the number of N's
+    gap_type = "within scaffold"
+    linkage_evidence = "paired-ends"
+    ```
 
 
 
-### 2.（とりあえず） スクリプトの実行
 
-まずはスクリプトを動かしてみましょう。
 
-* `--gff3 <FILE>` には入力 GFF3ファイルへのパスを指定
-* `--fasta <FILE>` には入力 FASTAファイルへのパスを指定
-* `--metadata <FILE>` には４でコピー＆編集するTOML ファイルを指定。（とりあえずはテンプレートを使ってみます。）
-* `--locus_tag_prefix <STRING>` には [BioSampleの申請時に得られたもの](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#locus_tag)を指定。（とりあえずは省略）
-* `--transl_table <INT>` は [The Genetic Codes](https://www.ddbj.nig.ac.jp/ddbj/geneticcode-e.html) から適切な数字を選ぶ。（とりあえずは１）
-* `--output <FILE>` には出力ファイル（＝アノテーション）のパスを指定
+### [advanced] Edit translation table
+
+GFF3 and DDBJ annotation have rough correspondence as follows:
+
+1. GFF3 column 3 --> DDBJ annotation column 2 as "Feature"
+2. GFF3 column 9 --> DDBJ annotation column 4 and 5 as "Qualifier key", and "Qualifier value"
+
+but nomenclatures in GFF3 often do not conform the INSDC definitions. Furthermore, DDBJ lists up the [feature-qualifier pairs they accepts](https://docs.google.com/spreadsheets/d/1qosakEKo-y9JjwUO_OFcmGCUfssxhbFAm5NXUAnT3eM/edit#gid=0), which is stricter than INSDC.
+
+To satisfy requirement, I have prepared translation tables for features and qualifiers, and GFF3-to-DDBJ uses the table. For example, GFF3 may contain `five_prime_UTR` in the column 2, but `5'UTR` is the translated name in the outcome. You can edit the translation tables and feed them with
+
+* `--translate_feature <file>` for feature translation
+* `--translate_qualifeirs <file>` for qualifier translation
+
+And here is an example call.
 
 ```shell
-# gff3_to_ddbj のような実行ファイルを用意する予定です…
-python gff3toddbj/main.py
+gff3-to-ddbj
   --gff3 myfile.gff3 \
   --fasta myfile.fa \
-  --metadata mymetadata.toml \
-  --locus_tag_prefix MYOWNPREFIX \
+  --config config.toml \
+  --locus_tag_prefix MYOWNPREFIX_ \
   --transl_table 1 \
+  --translate_features translate_features.toml \
+  --translate_qualifiers translate_qualifiers.toml \
   --output myawesome_output.ann
 ```
 
-このとき出力として `myawesome_output.ann` が作成されます。
 
 
 
-### 3. Entry 名の正規化
 
-DDBJ のアノテーションチェックソフトによると `=|>" []` といった文字は Entry として使えないとのこと。違反文字が含まれるときには GFF3の1列目 (= "SeqID") および FASTAのヘッダをリネームする必要があります。ステップ２でその旨のエラーを見かけたら以下を実行してください。
+## Troubleshooting
+
+### Validate GFF3
+
+It might be a good practice to validate your GFF3 files. [GFF3 online validator](http://genometools.org/cgi-bin/gff3validator.cgi) is useful though the file size is limited to 50MB.
+
+
+
+### Split FASTA from GFF3 (if needed)
+
+GFF3_to_DDBJ does not work when GFF3 contains FASTA information inside with `##FASTA` directive. Attached tool under `split-fasta` reads a GFF3 file and saves GFF3 (without FASTA info) and FASTA.
 
 ```shell
-tools/regularize_seqids \
+split-fasta path/to/myfile.gff3 --suffix "_modified"
+```
+
+This creates two files, `myfile_modified.gff3` and `myfile_modified.fa`.
+
+
+
+### Fix entry names (if needed)
+
+Letters like `=|>" []` are not allowed in the 1st column (= "Entry") of the DDBJ annotation.  So, you need to rename the 1st column (= "SeqID") of your GFF3 and headers in your FASTA. Attached tool `rename-ids` might be useful. This program converts an ID like `ERS324955|SC|contig000013` into `ERS324955:SC:contig000013`.
+
+```shell
+rename-ids \
   --gff3=path/to/foo.gff3 \
   --fasta=path/to/bar.fasta \
   --suffix="_renamed_ids"
 ```
 
-リネームの必要があるときには `foo_renamed_ids.gff3` と `bar_renamed_ids.fasta` の2つのファイルが作られます。無いときには `IDs are fine: No need to regularize them.` のメッセージが出て終了します。
+This command saves two files, `foo_renamed_ids.gff3` and `bar_renamed_ids.fasta` *if* the invalid letters are found. Otherwise, you'll see no output.
 
 
 
-### 4. メタデータの編集
+fo
 
-DDBJアノテーションのCOMMON 項目に載せる情報や、`assembly_gap` の付属情報といったメタデータを設定するため [metadata.toml](https://raw.githubusercontent.com/yamaton/gff3_to_ddbj/main/metadata.toml) をベースに新規ファイルをつくります。テキストエディタで開いてください。COMMON を省略したいときには代わりに [metadata_without_COMMON.toml](https://raw.githubusercontent.com/yamaton/gff3_to_ddbj/main/metadata_without_COMMON.toml) から始めるのが便利です。
+## Under the Hood
 
-* COMMON に入れる[基本情報](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#annotation)
-* COMMON に入れる[メタ表記](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#common)
-* `assembly_gap` Feature に付属させる Qualifier 情報
+Here is the list of operations done by `gff3-to-ddbj`.
 
+* Rename Feature / Qualifiers keys using the translation tables
 
+* Search for `assembly_gap` s in FASTA
 
-### 5. 変換テーブルの編集
+* Add `/transl_table` to each CDS
 
-GFF3 と DDBJ アノテーションには大まかに以下のような対応があります。
+* Insert information from configuration fie
 
-1.  GFF3 の3列目 $\to$ DDBJ アノテーション 2列目 Feature
-2.  GFF3 の9列目 $\to$ DDBJ アノテーション 4，5列目 Qualifier Key, Value
+* Merge `CDS`s having the same parent with `join` notation
 
-いっぽうでアノテーションとして許される Features と Qualifiers には制限があります。（DDBJ一覧表）
+* Merge `mRNA` and `exon` in GFF3 and create `mRNA` feature with `join` notation
 
-当プログラムは「よしなに」計らうよう心掛けておりますが、それでもユーザさんの手作業が要ることがあります。というのも 1, 2 における表現と DDBJの規約のあいだにはギャップがあるためです。
+* Check start codon consistency. (Except for `/codon_start=1`  for now)
 
-そのため `translate_features.toml` と `translate_qualifiers.toml` を編集することになります。
+* Let CDS have a single `/product` value. Move the rest to `/note`.
 
+  * This is to conform the [instruction](https://www.ddbj.nig.ac.jp/ddbj/qualifiers-e.html#product) on `/product`.
 
+    > * Even if there are multiple general names for the same product, do  not enter multiple names in 'product'. Do not use needless symbolic  letters as delimiter for multiple names. If you would like to describe  more than two names, please enter one of the most representative name in /product qualifier, and other(s) in /[note](https://www.ddbj.nig.ac.jp/ddbj/qualifiers-e.html#note) qualifier.
+    >
+    > * If the name and function are not known, we recommend to describe as "hypothetical protein".
 
-
-
-## FASTA単体 から DDBJ アノテーションをつくる
-
-GFF3+FASTA を使う前節のなかで、ステップ４のメタデータ情報の編集だけが事前に必要です。
-
-* `--fasta` には入力 FASTAファイルへのパスを指定
-* `--metadata` には４で作成したTOML ファイルを指定
-* `--locus_tag_prefix` には [BioSampleの申請時に得られたもの](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#locus_tag)を指定。（とりあえずは省略してOK）
-* `--output` には出力ファイル（＝アノテーション）のパスを指定
-
-```
-python gff3toddbj/main.py
-  --fasta myfile.fa \
-  --metadata metadata.toml \
-  --locus_tag_prefix MYOWNPREFIX \
-  --output myawesome_output.ann
-```
-
-
-
-## 当プログラムが行っていること
-
-表示形式を変えるほかに以下のようなことをしています。
-
-* 変換テーブルに基づいた Features / Qualifiers のリネーム
-
-* assembly_gap の検索
-
-* /transl_table の CDS への追加
-
-* メタデータ中の source 情報を各エントリへの追加
-
-* Qualifier 値に使われる文字の正規化
-
-* 同じ親をもつ CDS を `join` 記法で結合
-
-* 入力GFF3 ファイル中の mRNA と exon を `join`記法で結合し mRNA Feature とする
-
-* Start codon まわり整合性チェック（ いまのところ /codon_start が 1でないときのみ）
-
-* CDS 下の /product が値をひとつだけ持つよう変更。複数値の残りは /note へ
-
-  * [DDBJ の/product 詳細](https://www.ddbj.nig.ac.jp/ddbj/qualifiers.html#product)を参照ください
-
-    > * 一般名が複数ある場合でも, 複数の名称を記載しないで下さい。また, そのために不必要な区切り記号を使用しないで下さい。一般名の複数記載を希望される場合は, 代表的な名称を /product qualifier に記載し, その他の名称を /note qualifier に記載して下さい。
-    > * 機能, 名称等が不明な蛋白質の場合は, hypothetical protein と記載することを推奨します。
-
-* Qualifier値に重複があるときに冗長分を削除
-
-* アノテーション行の並び替え
-
-* [DDBJ の Feature-Qualifier 一覧表](https://www.ddbj.nig.ac.jp/assets/files/pdf/ddbj/fq-j.pdf)に基づいた出力情報のフィルタリング
-
+* Remove duplicates in qualifier values
+* Sort lines in annotation
+* Filter out Feature-Qualifier pairs following [the table](https://www.ddbj.nig.ac.jp/assets/files/pdf/ddbj/fq-e.pdf).
