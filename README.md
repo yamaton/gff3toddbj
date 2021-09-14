@@ -41,7 +41,7 @@ $ conda create -n ddbj
 $ conda activate ddbj
 
 # Install dependencies to "ddbj"
-$ conda install -c bioconda -c conda-forge biopython bcbio-gff
+$ conda install -c bioconda -c conda-forge biopython bcbio-gff toml
 
 # Install gff3-to-ddbj and extra tools
 $ python setup.py install
@@ -53,7 +53,7 @@ $ python setup.py install
 
 
 
-### 3. Run `gff3-to-ddbj`
+### Run `gff3-to-ddbj`
 
 Let's run the main program to get some ideas. Here is the options.
 
@@ -126,10 +126,10 @@ but nomenclatures in GFF3 often do not conform the INSDC definitions. Furthermor
 
 To satisfy requirement, I have prepared translation tables for features and qualifiers, and GFF3-to-DDBJ uses the table. For example, GFF3 may contain `five_prime_UTR` in the column 2, but `5'UTR` is the translated name in the outcome. You can edit the translation tables and feed them with
 
-* `--translate_feature <file>` for feature translation
-* `--translate_qualifeirs <file>` for qualifier translation
+* `--translate_features <file>` for feature translation
+* `--translate_qualifiers <file>` for qualifier translation
 
-And here is an example call.
+And here is an example call:
 
 ```shell
 gff3-to-ddbj
@@ -139,7 +139,7 @@ gff3-to-ddbj
   --locus_tag_prefix MYOWNPREFIX_ \
   --transl_table 1 \
   --translate_features translate_features.toml \
-  --translate_qualifiers translate_qualifiers.toml \
+  --translate_qualifiers  translate_qualifiers.toml \
   --output myawesome_output.ann
 ```
 
@@ -173,12 +173,12 @@ Letters like `=|>" []` are not allowed in the 1st column (= "Entry") of the DDBJ
 
 ```shell
 rename-ids \
-  --gff3=path/to/foo.gff3 \
-  --fasta=path/to/bar.fasta \
-  --suffix="_renamed_ids"
+  --gff3=path/to/foo.gff3 \     # <Required>
+  --fasta=path/to/bar.fasta \   # <Required>
+  --suffix="_renamed"       # Optional: default is "_renamed_ids"
 ```
 
-This command saves two files, `foo_renamed_ids.gff3` and `bar_renamed_ids.fasta` *if* the invalid letters are found. Otherwise, you'll see no output.
+This command saves two files, `foo_renamed.gff3` and `bar_renamed.fasta` *if* the invalid letters are found. Otherwise, you'll see no output.
 
 
 
