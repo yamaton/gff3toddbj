@@ -45,6 +45,16 @@ def main():
         default=1,
     )
     parser.add_argument(
+        "--translate_features",
+        help="Translation table for features",
+        default=PATH_TRANS_FEATURES,
+    )
+    parser.add_argument(
+        "--translate_qualifiers",
+        help="Translation table for qualifiers",
+        default=PATH_TRANS_QUALIFIERS,
+    )
+    parser.add_argument(
         "-o", "--output",
         help="Specify annotation file name as output",
     )
@@ -56,17 +66,21 @@ def main():
     logging.info("Input config: {}".format(args.config))
     logging.info("Prefix of locus_tag: {}".format(args.prefix))
     logging.info("transl_table (The Genome Code): {}".format(args.transl_table))
+    if args.translate_features != PATH_TRANS_FEATURES:
+        logging.info(f"feature translation: {args.translate_features}")
+    if args.translate_qualifiers != PATH_TRANS_QUALIFIERS:
+        logging.info(f"qualifier translation: {args.translate_qualifiers}")
     if output:
         logging.info("Output  : {}".format(output))
 
-    metadata = utils.load_metadata_info(args.config)
+    config = utils.load_metadata_info(args.config)
 
     records = transforms.run(
         args.gff3,
         args.fasta,
-        PATH_TRANS_FEATURES,
-        PATH_TRANS_QUALIFIERS,
-        metadata,
+        args.translate_features,
+        args.translate_qualifiers,
+        config,
         args.prefix,
         args.transl_table,
         joinables=JOINABLES,
@@ -74,7 +88,7 @@ def main():
 
     logging.debug("Records: {}".format(records))
 
-    fmt = formatter.DDBJFormatter(metadata, PATH_DDBJ_RULES)
+    fmt = formatter.DDBJFormatter(config, PATH_DDBJ_RULES)
     gen = fmt.run(records, ignore_rules=IGNORE_FEATURE_QUALIFIER_RULE)
 
     if output:
