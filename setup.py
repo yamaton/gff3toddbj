@@ -23,6 +23,7 @@ setuptools.setup(
     ],
 
     packages=setuptools.find_packages(),
+    package_data={"": ["*.toml"]},
     python_requires=">=3.6",
     install_requires=[
         "biopython >= 1.75",
