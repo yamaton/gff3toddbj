@@ -31,7 +31,7 @@ setuptools.setup(
     ],
     entry_points={"console_scripts":
         [
-            "gff3toddbj = gff3toddbj:main",
-            "splitfasta = tools.splitfasta:main",
+            "gff3-to-ddbj = gff3toddbj:main",
+            "split-fasta = tools.splitfasta:main",
         ]},
 )

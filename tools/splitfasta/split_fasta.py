@@ -79,7 +79,6 @@ def main():
     logging.basicConfig(level=logging.INFO)
 
     parser = argparse.ArgumentParser(
-        prog="splitfasta",
         description="Split FASTA from GFF3",
         )
     parser.add_argument("gff3", help="Input GFF3")

@@ -1,1 +1,1 @@
-from .splitfasta import main
+from .split_fasta import main
