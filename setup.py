@@ -33,5 +33,6 @@ setuptools.setup(
         [
             "gff3-to-ddbj = gff3toddbj:main",
             "split-fasta = tools.splitfasta:main",
+            "fix-gff3-fasta-letters = tools.regularize_seqids:main",
         ]},
 )
