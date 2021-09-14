@@ -593,7 +593,8 @@ def run(
         _merge_mrna_qualifiers(rec)
 
     # check start codons in CDSs
-    _check_start_codons(rec, fasta_records, transl_table)
+    for rec in records:
+        _check_start_codons(rec, fasta_records, transl_table)
 
     # assign single value to /product and put the rest to /inference
     for rec in records:
