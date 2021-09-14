@@ -185,8 +185,9 @@ class DDBJFormatter(object):
         """
         ## feature keys
         for fkey, cnt in self.ignored_feature_count.items():
-            msg = "[Discarded] feature ------->  {}  <------- \t (count: {})".format(fkey, cnt)
-            logging.warning(msg)
+            if fkey != utils.DUMMY_ORIGINAL_MRNA:
+                msg = "[Discarded] feature ------->  {}  <------- \t (count: {})".format(fkey, cnt)
+                logging.warning(msg)
 
         ## feature-qualifier pairs
         for (fkey, qkey), cnt in self.ignored_pair_count.items():

@@ -429,7 +429,7 @@ def _merge_mrna_qualifiers(rec: SeqRecord) -> None:
     """
     def _helper(features: List[SeqFeature]) -> None:
         for f in features:
-            if f.type == "__mRNA":
+            if f.type == utils.DUMMY_ORIGINAL_MRNA:
                 mrnas = [subf for subf in f.sub_features if subf.type == "mRNA"]
                 if len(mrnas) != 1:
                     logging.warning("Something is wrong with mRNA and exons: {}".format(f))

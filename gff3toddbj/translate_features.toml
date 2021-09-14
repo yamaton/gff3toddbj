@@ -2,7 +2,7 @@
 ## DO NOT EDIT [mRNA] and [exon] entries
 ## Special treatment to handle exons -> mRNA
 [mRNA]
-target = "__mRNA"
+target = "__mRNA"   # MUST be the same as utils.DUMMY_ORIGINAL_MRNA constant
 
 [exon]
 target = "mRNA"

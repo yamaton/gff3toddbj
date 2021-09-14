@@ -9,6 +9,10 @@ from Bio.Data import CodonTable
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import CompoundLocation, FeatureLocation, SeqFeature
 
+# Feature name tagged to the original mRNA
+# Feature translation table MUST contain a translation
+# from "mRNA" to this value (= "__mRNA")
+DUMMY_ORIGINAL_MRNA = "__mRNA"
 
 # Supported metadata keys
 METADATA_COMMON_KEYS = {
