@@ -6,11 +6,11 @@ import re
 import pathlib
 import gzip
 import logging
-import urllib
+import urllib.parse
 import tempfile
 import sys
 
-import Bio
+import Bio.SeqIO
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import FeatureLocation, SeqFeature, CompoundLocation
@@ -241,11 +241,11 @@ class RenameFeatures(object):
         return features
 
 
-def _join_features(record: SeqRecord, joinables: Optional[Tuple[str]]) -> SeqRecord:
+def _join_features(record: SeqRecord, joinables: Optional[Tuple[str, ...]]) -> SeqRecord:
     """
     Join features of the same hierarchy if the type is found in `joinables`.
     """
-    joinables = [] if joinables is None else joinables
+    joinables_ = [] if joinables is None else joinables
 
     def _join(features: List[SeqFeature]) -> SeqFeature:
         """Join features into a single feature assuming the list already has right members
@@ -283,7 +283,7 @@ def _join_features(record: SeqRecord, joinables: Optional[Tuple[str]]) -> SeqRec
         # List[SeqFeature] as its value.
         triples_or_features = collections.defaultdict(list)
         for f in features:
-            if f.type not in joinables:
+            if f.type not in joinables_:
                 triples_or_features[f] = [True]  # dummy values
             else:
                 if "product" in f.qualifiers:
@@ -354,7 +354,7 @@ def _add_transl_table(rec: SeqRecord, transl_table: int) -> None:
 
 
 def _regularize_qualifier_value_letters(rec: SeqRecord) -> None:
-    """Fix qualifier values by removing backslash \ or double quote " """
+    """Fix qualifier values by removing backslash \\ or double quote \" """
 
     def _run(features: Iterable[SeqFeature]):
         for f in features:
@@ -398,7 +398,7 @@ def _remove_duplicates_in_qualifiers(rec: SeqRecord) -> None:
                 seen.add(x)
         return result
 
-    def _run(features: SeqFeature) -> None:
+    def _run(features: List[SeqFeature]) -> None:
         for f in features:
             f.qualifiers = {
                 qkey: _unique(qval) for (qkey, qval) in f.qualifiers.items()

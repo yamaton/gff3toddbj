@@ -13,9 +13,8 @@ import re
 import csv
 import pathlib
 import logging
-import sys
 
-INVALID_LETTERS = '[=|>" \[\]]'  # =|>" [] in regular expression
+INVALID_LETTERS = r'[=|>" \[\]]'  # =|>" [] in regular expression
 NEW_DELIMITER = ":"
 INVALID_PATTERN = re.compile(INVALID_LETTERS)
 FASTA_HEADER_PATTRN = re.compile(">(.*)")

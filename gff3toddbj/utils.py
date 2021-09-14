@@ -1,14 +1,13 @@
-from typing import Iterable, Generator, Dict, List, FrozenSet, OrderedDict, Any
+from typing import Iterable, Generator, Dict, List, FrozenSet, OrderedDict, Union, Any
 import logging
 import pprint
 import re
 import collections
 import toml
 
-from Bio.Seq import Seq
 from Bio.Data import CodonTable
 from Bio.SeqRecord import SeqRecord
-from Bio.SeqFeature import FeatureLocation, SeqFeature
+from Bio.SeqFeature import CompoundLocation, FeatureLocation, SeqFeature
 
 
 # Supported metadata keys
@@ -25,14 +24,10 @@ METADATA_COMMON_KEYS = {
     "ST_COMMENT",
 }
 
-METADATA_KEYS = {
-    "COMMON",
-    "source"
-}
+METADATA_KEYS = {"COMMON", "source"}
 
 INVALID_LETTERS_AS_SEQID = r'[=|>" \[\]]'
 INVALID_PATTERN_AS_SEQID = re.compile(INVALID_LETTERS_AS_SEQID)
-
 
 
 def load_rules(path: str) -> Dict[str, FrozenSet[str]]:
@@ -109,7 +104,10 @@ def is_invalid_as_seqid(name: str) -> bool:
 
 
 def has_start_codon(
-    rec: SeqRecord, location: FeatureLocation, transl_table: int, phase=0
+    rec: SeqRecord,
+    location: Union[FeatureLocation, CompoundLocation],
+    transl_table: int,
+    phase=0,
 ) -> bool:
     """Check if the codon starting at index_location in seq
     is start codon according to the Genetic Code transl_table.
@@ -186,12 +184,17 @@ def check_cds(
     helper(rec.features)
 
 
-def debug_checker(recs: List[SeqRecord], tag="", qual_key="note", qual_value="ID:cds-XP_008596228.1") -> None:
-
+def debug_checker(
+    recs: List[SeqRecord], tag="", qual_key="note", qual_value="ID:cds-XP_008596228.1"
+) -> None:
     def _helper(features: List[SeqFeature]) -> None:
         for f in features:
             if qual_value in f.qualifiers.get(qual_key, []):
-                logging.info("{} f.qualifiers['{}'] = {}".format(tag, qual_key, f.qualifiers[qual_key]))
+                logging.info(
+                    "{} f.qualifiers['{}'] = {}".format(
+                        tag, qual_key, f.qualifiers[qual_key]
+                    )
+                )
             if hasattr(f, "sub_features"):
                 _helper(f.sub_features)
 
