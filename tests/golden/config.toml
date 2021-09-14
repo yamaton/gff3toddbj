@@ -65,7 +65,7 @@ submitter_seqid = "@@[entry]@@"
 ff_definition =	"@@[organism]@@ DNA, @@[submitter_seqid]@@"
 
 
-[assembly_gap]
+[COMMON.assembly_gap]
 ## -----------------------------------------------------------------------
 ##        "assembly_gap" feature
 ##

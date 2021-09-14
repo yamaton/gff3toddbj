@@ -15,7 +15,7 @@ _DIR = pathlib.Path(__file__).parent
 PATH_TRANS_FEATURES = _DIR / "translate_features.toml"
 PATH_TRANS_QUALIFIERS = _DIR / "translate_qualifiers.toml"
 PATH_DDBJ_RULES = _DIR / "ddbj_rules.toml"
-PATH_METADATA = _DIR / "metadata.toml"
+PATH_CONFIG = _DIR / "config.toml"
 
 LOCUS_TAG_PREFIX = "LOCUSTAGPREFIX_"
 
@@ -27,9 +27,9 @@ def main():
     parser.add_argument("--gff3", "--gff", help="Input GFF3 file")
     parser.add_argument("--fasta", help="Input FASTA file", required=True)
     parser.add_argument(
-        "--metadata",
-        help="Input metadata in TOML describing COMMON and other entires",
-        default=PATH_METADATA,
+        "--config",
+        help="Input configuration in TOML describing COMMON and other entires",
+        default=PATH_CONFIG,
     )
     parser.add_argument(
         "-p",
@@ -53,13 +53,13 @@ def main():
 
     logging.info("Input GFF   : {}".format(args.gff3))
     logging.info("Input FASTA : {}".format(args.fasta))
-    logging.info("Input meta info: {}".format(args.metadata))
+    logging.info("Input configuration: {}".format(args.config))
     logging.info("Prefix of locus_tag: {}".format(args.prefix))
     logging.info("transl_table (The Genome Code): {}".format(args.transl_table))
     if output:
         logging.info("Output  : {}".format(output))
 
-    metadata = utils.load_metadata_info(args.metadata)
+    metadata = utils.load_metadata_info(args.config)
 
     records = transforms.run(
         args.gff3,
