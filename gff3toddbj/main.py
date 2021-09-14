@@ -53,7 +53,7 @@ def main():
 
     logging.info("Input GFF   : {}".format(args.gff3))
     logging.info("Input FASTA : {}".format(args.fasta))
-    logging.info("Input configuration: {}".format(args.config))
+    logging.info("Input config: {}".format(args.config))
     logging.info("Prefix of locus_tag: {}".format(args.prefix))
     logging.info("transl_table (The Genome Code): {}".format(args.transl_table))
     if output:

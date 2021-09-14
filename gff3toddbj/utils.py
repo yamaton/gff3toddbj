@@ -113,6 +113,7 @@ def has_start_codon(
     is start codon according to the Genetic Code transl_table.
     Location is shifted if phase is nonzero.
 
+    >>> from Bio.Seq import Seq
     >>> seq = Seq("GAATTCGAGGGG")
     >>> rec = SeqRecord(seq)
     >>> loc = FeatureLocation(1, 7, strand=1)
