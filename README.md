@@ -6,8 +6,7 @@
 
 ## What is this?
 
-GFF3-to-DDBJ creates [DDBJ's annotation file](https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#annotation) from GFF3 and FASTA files. It also works from FASTA alone.
-
+GFF3-to-DDBJ creates [DDBJ's annotation file](https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#annotation) from GFF3 and FASTA files. It also works with FASTA alone.
 
 
 
@@ -70,7 +69,7 @@ Let's run the main program to get some ideas. Here is the options.
 gff3-to-ddbj \
   --gff3 myfile.gff3 \                # produces the minimum without this line
   --fasta myfile.fa \                 # <<REQUIRED>>
-  --config config.toml \              # produces the minimum without this line
+  --config myconfig.toml \              # produces the minimum without this line
   --locus_tag_prefix MYOWNPREFIX_ \   # set to "LOCUSTAGPREFIX_" without this line
   --transl_table 1 \                  # set to 1 without this line
   --output myawesome_output.ann       # standard output without this line
@@ -80,17 +79,17 @@ gff3-to-ddbj \
 
 ## Customize the behavior
 
-### Edit `config.toml`
+### Configuration file
 
-You need to edit a configuration file in TOML, say `config.toml`. Take a look at [the sample TOML file with COMMON](https://raw.githubusercontent.com/yamaton/gff3toddbj/main/gff3toddbj/config.toml), or [the one without COMMON](https://raw.githubusercontent.com/yamaton/gff3toddbj/main/gff3toddbj/config_without_COMMON.toml). The configuration contains following items. They are all optional, and **GFF3-to-DDBJ works even without `config.toml`.**
+To enter information missing in GFF3 or FASTA, you need to feed a configuration file in TOML, say `myconfig.toml`. Take a look at [an example](https://github.com/yamaton/gff3toddbj/blob/main/examples/configs/config_ddbj_example.toml) matching [the example annotation in the DDBJ page](https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#annotation).
+
+The configuration can accommodate following information. They are all optional: **GFF3-to-DDBJ works even without feeding `config.toml`.**
 
 * Basic features in COMMON
 
 * "meta-description" in COMMON
 
-  * DDBJ annotation supports features under COMMON that are inserted to each of repeatedly-occurring features in the resulting flat file.
-
-  * Here is an example.
+  * DDBJ annotation supports "meta" values with features under COMMON such that the items are inserted to each occurrence **in the resulting flat file** produced by DDBJ. Here is an example to insert `assembly_gap` feature under `COMMON` entry.
 
     ```toml
     [COMMON.assembly_gap]
@@ -98,8 +97,8 @@ You need to edit a configuration file in TOML, say `config.toml`. Take a look at
     gap_type = "within scaffold"
     linkage_evidence = "paired-ends"
     ```
-
-* Feature-Qualifier information inserted to each occurrence by done GFF3-to-DDBJ
+  
+* Feature-Qualifier information inserted to each occurrence
 
   * This should work effectively the same purpose as the "meta-description" item above. But this repeated insertions are done by GFF3-to-DDBJ, and appears in the annotation output. **This configuration is mutually exclusive with the "metadata-description" configuration.** I'm keeping both simply because I'm undecided yet.
 
@@ -136,11 +135,11 @@ And here is an example call:
 gff3-to-ddbj \
   --gff3 myfile.gff3 \
   --fasta myfile.fa \
-  --config config.toml \
+  --config myconfig.toml \
   --locus_tag_prefix MYOWNPREFIX_ \
   --transl_table 1 \
-  --translate_features translate_features.toml \
-  --translate_qualifiers  translate_qualifiers.toml \
+  --translate_features translate_features.toml \      # Customized feature translation
+  --translate_qualifiers  translate_qualifiers.toml \ # Customized qualifier translation
   --output myawesome_output.ann
 ```
 
@@ -161,10 +160,10 @@ It might be a good practice to validate your GFF3 files. [GFF3 online validator]
 GFF3_to_DDBJ does not work when GFF3 contains FASTA information inside with `##FASTA` directive. Attached tool under `split-fasta` reads a GFF3 file and saves GFF3 (without FASTA info) and FASTA.
 
 ```shell
-split-fasta path/to/myfile.gff3 --suffix "_modified"
+split-fasta path/to/myfile.gff3 --suffix "_splitted"
 ```
 
-This creates two files, `myfile_modified.gff3` and `myfile_modified.fa`.
+This creates two files, `myfile_splitted.gff3` and `myfile_splitted.fa`.
 
 
 
@@ -182,8 +181,6 @@ rename-ids \
 This command saves two files, `foo_renamed.gff3` and `bar_renamed.fasta` *if* the invalid letters are found. Otherwise, you'll see no output.
 
 
-
-fo
 
 ## Under the Hood
 
@@ -212,5 +209,14 @@ Here is the list of operations done by `gff3-to-ddbj`.
     > * If the name and function are not known, we recommend to describe as "hypothetical protein".
 
 * Remove duplicates in qualifier values
+
 * Sort lines in annotation
+
 * Filter out Feature-Qualifier pairs following [the table](https://www.ddbj.nig.ac.jp/assets/files/pdf/ddbj/fq-e.pdf).
+
+
+
+
+## Acknowledgement
+
+GFF3-to-DDBJ's design is deeply indebted to [EMBLmyGFF3](https://github.com/NBISweden/EMBLmyGFF3), a versatile coversion for EMBL annotation format.

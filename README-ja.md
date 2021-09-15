@@ -4,17 +4,16 @@
 
 ## これは何？
 
-DDBJ への登録には指定された形式のアノテーションファイルが必要です。GFF3-to-DDBJ は **FASTA と GFF3ファイルからアノテーションファイルを作る**プログラムです。**FASTA 単体から最小限のアノテーションファイルを作る**ことも可能です。
-
+DDBJへの登録には指定された形式の[アノテーションファイル](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#annotation)が必要です。GFF3-to-DDBJ は **このアノテーションファイルをFASTA と GFF3ファイルから作る**プログラムです。**FASTA 単体から最小限のアノテーションを作ることも可能**です。
 
 
 ## セットアップ
 
-#### [未登録] biocondaからconda環境にインストールする場合
+#### [審査待ち] biocondaからconda環境にインストールする場合
 
 ```shell
 # ddbjという名前でconda環境をつくってbiocondaからパッケージをインストール
-## 現在登録処理中のためごちゃついてます 2021-09-14
+# 現在 (2021-09-14) 審査待ちのためごちゃついてます
 $ conda create -n ddbj -c bioconda -c conda-forge -c https://168588-42372094-gh.circle-artifacts.com/0/tmp/artifacts/packages gff3toddbj
 
 # 環境ddbjをアクティベート
@@ -26,7 +25,7 @@ $ conda activate ddbj
 #### GitHubソースコードからconda環境にインストールする場合
 
 ```shell
-# ファイルをダウンロード
+# ソースをzipでダウンロード
 $ wget https://github.com/yamaton/gff3_to_ddbj/archive/refs/heads/main.zip
 
 # zipを展開、リネーム
@@ -38,7 +37,7 @@ $ conda create -n ddbj
 # 環境ddbjをアクティベート
 $ conda activate ddbj
 
-# ddbjへ 依存パッケージ (bioconda, bcbio-gff, toml) をインストール
+# ddbjに依存パッケージ (bioconda, bcbio-gff, toml) をインストール
 $ conda install -c bioconda -c conda-forge biopython bcbio-gff toml
 
 # gff3-to-ddbj および付属ツールをインストール
@@ -64,7 +63,7 @@ $ python setup.py install
 gff3-to-ddbj \
   --gff3 myfile.gff3 \               # この行を削除するとそれなりの出力に
   --fasta myfile.fa \                # <<必須>>
-  --metadata mymetadata.toml \       # この行を削除するとそれなりの出力に
+  --config myconfig.toml \           # この行を削除するとそれなりの出力に
   --locus_tag_prefix MYOWNPREFIX \   # この行を削除すると LOCUSTAGPREFIX_ に設定
   --transl_table 1 \                 # この行を削除すると 1 と設定
   --output myawesome_output.ann      # この行を削除すると標準出力に
@@ -74,15 +73,17 @@ gff3-to-ddbj \
 
 ## 設定いろいろ
 
-### 設定ファイル `config.toml` の編集
+### 設定ファイル
 
-より良い出力のため設定ファイルをコピペ＆編集することをお勧めします。DDBJアノテーションのCOMMON 項目に載せる情報や、`assembly_gap` の付属情報といったを設定するため [config.toml](https://raw.githubusercontent.com/yamaton/gff3toddbj/main/gff3toddbj/config.toml) をベースに新規ファイルをつくります。テキストエディタで開いてください。COMMON を自分で追加するばあいには代わりに [config_without_COMMON.toml](https://raw.githubusercontent.com/yamaton/gff3toddbj/main/gff3toddbj/config_without_COMMON.toml) から始めるのが便利です。
+GFF3とFASTAに無い情報を追加するためTOML設定ファイルの用意をお勧めします。たとえば [DDBJのアノテーション例](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#annotation)に対応する設定は[このように](https://github.com/yamaton/gff3toddbj/blob/main/examples/configs/config_ddbj_example.toml)書けます。
+
+設定ファイルには以下の情報をTOML形式で入れていただきます。が、**省略してもプログラムは動作します。**
 
 * COMMON に入れる[基本情報](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#annotation)
 
 * COMMON に入れる[メタ表記](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#common)
 
-  * COMMON の下に Feature を入れておくことで、DDBJ でつくられるフラットファイルに自動的に一律に情報が挿入される機能があるそうです。たとえば以下のようにしておくと `assembly_gap` ごとに同じ Qualifier値が挿入されることになります。
+  * COMMON の下に Feature を入れておくことで、DDBJ でつくられるフラットファイルに自動的に一律に値が挿入される機能があるそうです。たとえば以下のようにしておくと `assembly_gap` ごとに同じ Qualifier値が挿入されることになります。
 
     ```toml
     [COMMON.assembly_gap]
@@ -93,7 +94,7 @@ gff3-to-ddbj \
 
 * Feature ごとに挿入する Qualifier 情報
 
-  * Feature ごとのQualifier値の一律挿入を **gff3-to-ddbj がアノテーションファイルに対して**行うのがこの設定値です。「COMMONに入れるメタ情報」と実質的に同じことですが、DDBJで行われるメタ表記の挙動が未確認なのでこの機能を付けています。使い方は`[COMMON.assembly_gap]` を `[assembly_gap]` に置き換えるだけです。
+  * Feature ごとのQualifier値の挿入を **gff3-to-ddbj がつくるアノテーションファイルに対して**行います。上記「COMMONに入れるメタ情報」と実質的に同じですが、メタ表記に対するDDBJ側での作業が未確認なのでこの機能を入れています。使い方は`[COMMON.assembly_gap]` ではなく  `[assembly_gap]` に置き換えるだけです。
 
     ```toml
     [assembly_gap]
@@ -101,6 +102,8 @@ gff3-to-ddbj \
     gap_type = "within scaffold"
     linkage_evidence = "paired-ends"
     ```
+
+詳細は、[DDBJのサンプルアノテーション](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#sample)に対応する設定ファイル群ページ（作成予定）を参照ください。
 
 
 
@@ -113,7 +116,7 @@ GFF3 と DDBJ アノテーションには大まかに以下のような対応が
 
 いっぽうでDDBJアノテーションとして許される Features と Qualifiers の名前にには規定があります。（参照: Feature-Qualifier 一覧表。）GFF3における慣習と INSDC / DDBJ で定められた名前の橋渡しをするため、変換テーブルを元に `gff3-to-ddbj`は Features と Qualifiers においてそれぞれリネームを行っています。たとえば `five_prime_UTR` という名前で GFF3 の2列目に現れるものは、 `5'UTR`という Feature に置き換えられます。
 
-デフォルトの変換テーブルは [translate_features.toml](https://raw.githubusercontent.com/yamaton/gff3toddbj/main/gff3toddbj/translate_features.toml) と [translate_qualifiers.toml](https://raw.githubusercontent.com/yamaton/gff3toddbj/main/gff3toddbj/translate_qualifiers.toml) にて定めています。これらをカスタマイズして使うばあいには 
+デフォルトの変換テーブルは [translate_features.toml](https://raw.githubusercontent.com/yamaton/gff3toddbj/main/gff3toddbj/translate_features.toml) と [translate_qualifiers.toml](https://raw.githubusercontent.com/yamaton/gff3toddbj/main/gff3toddbj/translate_qualifiers.toml) にて定めています。これらをカスタマイズして使うばあいには
 
 * `--translate_features <file>` で Features の変換テーブルを指定
 * `--translate_qualifiers <file>` で Qualifiers の変換テーブルを指定
@@ -124,11 +127,11 @@ GFF3 と DDBJ アノテーションには大まかに以下のような対応が
 gff3-to-ddbj \
   --gff3 myfile.gff3 \
   --fasta myfile.fa \
-  --config config.toml \
+  --config myconfig.toml \
   --locus_tag_prefix MYOWNPREFIX_ \
   --transl_table 1 \
-  --translate_features translate_features.toml \
-  --translate_qualifiers  translate_qualifiers.toml \
+  --translate_features translate_features.toml \      # Feature Keys の変換テーブルを指定
+  --translate_qualifiers  translate_qualifiers.toml \ # Qualifier Keys の変換テーブルを指定
   --output myawesome_output.ann
 ```
 
@@ -138,19 +141,19 @@ gff3-to-ddbj \
 
 ### GFF3 の正当性チェック
 
-アノテーションファイルへの変換を始めるまえに、手持ちのファイルがGFF3形式を満たしているかチェックをかけておくのが良いと思います。[GFF3 online validator](http://genometools.org/cgi-bin/gff3validator.cgi) が便利ですが、ファイル上限が 50MB なのが玉に瑕です。
+アノテーションファイルへの変換を始めるまえに、手持ちのファイルがGFF3形式を満たしているかチェックをかけておくのが良いプラクティスです。オンラインで利用可能なものは [GFF3 online validator](http://genometools.org/cgi-bin/gff3validator.cgi) が便利です。ファイル上限が 50MB なのが玉に瑕ですが。
 
 
 
 ### GFF3 と FASTA の分離（必要に応じて）
 
-GFF3 ファイル中に `##FASTA` ディレクティヴをつかって FASTA が書き込まれている場合には、同梱のツールを使うなどして分割してください。`##FASTA` が無ければスキップして次へ進んでください。
+GFF3 ファイル中に `##FASTA` を使っての塩基配列が含まれている場合には、同梱のツールを使うなどして分割してください。
 
 ```shell
-split-fasta path/to/myfile.gff3 --suffix "_modified"
+split-fasta path/to/myfile.gff3 --suffix "_splitted"
 ```
 
-このばあい `myfile_modified.gff3` と `myfile_modified.fa` の2つのファイルが作られます。
+このばあい `myfile_splitted.gff3` と `myfile_splitted.fa` の2つのファイルが作られます。
 
 
 
@@ -162,7 +165,7 @@ DDBJ のアノテーションチェックソフトによると `=|>" []` とい�
 rename-ids \
   --gff3=path/to/foo.gff3 \     # <<必須>>
   --fasta=path/to/bar.fasta \   # <<必須>>
-  --suffix="_renamed"       # この行を省略するとデフォルト値に
+  --suffix="_renamed"           # この行を省略するとデフォルト値に
 ```
 
 リネームの必要があるときには `foo_renamed.gff3` と `bar_renamed.fasta` の2つのファイルが作られます。無いときには `IDs are fine: No need to regularize them.` のメッセージが出るだけで終了します。
@@ -202,3 +205,8 @@ rename-ids \
 
 * [DDBJ の Feature-Qualifier 一覧表](https://www.ddbj.nig.ac.jp/assets/files/pdf/ddbj/fq-j.pdf)に基づいた出力情報のフィルタリング
 
+
+
+
+## 謝辞
+このプログラムの設計には、EMBL向けGFF3の変換ソフトである [EMBLmyGFF3](https://github.com/NBISweden/EMBLmyGFF3) のつくりを非常に参考にさせていただきました。
