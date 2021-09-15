@@ -13,11 +13,12 @@ GFF3-to-DDBJ creates [DDBJ's annotation file](https://www.ddbj.nig.ac.jp/ddbj/fi
 
 ## Initial setup
 
-### [NOT available yet] Install via bioconda
+### Install via bioconda
 
 ```shell
 # Create a conda environment named "ddbj", and install relevant packages from bioconda channel
-$ conda create -n ddbj -c bioconda gff3toddbj
+## --- Pending registration as of 2021-09-14 ---
+$ conda create -n ddbj -c bioconda -c conda-forge -c https://168588-42372094-gh.circle-artifacts.com/0/tmp/artifacts/packages gff3toddbj
 
 # Activate the environment "ddbj"
 $ conda activate ddbj
@@ -66,7 +67,7 @@ Let's run the main program to get some ideas. Here is the options.
 * `--output <FILE>` sets the path the annotation output.
 
 ```shell
-gff3-to-ddbj
+gff3-to-ddbj \
   --gff3 myfile.gff3 \                # produces the minimum without this line
   --fasta myfile.fa \                 # <<REQUIRED>>
   --config config.toml \              # produces the minimum without this line
@@ -132,7 +133,7 @@ To satisfy requirement, I have prepared translation tables for features and qual
 And here is an example call:
 
 ```shell
-gff3-to-ddbj
+gff3-to-ddbj \
   --gff3 myfile.gff3 \
   --fasta myfile.fa \
   --config config.toml \

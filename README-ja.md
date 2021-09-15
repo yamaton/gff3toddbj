@@ -14,7 +14,8 @@ DDBJ への登録には指定された形式のアノテーションファイル
 
 ```shell
 # ddbjという名前でconda環境をつくってbiocondaからパッケージをインストール
-$ conda create -n ddbj -c bioconda gff3toddbj
+## 現在登録処理中のためごちゃついてます 2021-09-14
+$ conda create -n ddbj -c bioconda -c conda-forge -c https://168588-42372094-gh.circle-artifacts.com/0/tmp/artifacts/packages gff3toddbj
 
 # 環境ddbjをアクティベート
 $ conda activate ddbj
@@ -60,7 +61,7 @@ $ python setup.py install
 * `--output <FILE>` には出力ファイル（＝アノテーション）のパスを指定
 
 ```shell
-gff3-to-ddbj
+gff3-to-ddbj \
   --gff3 myfile.gff3 \               # この行を削除するとそれなりの出力に
   --fasta myfile.fa \                # <<必須>>
   --metadata mymetadata.toml \       # この行を削除するとそれなりの出力に
@@ -120,7 +121,7 @@ GFF3 と DDBJ アノテーションには大まかに以下のような対応が
 してください。呼び出しは以下のようになります。
 
 ```shell
-gff3-to-ddbj
+gff3-to-ddbj \
   --gff3 myfile.gff3 \
   --fasta myfile.fa \
   --config config.toml \
