@@ -1,0 +1,64 @@
+## -----------------------------------------------------------------------
+##        COMMON entry
+[COMMON]
+[COMMON.SUBMITTER]
+ab_name = [
+    "Robertson,G.R.",
+    "Mishima,H."
+]
+contact = "Hanako Mishima"
+email = "mishima@ddbj.nig.ac.jp"
+phone = "81-55-981-6853"
+fax = "81-55-981-6853"
+phext =	"3207"
+institute = "National Institute of Genetics"
+department = "DNA Data Bank of Japan"
+country = "Japan"
+state = "Shizuoka"
+city = "Mishima"
+street = "Yata 1111"
+zip = "411-8540"
+
+[COMMON.REFERENCE]
+title = "Mouse Genome Sequencing"
+ab_name = [
+    "Robertson,G.R.",
+    "Mishima,H."
+]
+year = "2021"
+status = "Unpublished"
+
+### uncomment following if the DNA topology is circular
+# [COMMON.TOPOLOGY]
+# circular = ""
+
+[COMMON.COMMENT]
+line = [
+    "Please visit our website URL",
+    "http://www.ddbj.nig.ac.jp/"
+]
+
+## -----------------------------------------------------------------------
+## Following innvokes DDBJ's macro-processing feature in COMMON.
+##   See https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#common
+[source]
+organism = "Mus musculus"
+mol_type = "genomic DNA"
+clone = "PC0110"
+chromosome = 8
+
+
+[assembly_gap]
+## -----------------------------------------------------------------------
+##        "assembly_gap" feature
+##
+## Note that COMMON.assembly_gap items will be inserted to
+## EVERY assembly_gap features by DDBJ.
+## https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#common
+##
+estimated_length = "unknown"     # counts N's if the value is "<COMPUTE>"
+gap_type = "within scaffold"
+# linkage_evidence is mandatory if gap_type is "within scaffold" or "repeat within scaffold"
+linkage_evidence = "paired-ends"  # "paired-ends", "unspecified"
+##
+## -----------------------------------------------------------------------
