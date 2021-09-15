@@ -1,4 +1,4 @@
-## v0.1.2 (2021-09-14)
+## latest
 * Update to README
 * Add --translate-features and -translate-qualifiers CLI options
 
