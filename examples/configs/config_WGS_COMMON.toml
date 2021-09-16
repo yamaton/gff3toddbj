@@ -1,0 +1,77 @@
+# Replicate sample annotation file: WGS
+# https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=1753678626
+# This file `config_EST.toml` shows feature-wise notation
+# as opposed to COMMON-style notation in `config_EST_COMMON.toml`
+
+[COMMON]
+[COMMON.DATATYPE]
+type = "WGS"
+
+[COMMON.KEYWORD]
+keyword = [
+    "WGS",
+    "STANDARD_DRAFT",
+]
+
+[COMMON.DBLINK]
+project = "PRJDB90001"
+biosample = "SAMD90000000"
+"sequence read archive" = "DRR999900"
+
+
+[COMMON.SUBMITTER]
+contact = "Hanako Mishima"
+consrtm = "Streptomyces flavus genome sequencing consortium"
+ab_name = [
+    "Mishima,H.",
+    "Yamada,T.",
+    "Park,C.S.",
+    "Liu,G.Q.",
+]
+email = "mishima@ddbj.nig.ac.jp"
+phone = "81-55-981-6853"
+fax = "81-55-981-6849"
+institute = "National Institute of Genetics"
+department = "DNA Data Bank of Japan"
+country = "Japan"
+state = "Shizuoka"
+city = "Mishima"
+street = "Yata 1111"
+zip = "411-8540"
+
+[COMMON.REFERENCE]
+ab_name = [
+    "Mishima,H.",
+    "Yamada,T.",
+    "Park,C.S.",
+    "Liu,G.Q.",
+]
+title = "Streptomyces flavus NBRC 12345 whole genome shotgun sequence"
+status = "Unpublished"
+year = "2020"
+
+[COMMON.DATE]
+hold_date = "20240501"
+
+[COMMON.COMMENT]
+line = [
+    "Please visit our web page",
+    "URL:http://www.ddbj.nig.ac.jp/",
+]
+
+[COMMON.ST_COMMENT]
+tagset_id = "Genome-Assembly-Data"
+"Assembly Method" = "Velvet v. 2.0"
+"Assembly Name" = "Sfl_assembly01"
+"Genome Coverage" = "60x"
+"Sequencing Technology" = "454 GS FLX; ABI 3730"
+
+
+## source feature is inserted under COMMON
+[COMMON.source]
+organism = "Streptomyces flavus"
+mol_type = "genomic DNA"
+culture_collection = "NBRC:12345"
+strain = "NBRC:12345"
+ff_definition = "@@[organism]@@ @@[strain]@@ DNA, @@[submitter_seqid]@@"
+submitter_seqid = "@@[entry]@@"   # We can set `submitter_seqid` unlike the case in config_WGS.toml

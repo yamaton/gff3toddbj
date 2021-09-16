@@ -97,10 +97,12 @@ The configuration can accommodate following information. They are all optional: 
     gap_type = "within scaffold"
     linkage_evidence = "paired-ends"
     ```
-  
+
 * Feature-Qualifier information inserted to each occurrence
 
   * This should work effectively the same purpose as the "meta-description" item above. But this repeated insertions are done by GFF3-to-DDBJ, and appears in the annotation output. **This configuration is mutually exclusive with the "metadata-description" configuration.** I'm keeping both simply because I'm undecided yet.
+
+  * Currently supporting `[source]` and `[assembly_gap]` only.
 
   * Here is an example: Difference from the previous one is only at `[assembly_gap]` as opposed to`[COMMON.assembly_gap]`.
 
@@ -111,7 +113,7 @@ The configuration can accommodate following information. They are all optional: 
     linkage_evidence = "paired-ends"
     ```
 
-The difference between "meta-description" in COMMON and Feature-wise insertions is well illustrated by the annotation examples, [EST in COMMON](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=633379952) and [EST](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=1753678626), and corresponding config files, config_EST_COMMON.toml and config_EST.toml.
+The difference between "meta-description" in COMMON and Feature-wise insertions is well illustrated by the annotation examples, [EST in COMMON](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=633379952) and [EST](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=1753678626), and corresponding config files, [config_WGS_COMMON.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/configs/config_WGS_COMMON.toml) and [config_WGS.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/configs/config_WGS.toml).
 
 
 
