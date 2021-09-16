@@ -146,34 +146,33 @@ class DDBJFormatter(object):
         if ignore_rules or self._is_allowed_feature(feature.type):
             is_first_line = True
 
-            # special case when .qualifiers is empty
-            if not feature.qualifiers:
+            if feature.qualifiers:
+                # normal case listing up qualifier values
+                for (qualifier_key, values) in feature.qualifiers.items():
+                    values = values if isinstance(values, list) else [values]
+                    for qualifier_value in values:
+                        xs = ["" for _ in range(5)]
+                        feature_key = feature.type
+                        is_keeping = self._is_allowed_pair(feature_key, qualifier_key)
+                        if ignore_rules or is_keeping:
+                            if is_first_line:
+                                is_first_line = False
+                                xs[1] = feature_key
+                                if feature.location is not None:
+                                    xs[2] = format_location(feature.location)
+                            xs[3] = qualifier_key
+                            xs[4] = str(qualifier_value)
+                            yield xs
+                        elif not ignore_rules and not is_keeping:
+                            pair = (feature_key, qualifier_key)
+                            self.ignored_pair_count[pair] += 1
+            else:
+                # special case when .qualifiers is empty
                 xs = ["" for _ in range(5)]
                 xs[1] = feature.type
                 if feature.location is not None:
                     xs[2] = format_location(feature.location)
                 yield xs
-                return
-
-            # normal case listing up qualifier values
-            for (qualifier_key, values) in feature.qualifiers.items():
-                values = values if isinstance(values, list) else [values]
-                for qualifier_value in values:
-                    xs = ["" for _ in range(5)]
-                    feature_key = feature.type
-                    is_keeping = self._is_allowed_pair(feature_key, qualifier_key)
-                    if ignore_rules or is_keeping:
-                        if is_first_line:
-                            is_first_line = False
-                            xs[1] = feature_key
-                            if feature.location is not None:
-                                xs[2] = format_location(feature.location)
-                        xs[3] = qualifier_key
-                        xs[4] = str(qualifier_value)
-                        yield xs
-                    elif not ignore_rules and not is_keeping:
-                        pair = (feature_key, qualifier_key)
-                        self.ignored_pair_count[pair] += 1
 
         if hasattr(feature, "sub_features"):
             for subfeature in feature.sub_features:
