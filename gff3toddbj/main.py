@@ -73,7 +73,7 @@ def main():
     if output:
         logging.info("Output  : {}".format(output))
 
-    config = utils.load_metadata_info(args.config)
+    config = utils.load_config_info(args.config)
 
     records = transforms.run(
         args.gff3,

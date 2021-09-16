@@ -14,8 +14,8 @@ from Bio.SeqFeature import CompoundLocation, FeatureLocation, SeqFeature
 # from "mRNA" to this value (= "__mRNA")
 DUMMY_ORIGINAL_MRNA = "__mRNA"
 
-# Supported metadata keys
-METADATA_COMMON_KEYS = {
+# Supported config keys
+CONFIG_COMMON_KEYS = {
     "DIVISION",
     "DATATYPE",
     "KEYWORD",
@@ -28,7 +28,7 @@ METADATA_COMMON_KEYS = {
     "ST_COMMENT",
 }
 
-METADATA_KEYS = {"COMMON", "source"}
+CONFIG_KEYS = {"COMMON", "source"}
 
 INVALID_LETTERS_AS_SEQID = r'[=|>" \[\]]'
 INVALID_PATTERN_AS_SEQID = re.compile(INVALID_LETTERS_AS_SEQID)
@@ -45,13 +45,13 @@ def load_rules(path: str) -> Dict[str, FrozenSet[str]]:
     return rules
 
 
-def load_metadata_info(path) -> OrderedDict[str, OrderedDict[str, Any]]:
-    """Load metadata as dictionary from TOML file."""
+def load_config_info(path) -> OrderedDict[str, OrderedDict[str, Any]]:
+    """Load config as dictionary from TOML file."""
     try:
         with open(path, "r") as f:
             header_info = toml.load(f, _dict=collections.OrderedDict)
     except:
-        msg = "Failed to load metadata from {}:".format(path)
+        msg = "Failed to load config from {}:".format(path)
         raise FileNotFoundError(msg)
 
     # Change qualifier type to list
@@ -62,23 +62,23 @@ def load_metadata_info(path) -> OrderedDict[str, OrderedDict[str, Any]]:
                     header_info[k][qkey] = [qval]
 
     # [FIXME] Disabled till DDBJ rule is counted in the validation
-    # validate_metadata_keys(header_info)
+    # validate_config_keys(header_info)
 
     return header_info
 
 
-def validate_metadata_keys(d: Dict[str, Dict[str, Any]]) -> None:
-    """Check if metadata has proper table keys.
+def validate_config_keys(d: Dict[str, Dict[str, Any]]) -> None:
+    """Check if config has proper table keys.
 
     [FIXME] Need to take care of DDBJ features used in main.py
     """
     keys = set(d.keys())
-    msg = "Some meta-info keys are invalid: {}".format(keys - METADATA_KEYS)
-    assert keys.issubset(METADATA_KEYS), msg
+    msg = "Some meta-info keys are invalid: {}".format(keys - CONFIG_KEYS)
+    assert keys.issubset(CONFIG_KEYS), msg
 
     common_keys = set(d["COMMON"])
-    msg2 = "Some COMMON keys are invalid: {}".format(common_keys - METADATA_COMMON_KEYS)
-    assert common_keys.issubset(METADATA_COMMON_KEYS), msg2
+    msg2 = "Some COMMON keys are invalid: {}".format(common_keys - CONFIG_COMMON_KEYS)
+    assert common_keys.issubset(CONFIG_COMMON_KEYS), msg2
 
 
 def flatten_features(

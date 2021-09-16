@@ -506,7 +506,7 @@ def run(
     path_fasta: str,
     path_trans_features: str,
     path_trans_qualifiers: str,
-    meta_info: OrderedDict[str, OrderedDict[str, Any]],
+    config: OrderedDict[str, OrderedDict[str, Any]],
     locus_tag_prefix: str,
     transl_table: int,
     joinables: Tuple[str, ...],
@@ -519,7 +519,7 @@ def run(
     gaps: Dict[str, List[SeqFeature]] = dict()
     for rec_id, rec in fasta_records.items():
         seq_lengths[rec_id] = len(rec)
-        gaps[rec_id] = _get_assembly_gap(rec.seq, meta_info.get("assembly_gap", collections.OrderedDict()))
+        gaps[rec_id] = _get_assembly_gap(rec.seq, config.get("assembly_gap", collections.OrderedDict()))
 
     # Create record from GFF3 (or dummy if unavailable)
     if path_gff3 is not None:
@@ -557,26 +557,25 @@ def run(
     for rec in records:
         _add_transl_table(rec, transl_table)
 
-
-    # Add "source" feature if unavailable:
-    #   [NOTE] GFF3's "region" type corresponds to annotation's "source" feature
-    #   [NOTE] User-input metadata may contain "[COMMON.source]" items.
-    #   In either case, a "source" feature is NOT added to each entry.
-    #   Only [source] in metadata input inserts "source" entry by entry.
-    if ("source" in meta_info) and ("source" in meta_info["COMMON"]):
-        msg = "[COMMON.source] overrides [source] items in metadata."
+    # Add "source" features in certain cases:
+    #   [source] in config will inserts "source" to each entry
+    #   UNLESS either of the following applies.
+    #   [NOTE] GFF3's "region" type corresponds to annotation's "source" feature.
+    #   [NOTE] User-input config may contain "[COMMON.source]" items.
+    if ("source" in config) and ("source" in config["COMMON"]):
+        msg = "[COMMON.source] overrides [source] items in config."
         logging.warning(msg)
-    elif "source" in meta_info:
+    elif "source" in config:
         for rec in records:
             if not rec.features:
                 if rec.features[0].type == "source":
-                    msg = 'Skip [source] in metadata as GFF3 already has "region" line at SeqID = {}'.format(
+                    msg = 'Skip [source] in config as GFF3 already has "region" line at SeqID = {}'.format(
                         rec.id
                     )
                     logging.warning(msg)
                 else:
                     src_length = seq_lengths[rec.id]
-                    src_qualifiers = meta_info["source"]
+                    src_qualifiers = config["source"]
                     src = _get_source(src_length, src_qualifiers)
                     rec.features.insert(0, src)
 
