@@ -94,7 +94,7 @@ GFF3とFASTAに無い情報を追加するためTOML設定ファイルの用意�
 
 * Feature ごとに挿入する Qualifier 情報
 
-  * Feature ごとのQualifier値の挿入を **gff3-to-ddbj がつくるアノテーションファイルに対して**行います。上記「COMMONに入れるメタ情報」と実質的に同じですが、メタ表記に対するDDBJ側での作業が未確認なのでこの機能を入れています。使い方は`[COMMON.assembly_gap]` ではなく  `[assembly_gap]` に置き換えるだけです。
+  * Feature ごとのQualifier値の挿入を **gff3-to-ddbj がつくるアノテーションファイルに対して**行います。上記「COMMONに入れるメタ情報」と実質的に同じですが、メタ表記に対するDDBJ側での変換作業が未確認のためこの機能を入れています。使い方は`[COMMON.assembly_gap]` ではなく  `[assembly_gap]` に置き換えるだけです。
 
     ```toml
     [assembly_gap]
@@ -103,7 +103,7 @@ GFF3とFASTAに無い情報を追加するためTOML設定ファイルの用意�
     linkage_evidence = "paired-ends"
     ```
 
-詳細は、[DDBJのサンプルアノテーション](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#sample)に対応する設定ファイル群ページ（作成予定）を参照ください。
+アノテーションにおける、COMMON下のメタ表記とFeatureごとの挿入の比較は [EST in COMMON](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=633379952) vs [EST](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=1753678626)の例、そして対応する設定ファイル (config_EST_in_COMMON.toml vs config_EST.toml)  が分かりやすいです。
 
 
 
@@ -182,7 +182,7 @@ rename-ids \
 
 * /transl_table の CDS への追加
 
-* メタデータ中の source 情報を各エントリへの追加
+* メタデータ中の source 情報を各エントリに追加
 
 * Qualifier 値に使われる文字の正規化
 

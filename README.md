@@ -111,7 +111,7 @@ The configuration can accommodate following information. They are all optional: 
     linkage_evidence = "paired-ends"
     ```
 
-
+The difference between "meta-description" in COMMON and Feature-wise insertions is well illustrated by the annotation examples, [EST in COMMON](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=633379952) and [EST](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=1753678626), and corresponding config files, config_EST_COMMON.toml and config_EST.toml.
 
 
 
