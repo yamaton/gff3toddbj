@@ -15,7 +15,7 @@ _DIR = pathlib.Path(__file__).parent
 PATH_TRANS_FEATURES = _DIR / "translate_features.toml"
 PATH_TRANS_QUALIFIERS = _DIR / "translate_qualifiers.toml"
 PATH_DDBJ_RULES = _DIR / "ddbj_rules.toml"
-PATH_CONFIG = _DIR / "config.toml"
+PATH_METADATA_DEFAULT = _DIR / "metadata.toml"
 
 LOCUS_TAG_PREFIX = "LOCUSTAGPREFIX_"
 
@@ -27,9 +27,9 @@ def main():
     parser.add_argument("--gff3", "--gff", help="Input GFF3 file")
     parser.add_argument("--fasta", help="Input FASTA file", required=True)
     parser.add_argument(
-        "--config",
-        help="Input configuration in TOML describing COMMON and other entires",
-        default=PATH_CONFIG,
+        "--metadata",
+        help="Input metadata in TOML describing COMMON and other entires",
+        default=PATH_METADATA_DEFAULT,
     )
     parser.add_argument(
         "-p",
@@ -63,7 +63,7 @@ def main():
 
     logging.info("Input GFF   : {}".format(args.gff3))
     logging.info("Input FASTA : {}".format(args.fasta))
-    logging.info("Input config: {}".format(args.config))
+    logging.info("Input metadata: {}".format(args.metadata))
     logging.info("Prefix of locus_tag: {}".format(args.prefix))
     logging.info("transl_table (The Genome Code): {}".format(args.transl_table))
     if args.translate_features != PATH_TRANS_FEATURES:
@@ -73,14 +73,14 @@ def main():
     if output:
         logging.info("Output  : {}".format(output))
 
-    config = utils.load_config_info(args.config)
+    metadata = utils.load_metadata_info(args.metadata)
 
     records = transforms.run(
         args.gff3,
         args.fasta,
         args.translate_features,
         args.translate_qualifiers,
-        config,
+        metadata,
         args.prefix,
         args.transl_table,
         joinables=JOINABLES,
@@ -88,7 +88,7 @@ def main():
 
     logging.debug("Records: {}".format(records))
 
-    fmt = formatter.DDBJFormatter(config, PATH_DDBJ_RULES)
+    fmt = formatter.DDBJFormatter(metadata, PATH_DDBJ_RULES)
     gen = fmt.run(records, ignore_rules=IGNORE_FEATURE_QUALIFIER_RULE)
 
     if output:
