@@ -60,36 +60,38 @@ Let's run the main program to get some ideas. Here is the options.
 * `--gff3 <FILE>` takes GFF3 file
 * `--fasta <FILE>` takes FASTA file
 
-* `--config <FILE>` takes the configuration file in TOML
+* `--metadata <FILE>` takes the metadata file in TOML
 * `--locus_tag_prefix <STRING>` takes the prefix of locus tag [obtained from BioSample](https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#locus_tag). You can skip this for now.
 * `--transl_table <INT>`: Choose appropriate one from [The Genetic Codes](https://www.ddbj.nig.ac.jp/ddbj/geneticcode-e.html). The default value is 1 ("standard").
 * `--output <FILE>` sets the path the annotation output.
 
 ```shell
 gff3-to-ddbj \
-  --gff3 myfile.gff3 \                # produces the minimum without this line
+  --gff3 myfile.gff3 \                # bare-minimum output if omitted
   --fasta myfile.fa \                 # <<REQUIRED>>
-  --config myconfig.toml \              # produces the minimum without this line
-  --locus_tag_prefix MYOWNPREFIX_ \   # set to "LOCUSTAGPREFIX_" without this line
-  --transl_table 1 \                  # set to 1 without this line
-  --output myawesome_output.ann       # standard output without this line
+  --metadata mymetadata.toml \        # an example is used if omitted
+  --locus_tag_prefix MYOWNPREFIX_ \   # default is "LOCUSTAGPREFIX_"
+  --transl_table 1 \                  # default is 1
+  --output myawesome_output.ann       # standard output if omitted
 ```
 
 
 
 ## Customize the behavior
 
-### Configuration file
+### Metadata file
 
-To enter information missing in GFF3 or FASTA, you need to feed a configuration file in TOML, say `myconfig.toml`. Take a look at [an example](https://github.com/yamaton/gff3toddbj/blob/main/examples/configs/config_ddbj_example.toml) matching [the example annotation in the DDBJ page](https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#annotation).
+To enter information missing in GFF3 or FASTA, such as submitter names and certain qualifier values, you need to feed a metadata file in TOML, say `mymetadata.toml`. Take a look at [an example](https://github.com/yamaton/gff3toddbj/blob/main/examples/metadata/metadata_ddbj_example.toml) matching [the example annotation in the DDBJ page](https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#annotation).
 
-The configuration can accommodate following information. They are all optional: **GFF3-to-DDBJ works even without feeding `config.toml`.**
+The file accommodates following and they are all optional. That is, GFF3-to-DDBJ works even with an empty file.
 
-* Basic features in COMMON
+* Basic features in the [COMMON](https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#common) entry
 
-* "meta-description" in COMMON
+  * ... such as `SUBMITTER`, `REFERENCE`, and `COMMENT`.
 
-  * DDBJ annotation supports "meta" values with features under COMMON such that the items are inserted to each occurrence **in the resulting flat file** produced by DDBJ. Here is an example to insert `assembly_gap` feature under `COMMON` entry.
+* "meta-description" in the COMMON entry
+
+  * Here is an example with this notation:
 
     ```toml
     [COMMON.assembly_gap]
@@ -98,13 +100,11 @@ The configuration can accommodate following information. They are all optional: 
     linkage_evidence = "paired-ends"
     ```
 
-* Feature-Qualifier information inserted to each occurrence
+  * DDBJ annotation supports "meta" values with features under COMMON such that the items are inserted to each occurrence **in the resulting flat file** produced by DDBJ. Here is an example to insert `assembly_gap` feature under `COMMON` entry.
 
-  * This should work effectively the same purpose as the "meta-description" item above. But this repeated insertions are done by GFF3-to-DDBJ, and appears in the annotation output. **This configuration is mutually exclusive with the "metadata-description" configuration.** I'm keeping both simply because I'm undecided yet.
+* Feature-qualifier items inserted to each occurrence
 
-  * Currently supporting `[source]` and `[assembly_gap]` only.
-
-  * Here is an example: Difference from the previous one is only at `[assembly_gap]` as opposed to`[COMMON.assembly_gap]`.
+  * Here is an example: Difference from the previous case is only at `[assembly_gap]` as opposed to`[COMMON.assembly_gap]`.
 
     ```toml
     [assembly_gap]
@@ -113,20 +113,43 @@ The configuration can accommodate following information. They are all optional: 
     linkage_evidence = "paired-ends"
     ```
 
-The difference between "meta-description" in COMMON and Feature-wise insertions is well illustrated by the annotation examples, [EST in COMMON](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=633379952) and [EST](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=1753678626), and corresponding config files, [config_WGS_COMMON.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/configs/config_WGS_COMMON.toml) and [config_WGS.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/configs/config_WGS.toml).
+  * While this should work effectively the same as the "meta-description" item above, use this notation if you insert values repeatedly **in the annotation file** produced by GFF3-to-DDBJ.
+
+  * Currently supporting `[source]` and `[assembly_gap]` only.
+
+  * If both `[COMMON.assembly_gap]` and `[COMMON.assembly]` exist in the metadata file, `gff3-to-ddbj` takes the one with COMMON.
+
+For more examples, see [WGS in COMMON](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=1110334278) and [WGS](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=382116224) for DDBJ annotations, and [metadata_WGS_COMMON.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/metadata/metadata_WGS_COMMON.toml) and [metadata_WGS.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/metadata/metadata_WGS.toml) as corresponding metadata files.
 
 
 
-### [advanced] Edit translation table
+### [Advanced] Feature/Qualifier translation tables
 
 GFF3 and DDBJ annotation have rough correspondence as follows:
 
-1. GFF3 column 3 --> DDBJ annotation column 2 as "Feature"
-2. GFF3 column 9 --> DDBJ annotation column 4 and 5 as "Qualifier key", and "Qualifier value"
+1. GFF3 column 3  →  DDBJ annotation column 2 as "Feature"
+2. GFF3 column 9  →  DDBJ annotation column 4 and 5 as "Qualifier key", and "Qualifier value"
 
-but nomenclatures in GFF3 often do not conform the INSDC definitions. Furthermore, DDBJ lists up the [feature-qualifier pairs they accepts](https://docs.google.com/spreadsheets/d/1qosakEKo-y9JjwUO_OFcmGCUfssxhbFAm5NXUAnT3eM/edit#gid=0), which is stricter than INSDC.
+but nomenclatures in GFF3 often do not conform the definitions by INSDC. Furthermore, DDBJ lists up the [feature-qualifier pairs they accepts](https://docs.google.com/spreadsheets/d/1qosakEKo-y9JjwUO_OFcmGCUfssxhbFAm5NXUAnT3eM/edit#gid=0), which is stricter than INSDC.
 
-To satisfy requirement, I have prepared translation tables for features and qualifiers, and GFF3-to-DDBJ uses the table. For example, GFF3 may contain `five_prime_UTR` in the column 2, but `5'UTR` is the translated name in the outcome. You can edit the translation tables and feed them with
+To satisfy the requirement, GFF3-to-DDBJ uses translation tables to rename feature and qualifier keys. For example, GFF3 may contain `five_prime_UTR` in the column 2. Then this item is renamed to `5'UTR` in the annotation. This renaming is expressed in TOML as follows.
+
+```toml
+[five_prime_UTR]
+target = "5'UTR"
+```
+
+As another example from the default behavior, if GFF3 has an `ID=foobar` in the column 9, we have translation table like
+
+```
+[ID]
+target = "note"
+prefix = "ID:"
+```
+
+which transforms the item into qualifier `/note` with the value `ID:foobar`.
+
+See [translate_features.toml](https://raw.githubusercontent.com/yamaton/gff3toddbj/main/gff3toddbj/translate_features.toml) and [translate_qualifiers.toml](https://raw.githubusercontent.com/yamaton/gff3toddbj/main/gff3toddbj/translate_qualifiers.toml) for default behavior. To use custom translation tables, use the CLI options:
 
 * `--translate_features <file>` for feature translation
 * `--translate_qualifiers <file>` for qualifier translation
@@ -137,7 +160,7 @@ And here is an example call:
 gff3-to-ddbj \
   --gff3 myfile.gff3 \
   --fasta myfile.fa \
-  --config myconfig.toml \
+  --metadata mymetadata.toml \
   --locus_tag_prefix MYOWNPREFIX_ \
   --transl_table 1 \
   --translate_features translate_features.toml \      # Customized feature translation
@@ -177,7 +200,7 @@ Letters like `=|>" []` are not allowed in the 1st column (= "Entry") of the DDBJ
 rename-ids \
   --gff3=path/to/foo.gff3 \     # <Required>
   --fasta=path/to/bar.fasta \   # <Required>
-  --suffix="_renamed"       # Optional: default is "_renamed_ids"
+  --suffix="_renamed"           # Optional: default is "_renamed_ids"
 ```
 
 This command saves two files, `foo_renamed.gff3` and `bar_renamed.fasta` *if* the invalid letters are found. Otherwise, you'll see no output.
@@ -194,7 +217,7 @@ Here is the list of operations done by `gff3-to-ddbj`.
 
 * Add `/transl_table` to each CDS
 
-* Insert information from configuration fie
+* Insert `source` information from the metadata fie
 
 * Merge `CDS`s having the same parent with `join` notation
 

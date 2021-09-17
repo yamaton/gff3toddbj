@@ -4,7 +4,7 @@
 
 ## これは何？
 
-DDBJへの登録には指定された形式の[アノテーションファイル](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#annotation)が必要です。GFF3-to-DDBJ は **このアノテーションファイルをFASTA と GFF3ファイルから作る**プログラムです。**FASTA 単体から最小限のアノテーションを作ることも可能**です。
+DDBJへの登録には指定された形式の[アノテーションファイル](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#annotation)が必要です。GFF3-to-DDBJ はこの**アノテーションファイルをFASTA と GFF3ファイルから作る**プログラムです。**FASTA 単体から最小限のアノテーションファイルを作ることも可能**です。
 
 
 ## セットアップ
@@ -54,18 +54,18 @@ $ python setup.py install
 
 * `--gff3 <FILE>` には入力 GFF3ファイルへのパスを指定
 * `--fasta <FILE>` には入力 FASTAファイルへのパスを指定
-* `--config <FILE>` にはTOMLでの設定ファイルを指定
+* `--metadata <FILE>` にはTOML形式のメタデータファイルを指定
 * `--locus_tag_prefix <STRING>` には [BioSampleの申請時に得られたもの](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#locus_tag)を指定
 * `--transl_table <INT>` は [The Genetic Codes](https://www.ddbj.nig.ac.jp/ddbj/geneticcode.html) から適切な数字を選ぶ
 * `--output <FILE>` には出力ファイル（＝アノテーション）のパスを指定
 
 ```shell
 gff3-to-ddbj \
-  --gff3 myfile.gff3 \               # この行を削除するとそれなりの出力に
+  --gff3 myfile.gff3 \               # この行を削除すると source, assembly_gap のみになります
   --fasta myfile.fa \                # <<必須>>
-  --config myconfig.toml \           # この行を削除するとそれなりの出力に
-  --locus_tag_prefix MYOWNPREFIX \   # この行を削除すると LOCUSTAGPREFIX_ に設定
-  --transl_table 1 \                 # この行を削除すると 1 と設定
+  --metadata mymetadata.toml \       # この行を削除すると作成者名などにサンプル値が入ります
+  --locus_tag_prefix MYOWNPREFIX \   # この行を削除すると LOCUSTAGPREFIX_ に設定されます
+  --transl_table 1 \                 # この行を削除すると 1 に設定されます
   --output myawesome_output.ann      # この行を削除すると標準出力に
 ```
 
@@ -73,17 +73,39 @@ gff3-to-ddbj \
 
 ## 設定いろいろ
 
-### 設定ファイル
+### メタデータファイル
 
-GFF3とFASTAに無い情報を追加するためTOML設定ファイルの用意をお勧めします。たとえば [DDBJのアノテーション例](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#annotation)に対応する設定は[このように](https://github.com/yamaton/gff3toddbj/blob/main/examples/configs/config_ddbj_example.toml)書けます。
+GFF3とFASTAに無い情報をアノテーションファイルに入れるためメタデータファイルを用意します。たとえば [DDBJサイトのアノテーション例](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#annotation)に対応するメタデータはTOML形式で以下のように書かれます。
 
-設定ファイルには以下の情報をTOML形式で入れていただきます。が、**省略してもプログラムは動作します。**
+```toml
+[COMMON]
+[COMMON.SUBMITTER]
+ab_name = [
+    "Robertson,G.R.",
+    "Mishima,H."
+]
+contact = "Hanako Mishima"
+email = "mishima@ddbj.nig.ac.jp"
+
+## ... 中略 ...
+
+[COMMON.COMMENT]
+line = [
+    "Please visit our website URL",
+    "http://www.ddbj.nig.ac.jp/"
+]
+
+```
+
+ファイルには以下の情報を入れられます。なおファイルに何も書かれていなくともプログラムは一応動作します。
 
 * COMMON に入れる[基本情報](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#annotation)
 
+  * `SUBMITTER`, `REFERENCE` といった Features
+
 * COMMON に入れる[メタ表記](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#common)
 
-  * COMMON の下に Feature を入れておくことで、DDBJ でつくられるフラットファイルに自動的に一律に値が挿入される機能があるそうです。たとえば以下のようにしておくと `assembly_gap` ごとに同じ Qualifier値が挿入されることになります。
+  * 例
 
     ```toml
     [COMMON.assembly_gap]
@@ -92,9 +114,12 @@ GFF3とFASTAに無い情報を追加するためTOML設定ファイルの用意�
     linkage_evidence = "paired-ends"
     ```
 
+  * COMMON の下に Feature を入れておくことで、DDBJ でつくられる最終記載（＝フラットファイル）に一律にQualifiersが挿入される機能があるようです。たとえば以下のようにしておくと、gff3-to-ddbjの生成するアノテーションファイルにおいて COMMON エントリの下に `assembly_gap` 以下の項目が追加されます。これは最終記載において `assembly_gap` 毎に同じ Qualifier値が挿入されることになります。
+
+
 * Feature ごとに挿入する Qualifier 情報
 
-  * Feature ごとのQualifier値の挿入を **gff3-to-ddbj がつくるアノテーションファイルに対して**行います。上記「COMMONに入れるメタ情報」と実質的に同じですが、メタ表記に対するDDBJ側での変換作業が未確認のためこの機能を入れています。使い方は `[COMMON.assembly_gap]` ではなく `[assembly_gap]` に置き換えるだけです。現在のところ `[source]` と `[assembly_gap]` のみ対応させています。
+  * 例: COMMON記法とは `[COMMON.assembly_gap]` → `[assembly_gap]` が違いだけです
 
     ```toml
     [assembly_gap]
@@ -103,7 +128,11 @@ GFF3とFASTAに無い情報を追加するためTOML設定ファイルの用意�
     linkage_evidence = "paired-ends"
     ```
 
-アノテーションにおける、COMMON下のメタ表記とFeatureごとの挿入の比較は [EST in COMMON](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=633379952) vs [EST](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=1753678626)の例、そして対応する設定ファイル [config_WGS_COMMON.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/configs/config_WGS_COMMON.toml) および [config_WGS.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/configs/config_WGS.toml) が分かりやすいかもです。
+    * Feature ごとのQualifier値の挿入を **gff3-to-ddbj がつくるアノテーションファイルに対して**行います。上記「COMMONに入れるメタ情報」と実質的に同じですが、アノテーションファイルの時点で Feature毎に値が入れられる点が違います。使い方は `[COMMON.assembly_gap]` ではなく `[assembly_gap]` に置き換えるだけになります。現在のところ `[source]` と `[assembly_gap]` のみ対応しています。
+
+    * COMMON記法と併記されたばあい（たとえば `[COMMON.asembly_gap` と `[assembly_gap]` ）COMMON記法が優先されます。
+
+さらなる例としては、アノテーションファイルとしては [WGS in COMMON](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=1110334278) と [WGS](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=382116224)、そして対応するメタデータファイルでは [metadata_WGS_COMMON.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/metadata/metadata_WGS_COMMON.toml) と [metadata_WGS.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/metadata/metadata_WGS.toml) などを参考にしてください。
 
 
 
@@ -111,27 +140,42 @@ GFF3とFASTAに無い情報を追加するためTOML設定ファイルの用意�
 
 GFF3 と DDBJ アノテーションには大まかに以下のような対応があります。
 
-1.  GFF3 の3列目 $\to$ DDBJ アノテーション 2列目 Feature
-2.  GFF3 の9列目 $\to$ DDBJ アノテーション 4，5列目 Qualifier Key, Value
+1.  GFF3 の3列目 → DDBJ アノテーション 2列目 Feature
+2.  GFF3 の9列目 → DDBJ アノテーション 4，5列目 Qualifier Key, Value
 
-いっぽうでDDBJアノテーションとして許される Features と Qualifiers の名前にには規定があります。（参照: Feature-Qualifier 一覧表。）GFF3における慣習と INSDC / DDBJ で定められた名前の橋渡しをするため、変換テーブルを元に `gff3-to-ddbj`は Features と Qualifiers においてそれぞれリネームを行っています。たとえば `five_prime_UTR` という名前で GFF3 の2列目に現れるものは、 `5'UTR`という Feature に置き換えられます。
+そしてDDBJアノテーションとして許される Features と Qualifiers の名前には規定があります [[Feature-Qualifier 一覧表](https://docs.google.com/spreadsheets/d/1qosakEKo-y9JjwUO_OFcmGCUfssxhbFAm5NXUAnT3eM/edit#gid=0)] 。
 
-デフォルトの変換テーブルは [translate_features.toml](https://raw.githubusercontent.com/yamaton/gff3toddbj/main/gff3toddbj/translate_features.toml) と [translate_qualifiers.toml](https://raw.githubusercontent.com/yamaton/gff3toddbj/main/gff3toddbj/translate_qualifiers.toml) にて定めています。これらをカスタマイズして使うばあいには
+GFF3での慣習名と INSDC / DDBJ で定められた名前の橋渡しをするため、GFF3-to-DDBJは変換テーブルを用いてリネームを行っています。たとえば `five_prime_UTR` としてGFF3 の2列目に現れるものは、アノテーションファイルでは  `5'UTR`  に置き換えられます。この変換はTOMLで以下のように書きます。
 
-* `--translate_features <file>` で Features の変換テーブルを指定
-* `--translate_qualifiers <file>` で Qualifiers の変換テーブルを指定
+```toml
+[five_prime_UTR]
+target = "5'UTR"
+```
 
-してください。呼び出しは以下のようになります。
+またQualifiersに対しては、値の前にprefixを付けることが可能です。たとえばGFF3にて `ID=foobar`となっているものを `/note` Qualifierに `ID:foobar` という値にして入れるばあいは以下のように書きます。
+
+```toml
+[ID]
+target = "note"
+prefix = "ID:"
+```
+
+詳しくはデフォルト設定 [translate_features.toml](https://raw.githubusercontent.com/yamaton/gff3toddbj/main/gff3toddbj/translate_features.toml) と [translate_qualifiers.toml](https://raw.githubusercontent.com/yamaton/gff3toddbj/main/gff3toddbj/translate_qualifiers.toml) をご覧ください。これらをカスタマイズしたものを使う場合には
+
+* `--translate_features <file>` で Feature 名の変換テーブルを指定
+* `--translate_qualifiers <file>` で Qualifier 名の変換テーブルを指定
+
+のオプションがあります。呼び出しは以下のようになります。
 
 ```shell
 gff3-to-ddbj \
   --gff3 myfile.gff3 \
   --fasta myfile.fa \
-  --config myconfig.toml \
+  --metadata mymetadata.toml \
   --locus_tag_prefix MYOWNPREFIX_ \
   --transl_table 1 \
-  --translate_features translate_features.toml \      # Feature Keys の変換テーブルを指定
-  --translate_qualifiers  translate_qualifiers.toml \ # Qualifier Keys の変換テーブルを指定
+  --translate_features translate_features.toml \       # Feature の変換テーブル指定
+  --translate_qualifiers  translate_qualifiers.toml \  # Qualifier の変換テーブル指定
   --output myawesome_output.ann
 ```
 
@@ -209,4 +253,5 @@ rename-ids \
 
 
 ## 謝辞
-このプログラムの設計には、EMBL向けGFF3の変換ソフトである [EMBLmyGFF3](https://github.com/NBISweden/EMBLmyGFF3) のつくりを非常に参考にさせていただきました。
+このプログラムの設計には、EMBL向けGFF3の変換ソフトである [EMBLmyGFF3](https://github.com/NBISweden/EMBLmyGFF3) のつくりを参考にさせていただきました。
+
