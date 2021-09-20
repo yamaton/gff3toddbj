@@ -509,6 +509,7 @@ def _sort_features(features: List[SeqFeature]) -> None:
     """
     def type_priority(type_name: str) -> int:
         d = {
+            "source": -1,
             "gene": 0,
             "mRNA": 1,
             "5'UTR": 2,
@@ -596,7 +597,7 @@ def run(
         logging.warning(msg)
     elif "source" in metadata:
         for rec in records:
-            if not rec.features:
+            if rec.features:
                 if rec.features[0].type == "source":
                     msg = 'Skip [source] in metadata as GFF3 already has "region" line at SeqID = {}'.format(
                         rec.id
