@@ -517,12 +517,5 @@ variation = [
 "trans_splicing",
 ]
 
-# https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#keyword
-KEYWORD = ["keyword"]
-COMMENT = ["line"]
-
-# https://www.ddbj.nig.ac.jp/ddbj/file-format.html#dblink
-DBLINK = ["project", "biosample", "sequence read archive"]
-
 # https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#primary_contig
 "PRIMARY_CONTIG" = ["entry", "primary_bases", "complement"]
