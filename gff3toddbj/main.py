@@ -24,11 +24,12 @@ JOINABLES = ("mRNA", "CDS")
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--gff3", "--gff", help="Input GFF3 file")
-    parser.add_argument("--fasta", help="Input FASTA file", required=True)
+    parser.add_argument("--gff3", "--gff", metavar="FILE", help="Input GFF3 file")
+    parser.add_argument("--fasta", metavar="FILE", help="Input FASTA file", required=True)
     parser.add_argument(
         "--metadata",
         help="Input metadata in TOML describing COMMON and other entires",
+        metavar="FILE",
         default=PATH_METADATA_DEFAULT,
     )
     parser.add_argument(
@@ -36,26 +37,31 @@ def main():
         "--prefix",
         "--locus_tag_prefix",
         help="Prefix of locus_tag. See https://www.ddbj.nig.ac.jp/ddbj/locus_tag-e.html",
+        metavar="STR",
         default=LOCUS_TAG_PREFIX,
     )
     parser.add_argument(
         "--transl_table",
         help="Genetic Code ID. 1 by default, and 11 for bacteria. See https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi",
         type=int,
+        metavar="INT",
         default=1,
     )
     parser.add_argument(
         "--translate_features",
         help="Translation table for features",
+        metavar="FILE",
         default=PATH_TRANS_FEATURES,
     )
     parser.add_argument(
         "--translate_qualifiers",
         help="Translation table for qualifiers",
+        metavar="FILE",
         default=PATH_TRANS_QUALIFIERS,
     )
     parser.add_argument(
         "-o", "--output",
+        metavar="FILE",
         help="Specify annotation file name as output",
     )
     args = parser.parse_args()
