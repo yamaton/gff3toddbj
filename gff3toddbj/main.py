@@ -8,9 +8,6 @@ from . import transforms
 from . import utils
 
 FORMAT = '%(levelname)s: %(message)s'
-
-logging.basicConfig(level=logging.INFO, format=FORMAT)
-
 _DIR = pathlib.Path(__file__).parent
 PATH_TRANS_FEATURES = _DIR / "translate_features.toml"
 PATH_TRANS_QUALIFIERS = _DIR / "translate_qualifiers.toml"
@@ -64,20 +61,23 @@ def main():
         metavar="FILE",
         help="Specify annotation file name as output",
     )
+    parser.add_argument("--log", default=logging.INFO, help="[debug only] Set log level.")
     args = parser.parse_args()
-    output = args.output
+    logging.basicConfig(level=args.log, format=FORMAT)
 
-    logging.info("Input GFF   : {}".format(args.gff3))
-    logging.info("Input FASTA : {}".format(args.fasta))
-    logging.info("Input metadata: {}".format(args.metadata))
-    logging.info("Prefix of locus_tag: {}".format(args.prefix))
-    logging.info("transl_table (The Genome Code): {}".format(args.transl_table))
+    logging.info("Input GFF            : {}".format(args.gff3))
+    logging.info("Input FASTA          : {}".format(args.fasta))
+    logging.info("Input metadata       : {}".format(args.metadata))
+    logging.info("Prefix of locus_tag  : {}".format(args.prefix))
+    logging.info("transl_table         : {}".format(args.transl_table))
     if args.translate_features != PATH_TRANS_FEATURES:
-        logging.info(f"feature translation: {args.translate_features}")
+        logging.info(f"feature translation  : {args.translate_features}")
     if args.translate_qualifiers != PATH_TRANS_QUALIFIERS:
         logging.info(f"qualifier translation: {args.translate_qualifiers}")
+
+    output = args.output
     if output:
-        logging.info("Output  : {}".format(output))
+        logging.info("Output               : {}".format(output))
 
     metadata = utils.load_metadata_info(args.metadata)
 

@@ -41,7 +41,6 @@ def load_rules(path: str) -> Dict[str, FrozenSet[str]]:
     for feature_key in rules:
         rules[feature_key] = frozenset(rules[feature_key])
 
-    logging.debug("rules:\n{}".format(pprint.pformat(rules)))
     return rules
 
 
