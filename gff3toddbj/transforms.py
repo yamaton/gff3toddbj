@@ -50,7 +50,8 @@ def load_gff3_as_seqrecords(filepath, unquoting=False) -> List[SeqRecord]:
             with gzip.open(filepath, "rt") as fin:
                 recs = wrapper_gff_parse(fin)
         else:
-            recs = wrapper_gff_parse(filepath)
+            with open(filepath, "r") as fin:
+                recs = wrapper_gff_parse(fin)
 
     return recs
 
@@ -61,11 +62,10 @@ def wrapper_gff_parse(fileobj) -> List[SeqRecord]:
     Raises TypeError if the opening fails due to ##FASTA directive in GFF3.
     """
     try:
-        result = list(GFF.parse(fileobj))
+        records = list(GFF.parse(fileobj))
     except TypeError:
         if isinstance(fileobj, str) or isinstance(fileobj, pathlib.Path):
             fileobj = open(fileobj, "r")
-        fileobj.seek(0)
         s = fileobj.read()
         patt = re.compile("##FASTA")
         matchobj = patt.search(s)
@@ -80,7 +80,15 @@ def wrapper_gff_parse(fileobj) -> List[SeqRecord]:
             sys.exit(1)
         else:
             raise TypeError("Failed to read GFF3 for unknown reason.")
-    return result
+
+    # Revert sorting of IDs done by GFF.parse()
+    if isinstance(fileobj, str) or isinstance(fileobj, pathlib.Path):
+        fileobj = open(fileobj, "r")
+    fileobj.seek(0)
+    ids = utils.get_ids_gff3(fileobj)
+    ids_score = {id_: (index, id_) for index, id_ in enumerate(ids)}
+    records.sort(key=lambda rec: ids_score[rec.id])
+    return records
 
 
 def load_fasta_as_seq(filepath) -> OrderedDict[str, SeqRecord]:

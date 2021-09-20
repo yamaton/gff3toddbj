@@ -1,8 +1,10 @@
 from typing import Iterable, Generator, Dict, List, FrozenSet, OrderedDict, Union, Any
 import logging
-import pprint
+import pathlib
 import re
 import collections
+import gzip
+import csv
 import toml
 
 from Bio.Data import CodonTable
@@ -204,3 +206,23 @@ def debug_checker(
 
     for rec in recs:
         _helper(rec.features)
+
+
+def get_ids_gff3(fileobj) -> List[str]:
+    """
+    Get SeqIDs from GFF3 file while keeping the order.
+
+    [NOTE] BcBio.parse() returns a list of SeqRecords sorted by their IDs.
+    I want to revert this operation.
+    """
+    seen = set()
+    ids = []
+    spamreader = csv.reader(fileobj, delimiter="\t")
+    for row in spamreader:
+        if not row:
+            continue
+        x = row[0]
+        if (not x.startswith("#")) and (x not in seen):
+            ids.append(x)
+            seen.add(x)
+    return ids
