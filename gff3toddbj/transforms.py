@@ -34,7 +34,7 @@ def load_gff3_as_seqrecords(filepath, unquoting=False) -> List[SeqRecord]:
     ext = pathlib.Path(filepath).suffix
 
     if unquoting:
-        # Save unquoted content to tempfile before feeding GFF.parse()
+        # Save unquoted content to tempfile before parsing GFF3
         with tempfile.TemporaryFile(mode="w+") as ftemp:
             if ext == ".gz":
                 with gzip.open(filepath, "rt") as fin:
@@ -43,16 +43,44 @@ def load_gff3_as_seqrecords(filepath, unquoting=False) -> List[SeqRecord]:
                 with open(filepath, "r") as fin:
                     ftemp.write(urllib.parse.unquote(fin.read()))
             ftemp.seek(0)
-            recs = list(GFF.parse(ftemp))
+            recs = wrapper_gff_parse(ftemp)
     else:
         # If unquoting is unnecessary
         if ext == ".gz":
             with gzip.open(filepath, "rt") as fin:
-                recs = list(GFF.parse(fin))
+                recs = wrapper_gff_parse(fin)
         else:
-            recs = list(GFF.parse(filepath))
+            recs = wrapper_gff_parse(filepath)
 
     return recs
+
+
+def wrapper_gff_parse(fileobj) -> List[SeqRecord]:
+    """
+    Returns a list of SeqRecord from a GFF3 file object.
+    Raises TypeError if the opening fails due to ##FASTA directive in GFF3.
+    """
+    try:
+        result = list(GFF.parse(fileobj))
+    except TypeError:
+        if isinstance(fileobj, str) or isinstance(fileobj, pathlib.Path):
+            fileobj = open(fileobj, "r")
+        fileobj.seek(0)
+        s = fileobj.read()
+        patt = re.compile("##FASTA")
+        matchobj = patt.search(s)
+        if matchobj:
+            msg = (
+                "\n\n"
+                "Directive ##FASTA exists in the input GFF3: Run \n\n"
+                "    $ split-fasta <<this-gff3-file.gff3>>\n\n"
+                "and split FASTA part from the file before running gff3-to-ddbj."
+            )
+            logging.error(msg)
+            sys.exit(1)
+        else:
+            raise TypeError("Failed to read GFF3 for unknown reason.")
+    return result
 
 
 def load_fasta_as_seq(filepath) -> OrderedDict[str, SeqRecord]:
