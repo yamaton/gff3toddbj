@@ -11,7 +11,13 @@ target = "mRNA"
 [five_prime_UTR]
 target = "5'UTR"
 
+[five_prime_utr]
+target = "5'UTR"
+
 [three_prime_UTR]
+target = "3'UTR"
+
+[three_prime_utr]
 target = "3'UTR"
 
 [region]
