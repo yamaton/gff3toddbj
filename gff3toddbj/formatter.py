@@ -123,10 +123,10 @@ class DDBJFormatter(object):
         """
         # Check skipped features according to the rule
         if not ignore_rules:
-            feature_keys = {f.type for f in utils.flatten_features(rec.features)}
-            for k in feature_keys:
+            feature_keys = collections.Counter(f.type for f in utils.flatten_features(rec.features))
+            for k, k_count in feature_keys.items():
                 if not self._is_allowed_feature(k):
-                    self.ignored_feature_count[k] += 1  # update ignored feature count
+                    self.ignored_feature_count[k] += k_count  # update ignored feature count
 
         table = [
             row
