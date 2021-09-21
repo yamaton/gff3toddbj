@@ -107,6 +107,23 @@ def load_fasta_as_seq(filepath) -> OrderedDict[str, SeqRecord]:
     return recs
 
 
+def load_gaps_and_seqlen_from_fasta(filepath, qualifiers: OrderedDict[str, Any]) -> Tuple[OrderedDict[str, SeqRecord], OrderedDict[str, int]]:
+    """Load FASTA and get assembly gap and sequence length as
+    two dictionaries both of which have SeqID as the key.
+    """
+    p = pathlib.Path(filepath)
+    gap = collections.OrderedDict()
+    seqlen = collections.OrderedDict()
+    if p.suffix == ".gz":
+        f = gzip.open(p, "rt")
+    else:
+        f = open(p, "r")
+    for rec in Bio.SeqIO.parse(f, "fasta"):
+        gap[rec.id] = _get_assembly_gap(rec.upper().seq, qualifiers)
+        seqlen[rec.id] = len(rec)
+    return (gap, seqlen)
+
+
 def load_toml_tables(filepath) -> OrderedDict[str, Any]:
     """
     Load TOML as python dictionary
@@ -551,12 +568,9 @@ def run(
     """Create a list of `SeqRecord`s and apply various transformations"""
 
     # get sequence info
-    fasta_records = load_fasta_as_seq(path_fasta)
-    seq_lengths = dict()
-    gaps: Dict[str, List[SeqFeature]] = dict()
-    for rec_id, rec in fasta_records.items():
-        seq_lengths[rec_id] = len(rec)
-        gaps[rec_id] = _get_assembly_gap(rec.seq, metadata.get("assembly_gap", collections.OrderedDict()))
+    gap_qualifiers = metadata.get("assembly_gap", collections.OrderedDict())
+    id_to_gap, id_to_seqlen = load_gaps_and_seqlen_from_fasta(path_fasta, gap_qualifiers)
+    seqids = list(id_to_seqlen.keys())
 
     # Create record from GFF3 (or dummy if unavailable)
     if path_gff3 is not None:
@@ -572,12 +586,12 @@ def run(
             _fix_codon_start_values(rec)
     else:
         # Create dummy SeqRecords with IDs from FASTA
-        records = [SeqRecord("", id=seq_id) for seq_id in fasta_records.keys()]
+        records = [SeqRecord("", id=seq_id) for seq_id in seqids]
 
     # Add "assembly_gap" features
     for rec in records:
-        if rec.id in gaps:
-            rec.features.extend(gaps[rec.id])
+        if rec.id in id_to_gap:
+            rec.features.extend(id_to_gap[rec.id])
 
     # Add the transl_table qualifier to CDS feature each
     for rec in records:
@@ -600,7 +614,7 @@ def run(
                     )
                     logging.warning(msg)
                 else:
-                    src_length = seq_lengths[rec.id]
+                    src_length = id_to_seqlen[rec.id]
                     src_qualifiers = metadata["source"]
                     src = _get_source(src_length, src_qualifiers)
                     rec.features.insert(0, src)
@@ -617,9 +631,9 @@ def run(
     for rec in records:
         _merge_mrna_qualifiers(rec)
 
-    # check start codons in CDSs
-    for rec in records:
-        _check_start_codons(rec, fasta_records, transl_table)
+    # # check start codons in CDSs
+    # for rec in records:
+    #     _check_start_codons(rec, fasta_records, transl_table)
 
     # assign single value to /product and put the rest to /inference
     for rec in records:
