@@ -75,9 +75,9 @@ def get_common(header_info: DefaultDict[str, DefaultDict[str, Any]]) -> Optional
 class DDBJFormatter(object):
     """Format SeqRecord to DDBJ annotation table."""
 
-    def __init__(self, header_info, ddbj_rule_path: str):
+    def __init__(self, header_info, ddbj_filter_path: str):
         self.common = get_common(header_info)
-        self.rules = utils.load_rules(ddbj_rule_path)
+        self.rules = utils.load_rules(ddbj_filter_path)
         ## Counter of ignored feature keys
         self.ignored_feature_count = collections.defaultdict(int)
         ## Counter of ignored (feature key, qualifier key) pairs

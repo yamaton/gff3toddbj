@@ -11,7 +11,7 @@ FORMAT = '%(levelname)s: %(message)s'
 _DIR = pathlib.Path(__file__).parent
 PATH_TRANS_FEATURES = _DIR / "translate_features.toml"
 PATH_TRANS_QUALIFIERS = _DIR / "translate_qualifiers.toml"
-PATH_DDBJ_RULES = _DIR / "ddbj_rules.toml"
+PATH_DDBJ_FILTER = _DIR / "ddbj_filter.toml"
 PATH_METADATA_DEFAULT = _DIR / "metadata.toml"
 
 LOCUS_TAG_PREFIX = "LOCUSTAGPREFIX_"
@@ -94,7 +94,7 @@ def main():
 
     logging.debug("Records: {}".format(records))
 
-    fmt = formatter.DDBJFormatter(metadata, PATH_DDBJ_RULES)
+    fmt = formatter.DDBJFormatter(metadata, PATH_DDBJ_FILTER)
     gen = fmt.run(records, ignore_rules=IGNORE_FEATURE_QUALIFIER_RULE)
 
     if output:
