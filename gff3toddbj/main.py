@@ -12,7 +12,7 @@ _DIR = pathlib.Path(__file__).parent
 PATH_TRANS_FEATURES = _DIR / "translate_features.toml"
 PATH_TRANS_QUALIFIERS = _DIR / "translate_qualifiers.toml"
 PATH_DDBJ_FILTER = _DIR / "ddbj_filter.toml"
-PATH_METADATA_DEFAULT = _DIR / "metadata.toml"
+PATH_METADATA_DEFAULT = _DIR / "metadata_without_COMMON.toml"
 
 LOCUS_TAG_PREFIX = "LOCUSTAGPREFIX_"
 
