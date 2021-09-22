@@ -3,13 +3,10 @@
 [COMMON]
 ## "source" feature under COMMON has its own macro processing
 ##   https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#common
-[COMMON.source]
 
+[source]
 organism = "Drosophila melanogaster"
 mol_type = "genomic DNA"
-submitter_seqid = "@@[entry]@@"
-ff_definition =	"@@[organism]@@ DNA, @@[submitter_seqid]@@"
-
 
 [assembly_gap]
 ## -----------------------------------------------------------------------

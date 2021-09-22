@@ -532,21 +532,32 @@ def _assign_single_product(rec: SeqRecord) -> None:
 def _sort_features(features: List[SeqFeature]) -> None:
     """Sort features
     """
-    def type_priority(type_name: str) -> int:
+    def type_priority(type_name: str) -> float:
         d = {
             "source": -1,
             "gene": 0,
             "mRNA": 1,
+            "rRNA": 1,
+            "ncRNA": 1,
+            "tmRNA": 1,
+            "tRNA": 1,
+            "misc_RNA": 1,
+            "V_region": 1,
+            "C_region": 1.5,
+            "D_segment": 1.5,
+            "J_segment": 1.5,
+            "V_segment": 1.5,
             "5'UTR": 2,
             "3'UTR": 2,
             "CDS": 2,
+            "mat_peptide": 2.5,
             "exon": 3,
             "intron": 3,
-            "assembly_gap": 4,
+            "assembly_gap": 8,
         }
         return d[type_name] if (type_name in d) else 10
 
-    def keyfunc(f: SeqFeature) -> Tuple[int, int, int, str]:
+    def keyfunc(f: SeqFeature) -> Tuple[int, float, int, str]:
         return (f.location.start, type_priority(f.type), f.location.end, f.id)
 
     features.sort(key=keyfunc)
@@ -648,12 +659,11 @@ def run(
         _sort_features(rec.features)
 
     # Check if SeqIDs have valid characters
-    _msg_tmp = "  $ rename-ids --gff3={} --fasta={}\n".format(path_gff3, path_fasta)
     msg = (
         "\n\n"
         "Found invalid letter(s) in the 1st column of the GFF3: {}\n"
         "Run following script to generate corrected GFF3 and FASTA files:\n\n"
-    ) + _msg_tmp
+    ) + "  $ rename-ids --gff3={} --fasta={}\n".format(path_gff3, path_fasta)
     for rec in records:
         if utils.is_invalid_as_seqid(rec.id):
             logging.warning(msg.format(rec.id))
