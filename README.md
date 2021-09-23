@@ -28,10 +28,6 @@
 GFF3-to-DDBJ creates [DDBJ's annotation file](https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#annotation) from GFF3 and FASTA files. It also works with FASTA alone.
 
 
-## TODOs
-- [ ] Load FASTA to a local database to enable sequence searches without consuming too much memory.
-- [ ] Check start and stop codons, and modify location with inequality signs (`<` and `>`) if necessary. For example, modify location `12345..12500` to `<12345..12500` if start codon is absent.
-
 
 ## Initial setup
 
@@ -246,7 +242,8 @@ Here is the list of operations done by `gff3-to-ddbj`.
 
 * Merge `mRNA` and `exon` in GFF3 and create `mRNA` feature with `join` notation
 
-* Check start codons, and modify locations with inequality signs (`<` and `>`) (**[NOTE]** Still in development)
+* Modify locations with inequality signs (`<` and `>`) if start/stop codon is absent.
+  * See [Offset of the frame at translation initiation by codon_start](https://www.ddbj.nig.ac.jp/ddbj/cds-e.html#frame)
 
 * Let CDS have a single `/product` value. Move the rest to `/note`.
 
@@ -265,6 +262,6 @@ Here is the list of operations done by `gff3-to-ddbj`.
 
 
 
-## Acknowledgement
+## Credit
 
 GFF3-to-DDBJ's design is deeply indebted to [EMBLmyGFF3](https://github.com/NBISweden/EMBLmyGFF3), a versatile coversion for EMBL annotation format.

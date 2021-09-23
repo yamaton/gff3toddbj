@@ -7,10 +7,6 @@
 DDBJへの登録には指定された形式の[アノテーションファイル](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#annotation)が必要です。GFF3-to-DDBJ はこの**アノテーションファイルをFASTA と GFF3ファイルから作る**プログラムです。**FASTA 単体から最小限のアノテーションファイルを作ることも可能**です。
 
 
-## TODOs
-- [ ] FASTAをデータベースにロードして配列検索を無茶なメモリ消費なしに行う
-- [ ] start codon, stop codon のチェックと
-
 ## セットアップ
 
 #### [審査待ち] biocondaからconda環境にインストールする場合
@@ -237,7 +233,8 @@ rename-ids \
 
 * 入力GFF3 ファイル中の mRNA と exon を `join`記法で結合し mRNA Feature とする
 
-* start/stop codon チェックと位置情報の修正（**[NOTE]** 未実装）
+* CDS に 開始・終了コドンが無い場合の位置情報修正
+  * 参照: [codon_start qualifier による翻訳開始の位置補正](https://www.ddbj.nig.ac.jp/ddbj/cds.html#frame)
 
 * CDS 下の /product が値をひとつだけ持つよう変更。複数値の残りは /note へ
 
