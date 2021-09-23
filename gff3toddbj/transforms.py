@@ -261,7 +261,7 @@ def _join_features(record: SeqRecord, joinables: Optional[Tuple[str, ...]]) -> S
     return record
 
 
-def _fix_codon_start_values(rec: SeqRecord) -> None:
+def _convert_codon_start_to_1_based(rec: SeqRecord) -> None:
     """Convert `codon_start` qualifier value
     from 0-based (in GFF3 'phase' column)
     to   1-based (in INSDC table definition)
@@ -331,7 +331,7 @@ def _regularize_qualifier_value_letters(rec: SeqRecord) -> None:
 
 
 def _remove_duplicates_in_qualifiers(rec: SeqRecord) -> None:
-    """Remove duplicate values within a qualifier"""
+    """Remove duplicates in each qualifier's values"""
 
     def _unique(xs: List) -> List:
         seen = set()
@@ -485,13 +485,13 @@ def run(
         f = RenameFeatures(path_trans_features).run
         g = RenameQualifiers(path_trans_qualifiers, locus_tag_prefix).run
         records = [g(f(rec)) for rec in records]
-
-        # Fix codon_start value to 1-based indexing
-        for rec in records:
-            _fix_codon_start_values(rec)
     else:
         # Create dummy SeqRecords with IDs from FASTA
         records = [SeqRecord("", id=seq_id) for seq_id in fasta_ids]
+
+    # Convert codon_start value to 1-based indexing
+    for rec in records:
+        _convert_codon_start_to_1_based(rec)
 
     # Add "assembly_gap" features
     _set_assembly_gap(records, cur, metadata)

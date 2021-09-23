@@ -1,4 +1,5 @@
 import collections
+import csv
 import gzip
 import logging
 import pathlib
@@ -33,6 +34,7 @@ def load_gff3_as_seqrecords(filepath, unquoting=False) -> List[SeqRecord]:
     """
     ext = pathlib.Path(filepath).suffix
 
+    logging.info("Loading GFF3. May take some time ...")
     if unquoting:
         # Save unquoted content to tempfile before parsing GFF3
         with tempfile.TemporaryFile(mode="w+") as ftemp:
@@ -52,6 +54,7 @@ def load_gff3_as_seqrecords(filepath, unquoting=False) -> List[SeqRecord]:
         else:
             with open(filepath, "r") as fin:
                 recs = _wrapper_gff_parse(fin)
+    logging.info("... Done Loading GFF3")
 
     return recs
 
@@ -85,10 +88,30 @@ def _wrapper_gff_parse(fileobj) -> List[SeqRecord]:
     if isinstance(fileobj, str) or isinstance(fileobj, pathlib.Path):
         fileobj = open(fileobj, "r")
     fileobj.seek(0)
-    ids = utils.get_ids_gff3(fileobj)
+    ids = _get_ids_gff3(fileobj)
     ids_score = {id_: (index, id_) for index, id_ in enumerate(ids)}
     records.sort(key=lambda rec: ids_score[rec.id])
     return records
+
+
+def _get_ids_gff3(fileobj) -> List[str]:
+    """
+    Get SeqIDs from GFF3 file while keeping the order.
+
+    [NOTE] BcBio.parse() returns a list of SeqRecords sorted by their IDs.
+    I want to revert this operation.
+    """
+    seen = set()
+    ids = []
+    spamreader = csv.reader(fileobj, delimiter="\t")
+    for row in spamreader:
+        if not row:
+            continue
+        x = row[0]
+        if (not x.startswith("#")) and (x not in seen):
+            ids.append(x)
+            seen.add(x)
+    return ids
 
 
 def load_toml_tables(filepath) -> OrderedDict[str, Any]:
@@ -126,7 +149,7 @@ def load_fasta_as_database(filepath) -> sqlite3.Connection:
         f = open(filepath, "r")
 
     logging.info("Loading FASTA data to a local database.")
-    logging.info("    It may take minutes. Have a cup of coffee ☕")
+    logging.info("    It may take minutes. Coffee break? ☕ ...")
     for rec in Bio.SeqIO.parse(f, "fasta"):
         seq = str(rec.upper().seq)
         seqlen = len(rec)
