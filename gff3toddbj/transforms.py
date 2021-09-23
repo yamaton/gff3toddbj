@@ -1,138 +1,29 @@
-import pprint
-from typing import Any, Dict, Generator, List, Optional, Tuple, Iterable, OrderedDict
+from typing import Any, Dict, List, Optional, Tuple, Iterable, OrderedDict
 import collections
-import toml
 import re
-import pathlib
-import gzip
 import logging
-import urllib.parse
-import tempfile
-import sys
+import sqlite3
 
-import Bio.SeqIO
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import FeatureLocation, SeqFeature, CompoundLocation
-from BCBio import GFF
 
 from . import utils
+from . import io
+
 Interval = Tuple[int, int]
 
 
-def load_gff3_as_seqrecords(filepath, unquoting=False) -> List[SeqRecord]:
-    """Load GFF3 as iterable of SeqRecord
-
-    Args:
-        filepath: path to load GFF3
-        unquoting (bool): unquote characters.
-
-    Unquoting means converesions like this:
-        from %3B to ;
-        from %2C to ,
+def _set_assembly_gap(records: List[SeqRecord], cur: sqlite3.Cursor, metadata: OrderedDict[str, OrderedDict[str, Any]]) -> None:
     """
-    ext = pathlib.Path(filepath).suffix
-
-    if unquoting:
-        # Save unquoted content to tempfile before parsing GFF3
-        with tempfile.TemporaryFile(mode="w+") as ftemp:
-            if ext == ".gz":
-                with gzip.open(filepath, "rt") as fin:
-                    ftemp.write(urllib.parse.unquote(fin.read()))
-            else:
-                with open(filepath, "r") as fin:
-                    ftemp.write(urllib.parse.unquote(fin.read()))
-            ftemp.seek(0)
-            recs = wrapper_gff_parse(ftemp)
-    else:
-        # If unquoting is unnecessary
-        if ext == ".gz":
-            with gzip.open(filepath, "rt") as fin:
-                recs = wrapper_gff_parse(fin)
-        else:
-            with open(filepath, "r") as fin:
-                recs = wrapper_gff_parse(fin)
-
-    return recs
-
-
-def wrapper_gff_parse(fileobj) -> List[SeqRecord]:
+    Set assembly gaps feature to records.
     """
-    Returns a list of SeqRecord from a GFF3 file object.
-    Raises TypeError if the opening fails due to ##FASTA directive in GFF3.
-    """
-    try:
-        records = list(GFF.parse(fileobj))
-    except TypeError:
-        if isinstance(fileobj, str) or isinstance(fileobj, pathlib.Path):
-            fileobj = open(fileobj, "r")
-        s = fileobj.read()
-        patt = re.compile("##FASTA")
-        matchobj = patt.search(s)
-        if matchobj:
-            msg = (
-                "\n\n"
-                "Directive ##FASTA exists in the input GFF3: Run \n\n"
-                "    $ split-fasta <<this-gff3-file.gff3>>\n\n"
-                "and split FASTA part from the file before running gff3-to-ddbj."
-            )
-            logging.error(msg)
-            sys.exit(1)
-        else:
-            raise TypeError("Failed to read GFF3 for unknown reason.")
-
-    # Revert sorting of IDs done by GFF.parse()
-    if isinstance(fileobj, str) or isinstance(fileobj, pathlib.Path):
-        fileobj = open(fileobj, "r")
-    fileobj.seek(0)
-    ids = utils.get_ids_gff3(fileobj)
-    ids_score = {id_: (index, id_) for index, id_ in enumerate(ids)}
-    records.sort(key=lambda rec: ids_score[rec.id])
-    return records
-
-
-def load_fasta_as_seq(filepath) -> OrderedDict[str, SeqRecord]:
-    """
-    Load FASTA file as Seq
-    """
-    p = pathlib.Path(filepath)
-    recs = collections.OrderedDict()
-    if p.suffix == ".gz":
-        with gzip.open(filepath, "rt") as f:
-            for seq in Bio.SeqIO.parse(f, "fasta"):
-                recs[seq.id] = seq.upper()
-    else:
-        for seq in Bio.SeqIO.parse(filepath, "fasta"):
-            recs[seq.id] = seq.upper()
-    return recs
-
-
-def load_gaps_and_seqlen_from_fasta(filepath, qualifiers: OrderedDict[str, Any]) -> Tuple[OrderedDict[str, SeqRecord], OrderedDict[str, int]]:
-    """Load FASTA and get assembly gap and sequence length as
-    two dictionaries both of which have SeqID as the key.
-    """
-    p = pathlib.Path(filepath)
-    gap = collections.OrderedDict()
-    seqlen = collections.OrderedDict()
-    if p.suffix == ".gz":
-        f = gzip.open(p, "rt")
-    else:
-        f = open(p, "r")
-    for rec in Bio.SeqIO.parse(f, "fasta"):
-        gap[rec.id] = _get_assembly_gap(rec.upper().seq, qualifiers)
-        seqlen[rec.id] = len(rec)
-    return (gap, seqlen)
-
-
-def load_toml_tables(filepath) -> OrderedDict[str, Any]:
-    """
-    Load TOML as python dictionary
-    """
-    with open(filepath) as fp:
-        d = toml.load(fp, _dict=collections.OrderedDict)
-
-    logging.debug("TOML table:\n{}".format(pprint.pformat(d)))
-    return d
+    gap_qualifiers = metadata.get("assembly_gap", collections.OrderedDict())
+    for rec in records:
+        seq = io.get_seq(cur, rec.id)
+        if seq:
+            gap = _get_assembly_gap(seq, gap_qualifiers)
+            rec.features.extend(gap)
 
 
 def _get_assembly_gap(seq: Seq, qualifiers: OrderedDict[str, Any]) -> List[SeqFeature]:
@@ -211,7 +102,7 @@ class RenameQualifiers(object):
     def __init__(self, filepath: str, locus_tag_prefix: str):
         self.path = filepath
         self.locus_tag_prefix = locus_tag_prefix
-        self.trans_table = load_toml_tables(filepath)
+        self.trans_table = io.load_toml_tables(filepath)
 
         # modify the table by inserting locus_tag prefix
         assert "locus_tag" in self.trans_table
@@ -276,7 +167,7 @@ class RenameFeatures(object):
     """
     def __init__(self, filepath: str):
         self.path = filepath
-        self.d = load_toml_tables(filepath)
+        self.d = io.load_toml_tables(filepath)
 
     def run(self, record: SeqRecord) -> SeqRecord:
         """Modifies record according to the GFF3-types-to-features translation JSON data."""
@@ -578,14 +469,17 @@ def run(
 ) -> List[SeqRecord]:
     """Create a list of `SeqRecord`s and apply various transformations"""
 
-    # get sequence info
-    gap_qualifiers = metadata.get("assembly_gap", collections.OrderedDict())
-    id_to_gap, id_to_seqlen = load_gaps_and_seqlen_from_fasta(path_fasta, gap_qualifiers)
-    seqids = list(id_to_seqlen.keys())
+    # Load FASTA to database
+    con = io.load_fasta_as_database(path_fasta)
+    cur = con.cursor()
+
+    # Get SeqIDs and Sequence lengths
+    id_to_seqlen = io.get_seqlens(cur)
+    fasta_ids = list(id_to_seqlen.keys())
 
     # Create record from GFF3 (or dummy if unavailable)
     if path_gff3 is not None:
-        records = load_gff3_as_seqrecords(path_gff3)
+        records = io.load_gff3_as_seqrecords(path_gff3)
 
         # Rename feature and qualifier keys
         f = RenameFeatures(path_trans_features).run
@@ -597,12 +491,10 @@ def run(
             _fix_codon_start_values(rec)
     else:
         # Create dummy SeqRecords with IDs from FASTA
-        records = [SeqRecord("", id=seq_id) for seq_id in seqids]
+        records = [SeqRecord("", id=seq_id) for seq_id in fasta_ids]
 
     # Add "assembly_gap" features
-    for rec in records:
-        if rec.id in id_to_gap:
-            rec.features.extend(id_to_gap[rec.id])
+    _set_assembly_gap(records, cur, metadata)
 
     # Add the transl_table qualifier to CDS feature each
     for rec in records:
@@ -668,4 +560,6 @@ def run(
         if utils.is_invalid_as_seqid(rec.id):
             logging.warning(msg.format(rec.id))
 
+    cur.close()
+    io.close_and_remove_database(con)
     return records
