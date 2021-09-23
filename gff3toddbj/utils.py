@@ -1,10 +1,10 @@
 from typing import Iterable, Generator, Dict, List, FrozenSet, OrderedDict, Union, Any
 import logging
-import pathlib
 import re
 import collections
 import toml
 
+from Bio.Seq import Seq
 from Bio.Data import CodonTable
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import CompoundLocation, FeatureLocation, SeqFeature
@@ -107,85 +107,66 @@ def is_invalid_as_seqid(name: str) -> bool:
 
 
 def has_start_codon(
-    rec: SeqRecord,
+    seq: Seq,
     location: Union[FeatureLocation, CompoundLocation],
     transl_table: int,
-    phase=0,
+    phase: int = 0,
 ) -> bool:
     """Check if the codon starting at index_location in seq
     is start codon according to the Genetic Code transl_table.
     Location is shifted if phase is nonzero.
 
     >>> from Bio.Seq import Seq
-    >>> seq = Seq("GAATTCGAGGGG")
-    >>> rec = SeqRecord(seq)
+    >>> seq = Seq("AATTCGAGGGG")
     >>> loc = FeatureLocation(1, 7, strand=1)
-    >>> has_start_codon(rec, loc, 11, phase=1)
+    >>> table = 11
+    >>> phase = 0
+    >>> has_start_codon(seq, loc, table, phase)
     True
     """
     strand = location.strand
     start_codons = CodonTable.unambiguous_dna_by_id[transl_table].start_codons
-    seq = rec.seq
 
     if strand > 0:
-        p = location.start + phase
+        p = location.start.position + phase
         codon = seq[p : p + 3]
     elif strand < 0:
-        p = location.end - phase
+        p = location.end.position - phase
         codon = seq[p - 3 : p].reverse_complement()
     else:
         raise ValueError("Cannot determine as strand = {}".format(strand))
     return codon in start_codons
 
 
-def check_cds(
-    rec: SeqRecord, fasta_record: Dict[str, SeqRecord], transl_table: int
-) -> None:
+def has_stop_codon(
+    seq: Seq,
+    location: Union[FeatureLocation, CompoundLocation],
+    transl_table: int,
+) -> bool:
+    """Check if stop codon exists in seq.
+    Stop codons correspond to the Genetic Code transl_table.
+
+    >>> from Bio.Seq import Seq
+    >>> seq = Seq("GAATGCGAGGGTAG")
+    >>> loc = FeatureLocation(2, 14, strand=1)
+    >>> table = 1
+    >>> has_stop_codon(seq, loc, table)
+    True
     """
-    Find an inconsistency in codon_start qualifier and displays suggestion as WARNING log.
-    """
-    if rec.id not in fasta_record:
-        logging.error("Following SeqID from GFF3 not found in FASTA: {}".format(rec.id))
-        return
+    strand = location.strand
+    stop_codons = CodonTable.unambiguous_dna_by_id[transl_table].stop_codons
 
-    fasta_seq = fasta_record[rec.id]
+    if strand > 0:
+        p = location.end.position
+        codon = seq[p - 3 : p]
+    elif strand < 0:
+        p = location.start.position
+        codon = seq[p : p + 3].reverse_complement()
+    else:
+        raise ValueError("Cannot determine as strand = {}".format(strand))
+    return codon in stop_codons
 
-    def helper(features: List[SeqFeature]):
-        for f in features:
-            if f.type == "CDS" and int(f.qualifiers["codon_start"][0]) != 1:
-                cs_list = f.qualifiers["codon_start"]
-                codon_start = cs_list[0]
-                msg = "f.qualifiers['codon_start'] = {}".format(cs_list)
-                assert len(cs_list) == 1, msg
-                assert isinstance(cs_list[0], int)
-                try:
-                    shift = codon_start - 1  # 1-based indexing to shift
-                    if not has_start_codon(fasta_seq, f.location, transl_table, shift):
-                        msg = "A start codon NOTFOUND with shift={}, transl_table={}".format(
-                            shift, transl_table
-                        )
-                        logging.warning(msg)
-                        logging.warning("   CDS: location = {}".format(f.location))
-                        if has_start_codon(fasta_seq, f.location, transl_table):
-                            template = "Found a start codon with zero shift (while codon_start={} currently). Fix /codon_start?"
-                            msg = template.format(codon_start)
-                            logging.warning(msg)
-                        else:
-                            msg = "A start codon NOTFOUND. Fix the feature location?"
-                            logging.warning(msg)
-                    else:
-                        temp = "Found a start codon as indicated by codon_start={}"
-                        msg = temp.format(codon_start)
-                        logging.info(msg)
-                except:
-                    raise ValueError(
-                        "fix_cds...codon_start = {}".format(f.qualifiers["codon_start"])
-                    )
 
-            if hasattr(f, "sub_features"):
-                helper(f.sub_features)
-
-    helper(rec.features)
 
 
 def debug_checker(

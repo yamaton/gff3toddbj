@@ -6,7 +6,7 @@ import sqlite3
 
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
-from Bio.SeqFeature import FeatureLocation, SeqFeature, CompoundLocation
+from Bio.SeqFeature import FeatureLocation, SeqFeature, CompoundLocation, BeforePosition, AfterPosition
 
 from . import utils
 from . import io
@@ -353,10 +353,11 @@ def _remove_duplicates_in_qualifiers(rec: SeqRecord) -> None:
     _run(rec.features)
 
 
-def _check_start_codons(
-    rec: SeqRecord, fasta_record: Dict[str, SeqRecord], transl_table: int
-) -> None:
-    """Fix location or start_codon according to the DDBJ FAQ
+
+def fix_locations(cur: sqlite3.Cursor, record: SeqRecord, transl_table: int) -> None:
+    """
+    Fix locations of features in records when start/stop codons are absent.
+    See DDBJ FAQ for detail.
     https://www.ddbj.nig.ac.jp/faq/en/how-to-fix-error-msg-codon-start-e.html
 
     Args:
@@ -364,7 +365,71 @@ def _check_start_codons(
         seq_dict is {SeqID: Record} dict containing sequence info.
         transl_table is the Genetic Code.
     """
-    utils.check_cds(rec, fasta_record, transl_table)
+    def _runner(features: List[SeqFeature], seq: Seq) -> None:
+         for f in features:
+            if f.type == "CDS":
+                cs_list = f.qualifiers.get("codon_start", [1])
+                codon_start = cs_list[0]
+                phase = codon_start - 1   # to 0-based phase index
+                if not utils.has_start_codon(seq, f.location, transl_table, phase):
+                    if phase > 0 and utils.has_start_codon(seq, f.location, transl_table):
+                        logging.warning("Fixed /codon_start to 1: SeqID = {}".format(record.id))
+                        f.qualifiers["codon_start"] = [1]
+                    else:
+                        f.location = _fix_absent_start_codon(f.location)
+
+                if not utils.has_stop_codon(seq, f.location, transl_table):
+                    f.locatoin = _fix_absent_stop_codon(f.location)
+
+            if hasattr(f, "sub_features"):
+                _runner(f.sub_features, seq)
+
+    def _fix_loc(location: FeatureLocation, is_at_start=True) -> FeatureLocation:
+        """Credit: EMBLmyGFF3
+        """
+        sign = 1 if is_at_start else -1
+        if location.strand * sign > 0:
+            # left-end, strand (+)  OR   right-end, strand (-)
+            if len(location.parts) > 1:
+                idx = 0 if location.strand > 0 else -1
+                location.parts[idx] = FeatureLocation(
+                    BeforePosition(location.parts[idx].start),
+                    location.parts[idx].end,
+                    strand = location.parts[idx].strand
+                )
+            else:
+                location = FeatureLocation(
+                    BeforePosition(location.start),
+                    location.end,
+                    strand = location.strand
+                )
+        else:
+            # left-end, strand (-)  OR   right-end, strand (+)
+            if len(location.parts) > 1:
+                idx = -1 if location.strand > 0 else 0
+                location.parts[idx] = FeatureLocation(
+                    location.parts[idx].start,
+                    AfterPosition(location.parts[idx].end),
+                    strand = location.parts[idx].strand
+                )
+            else:
+                location = FeatureLocation(
+                    location.start,
+                    AfterPosition(location.end),
+                    strand = location.strand
+                )
+        return location
+
+    def _fix_absent_start_codon(location: FeatureLocation) -> FeatureLocation:
+        return _fix_loc(location, is_at_start=True)
+
+    def _fix_absent_stop_codon(location: FeatureLocation) -> FeatureLocation:
+        return _fix_loc(location, is_at_start=False)
+
+    s = io.get_seq(cur, record.id)
+    if s:
+        seq = Seq(s)
+        _runner(record.features, seq)
 
 
 def _merge_mrna_qualifiers(rec: SeqRecord) -> None:
@@ -535,8 +600,8 @@ def run(
         _merge_mrna_qualifiers(rec)
 
     # # check start codons in CDSs
-    # for rec in records:
-    #     _check_start_codons(rec, fasta_records, transl_table)
+    for rec in records:
+        fix_locations(cur, rec, transl_table)
 
     # assign single value to /product and put the rest to /inference
     for rec in records:

@@ -16,27 +16,30 @@ def format_location(loc: Location) -> str:
     while Annotation is 1-based, both-inclusive.
     """
 
-    def _format_forward_segment(loc: FeatureLocation) -> str:
-        start = min(loc.start, loc.end)
-        end = max(loc.start, loc.end)
-        if start + 1 == end:
-            s = "{}".format(start + 1)  # convert to 1-based
+    def _format_part(loc: FeatureLocation) -> str:
+        PositionType = type(loc.start)
+        start = str(PositionType(loc.start.position + 1))
+        end = str(loc.end)
+        if start == end:
+            msg = "Something is wrong with position type!"
+            assert all(isinstance(x, ExactPosition) for x in (loc.start, loc.end)), msg
+            s = "{}".format(start)  # convert to 1-based
         else:
-            s = "{}..{}".format(start + 1, end)  # convert to 1-based, both-inclusive
+            s = "{}..{}".format(start, end)  # convert to 1-based, both-inclusive
         return s
 
-    def _format_forward_compound_segments(loc: CompoundLocation) -> str:
+    def _format_compound(loc: CompoundLocation) -> str:
         locs = sorted(
             loc.parts, key=lambda feature_loc: min(feature_loc.start, feature_loc.end)
         )
-        parts = ",".join(_format_forward_segment(x) for x in locs)
+        parts = ",".join(_format_part(x) for x in locs)
         s = "join({})".format(parts)
         return s
 
     if isinstance(loc, FeatureLocation):
-        s = _format_forward_segment(loc)
+        s = _format_part(loc)
     elif isinstance(loc, CompoundLocation):
-        s = _format_forward_compound_segments(loc)
+        s = _format_compound(loc)
     else:
         raise ValueError("Wrong type: type(loc) = {}".format(type(loc)))
 
