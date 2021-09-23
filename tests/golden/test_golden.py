@@ -3,7 +3,6 @@
 import subprocess
 import pathlib
 import uuid
-import os
 
 WORK_DIR = pathlib.Path(__file__).parent
 
@@ -45,11 +44,8 @@ def _runner(data: BunchOfFiles):
         content_out = f_out.read()
 
     assert content_ref == content_out
+    output_file.unlink(missing_ok=True)
 
-    if output_file.exists():
-        os.remove(output_file)
-    else:
-        raise FileNotFoundError("Failed to create output file in golden test!; {}".format(output_file.as_posix))
 
 def test_golden():
     testdata0 = BunchOfFiles(
