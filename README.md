@@ -1,13 +1,36 @@
 # GFF3-to-DDBJ
 日本語版は[こちら](https://github.com/yamaton/gff3toddbj/blob/main/README-ja.md)。
 
-
 [TOC]
+
+## Table of Contents
+- [GFF3-to-DDBJ](#gff3-to-ddbj)
+  * [What is this?](#what-is-this-)
+  * [Initial setup](#initial-setup)
+    + [Install via bioconda](#install-via-bioconda)
+    + [Install from the source](#install-from-the-source)
+  * [Create DDBJ annotation from GFF3 and FASTA](#create-ddbj-annotation-from-gff3-and-fasta)
+    + [Run `gff3-to-ddbj`](#run--gff3-to-ddbj-)
+  * [Customize the behavior](#customize-the-behavior)
+    + [Metadata file](#metadata-file)
+    + [[Advanced] Feature/Qualifier translation tables](#-advanced--feature-qualifier-translation-tables)
+  * [Troubleshooting](#troubleshooting)
+    + [Validate GFF3](#validate-gff3)
+    + [Split FASTA from GFF3 (if needed)](#split-fasta-from-gff3--if-needed-)
+    + [Fix entry names (if needed)](#fix-entry-names--if-needed-)
+  * [Under the Hood](#under-the-hood)
+  * [Acknowledgement](#acknowledgement)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 ## What is this?
 
 GFF3-to-DDBJ creates [DDBJ's annotation file](https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#annotation) from GFF3 and FASTA files. It also works with FASTA alone.
 
+
+## TODOs
+- [ ] Load FASTA to a local database to enable sequence searches without consuming too much memory.
+- [ ] Check start and stop codons, and modify location with inequality signs (`<` and `>`) if necessary. For example, modify location `12345..12500` to `<12345..12500` if start codon is absent.
 
 
 ## Initial setup
@@ -223,7 +246,7 @@ Here is the list of operations done by `gff3-to-ddbj`.
 
 * Merge `mRNA` and `exon` in GFF3 and create `mRNA` feature with `join` notation
 
-* Check start codon consistency. (Except for `/codon_start=1`  for now)
+* Check start codons, and modify locations with inequality signs (`<` and `>`) (**[NOTE]** Still in development)
 
 * Let CDS have a single `/product` value. Move the rest to `/note`.
 
