@@ -34,7 +34,7 @@ setuptools.setup(
         [
             "gff3-to-ddbj = gff3toddbj:main",
             "split-fasta = tools.splitfasta:main",
-            "rename-ids = tools.regularize_seqids:main",
+            "normalize-entry-names = tools.normalize_seqids:main",
             "list-products = tools.list_products:main",
         ]},
 )
