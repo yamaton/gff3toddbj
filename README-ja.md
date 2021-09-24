@@ -1,5 +1,23 @@
 # GFF3-to-DDBJ
 
+- [GFF3-to-DDBJ](#gff3-to-ddbj)
+  * [これは何？](#これは何)
+  * [セットアップ](#セットアップ)
+      - [biocondaからconda環境にインストールする場合](#biocondaからconda環境にインストールする場合)
+      - [GitHubソースコードからconda環境にインストールする場合](#githubソースコードからconda環境にインストールする場合)
+  * [GFF3 と FASTA から DDBJ アノテーションをつくる](#gff3-と-fasta-から-ddbj-アノテーションをつくる)
+    + [`gff3-to-ddbj` を動かしてみる](#gff3-to-ddbj-を動かしてみる)
+  * [設定いろいろ](#設定いろいろ)
+    + [メタデータファイル](#メタデータファイル)
+    + [[パワーユーザ向け] Feature/Qualifier変換テーブルの編集](#パワーユーザ向け-featurequalifier変換テーブルの編集)
+  * [トラブルシューティング](#トラブルシューティング)
+    + [GFF3 の正当性チェック](#gff3-の正当性チェック)
+    + [GFF3 と FASTA の分離（必要に応じて）](#gff3-と-fasta-の分離必要に応じて)
+    + [Entry 名の正規化（必要に応じて）](#entry-名の正規化必要に応じて)
+  * [当プログラムが行うこと](#当プログラムが行うこと)
+  * [謝辞](#謝辞)
+
+
 [TOC]
 
 ## これは何？
@@ -9,15 +27,14 @@ DDBJへの登録には指定された形式の[アノテーションファイル
 
 ## セットアップ
 
-#### [審査待ち] biocondaからconda環境にインストールする場合
+#### biocondaからconda環境にインストールする場合
 
 ```shell
 # ddbjという名前でconda環境をつくってbiocondaからパッケージをインストール
-# 現在 (2021-09-14) 審査待ちのためごちゃついてます
-$ conda create -n ddbj -c bioconda -c conda-forge -c https://168588-42372094-gh.circle-artifacts.com/0/tmp/artifacts/packages gff3toddbj
+conda create -n ddbj -c bioconda -c conda-forge gff3toddbj
 
 # 環境ddbjをアクティベート
-$ conda activate ddbj
+conda activate ddbj
 ```
 
 
@@ -25,22 +42,22 @@ $ conda activate ddbj
 
 ```shell
 # ソースをzipでダウンロード
-$ wget https://github.com/yamaton/gff3_to_ddbj/archive/refs/heads/main.zip
+wget https://github.com/yamaton/gff3_to_ddbj/archive/refs/heads/main.zip
 
 # zipを展開、リネーム
-$ unzip main.zip && mv gff3toddbj-main gff3toddbj && cd gff3toddbj
+unzip main.zip && mv gff3toddbj-main gff3toddbj && cd gff3toddbj
 
 # ddbjという名前でconda環境をつくる
-$ conda create -n ddbj
+conda create -n ddbj
 
 # 環境ddbjをアクティベート
-$ conda activate ddbj
+conda activate ddbj
 
 # ddbjに依存パッケージ (bioconda, bcbio-gff, toml) をインストール
-$ conda install -c bioconda -c conda-forge biopython bcbio-gff toml
+conda install -c bioconda -c conda-forge biopython bcbio-gff toml
 
 # gff3-to-ddbj および付属ツールをインストール
-$ python setup.py install
+python setup.py install
 ```
 
 

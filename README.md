@@ -5,19 +5,19 @@
 
 ## Table of Contents
 - [GFF3-to-DDBJ](#gff3-to-ddbj)
-  * [What is this?](#what-is-this-)
+  * [What is this?](#what-is-this)
   * [Initial setup](#initial-setup)
     + [Install via bioconda](#install-via-bioconda)
     + [Install from the source](#install-from-the-source)
   * [Create DDBJ annotation from GFF3 and FASTA](#create-ddbj-annotation-from-gff3-and-fasta)
-    + [Run `gff3-to-ddbj`](#run--gff3-to-ddbj-)
+    + [Run `gff3-to-ddbj`](#run-gff3-to-ddbj)
   * [Customize the behavior](#customize-the-behavior)
     + [Metadata file](#metadata-file)
-    + [[Advanced] Feature/Qualifier translation tables](#-advanced--feature-qualifier-translation-tables)
+    + [[Advanced] Feature/Qualifier translation tables](#advanced-featurequalifier-translation-tables)
   * [Troubleshooting](#troubleshooting)
     + [Validate GFF3](#validate-gff3)
-    + [Split FASTA from GFF3 (if needed)](#split-fasta-from-gff3--if-needed-)
-    + [Fix entry names (if needed)](#fix-entry-names--if-needed-)
+    + [Split FASTA from GFF3 (if needed)](#split-fasta-from-gff3-if-needed)
+    + [Fix entry names (if needed)](#fix-entry-names-if-needed)
   * [Under the Hood](#under-the-hood)
   * [Acknowledgement](#acknowledgement)
 
@@ -35,8 +35,7 @@ GFF3-to-DDBJ creates [DDBJ's annotation file](https://www.ddbj.nig.ac.jp/ddbj/fi
 
 ```shell
 # Create a conda environment named "ddbj", and install relevant packages from bioconda channel
-## --- Pending registration as of 2021-09-14 ---
-$ conda create -n ddbj -c bioconda -c conda-forge -c https://168588-42372094-gh.circle-artifacts.com/0/tmp/artifacts/packages gff3toddbj
+$ conda create -n ddbj -c bioconda -c conda-forge gff3toddbj
 
 # Activate the environment "ddbj"
 $ conda activate ddbj
