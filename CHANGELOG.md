@@ -1,6 +1,6 @@
 ## latest
 * Improve memory usage when reading a large FASTA file
-* Add CLI options: --translate-features and -translate-qualifiers
+* Add CLI options: --renaming_scheme to use custom renaming table
 * Fix locations with inequalities '<' and '>' when start/stop codons are absent
 * Fix a critical bug not inserting source properly
 * Fix a critical bug missing subfeatures in certain cases

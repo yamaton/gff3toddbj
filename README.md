@@ -13,19 +13,19 @@
     + [Run `gff3-to-ddbj`](#run-gff3-to-ddbj)
   * [Customize the behavior](#customize-the-behavior)
     + [Metadata file](#metadata-file)
-    + [[Advanced] Feature/Qualifier translation tables](#advanced-featurequalifier-translation-tables)
+    + [[Advanced] Feature/Qualifier renaming schema](#advanced-featurequalifier-renaming-schema)
   * [Troubleshooting](#troubleshooting)
     + [Validate GFF3](#validate-gff3)
     + [Split FASTA from GFF3 (if needed)](#split-fasta-from-gff3-if-needed)
-    + [Fix entry names (if needed)](#fix-entry-names-if-needed)
+    + [Normalize entry names (if needed)](#normalize-entry-names-if-needed)
   * [Under the Hood](#under-the-hood)
-  * [Acknowledgement](#acknowledgement)
+  * [Credit](#credit)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 ## What is this?
 
-GFF3-to-DDBJ creates [DDBJ's annotation file](https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#annotation) from GFF3 and FASTA files. It also works with FASTA alone.
+GFF3-to-DDBJ creates [an annotation file for the DDBJ submission](https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#annotation) by taking GFF3 and FASTA files as input. It also works with FASTA alone.
 
 
 
@@ -73,25 +73,25 @@ $ python setup.py install
 
 ### Run `gff3-to-ddbj`
 
-Let's run the main program to get some ideas. Here is the options.
-
-* `--gff3 <FILE>` takes GFF3 file
-* `--fasta <FILE>` takes FASTA file
-
-* `--metadata <FILE>` takes the metadata file in TOML
-* `--locus_tag_prefix <STRING>` takes the prefix of locus tag [obtained from BioSample](https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#locus_tag). You can skip this for now.
-* `--transl_table <INT>`: Choose appropriate one from [The Genetic Codes](https://www.ddbj.nig.ac.jp/ddbj/geneticcode-e.html). The default value is 1 ("standard").
-* `--output <FILE>` sets the path the annotation output.
+Let's run the main program to get some ideas.
 
 ```shell
 gff3-to-ddbj \
   --gff3 myfile.gff3 \                # bare-minimum output if omitted
   --fasta myfile.fa \                 # <<REQUIRED>>
-  --metadata mymetadata.toml \        # an example is used if omitted
+  --metadata mymetadata.toml \        # example metadata used if omitted
   --locus_tag_prefix MYOWNPREFIX_ \   # default is "LOCUSTAGPREFIX_"
   --transl_table 1 \                  # default is 1
   --output myawesome_output.ann       # standard output if omitted
 ```
+
+Here is the options:
+* `--gff3 <FILE>` takes GFF3 file
+* `--fasta <FILE>` takes FASTA file
+* `--metadata <FILE>` takes the metadata file in TOML
+* `--locus_tag_prefix <STRING>` takes the prefix of locus tag [obtained from BioSample](https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#locus_tag). You can skip this for now.
+* `--transl_table <INT>`: Choose appropriate one from [The Genetic Codes](https://www.ddbj.nig.ac.jp/ddbj/geneticcode-e.html). The default value is 1 ("standard").
+* `--output <FILE>` sets the path the annotation output.
 
 
 
@@ -141,36 +141,69 @@ For more examples, see [WGS in COMMON](https://docs.google.com/spreadsheets/d/15
 
 
 
-### [Advanced] Feature/Qualifier translation tables
+### [Advanced] Feature/Qualifier renaming schema
 
 GFF3 and DDBJ annotation have rough correspondence as follows:
 
-1. GFF3 column 3  →  DDBJ annotation column 2 as "Feature"
-2. GFF3 column 9  →  DDBJ annotation column 4 and 5 as "Qualifier key", and "Qualifier value"
+1. GFF3 column 3 "type" →  DDBJ annotation column 2 as "Feature"
+2. GFF3 column 9 "attribute" →  DDBJ annotation column 4 and 5 as "Qualifier key", and "Qualifier value"
 
-but nomenclatures in GFF3 often do not conform the definitions by INSDC. Furthermore, DDBJ lists up the [feature-qualifier pairs they accepts](https://docs.google.com/spreadsheets/d/1qosakEKo-y9JjwUO_OFcmGCUfssxhbFAm5NXUAnT3eM/edit#gid=0), which is stricter than INSDC.
+but nomenclatures in GFF3 often do not conform the annotations set by INSDC. Furthermore, DDBJ lists up the [feature-qualifier pairs they accepts](https://docs.google.com/spreadsheets/d/1qosakEKo-y9JjwUO_OFcmGCUfssxhbFAm5NXUAnT3eM/edit#gid=0), a subset of the INSDC definitions.
 
-To satisfy the requirement, GFF3-to-DDBJ uses translation tables to rename feature and qualifier keys. For example, GFF3 may contain `five_prime_UTR` in the column 2. Then this item is renamed to `5'UTR` in the annotation. This renaming is expressed in TOML as follows.
+To meet convensions with the requirement, GFF3-to-DDBJ comes with a TOML file to rename feature keys and qualifier keys/values.
+
+Here is a way to customize the renaming schema.
+
+#### Rename types/feature keys
+
+The default setting renames `five_prime_UTR` "type" in GFF3 into `5'UTR` "feature key" in the annotation. This transformation is expressed in TOML as follows:
 
 ```toml
 [five_prime_UTR]
-target = "5'UTR"
+feature_key = "5'UTR"
 ```
 
-As another example from the default behavior, if GFF3 has an `ID=foobar` in the column 9, we have translation table like
+#### Rename attributes/qualifier keys
 
-```
-[ID]
-target = "note"
-prefix = "ID:"
+This is about renaming attributes under arbitrary types. By default, `ID=foobar` "attribute" in a GFF3 becomes `/note="ID:foobar"` qualifier in the annotation. (Here I follow the convention putting slash (like `/note`) to denote qualifier. But DDBJ annotation does NOT include slash hence no slash is used in any of TOML files.)
+
+Here is the TOML defining the transformation. `__ANY__` is the special name representing arbitrary types. `ID` is the original attribute key. `note` is the name of corresponding qualifier key. `ID:` is attached as the prefix of the qualifier value.
+
+```toml
+[__ANY__]  # This lineis required for structural reason
+[__ANY__.ID]
+qualifier_key = "note"
+qualifier_value_prefix = "ID:"  # optional
 ```
 
-which transforms the item into qualifier `/note` with the value `ID:foobar`.
+#### Translate types to featuress with qualifiers
+
+Sometimes we want to replace a certain types with features WITH qualifiers. For example, `snRNA` is an invalid feature in INSDC/DDBJ hence we replace it with `ncRNA` feature with `/ncRNA_class="snRNA"` qualifier. Such transformation is written in TOML as following.
+
+```toml
+[snRNA]
+feature_key = "ncRNA"
+qualifier_key = "ncRNA_class"
+qualifier_value = "snRNA"
+```
+
+#### Translate (type, attribute) items to features
+
+Example: some annotation programs produce a GFF3 line containing `RNA` as the type and `biotype=misc_RNA` as one of the attributes. Then it should be translated to `misc_RNA` feature in annoation.
+
+```toml
+[RNA]    # Required though redundant
+[RNA.biotype]
+attribute_value = "misc_RNA"
+feature_key = "misc_RNA"
+```
+
+
+#### Run with a custom file
 
 See [translate_features.toml](https://raw.githubusercontent.com/yamaton/gff3toddbj/main/gff3toddbj/translate_features.toml) and [translate_qualifiers.toml](https://raw.githubusercontent.com/yamaton/gff3toddbj/main/gff3toddbj/translate_qualifiers.toml) for default behavior. To use custom translation tables, use the CLI options:
 
-* `--translate_features <file>` for feature translation
-* `--translate_qualifiers <file>` for qualifier translation
+* `--renaming_scheme <FILE>`
 
 And here is an example call:
 
@@ -181,13 +214,9 @@ gff3-to-ddbj \
   --metadata mymetadata.toml \
   --locus_tag_prefix MYOWNPREFIX_ \
   --transl_table 1 \
-  --translate_features translate_features.toml \      # Customized feature translation
-  --translate_qualifiers  translate_qualifiers.toml \ # Customized qualifier translation
+  --renaming_scheme my_translate_features_qualifiers.toml \  # Set your customized file here
   --output myawesome_output.ann
 ```
-
-
-
 
 
 ## Troubleshooting
@@ -200,7 +229,7 @@ It might be a good practice to validate your GFF3 files. [GFF3 online validator]
 
 ### Split FASTA from GFF3 (if needed)
 
-GFF3_to_DDBJ does not work when GFF3 contains FASTA information inside with `##FASTA` directive. Attached tool under `split-fasta` reads a GFF3 file and saves GFF3 (without FASTA info) and FASTA.
+GFF3_to_DDBJ does not work when GFF3 contains FASTA information inside with `##FASTA` directive. Attached tool `split-fasta` reads a GFF3 file and saves GFF3 (without FASTA info) and FASTA.
 
 ```shell
 split-fasta path/to/myfile.gff3 --suffix "_splitted"
@@ -210,24 +239,24 @@ This creates two files, `myfile_splitted.gff3` and `myfile_splitted.fa`.
 
 
 
-### Fix entry names (if needed)
+### Normalize entry names (if needed)
 
-Letters like `=|>" []` are not allowed in the 1st column (= "Entry") of the DDBJ annotation.  So, you need to rename the 1st column (= "SeqID") of your GFF3 and headers in your FASTA. Attached tool `rename-ids` might be useful. This program converts an ID like `ERS324955|SC|contig000013` into `ERS324955:SC:contig000013`.
+Letters like `=|>" []` are not allowed in the 1st column (= "Entry") of the DDBJ annotation.  The attached program `normalize-entry-names` renames such entries. This program converts an ID like `ERS324955|SC|contig000013` into `ERS324955:SC:contig000013` for example.
 
 ```shell
-rename-ids \
-  --gff3=path/to/foo.gff3 \     # <Required>
-  --fasta=path/to/bar.fasta \   # <Required>
-  --suffix="_renamed"           # Optional: default is "_renamed_ids"
+normalize-entry-names myannotation_output.txt
 ```
 
-This command saves two files, `foo_renamed.gff3` and `bar_renamed.fasta` *if* the invalid letters are found. Otherwise, you'll see no output.
+This command create as files `myannotation_output_renamed.txt` *if* the invalid letters are found. Otherwise, you'll see no output.
 
 
 
 ## Under the Hood
 
 Here is the list of operations done by `gff3-to-ddbj`.
+
+* Store FASTA sequences to SQLite database to save memory use
+  * The database is deleted after the operation.
 
 * Rename Feature / Qualifiers keys using the translation tables
 
