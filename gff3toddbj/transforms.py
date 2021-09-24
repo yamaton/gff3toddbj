@@ -79,24 +79,22 @@ def _get_source(length: int, source_qualifiers: Dict[str, Any]) -> SeqFeature:
 
 
 class RenameQualifiers(object):
-    """Translate annotation qualifiers according to table given in JSON.
+    """Translate annotation qualifiers according to table given in TOML.
 
     Meant for renaming GFF3 attributes to DDBJ annotation qualifier keys.
-    JSON should have the form like following.
+    TOML should have the form like following.
 
-    ```
-    {
-        "ID": {
-            "target": "note",
-            "prefix": "ID:",
-        },
-        "Name": {
-            "target": "",
-        }
-    }
+    ```toml
+    [ID]
+    target = "note"
+    prefix = "ID:"
+
+    [Name]
+    target = ""
     ```
 
     Empty "target" value means the name key is dropped.
+    prefix string is added to each value.
     """
 
     def __init__(self, filepath: str, locus_tag_prefix: str):
@@ -146,20 +144,16 @@ class RenameQualifiers(object):
 
 
 class RenameFeatures(object):
-    """Translate annotation features according to table given in JSON.
+    """Translate annotation features according to table given in TOML.
+    This is meant for renaming GFF3 types to DDBJ annotation feature keys.
+    TOML has following form:
 
-    Meant for renaming GFF3 types to DDBJ annotation feature keys.
-    JSON should have the form like following.
+    ```toml
+    [five_prime_UTR]
+    target = "5'UTR"
 
-    ```
-    {
-        "five_prime_UTR": {
-            "target": "5'UTR"
-        },
-        "three_prime_UTR": {
-            "target": "3'UTR"
-        }
-    }
+    [three_prime_UTR]
+    target = "3'UTR"
     ```
 
     Empty "target" value means the name key is dropped.
