@@ -9,8 +9,8 @@ from . import utils
 
 FORMAT = '%(levelname)s: %(message)s'
 _DIR = pathlib.Path(__file__).parent
-PATH_TRANS_FEATURES = _DIR / "translate_features.toml"
-PATH_TRANS_QUALIFIERS = _DIR / "translate_qualifiers.toml"
+PATH_TRANS_FEATURES_QUALIFIERS = _DIR / "translate_features_qualifiers.toml"
+
 PATH_DDBJ_FILTER = _DIR / "ddbj_filter.toml"
 PATH_METADATA_DEFAULT = _DIR / "metadata_without_COMMON.toml"
 
@@ -45,16 +45,10 @@ def main():
         default=1,
     )
     parser.add_argument(
-        "--translate_features",
-        help="Translation table for features",
+        "--renaming_scheme",
+        help="Renaming scheme for features and qualifiers",
         metavar="FILE",
-        default=PATH_TRANS_FEATURES,
-    )
-    parser.add_argument(
-        "--translate_qualifiers",
-        help="Translation table for qualifiers",
-        metavar="FILE",
-        default=PATH_TRANS_QUALIFIERS,
+        default=PATH_TRANS_FEATURES_QUALIFIERS,
     )
     parser.add_argument(
         "-o", "--output",
@@ -65,27 +59,24 @@ def main():
     args = parser.parse_args()
     logging.basicConfig(level=args.log, format=FORMAT)
 
-    logging.info("Input GFF            : {}".format(args.gff3))
-    logging.info("Input FASTA          : {}".format(args.fasta))
-    logging.info("Input metadata       : {}".format(args.metadata))
-    logging.info("Prefix of locus_tag  : {}".format(args.prefix))
-    logging.info("transl_table         : {}".format(args.transl_table))
-    if args.translate_features != PATH_TRANS_FEATURES:
-        logging.info(f"feature translation  : {args.translate_features}")
-    if args.translate_qualifiers != PATH_TRANS_QUALIFIERS:
-        logging.info(f"qualifier translation: {args.translate_qualifiers}")
+    logging.info("Input GFF           : {}".format(args.gff3))
+    logging.info("Input FASTA         : {}".format(args.fasta))
+    logging.info("Input metadata      : {}".format(args.metadata))
+    logging.info("Prefix of locus_tag : {}".format(args.prefix))
+    logging.info("transl_table        : {}".format(args.transl_table))
+    if args.renaming_scheme != PATH_TRANS_FEATURES_QUALIFIERS:
+        logging.info(f"Renaming scheme     : {args.translate_features}")
 
     output = args.output
     if output:
-        logging.info("Output               : {}".format(output))
+        logging.info("Output              : {}".format(output))
 
     metadata = utils.load_metadata_info(args.metadata)
 
     records = transforms.run(
         args.gff3,
         args.fasta,
-        args.translate_features,
-        args.translate_qualifiers,
+        args.renaming_scheme,
         metadata,
         args.prefix,
         args.transl_table,

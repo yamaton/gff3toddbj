@@ -1,4 +1,4 @@
-from typing import Iterable, Generator, Dict, List, FrozenSet, OrderedDict, Union, Any
+from typing import Iterable, Generator, Dict, List, FrozenSet, Optional, OrderedDict, Union, Any
 import logging
 import re
 import collections
@@ -32,6 +32,14 @@ METADATA_KEYS = {"COMMON", "source", "assembly_gap"}
 
 INVALID_LETTERS_AS_SEQID = r'[=|>" \[\]]'
 INVALID_PATTERN_AS_SEQID = re.compile(INVALID_LETTERS_AS_SEQID)
+
+TARGET_KEYS_IN_TRANSLATION = {
+    "feature_key",
+    "qualifier_key",
+    "qualifier_value",
+    "qualifier_value_prefix",
+    "attribute_value",
+}
 
 
 def load_rules(path: str) -> Dict[str, FrozenSet[str]]:
@@ -185,4 +193,15 @@ def debug_checker(
 
     for rec in recs:
         _helper(rec.features)
+
+
+
+def get_attribute_keys(subtree: OrderedDict[str, Any]) -> List[str]:
+    """
+    Get associated attribute keys in the translation subtable.
+    Returns an empty list if the translation input is "type" only.
+    """
+    if set(subtree.keys()) < TARGET_KEYS_IN_TRANSLATION:
+        return []
+    return subtree.keys()
 

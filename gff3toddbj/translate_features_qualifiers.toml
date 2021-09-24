@@ -41,54 +41,54 @@ feature_key = "mRNA"
 ## --------------------------------------------------------------------------------
 ## Rename qualifiers (GFF3 attribute --> Qualifier key)
 
-[__ALL__]
+[__ANY__]
 ## ============== BEGIN ========================
 # Originally from GFF3 columns ("source", "score", "phase")
 # but translated to qualifier by the GFF parser.
 
-[__ALL__.source]
+[__ANY__.source]
 qualifier_key = "note"
 qualifier_value_prefix =  'source:'
 
-[__ALL__.score]
+[__ANY__.score]
 qualifier_key = "score"
 
-[__ALL__.phase]
+[__ANY__.phase]
 qualifier_key = "codon_start"  # 0-based in GFF3. Will be transformed to 1-based.
 ## ============== END ==========================
 
 # --------------------------------------------
 # Found in GFF3 attributes
-[__ALL__.ID]
+[__ANY__.ID]
 qualifier_key = "note"
 qualifier_value_prefix =  "ID:"
 
-[__ALL__.Note]
+[__ANY__.Note]
 qualifier_key = "note"
 
-[__ALL__.Dbxref]
+[__ANY__.Dbxref]
 qualifier_key = "db_xref"
 
-[__ALL__.gene_name]
+[__ANY__.gene_name]
 qualifier_key = "gene"
 
-[__ALL__.geneID]
+[__ANY__.geneID]
 qualifier_key = "gene"
 
-[__ALL__.description]
+[__ANY__.description]
 qualifier_key = "product"
 
-[__ALL__.eC_number]
+[__ANY__.eC_number]
 qualifier_key = "EC_number"
 
-[__ALL__.ec_number]
+[__ANY__.ec_number]
 qualifier_key = "EC_number"
 
-[__ALL__.locus_tag]
+[__ANY__.locus_tag]
 qualifier_key = "locus_tag"
 qualifier_value_prefix =  "<dummy>"
 
-[__ALL__._Description]
+[__ANY__._Description]
 qualifier_key = "product"
 
 

@@ -78,36 +78,22 @@ def _get_source(length: int, source_qualifiers: Dict[str, Any]) -> SeqFeature:
     return SeqFeature(loc, type="source", qualifiers=source_qualifiers)
 
 
-class RenameQualifiers(object):
-    """Translate annotation qualifiers according to table given in TOML.
+class RenameHandler(object):
+    """Rename feature and qualifiers according to the structure in TOML.
 
-    Meant for renaming GFF3 attributes to DDBJ annotation qualifier keys.
-    TOML should have the form like following.
+    By default, "type" value in GFF3 becomes "feature" key in annotation,
+    and "attribute" keys and values in GFF3 becomes "qualifier" keys and values
+    in annotation. This handler renames/transforms the names and values.
 
-    ```toml
-    [ID]
-    target = "note"
-    prefix = "ID:"
-
-    [Name]
-    target = ""
-    ```
-
-    Empty "target" value means the name key is dropped.
-    prefix string is added to each value.
+    [TODO] Add description of Case 1, 2, 3, 4.
     """
-
     def __init__(self, filepath: str, locus_tag_prefix: str):
-        self.path = filepath
-        self.locus_tag_prefix = locus_tag_prefix
-        self.trans_table = io.load_toml_tables(filepath)
-
-        # modify the table by inserting locus_tag prefix
-        assert "locus_tag" in self.trans_table
-        self.trans_table["locus_tag"]["prefix"] = locus_tag_prefix
+        self.d = io.load_toml_tables(filepath)
+        # overwrite with locus_tag_prefix
+        self.d["__ANY__"]["locus_tag"]["qualifier_value_prefix"] = locus_tag_prefix
 
     def run(self, record: SeqRecord) -> SeqRecord:
-        """Modifies record according to the GFF3-attributes-to-qualifiers translation JSON data."""
+        """Modifies record according to the GFF3-types-to-features translation JSON data."""
         record.features = self._run_on_features(record.features)
         return record
 
@@ -115,18 +101,63 @@ class RenameQualifiers(object):
         for feature in features:
             if hasattr(feature, "sub_features"):
                 feature.sub_features = self._run_on_features(feature.sub_features)
-            if hasattr(feature, "qualifiers"):
-                feature.qualifiers = self._run_on_qualifiers(feature.qualifiers)
+
+            if "__ANY__" in self.d:
+                # (Case 1) Attribute --> Qualifier case
+                feature.qualifiers = self._run_on_qualifiers(feature.qualifiers, self.d["__ANY__"])
+
+            type_ = feature.type
+            if type_ in self.d:
+                subtree = self.d[type_]
+                new_type = subtree.get("feature_key", "")
+                if not new_type:
+                    logging.error("[{}] should have feature_key (case 2, 3, 4, 5)".format(type_))
+                    continue
+
+                attribute_keys = utils.get_attribute_keys(subtree)
+                if not attribute_keys:
+                    if "qualifier_key" not in subtree.keys():
+                        # (Case 2) Type --> Feature key
+                        feature.type = new_type
+                    else:
+                        # (Case 3) Type --> (Feature key, Qualifier key-value)
+                        key = subtree["qualifier_key"]
+                        value = subtree.get("qualifier_value", "")
+                        if not value:
+                            logging.error("[{}] should have qualifier_value (case 3)".format(type_))
+                            continue
+
+                        feature.type = new_type
+                        if key in feature.qualifiers:
+                            msg = "[{}] /{} already exists. Adding more..".format(type_, key)
+                            logging.warning(msg)
+                            feature.qualifiers[key].append(value)
+                        else:
+                            feature.qualifiers[key] = [value]
+
+                # (Case 4) (Type, Attribute) --> Feature key
+                for (k, vals) in feature.qualifiers.items():
+                    if k in attribute_keys:
+                        subsubtree = subtree[k]
+                        if "attribute_value" in subsubtree:
+                            attribute_value = subsubtree["attribute_value"]
+                            if attribute_value in vals:
+                                feature.type = new_type
+                                feature.qualifiers[k].remove(attribute_value)
+
         return features
 
-    def _run_on_qualifiers(self, qualifiers: OrderedDict) -> OrderedDict:
+
+    def _run_on_qualifiers(self, qualifiers: OrderedDict, subtree: OrderedDict) -> OrderedDict:
+        """Handle attribute-qualifier renamining
+        """
         res = collections.OrderedDict()
         for name, vals in qualifiers.items():
-            if name in self.trans_table:
+            if name in subtree:
                 # Replace the item name
-                new_name = self.trans_table[name].get("target", "")
+                new_name = subtree[name].get("qualifier_key", "")
                 if new_name:
-                    prefix = self.trans_table[name].get("prefix", "")
+                    prefix = subtree[name].get("qualifier_value_prefix", "")
                     if prefix:
                         vals = [prefix + v for v in vals]
 
@@ -141,42 +172,6 @@ class RenameQualifiers(object):
                     res[name] = []
                 res[name] += vals
         return res
-
-
-class RenameFeatures(object):
-    """Translate annotation features according to table given in TOML.
-    This is meant for renaming GFF3 types to DDBJ annotation feature keys.
-    TOML has following form:
-
-    ```toml
-    [five_prime_UTR]
-    target = "5'UTR"
-
-    [three_prime_UTR]
-    target = "3'UTR"
-    ```
-
-    Empty "target" value means the name key is dropped.
-    Unlike qualifiers, "prefix" is not supported here.
-    """
-    def __init__(self, filepath: str):
-        self.path = filepath
-        self.d = io.load_toml_tables(filepath)
-
-    def run(self, record: SeqRecord) -> SeqRecord:
-        """Modifies record according to the GFF3-types-to-features translation JSON data."""
-        record.features = self._run_on_features(record.features)
-        return record
-
-    def _run_on_features(self, features: List[SeqFeature]) -> List[SeqFeature]:
-        for feature in features:
-            if hasattr(feature, "sub_features"):
-                feature.sub_features = self._run_on_features(feature.sub_features)
-            name = feature.type
-            if name in self.d:
-                new_name = self.d[name]["target"]
-                feature.type = new_name
-        return features
 
 
 def _join_features(record: SeqRecord, joinables: Optional[Tuple[str, ...]]) -> SeqRecord:
@@ -519,8 +514,7 @@ def _sort_features(features: List[SeqFeature]) -> None:
 def run(
     path_gff3: Optional[str],
     path_fasta: str,
-    path_trans_features: str,
-    path_trans_qualifiers: str,
+    path_rename_scheme: str,
     metadata: OrderedDict[str, OrderedDict[str, Any]],
     locus_tag_prefix: str,
     transl_table: int,
@@ -540,10 +534,9 @@ def run(
     if path_gff3 is not None:
         records = io.load_gff3_as_seqrecords(path_gff3)
 
-        # Rename feature and qualifier keys
-        f = RenameFeatures(path_trans_features).run
-        g = RenameQualifiers(path_trans_qualifiers, locus_tag_prefix).run
-        records = [g(f(rec)) for rec in records]
+        # Rename feature keys and/or qualifier keys/values
+        f = RenameHandler(path_rename_scheme, locus_tag_prefix).run
+        records = [f(rec) for rec in records]
     else:
         # Create dummy SeqRecords with IDs from FASTA
         records = [SeqRecord("", id=seq_id) for seq_id in fasta_ids]
