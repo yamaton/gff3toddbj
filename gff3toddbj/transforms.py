@@ -397,7 +397,7 @@ def fix_locations(cur: sqlite3.Cursor, record: SeqRecord, transl_table: int) -> 
                         f.location = _fix_absent_start_codon(f.location)
 
                 if not utils.has_stop_codon(seq, f.location, transl_table):
-                    f.locatoin = _fix_absent_stop_codon(f.location)
+                    f.location = _fix_absent_stop_codon(f.location)
 
             if hasattr(f, "sub_features"):
                 _runner(f.sub_features, seq)
