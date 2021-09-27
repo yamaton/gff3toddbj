@@ -87,6 +87,8 @@ class RenameHandler(object):
 
     [TODO] Add description of Case 1, 2, 3, 4.
     """
+    _DUMMY_PREFIX = "__tmpname__"
+
     def __init__(self, filepath: str, locus_tag_prefix: str):
         self.d = io.load_toml_tables(filepath)
         # overwrite with locus_tag_prefix
@@ -94,7 +96,23 @@ class RenameHandler(object):
 
     def run(self, record: SeqRecord) -> SeqRecord:
         """Modifies record according to the GFF3-types-to-features translation JSON data."""
+        #
+        # Some GFFs contain the exon that is a child of multiple mRNAs,
+        # which breaks the tree structure, and my traversal visits
+        # some nodes more than once.
+        #
+        # OTOH, the renaming scheme can contain {mRNA -> __mRNA, exon -> mRNA}
+        # hence the application twice leads unexpected results like exon -> __mRNA.
+        #
+        # A dummy constant defined as `RenameHandler._DUMMY_PREFIX = "__tempname__"`
+        # prevents collision of keys and values, hence avoiding multiple applications
+        # by
+        # {mRNA -> __tempname____mRNA, exon -> __tempname__mRNA}
+        #
+        # The dummy prefix is removed in the second scan.
+        #
         record.features = self._run_on_features(record.features)
+        record.features = self._remove_dummy_prefix_features(record.features)
         return record
 
     def _run_on_features(self, features: List[SeqFeature]) -> List[SeqFeature]:
@@ -113,6 +131,8 @@ class RenameHandler(object):
                 if not new_type:
                     logging.error("[{}] should have feature_key (case 2, 3, 4, 5)".format(type_))
                     continue
+                else:
+                    new_type = RenameHandler._DUMMY_PREFIX + new_type
 
                 attribute_keys = utils.get_attribute_keys(subtree)
                 if not attribute_keys:
@@ -172,6 +192,15 @@ class RenameHandler(object):
                     res[name] = []
                 res[name] += vals
         return res
+
+    def _remove_dummy_prefix_features(self, features: List[SeqFeature]) -> List[SeqFeature]:
+        for f in features:
+            if hasattr(f, "sub_features"):
+                f.sub_features = self._remove_dummy_prefix_features(f.sub_features)
+            if f.type.startswith(RenameHandler._DUMMY_PREFIX):
+                size = len(RenameHandler._DUMMY_PREFIX)
+                f.type = f.type[size:]
+        return features
 
 
 def _join_features(record: SeqRecord, joinables: Optional[Tuple[str, ...]]) -> SeqRecord:
