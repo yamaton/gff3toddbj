@@ -5,6 +5,7 @@ import pathlib
 import uuid
 
 WORK_DIR = pathlib.Path(__file__).parent
+TEST_OUTPUT_PREFIX = "testout_"
 
 class BunchOfFiles(object):
     def __init__(self, reference, input_gff3, input_fasta, input_metadata, transl_table=1):
@@ -35,7 +36,7 @@ def get_command(data: BunchOfFiles, output: str):
 
 
 def _runner(data: BunchOfFiles):
-    output_file = WORK_DIR / (str(uuid.uuid1()) + ".ann")
+    output_file = WORK_DIR / (TEST_OUTPUT_PREFIX + str(uuid.uuid1()) + ".ann")
     cmd = get_command(data, output_file)
     subprocess.run(cmd, shell=True)
 

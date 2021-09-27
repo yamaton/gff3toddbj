@@ -11,14 +11,15 @@ import tempfile
 import toml
 from typing import OrderedDict, List, Any
 import urllib.parse
+import uuid
 
 import Bio.SeqIO
 from Bio.SeqRecord import SeqRecord
 from BCBio import GFF
 
-from . import utils
 
-PATH_DATABASE_LOCAL = "gff3-to-ddbj.db"
+PATH_DATABASE_LOCAL_PREFIX = "temp_gff3-to-ddbj_"
+PATH_DATABASE_LOCAL = PATH_DATABASE_LOCAL_PREFIX + str(uuid.uuid4()) + ".db"
 
 
 def load_gff3_as_seqrecords(filepath, unquoting=False) -> List[SeqRecord]:
