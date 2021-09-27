@@ -237,7 +237,7 @@ def _join_features(record: SeqRecord, joinables: Optional[Tuple[str, ...]]) -> S
             sub_features=sub_features,
         )
 
-    def _join_helper(features: List[SeqFeature]) -> List[SeqFeature]:
+    def _runner(features: List[SeqFeature]) -> List[SeqFeature]:
         """
         """
         # `triples_or_features` has either `SeqFeature` or (type, id, product) as its key.
@@ -271,11 +271,15 @@ def _join_features(record: SeqRecord, joinables: Optional[Tuple[str, ...]]) -> S
         # join after upper levels
         for f in res:
             if hasattr(f, "sub_features") and f.sub_features:
-                f.sub_features = _join_helper(f.sub_features)
+                f.sub_features = _runner(f.sub_features)
 
         return res
 
-    record.features = _join_helper(record.features)
+    # Do not merge features at the top-level
+    for feature in record.features:
+        if hasattr(feature, "sub_features"):
+            feature.sub_features = _runner(feature.sub_features)
+
     return record
 
 
@@ -389,9 +393,15 @@ def fix_locations(cur: sqlite3.Cursor, record: SeqRecord, transl_table: int) -> 
                 cs_list = f.qualifiers.get("codon_start", [1])
                 codon_start = cs_list[0]
                 phase = codon_start - 1   # to 0-based phase index
+                if f.location is None:
+                    logging.error("f.location is None. Something is wrong: {}".format(f))
+                    continue
+                if f.location.strand is None:
+                    logging.error("f.location.strand is None! Something is wrong: {}".format(f))
+                    continue
                 if not utils.has_start_codon(seq, f.location, transl_table, phase):
                     if phase > 0 and utils.has_start_codon(seq, f.location, transl_table):
-                        logging.warning("Fixed /codon_start to 1: SeqID = {}".format(record.id))
+                        logging.warning("Fixed /codon_start to 1: SeqID = {} (was /start_codon={})".format(record.id, phase + 1))
                         f.qualifiers["codon_start"] = [1]
                     else:
                         f.location = _fix_absent_start_codon(f.location)
@@ -407,7 +417,8 @@ def fix_locations(cur: sqlite3.Cursor, record: SeqRecord, transl_table: int) -> 
         """
         sign = 1 if is_at_start else -1
         if location.strand * sign > 0:
-            # left-end, strand (+)  OR   right-end, strand (-)
+            # left-end (5' terminal):
+            #    start of strand (+)   OR   end of strand (-)
             if len(location.parts) > 1:
                 idx = 0 if location.strand > 0 else -1
                 location.parts[idx] = FeatureLocation(
@@ -422,7 +433,8 @@ def fix_locations(cur: sqlite3.Cursor, record: SeqRecord, transl_table: int) -> 
                     strand = location.strand
                 )
         else:
-            # left-end, strand (-)  OR   right-end, strand (+)
+            # right-end (3' terminal):
+            #    end of strand (+)   OR   start of strand (-)
             if len(location.parts) > 1:
                 idx = -1 if location.strand > 0 else 0
                 location.parts[idx] = FeatureLocation(
