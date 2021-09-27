@@ -134,6 +134,14 @@ qualifier_value = "snoRNA"
 feature_key = "ncRNA"
 qualifier_key = "ncRNA_class"
 qualifier_value = "snRNA"
+
+
+# http://www.sequenceontology.org/browser/current_svn/term/SO:0001877
+[lncRNA]
+feature_key = "ncRNA"
+qualifier_key = "ncRNA_class"
+qualifier_value = "lncRNA"
+
 ## ------------- END --------------------
 
 
