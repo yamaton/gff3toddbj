@@ -126,44 +126,46 @@ class RenameHandler(object):
 
             type_ = feature.type
             if type_ in self.d:
-                subtree = self.d[type_]
-                new_type = subtree.get("feature_key", "")
-                if not new_type:
-                    logging.error("[{}] should have feature_key (case 2, 3, 4, 5)".format(type_))
-                    continue
-                else:
+                below_type = self.d[type_]
+                attribute_keys = utils.get_attribute_keys(below_type)
+                new_type = below_type.get("feature_key", "")
+                if new_type:
                     new_type = RenameHandler._DUMMY_PREFIX + new_type
-
-                attribute_keys = utils.get_attribute_keys(subtree)
-                if not attribute_keys:
-                    if "qualifier_key" not in subtree.keys():
-                        # (Case 2) Type --> Feature key
-                        feature.type = new_type
-                    else:
-                        # (Case 3) Type --> (Feature key, Qualifier key-value)
-                        key = subtree["qualifier_key"]
-                        value = subtree.get("qualifier_value", "")
-                        if not value:
-                            logging.error("[{}] should have qualifier_value (case 3)".format(type_))
-                            continue
-
-                        feature.type = new_type
-                        if key in feature.qualifiers:
-                            msg = "[{}] /{} already exists. Adding more..".format(type_, key)
-                            logging.warning(msg)
-                            feature.qualifiers[key].append(value)
+                    if not attribute_keys:
+                        if "qualifier_key" not in below_type.keys():
+                            # (Case 2) Type --> Feature key
+                            feature.type = new_type
                         else:
-                            feature.qualifiers[key] = [value]
+                            # (Case 3) Type --> (Feature key, Qualifier key-value)
+                            key = below_type["qualifier_key"]
+                            value = below_type.get("qualifier_value", "")
+                            if not value:
+                                logging.error("[{}] should have qualifier_value (case 3)".format(type_))
+                                continue
+                            feature.type = new_type
+                            if key in feature.qualifiers:
+                                msg = "[{}] /{} already exists. Adding more..".format(type_, key)
+                                logging.warning(msg)
+                                feature.qualifiers[key].append(value)
+                            else:
+                                feature.qualifiers[key] = [value]
 
-                # (Case 4) (Type, Attribute) --> Feature key
-                for (k, vals) in feature.qualifiers.items():
-                    if k in attribute_keys:
-                        subsubtree = subtree[k]
-                        if "attribute_value" in subsubtree:
-                            attribute_value = subsubtree["attribute_value"]
-                            if attribute_value in vals:
-                                feature.type = new_type
-                                feature.qualifiers[k].remove(attribute_value)
+                else:
+                    # (Case 4) (Type, Attribute) --> Feature key
+                    for (key, vals) in feature.qualifiers.items():
+                        if key in attribute_keys:
+                            below_attribute = below_type[key]
+                            new_type = below_attribute.get("feature_key", "")
+                            new_type = RenameHandler._DUMMY_PREFIX + new_type
+                            if "attribute_value" in below_attribute:
+                                attribute_value = below_attribute["attribute_value"]
+                                if attribute_value in vals:
+                                    msg = "(type, attribute_key, attribute_value, feature_key) = ({}, {}, {}, {})".format(
+                                        type_, key, attribute_value, new_type,
+                                    )
+                                    logging.info(msg)
+                                    feature.type = new_type
+                                    feature.qualifiers[key].remove(attribute_value)
 
         return features
 
