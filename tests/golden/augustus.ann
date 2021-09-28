@@ -1,0 +1,743 @@
+4	source	1..1351857	organism	Drosophila melanogaster
+			mol_type	genomic DNA
+	mRNA	join(386..594,913..1014,3018..3070,3124..3482,8166..8720,9026..10377,10460..11032,11141..11851,11973..12258,12369..13142)	note	ID:g1.t1
+			note	source:AUGUSTUS
+	CDS	join(914..1014,3018..3070,3124..3482,8166..8720,9026..10377,10460..11032,11141..11851,11973..12258,12369..12911)	note	ID:g1.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	1015..3017	note	source:AUGUSTUS
+	intron	3071..3123	note	source:AUGUSTUS
+	intron	3483..8165	note	source:AUGUSTUS
+	intron	8721..9025	note	source:AUGUSTUS
+	intron	10378..10459	note	source:AUGUSTUS
+	intron	11033..11140	note	source:AUGUSTUS
+	intron	11852..11972	note	source:AUGUSTUS
+	intron	12259..12368	note	source:AUGUSTUS
+	mRNA	join(16086..16131,16441..16574,17106..17459,18311..19342,19567..20525,21529..23043,23731..23860,23936..24477,35682..35905,37326..38972)	note	ID:g2.t1
+			note	source:AUGUSTUS
+	CDS	join(22703..23043,23731..23860,23936..24477,35682..35905,37326..37381)	note	ID:g2.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	23044..23730	note	source:AUGUSTUS
+	intron	23861..23935	note	source:AUGUSTUS
+	intron	24478..35681	note	source:AUGUSTUS
+	intron	35906..37325	note	source:AUGUSTUS
+	mRNA	complement(join(40422..42122,42238..42586,49533..50059,50175..50523,56500..57026,57142..57753,61300..61911,63540..63969,70654..71098,71142..71175))	note	ID:g3.t1
+			note	source:AUGUSTUS
+	CDS	complement(join(41581..42122,42238..42586,49533..50059,50175..50523,56500..57026,57142..57753,61300..61911,63540..63969,70654..70857))	note	ID:g3.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	complement(42123..42237)	note	source:AUGUSTUS
+	intron	complement(42587..49532)	note	source:AUGUSTUS
+	intron	complement(50060..50174)	note	source:AUGUSTUS
+	intron	complement(50524..56499)	note	source:AUGUSTUS
+	intron	complement(57027..57141)	note	source:AUGUSTUS
+	intron	complement(57754..61299)	note	source:AUGUSTUS
+	intron	complement(61912..63539)	note	source:AUGUSTUS
+	intron	complement(63970..70653)	note	source:AUGUSTUS
+	mRNA	complement(join(80617..81770,85857..86147,86626..87364,87466..87875))	note	ID:g4.t1
+			note	source:AUGUSTUS
+	CDS	complement(join(86899..87364,87466..87806))	note	ID:g4.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	complement(87365..87465)	note	source:AUGUSTUS
+	mRNA	join(114336..114543,114901..114926,115049..115241,118448..119322)	note	ID:g5.t1
+			note	source:AUGUSTUS
+	CDS	join(114910..114926,115049..115241,118448..118606)	note	ID:g5.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	114927..115048	note	source:AUGUSTUS
+	intron	115242..118447	note	source:AUGUSTUS
+	mRNA	join(121686..122199,127336..127382,128029..128998,129053..130976)	note	ID:g6.t1
+			note	source:AUGUSTUS
+	CDS	join(127345..127382,128029..128998,129053..129118)	note	ID:g6.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	127383..128028	note	source:AUGUSTUS
+	intron	128999..129052	note	source:AUGUSTUS
+	mRNA	complement(join(132660..133834,134789..135736,137446..139127,139181..139405,139464..139557,140514..140838,143235..143325))	note	ID:g7.t1
+			note	source:AUGUSTUS
+	CDS	complement(join(137495..139127,139181..139405,139464..139557,140514..140838,143235..143267))	note	ID:g7.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	complement(139128..139180)	note	source:AUGUSTUS
+	intron	complement(139406..139463)	note	source:AUGUSTUS
+	intron	complement(139558..140513)	note	source:AUGUSTUS
+	intron	complement(140839..143234)	note	source:AUGUSTUS
+	mRNA	join(145836..146037,155153..155590,158341..158378,158433..158469,158563..158936,159000..159092,160896..161738,162270..162746,162826..164760)	note	ID:g8.t1
+			note	source:AUGUSTUS
+	CDS	join(155155..155590,158341..158378,158433..158469,158563..158936,159000..159092,160896..161738,162270..162746,162826..162891)	note	ID:g8.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	155591..158340	note	source:AUGUSTUS
+	intron	158379..158432	note	source:AUGUSTUS
+	intron	158470..158562	note	source:AUGUSTUS
+	intron	158937..158999	note	source:AUGUSTUS
+	intron	159093..160895	note	source:AUGUSTUS
+	intron	161739..162269	note	source:AUGUSTUS
+	intron	162747..162825	note	source:AUGUSTUS
+	mRNA	complement(join(189196..189724,189774..190160,191898..192023,192555..193548,206453..206542,206604..207466,209051..209143))	note	ID:g9.t1
+			note	source:AUGUSTUS
+	CDS	complement(join(189512..189724,189774..190160,191898..192023,192555..193548,206453..206542,206604..207460))	note	ID:g9.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	complement(189725..189773)	note	source:AUGUSTUS
+	intron	complement(190161..191897)	note	source:AUGUSTUS
+	intron	complement(192024..192554)	note	source:AUGUSTUS
+	intron	complement(193549..206452)	note	source:AUGUSTUS
+	intron	complement(206543..206603)	note	source:AUGUSTUS
+	mRNA	complement(join(216788..219808,221312..222009,222067..222284,224606..224815,225266..225313))	note	ID:g10.t1
+			note	source:AUGUSTUS
+	CDS	complement(join(218504..219808,221312..222009,222067..222284,224606..224796))	note	ID:g10.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	complement(219809..221311)	note	source:AUGUSTUS
+	intron	complement(222010..222066)	note	source:AUGUSTUS
+	intron	complement(222285..224605)	note	source:AUGUSTUS
+	mRNA	join(231004..231112,231184..231306,249531..250197,252905..253474,257021..257101,264260..264374,278938..279092,279154..279298,279360..279996,283288..283966,285401..286591)	note	ID:g11.t1
+			note	source:AUGUSTUS
+	CDS	join(231081..231112,231184..231306,249531..250197,252905..253474,257021..257101,264260..264374,278938..279092,279154..279298,279360..279394)	note	ID:g11.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	231113..231183	note	source:AUGUSTUS
+	intron	231307..249530	note	source:AUGUSTUS
+	intron	250198..252904	note	source:AUGUSTUS
+	intron	253475..257020	note	source:AUGUSTUS
+	intron	257102..264259	note	source:AUGUSTUS
+	intron	264375..278937	note	source:AUGUSTUS
+	intron	279093..279153	note	source:AUGUSTUS
+	intron	279299..279359	note	source:AUGUSTUS
+	mRNA	complement(join(288887..290086,291061..291125,291186..291381,307426..307592,307715..308671,309555..309973))	note	ID:g12.t1
+			note	source:AUGUSTUS
+	CDS	complement(join(291076..291125,291186..291381,307426..307592,307715..307823))	note	ID:g12.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	complement(291126..291185)	note	source:AUGUSTUS
+	intron	complement(291382..307425)	note	source:AUGUSTUS
+	intron	complement(307593..307714)	note	source:AUGUSTUS
+	mRNA	join(322224..322673,329057..329705,330249..330259,330320..330643,330705..331471)	note	ID:g13.t1
+			note	source:AUGUSTUS
+	CDS	join(322671..322673,329057..329705,330249..330259,330320..330643,330705..330815)	note	ID:g13.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	322674..329056	note	source:AUGUSTUS
+	intron	329706..330248	note	source:AUGUSTUS
+	intron	330260..330319	note	source:AUGUSTUS
+	intron	330644..330704	note	source:AUGUSTUS
+	mRNA	join(331854..331886,333532..333596,334061..334117,343490..343717,343778..344106,346457..348459)	note	ID:g14.t1
+			note	source:AUGUSTUS
+	CDS	join(334063..334117,343490..343717,343778..344106,346457..346489)	note	ID:g14.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	334118..343489	note	source:AUGUSTUS
+	intron	343718..343777	note	source:AUGUSTUS
+	intron	344107..346456	note	source:AUGUSTUS
+	mRNA	complement(join(361867..363686,369621..369772,369839..370050,370107..370247,371229..371316,371391..371835,372212..372453,372510..372752,372807..373216,374977..375187,375306..375592,375657..375851,375936..376107,377836..378218))	note	ID:g15.t1
+			note	source:AUGUSTUS
+	CDS	complement(join(363449..363686,369621..369772,369839..370050,370107..370247,371229..371316,371391..371835,372212..372453,372510..372752,372807..373216,374977..375187,375306..375592,375657..375851,375936..376092))	note	ID:g15.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	complement(363687..369620)	note	source:AUGUSTUS
+	intron	complement(369773..369838)	note	source:AUGUSTUS
+	intron	complement(370051..370106)	note	source:AUGUSTUS
+	intron	complement(370248..371228)	note	source:AUGUSTUS
+	intron	complement(371317..371390)	note	source:AUGUSTUS
+	intron	complement(371836..372211)	note	source:AUGUSTUS
+	intron	complement(372454..372509)	note	source:AUGUSTUS
+	intron	complement(372753..372806)	note	source:AUGUSTUS
+	intron	complement(373217..374976)	note	source:AUGUSTUS
+	intron	complement(375188..375305)	note	source:AUGUSTUS
+	intron	complement(375593..375656)	note	source:AUGUSTUS
+	intron	complement(375852..375935)	note	source:AUGUSTUS
+	mRNA	join(380939..380984,381213..381632,382930..383239,383297..383508,383572..383760,384120..384271,384494..385567,386300..386431,386486..386945,387015..387388,390169..390370,390436..390590,392439..392802,392876..394095,394207..394250,395454..395882)	note	ID:g16.t1
+			note	source:AUGUSTUS
+	CDS	join(381317..381632,382930..383239,383297..383508,383572..383760,384120..384271,384494..385567,386300..386431,386486..386945,387015..387388,390169..390370,390436..390590,392439..392802,392876..393018)	note	ID:g16.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	381633..382929	note	source:AUGUSTUS
+	intron	383240..383296	note	source:AUGUSTUS
+	intron	383509..383571	note	source:AUGUSTUS
+	intron	383761..384119	note	source:AUGUSTUS
+	intron	384272..384493	note	source:AUGUSTUS
+	intron	385568..386299	note	source:AUGUSTUS
+	intron	386432..386485	note	source:AUGUSTUS
+	intron	386946..387014	note	source:AUGUSTUS
+	intron	387389..390168	note	source:AUGUSTUS
+	intron	390371..390435	note	source:AUGUSTUS
+	intron	390591..392438	note	source:AUGUSTUS
+	intron	392803..392875	note	source:AUGUSTUS
+	mRNA	complement(join(396183..396858,397720..398295,398384..398451,398511..398828,399022..399187,399342..399526,402749..403034,411051..411899,435202..435591,439749..439968))	note	ID:g17.t1
+			note	source:AUGUSTUS
+	CDS	complement(join(396589..396858,397720..398295,398384..398451,398511..398828,399022..399187,399342..399526,402749..403034,411051..411899,435202..435276))	note	ID:g17.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	complement(396859..397719)	note	source:AUGUSTUS
+	intron	complement(398296..398383)	note	source:AUGUSTUS
+	intron	complement(398452..398510)	note	source:AUGUSTUS
+	intron	complement(398829..399021)	note	source:AUGUSTUS
+	intron	complement(399188..399341)	note	source:AUGUSTUS
+	intron	complement(399527..402748)	note	source:AUGUSTUS
+	intron	complement(403035..411050)	note	source:AUGUSTUS
+	intron	complement(411900..435201)	note	source:AUGUSTUS
+	mRNA	complement(join(455098..455416,457452..459544,459601..459791,460074..462077,462806..463015,463490..463780,463839..464178))	note	ID:g18.t1
+			note	source:AUGUSTUS
+	CDS	complement(join(458012..459544,459601..459791,460074..462077,462806..463015,463490..463780,463839..464019))	note	ID:g18.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	complement(459545..459600)	note	source:AUGUSTUS
+	intron	complement(459792..460073)	note	source:AUGUSTUS
+	intron	complement(462078..462805)	note	source:AUGUSTUS
+	intron	complement(463016..463489)	note	source:AUGUSTUS
+	intron	complement(463781..463838)	note	source:AUGUSTUS
+	mRNA	join(467429..467661,467727..467861,470550..470594,470868..470942,470997..471135,471816..471964,473429..473516,473598..475390)	note	ID:g19.t1
+			note	source:AUGUSTUS
+	CDS	join(467546..467661,467727..467861,470550..470594,470868..470942,470997..471135,471816..471964,473429..473516,473598..473825)	note	ID:g19.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	467662..467726	note	source:AUGUSTUS
+	intron	467862..470549	note	source:AUGUSTUS
+	intron	470595..470867	note	source:AUGUSTUS
+	intron	470943..470996	note	source:AUGUSTUS
+	intron	471136..471815	note	source:AUGUSTUS
+	intron	471965..473428	note	source:AUGUSTUS
+	intron	473517..473597	note	source:AUGUSTUS
+	mRNA	complement(join(480511..480767,480829..481282,481340..481673,482131..482954,483014..483127,483681..483806,485423..485929,487127..487244,493008..493146,493204..493303,495079..495394,497918..498709,499164..499364,499426..499494,500661..500864,500928..501317,501606..501767,501835..501998))	note	ID:g20.t1
+			note	source:AUGUSTUS
+	CDS	complement(join(480647..480767,480829..481282,481340..481673,482131..482954,483014..483127,483681..483806,485423..485929,487127..487244,493008..493146,493204..493303,495079..495394,497918..498709,499164..499364,499426..499494,500661..500864,500928..501317,501606..501767,501835..501888))	note	ID:g20.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	complement(480768..480828)	note	source:AUGUSTUS
+	intron	complement(481283..481339)	note	source:AUGUSTUS
+	intron	complement(481674..482130)	note	source:AUGUSTUS
+	intron	complement(482955..483013)	note	source:AUGUSTUS
+	intron	complement(483128..483680)	note	source:AUGUSTUS
+	intron	complement(483807..485422)	note	source:AUGUSTUS
+	intron	complement(485930..487126)	note	source:AUGUSTUS
+	intron	complement(487245..493007)	note	source:AUGUSTUS
+	intron	complement(493147..493203)	note	source:AUGUSTUS
+	intron	complement(493304..495078)	note	source:AUGUSTUS
+	intron	complement(495395..497917)	note	source:AUGUSTUS
+	intron	complement(498710..499163)	note	source:AUGUSTUS
+	intron	complement(499365..499425)	note	source:AUGUSTUS
+	intron	complement(499495..500660)	note	source:AUGUSTUS
+	intron	complement(500865..500927)	note	source:AUGUSTUS
+	intron	complement(501318..501605)	note	source:AUGUSTUS
+	intron	complement(501768..501834)	note	source:AUGUSTUS
+	mRNA	join(539434..539617,539795..539991,542099..543730,544957..545138,545530..547146,550319..551719,551782..552005,552062..552409,553409..553552,553609..556506,557801..558386,558442..559230,559285..559864,560421..561570)	note	ID:g21.t1
+			note	source:AUGUSTUS
+	CDS	join(539798..539991,542099..543730,544957..545138,545530..547146,550319..551719,551782..552005,552062..552409,553409..553552,553609..556506,557801..558386,558442..558446)	note	ID:g21.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	539992..542098	note	source:AUGUSTUS
+	intron	543731..544956	note	source:AUGUSTUS
+	intron	545139..545529	note	source:AUGUSTUS
+	intron	547147..550318	note	source:AUGUSTUS
+	intron	551720..551781	note	source:AUGUSTUS
+	intron	552006..552061	note	source:AUGUSTUS
+	intron	552410..553408	note	source:AUGUSTUS
+	intron	553553..553608	note	source:AUGUSTUS
+	intron	556507..557800	note	source:AUGUSTUS
+	intron	558387..558441	note	source:AUGUSTUS
+	mRNA	complement(join(564436..568769,569885..570247,570340..570499,572617..573598,573698..574045,574688..574863))	note	ID:g22.t1
+			note	source:AUGUSTUS
+	CDS	complement(join(566289..568769,569885..570247,570340..570499,572617..573598,573698..573992))	note	ID:g22.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	complement(568770..569884)	note	source:AUGUSTUS
+	intron	complement(570248..570339)	note	source:AUGUSTUS
+	intron	complement(570500..572616)	note	source:AUGUSTUS
+	intron	complement(573599..573697)	note	source:AUGUSTUS
+	mRNA	join(576284..576413,580873..580926,580975..581037,581097..581209,585167..585288,586033..587884)	note	ID:g23.t1
+			note	source:AUGUSTUS
+	CDS	join(580884..580926,580975..581037,581097..581209,585167..585288,586033..586147)	note	ID:g23.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	580927..580974	note	source:AUGUSTUS
+	intron	581038..581096	note	source:AUGUSTUS
+	intron	581210..585166	note	source:AUGUSTUS
+	intron	585289..586032	note	source:AUGUSTUS
+	mRNA	complement(join(587888..589682,589740..589927,590601..590802,590860..590969,591035..591433))	note	ID:g24.t1
+			note	source:AUGUSTUS
+	CDS	complement(join(588993..589682,589740..589927,590601..590802,590860..590969,591035..591107))	note	ID:g24.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	complement(589683..589739)	note	source:AUGUSTUS
+	intron	complement(589928..590600)	note	source:AUGUSTUS
+	intron	complement(590803..590859)	note	source:AUGUSTUS
+	intron	complement(590970..591034)	note	source:AUGUSTUS
+	mRNA	join(595334..595397,596181..596271,596328..596951,597605..598870,599871..600739)	note	ID:g25.t1
+			note	source:AUGUSTUS
+	CDS	join(596187..596271,596328..596951,597605..597948)	note	ID:g25.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	596272..596327	note	source:AUGUSTUS
+	intron	596952..597604	note	source:AUGUSTUS
+	mRNA	join(605604..605800,606466..606564,607528..607719,608469..608668,609198..609326,612226..612985,613279..613642,613696..616329,616728..617105)	note	ID:g26.t1
+			note	source:AUGUSTUS
+	CDS	join(606529..606564,607528..607719,608469..608668,609198..609326,612226..612985,613279..613642,613696..616142)	note	ID:g26.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	606565..607527	note	source:AUGUSTUS
+	intron	607720..608468	note	source:AUGUSTUS
+	intron	608669..609197	note	source:AUGUSTUS
+	intron	609327..612225	note	source:AUGUSTUS
+	intron	612986..613278	note	source:AUGUSTUS
+	intron	613643..613695	note	source:AUGUSTUS
+	mRNA	complement(join(619360..620538,621376..622155,622383..622561,623938..624878,625629..627403))	note	ID:g27.t1
+			note	source:AUGUSTUS
+	CDS	complement(join(621730..622155,622383..622561,623938..624878,625629..627328))	note	ID:g27.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	complement(622156..622382)	note	source:AUGUSTUS
+	intron	complement(622562..623937)	note	source:AUGUSTUS
+	intron	complement(624879..625628)	note	source:AUGUSTUS
+	mRNA	join(634214..634421,635662..635754,635942..636549,636631..636807,638974..639102,640240..640409,640474..640803,653955..654058,654117..654486,654547..654750,654803..654970,655036..655081,656704..658251)	note	ID:g28.t1
+			note	source:AUGUSTUS
+	CDS	join(635702..635754,635942..636549,636631..636807,638974..639102,640240..640409,640474..640803,653955..654058,654117..654486,654547..654750,654803..654970,655036..655081,656704..656765)	note	ID:g28.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	635755..635941	note	source:AUGUSTUS
+	intron	636550..636630	note	source:AUGUSTUS
+	intron	636808..638973	note	source:AUGUSTUS
+	intron	639103..640239	note	source:AUGUSTUS
+	intron	640410..640473	note	source:AUGUSTUS
+	intron	640804..653954	note	source:AUGUSTUS
+	intron	654059..654116	note	source:AUGUSTUS
+	intron	654487..654546	note	source:AUGUSTUS
+	intron	654751..654802	note	source:AUGUSTUS
+	intron	654971..655035	note	source:AUGUSTUS
+	intron	655082..656703	note	source:AUGUSTUS
+	mRNA	complement(join(658440..659196,660733..661362,662902..663054,663118..663354,672931..673210,673272..673468,673527..673677,674496..674674,675131..675424,675687..676061,676842..678310,678528..678923))	note	ID:g29.t1
+			note	source:AUGUSTUS
+	CDS	complement(join(661138..661362,662902..663054,663118..663354,672931..673210,673272..673468,673527..673677,674496..674674,675131..675424,675687..676061,676842..678310,678528..678846))	note	ID:g29.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	complement(661363..662901)	note	source:AUGUSTUS
+	intron	complement(663055..663117)	note	source:AUGUSTUS
+	intron	complement(663355..672930)	note	source:AUGUSTUS
+	intron	complement(673211..673271)	note	source:AUGUSTUS
+	intron	complement(673469..673526)	note	source:AUGUSTUS
+	intron	complement(673678..674495)	note	source:AUGUSTUS
+	intron	complement(674675..675130)	note	source:AUGUSTUS
+	intron	complement(675425..675686)	note	source:AUGUSTUS
+	intron	complement(676062..676841)	note	source:AUGUSTUS
+	intron	complement(678311..678527)	note	source:AUGUSTUS
+	mRNA	join(684268..684368,684481..684966,685614..685931,686577..687558,689046..689200,689756..690512)	note	ID:g30.t1
+			note	source:AUGUSTUS
+	CDS	join(684327..684368,684481..684966,685614..685931,686577..687558,689046..689200,689756..690076)	note	ID:g30.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	684369..684480	note	source:AUGUSTUS
+	intron	684967..685613	note	source:AUGUSTUS
+	intron	685932..686576	note	source:AUGUSTUS
+	intron	687559..689045	note	source:AUGUSTUS
+	intron	689201..689755	note	source:AUGUSTUS
+	mRNA	complement(join(691408..693363,698034..698187,698272..698917,699258..699917))	note	ID:g31.t1
+			note	source:AUGUSTUS
+	CDS	complement(join(692666..693363,698034..698187,698272..698790))	note	ID:g31.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	complement(693364..698033)	note	source:AUGUSTUS
+	intron	complement(698188..698271)	note	source:AUGUSTUS
+	mRNA	join(700158..700352,701347..701761,705207..705883,725701..725767,725825..725899,728118..728297,731543..731708,733119..733299,734484..734828,734877..735138,737753..737926,738280..738555,739900..740254,740948..741538,748087..748249,748730..748871,749236..749440,749628..749828,749900..750171,751403..751626,751689..752091,752186..752859,754905..755027,755104..755163,755340..755438,756141..756449,756531..756656,757445..757672,758362..758535,763029..763176,763414..763787,765792..765917,765998..766697,767102..767455,767933..769645,771196..772095,772803..773566,773651..773786,773964..774854,774913..777585,778147..778428,778491..778790,778846..788316,788388..789366,789430..789771,791179..792221,794643..794743,794811..794937,795003..795305,795541..796697)	note	ID:g32.t1
+			note	source:AUGUSTUS
+	CDS	join(701422..701761,705207..705883,725701..725767,725825..725899,728118..728297,731543..731708,733119..733299,734484..734828,734877..735138,737753..737926,738280..738555,739900..740254,740948..741538,748087..748249,748730..748871,749236..749440,749628..749828,749900..750171,751403..751626,751689..752091,752186..752859,754905..755027,755104..755163,755340..755438,756141..756449,756531..756656,757445..757672,758362..758535,763029..763176,763414..763787,765792..765917,765998..766697,767102..767455,767933..769645,771196..772095,772803..773566,773651..773786,773964..774854,774913..777585,778147..778428,778491..778790,778846..788316,788388..789366,789430..789771,791179..792221,794643..794743,794811..794937,795003..795305,795541..796175)	note	ID:g32.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	701762..705206	note	source:AUGUSTUS
+	intron	705884..725700	note	source:AUGUSTUS
+	intron	725768..725824	note	source:AUGUSTUS
+	intron	725900..728117	note	source:AUGUSTUS
+	intron	728298..731542	note	source:AUGUSTUS
+	intron	731709..733118	note	source:AUGUSTUS
+	intron	733300..734483	note	source:AUGUSTUS
+	intron	734829..734876	note	source:AUGUSTUS
+	intron	735139..737752	note	source:AUGUSTUS
+	intron	737927..738279	note	source:AUGUSTUS
+	intron	738556..739899	note	source:AUGUSTUS
+	intron	740255..740947	note	source:AUGUSTUS
+	intron	741539..748086	note	source:AUGUSTUS
+	intron	748250..748729	note	source:AUGUSTUS
+	intron	748872..749235	note	source:AUGUSTUS
+	intron	749441..749627	note	source:AUGUSTUS
+	intron	749829..749899	note	source:AUGUSTUS
+	intron	750172..751402	note	source:AUGUSTUS
+	intron	751627..751688	note	source:AUGUSTUS
+	intron	752092..752185	note	source:AUGUSTUS
+	intron	752860..754904	note	source:AUGUSTUS
+	intron	755028..755103	note	source:AUGUSTUS
+	intron	755164..755339	note	source:AUGUSTUS
+	intron	755439..756140	note	source:AUGUSTUS
+	intron	756450..756530	note	source:AUGUSTUS
+	intron	756657..757444	note	source:AUGUSTUS
+	intron	757673..758361	note	source:AUGUSTUS
+	intron	758536..763028	note	source:AUGUSTUS
+	intron	763177..763413	note	source:AUGUSTUS
+	intron	763788..765791	note	source:AUGUSTUS
+	intron	765918..765997	note	source:AUGUSTUS
+	intron	766698..767101	note	source:AUGUSTUS
+	intron	767456..767932	note	source:AUGUSTUS
+	intron	769646..771195	note	source:AUGUSTUS
+	intron	772096..772802	note	source:AUGUSTUS
+	intron	773567..773650	note	source:AUGUSTUS
+	intron	773787..773963	note	source:AUGUSTUS
+	intron	774855..774912	note	source:AUGUSTUS
+	intron	777586..778146	note	source:AUGUSTUS
+	intron	778429..778490	note	source:AUGUSTUS
+	intron	778791..778845	note	source:AUGUSTUS
+	intron	788317..788387	note	source:AUGUSTUS
+	intron	789367..789429	note	source:AUGUSTUS
+	intron	789772..791178	note	source:AUGUSTUS
+	intron	792222..794642	note	source:AUGUSTUS
+	intron	794744..794810	note	source:AUGUSTUS
+	intron	794938..795002	note	source:AUGUSTUS
+	intron	795306..795540	note	source:AUGUSTUS
+	mRNA	complement(join(799083..802295,806911..807652,807707..807727,813407..815004,815279..816919,819625..819997))	note	ID:g33.t1
+			note	source:AUGUSTUS
+	CDS	complement(join(799453..802295,806911..807652,807707..807727,813407..815004,815279..816326))	note	ID:g33.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	complement(802296..806910)	note	source:AUGUSTUS
+	intron	complement(807653..807706)	note	source:AUGUSTUS
+	intron	complement(807728..813406)	note	source:AUGUSTUS
+	intron	complement(815005..815278)	note	source:AUGUSTUS
+	mRNA	820118..821466	note	ID:g34.t1
+			note	source:AUGUSTUS
+	CDS	820197..820553	note	ID:g34.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	mRNA	complement(join(821568..822565,823024..823244,823458..823953,829664..829674,836343..836617))	note	ID:g35.t1
+			note	source:AUGUSTUS
+	CDS	complement(join(821909..822565,823024..823244,823458..823953,829664..829669))	note	ID:g35.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	complement(822566..823023)	note	source:AUGUSTUS
+	intron	complement(823245..823457)	note	source:AUGUSTUS
+	intron	complement(823954..829663)	note	source:AUGUSTUS
+	mRNA	join(994053..994138,994226..994292,997392..997467,997525..997844,1020111..1020161,1020223..1020399,1024784..1025038,1025096..1025244,1026433..1026635,1026692..1028531)	note	ID:g36.t1
+			note	source:AUGUSTUS
+	CDS	join(994227..994292,997392..997467,997525..997844,1020111..1020161,1020223..1020399,1024784..1025038,1025096..1025244,1026433..1026635,1026692..1026786)	note	ID:g36.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	994293..997391	note	source:AUGUSTUS
+	intron	997468..997524	note	source:AUGUSTUS
+	intron	997845..1020110	note	source:AUGUSTUS
+	intron	1020162..1020222	note	source:AUGUSTUS
+	intron	1020400..1024783	note	source:AUGUSTUS
+	intron	1025039..1025095	note	source:AUGUSTUS
+	intron	1025245..1026432	note	source:AUGUSTUS
+	intron	1026636..1026691	note	source:AUGUSTUS
+	mRNA	complement(join(1041681..1042839,1049348..1049782,1050609..1051600))	note	ID:g37.t1
+			note	source:AUGUSTUS
+	CDS	complement(join(1049369..1049782,1050609..1051436))	note	ID:g37.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	complement(1049783..1050608)	note	source:AUGUSTUS
+	mRNA	join(1052361..1052579,1053533..1053844,1053898..1055175)	note	ID:g38.t1
+			note	source:AUGUSTUS
+	CDS	join(1052516..1052579,1053533..1053844,1053898..1055039)	note	ID:g38.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	1052580..1053532	note	source:AUGUSTUS
+	intron	1053845..1053897	note	source:AUGUSTUS
+	mRNA	complement(join(1055959..1058048,1058102..1058216,1058272..1058366,1067886..1068016,1068079..1068188,1068449..1068817,1070924..1071018,1071081..1071235,1072566..1072950))	note	ID:g39.t1
+			note	source:AUGUSTUS
+	CDS	complement(join(1057904..1058048,1058102..1058216,1058272..1058366,1067886..1068016,1068079..1068188,1068449..1068817,1070924..1071018,1071081..1071145))	note	ID:g39.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	complement(1058049..1058101)	note	source:AUGUSTUS
+	intron	complement(1058217..1058271)	note	source:AUGUSTUS
+	intron	complement(1058367..1067885)	note	source:AUGUSTUS
+	intron	complement(1068017..1068078)	note	source:AUGUSTUS
+	intron	complement(1068189..1068448)	note	source:AUGUSTUS
+	intron	complement(1068818..1070923)	note	source:AUGUSTUS
+	intron	complement(1071019..1071080)	note	source:AUGUSTUS
+	mRNA	join(1083441..1083545,1085710..1085809,1086482..1086511,1086566..1093731,1093787..1094007,1094065..1096183,1096242..1096362,1096418..1096833)	note	ID:g40.t1
+			note	source:AUGUSTUS
+	CDS	join(1085734..1085809,1086482..1086511,1086566..1093731,1093787..1094007,1094065..1096183,1096242..1096362,1096418..1096740)	note	ID:g40.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	1085810..1086481	note	source:AUGUSTUS
+	intron	1086512..1086565	note	source:AUGUSTUS
+	intron	1093732..1093786	note	source:AUGUSTUS
+	intron	1094008..1094064	note	source:AUGUSTUS
+	intron	1096184..1096241	note	source:AUGUSTUS
+	intron	1096363..1096417	note	source:AUGUSTUS
+	mRNA	complement(join(1097972..1098455,1099911..1100197,1100883..1101063,1101114..1101158,1104654..1104670))	note	ID:g41.t1
+			note	source:AUGUSTUS
+	CDS	complement(join(1100175..1100197,1100883..1101063,1101114..1101116))	note	ID:g41.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	complement(1100198..1100882)	note	source:AUGUSTUS
+	intron	complement(1101064..1101113)	note	source:AUGUSTUS
+	mRNA	join(1109601..1109688,1112885..1113035,1113098..1113254,1116202..1116342,1116420..1116458,1116841..1117459)	note	ID:g42.t1
+			note	source:AUGUSTUS
+	CDS	join(1112967..1113035,1113098..1113254,1116202..1116342,1116420..1116458,1116841..1116971)	note	ID:g42.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	1113036..1113097	note	source:AUGUSTUS
+	intron	1113255..1116201	note	source:AUGUSTUS
+	intron	1116343..1116419	note	source:AUGUSTUS
+	intron	1116459..1116840	note	source:AUGUSTUS
+	mRNA	join(1121561..1121710,1124161..1124358,1126778..1127223,1128724..1128970,1129735..1130171,1131407..1133305)	note	ID:g43.t1
+			note	source:AUGUSTUS
+	CDS	join(1127221..1127223,1128724..1128970,1129735..1130171,1131407..1131511)	note	ID:g43.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	1127224..1128723	note	source:AUGUSTUS
+	intron	1128971..1129734	note	source:AUGUSTUS
+	intron	1130172..1131406	note	source:AUGUSTUS
+	mRNA	complement(join(1135942..1136523,1136582..1136705,1137217..1137224,1137286..1137372,1138477..1138531,1138594..1139643,1140563..1140673,1140732..1141232,1141285..1141427,1141541..1141820))	note	ID:g44.t1
+			note	source:AUGUSTUS
+	CDS	complement(join(1136453..1136523,1136582..1136705,1137217..1137224,1137286..1137372,1138477..1138531,1138594..1139643,1140563..1140673,1140732..1141232,1141285..1141427,1141541..1141571))	note	ID:g44.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	complement(1136524..1136581)	note	source:AUGUSTUS
+	intron	complement(1136706..1137216)	note	source:AUGUSTUS
+	intron	complement(1137225..1137285)	note	source:AUGUSTUS
+	intron	complement(1137373..1138476)	note	source:AUGUSTUS
+	intron	complement(1138532..1138593)	note	source:AUGUSTUS
+	intron	complement(1139644..1140562)	note	source:AUGUSTUS
+	intron	complement(1140674..1140731)	note	source:AUGUSTUS
+	intron	complement(1141233..1141284)	note	source:AUGUSTUS
+	intron	complement(1141428..1141540)	note	source:AUGUSTUS
+	mRNA	join(1144861..1144957,1145062..1145324,1145394..1145519,1147435..1147567,1147628..1147788,1150061..1150114,1150192..1150356,1150651..1150809,1151009..1151212,1151275..1152047)	note	ID:g45.t1
+			note	source:AUGUSTUS
+	CDS	join(1144891..1144957,1145062..1145324,1145394..1145519,1147435..1147567,1147628..1147788,1150061..1150114,1150192..1150356,1150651..1150809,1151009..1151212,1151275..1151283)	note	ID:g45.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	1144958..1145061	note	source:AUGUSTUS
+	intron	1145325..1145393	note	source:AUGUSTUS
+	intron	1145520..1147434	note	source:AUGUSTUS
+	intron	1147568..1147627	note	source:AUGUSTUS
+	intron	1147789..1150060	note	source:AUGUSTUS
+	intron	1150115..1150191	note	source:AUGUSTUS
+	intron	1150357..1150650	note	source:AUGUSTUS
+	intron	1150810..1151008	note	source:AUGUSTUS
+	intron	1151213..1151274	note	source:AUGUSTUS
+	mRNA	complement(join(1158542..1160445,1161113..1161527,1161586..1161993,1162886..1163030))	note	ID:g46.t1
+			note	source:AUGUSTUS
+	CDS	complement(join(1160359..1160445,1161113..1161527,1161586..1161986))	note	ID:g46.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	complement(1160446..1161112)	note	source:AUGUSTUS
+	intron	complement(1161528..1161585)	note	source:AUGUSTUS
+	mRNA	complement(join(1165513..1167436,1174368..1174466,1174523..1174766,1175250..1176300))	note	ID:g47.t1
+			note	source:AUGUSTUS
+	CDS	complement(join(1167432..1167436,1174368..1174466,1174523..1174766,1175250..1175837))	note	ID:g47.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	complement(1167437..1174367)	note	source:AUGUSTUS
+	intron	complement(1174467..1174522)	note	source:AUGUSTUS
+	intron	complement(1174767..1175249)	note	source:AUGUSTUS
+	mRNA	join(1200561..1200908,1201411..1201465,1209680..1210021,1210169..1210315,1210507..1210634,1210693..1211175,1211474..1211607,1212075..1212936)	note	ID:g48.t1
+			note	source:AUGUSTUS
+	CDS	join(1201462..1201465,1209680..1210021,1210169..1210315,1210507..1210634,1210693..1211175,1211474..1211557)	note	ID:g48.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	1201466..1209679	note	source:AUGUSTUS
+	intron	1210022..1210168	note	source:AUGUSTUS
+	intron	1210316..1210506	note	source:AUGUSTUS
+	intron	1210635..1210692	note	source:AUGUSTUS
+	intron	1211176..1211473	note	source:AUGUSTUS
+	mRNA	complement(join(1213147..1214485,1216054..1216222,1216286..1216416,1216468..1216717,1217697..1218070))	note	ID:g49.t1
+			note	source:AUGUSTUS
+	CDS	complement(join(1214330..1214485,1216054..1216222,1216286..1216416,1216468..1216710))	note	ID:g49.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	complement(1214486..1216053)	note	source:AUGUSTUS
+	intron	complement(1216223..1216285)	note	source:AUGUSTUS
+	intron	complement(1216417..1216467)	note	source:AUGUSTUS
+	assembly_gap	1221289..1221388	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	mRNA	join(1222710..1223321,1223420..1223750,1223802..1223921,1223986..1224096,1225217..1225376,1225434..1225597,1225732..1225890,1225948..1227003,1228610..1229233)	note	ID:g50.t1
+			note	source:AUGUSTUS
+	CDS	join(1222819..1223321,1223420..1223750,1223802..1223921,1223986..1224096,1225217..1225376,1225434..1225597,1225732..1225890,1225948..1226517)	note	ID:g50.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	1223322..1223419	note	source:AUGUSTUS
+	intron	1223751..1223801	note	source:AUGUSTUS
+	intron	1223922..1223985	note	source:AUGUSTUS
+	intron	1224097..1225216	note	source:AUGUSTUS
+	intron	1225377..1225433	note	source:AUGUSTUS
+	intron	1225598..1225731	note	source:AUGUSTUS
+	intron	1225891..1225947	note	source:AUGUSTUS
+	mRNA	join(1244860..1244867,1245456..1245483,1245552..1245623,1247203..1247378,1247445..1247676,1247740..1247990,1248063..1248077,1249105..1249249,1268557..1268691,1268755..1268881,1274471..1274594,1274651..1275452)	note	ID:g51.t1
+			note	source:AUGUSTUS
+	CDS	join(1245463..1245483,1245552..1245623,1247203..1247378,1247445..1247676,1247740..1247990,1248063..1248077,1249105..1249249,1268557..1268691,1268755..1268881,1274471..1274594,1274651..1274855)	note	ID:g51.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	1245484..1245551	note	source:AUGUSTUS
+	intron	1245624..1247202	note	source:AUGUSTUS
+	intron	1247379..1247444	note	source:AUGUSTUS
+	intron	1247677..1247739	note	source:AUGUSTUS
+	intron	1247991..1248062	note	source:AUGUSTUS
+	intron	1248078..1249104	note	source:AUGUSTUS
+	intron	1249250..1268556	note	source:AUGUSTUS
+	intron	1268692..1268754	note	source:AUGUSTUS
+	intron	1268882..1274470	note	source:AUGUSTUS
+	intron	1274595..1274650	note	source:AUGUSTUS
+	mRNA	join(1276540..1276621,1280907..1280965,1281644..1281702,1282736..1282794,1283351..1283406,1283884..1284150,1284220..1284396,1284487..1284582,1285536..1285594,1286066..1286092,1286158..1286184,1286385..1286401,1286590..1286648,1286964..1287111,1287169..1287195,1287263..1287278,1287343..1287369,1287425..1287550)	note	ID:g52.t1
+			note	source:AUGUSTUS
+	CDS	join(1286397..1286401,1286590..1286648,1286964..1287111,1287169..1287195,1287263..1287278,1287343..1287351)	note	ID:g52.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	1286402..1286589	note	source:AUGUSTUS
+	intron	1286649..1286963	note	source:AUGUSTUS
+	intron	1287112..1287168	note	source:AUGUSTUS
+	intron	1287196..1287262	note	source:AUGUSTUS
+	intron	1287279..1287342	note	source:AUGUSTUS
+	mRNA	complement(join(1288365..1290694,1291564..1291939))	note	ID:g53.t1
+			note	source:AUGUSTUS
+	CDS	complement(1288834..1290585)	note	ID:g53.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	mRNA	complement(1293651..1296859)	note	ID:g54.t1
+			note	source:AUGUSTUS
+	CDS	complement(1295011..1296762)	note	ID:g54.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	mRNA	join(1298860..1298877,1299076..1299549,1299691..1299746,1299802..1299824,1299886..1299897,1301056..1301215,1301746..1301772,1301840..1301860,1301915..1302040)	note	ID:g55.t1
+			note	source:AUGUSTUS
+	CDS	join(1299811..1299824,1299886..1299897,1301056..1301215,1301746..1301772,1301840..1301848)	note	ID:g55.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	1299825..1299885	note	source:AUGUSTUS
+	intron	1299898..1301055	note	source:AUGUSTUS
+	intron	1301216..1301745	note	source:AUGUSTUS
+	intron	1301773..1301839	note	source:AUGUSTUS
+	mRNA	complement(1302899..1304979)	note	ID:g56.t1
+			note	source:AUGUSTUS
+	CDS	complement(1303088..1304842)	note	ID:g56.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	mRNA	complement(join(1313675..1316152,1321520..1322007,1325676..1326659,1326776..1327889,1328105..1328895,1329314..1329619,1330094..1330962,1334239..1335260,1337267..1337369))	note	ID:g57.t1
+			note	source:AUGUSTUS
+	CDS	complement(join(1314266..1316152,1321520..1322007,1325676..1325829))	note	ID:g57.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	complement(1316153..1321519)	note	source:AUGUSTUS
+	intron	complement(1322008..1325675)	note	source:AUGUSTUS
+	mRNA	complement(join(1337898..1338084,1338658..1339641,1339758..1340871,1341087..1341877,1342296..1342601,1343076..1343944,1347221..1348242,1348414..1348519))	note	ID:g58.t1
+			note	source:AUGUSTUS
+	CDS	complement(join(1337996..1338084,1338658..1338811))	note	ID:g58.t1.cds
+			note	source:AUGUSTUS
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	intron	complement(1338085..1338657)	note	source:AUGUSTUS

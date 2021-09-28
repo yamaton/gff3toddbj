@@ -8,7 +8,6 @@
   - For installation with conda, run `conda install pytest`.
 
 
-
 ### Running tests
 
 Following runs both doctests and golden tests.
@@ -18,4 +17,7 @@ $ pytest --doctest-modules ..
 ```
 
 
+### Credit
 
+* RefSeq: [GCF_000280675.1](https://www.ncbi.nlm.nih.gov/assembly/GCF_000280675.1/)
+* EMBLmyGFF3: [FASTA and GFF3 data](GCF_000280675.1) from augustus, maker, and prokka

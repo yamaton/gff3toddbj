@@ -1,0 +1,24 @@
+## -----------------------------------------------------------------------
+##        COMMON entry
+[COMMON]
+## "source" feature under COMMON has its own macro processing
+##   https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#common
+
+[source]
+organism = "Drosophila melanogaster"
+mol_type = "genomic DNA"
+
+[assembly_gap]
+## -----------------------------------------------------------------------
+##        "assembly_gap" feature
+##
+## Note that COMMON.assembly_gap items will be inserted to
+## EVERY assembly_gap features by DDBJ.
+## https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#common
+##
+estimated_length = "unknown"     # counts N's if the value is "<COMPUTE>"
+gap_type = "within scaffold"
+# linkage_evidence is mandatory if gap_type is "within scaffold" or "repeat within scaffold"
+linkage_evidence = "paired-ends"  # "paired-ends", "unspecified"
+##
+## -----------------------------------------------------------------------

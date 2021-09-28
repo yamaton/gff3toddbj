@@ -1,0 +1,1416 @@
+4	source	1..1351857	organism	Drosophila melanogaster
+			mol_type	genomic DNA
+	mRNA	complement(join(53461..53751,53817..53999,56500..57083,57142..61911,63540..64200))	note	ID:maker-4-est_gff_Cufflinks-gene-0.0-mRNA-1
+			note	source:maker
+	3'UTR	complement(53461..53643)	note	ID:maker-4-est_gff_Cufflinks-gene-0.0-mRNA-1:three_prime_utr
+			note	source:maker
+	CDS	complement(join(53644..53751,53817..53999,56500..57083,57142..61911,63540..64050))	note	ID:maker-4-est_gff_Cufflinks-gene-0.0-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(64051..64200)	note	ID:maker-4-est_gff_Cufflinks-gene-0.0-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(68504..71088,71142..71306,71371..71883,71940..72580,72643..73010,76457..76640,76783..76823))	note	ID:maker-4-est_gff_Cufflinks-gene-1.2-mRNA-1
+			note	source:maker
+	3'UTR	complement(68504..68619)	note	ID:maker-4-est_gff_Cufflinks-gene-1.2-mRNA-1:three_prime_utr
+			note	source:maker
+	CDS	complement(join(68620..71088,71142..71306,71371..71883,71940..72580,72643..73010,76457..76494))	note	ID:maker-4-est_gff_Cufflinks-gene-1.2-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(76495..76640)	note	ID:maker-4-est_gff_Cufflinks-gene-1.2-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	complement(76783..76823)	note	ID:maker-4-est_gff_Cufflinks-gene-1.2-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(68504..71088,71142..71306,71371..71883,71940..72580,72643..73010,76457..76929))	note	ID:maker-4-est_gff_Cufflinks-gene-1.2-mRNA-2
+			note	source:maker
+	3'UTR	complement(68504..68619)	note	ID:maker-4-est_gff_Cufflinks-gene-1.2-mRNA-2:three_prime_utr
+			note	source:maker
+	CDS	complement(join(68620..71088,71142..71306,71371..71883,71940..72580,72643..73010,76457..76494))	note	ID:maker-4-est_gff_Cufflinks-gene-1.2-mRNA-2:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(76495..76929)	note	ID:maker-4-est_gff_Cufflinks-gene-1.2-mRNA-2:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(86133..86147,86626..86675,86731..87364,87466..87863))	note	ID:maker-4-est_gff_Cufflinks-gene-1.3-mRNA-1
+			note	source:maker
+	3'UTR	complement(86133..86147)	note	ID:maker-4-est_gff_Cufflinks-gene-1.3-mRNA-1:three_prime_utr
+			note	source:maker
+	3'UTR	complement(86626..86675)	note	ID:maker-4-est_gff_Cufflinks-gene-1.3-mRNA-1:three_prime_utr
+			note	source:maker
+	3'UTR	complement(86731..86898)	note	ID:maker-4-est_gff_Cufflinks-gene-1.3-mRNA-1:three_prime_utr
+			note	source:maker
+	CDS	complement(join(86899..87364,87466..87806))	note	ID:maker-4-est_gff_Cufflinks-gene-1.3-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(87807..87863)	note	ID:maker-4-est_gff_Cufflinks-gene-1.3-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	join(90014..90020,92947..92961,93030..93220,93443..93488,95694..95791,103264..103372,106338..106425,106479..106559,107643..107792,115049..115241,115463..115628,120032..120101,124709..125154,128029)	note	ID:maker-4-est_gff_Cufflinks-gene-1.0-mRNA-1
+			note	source:maker
+	5'UTR	90014..90020	note	ID:maker-4-est_gff_Cufflinks-gene-1.0-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	92947..92961	note	ID:maker-4-est_gff_Cufflinks-gene-1.0-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	93030..93055	note	ID:maker-4-est_gff_Cufflinks-gene-1.0-mRNA-1:five_prime_utr
+			note	source:maker
+	CDS	join(93056..93220,93443..93488,95694..95791,103264..103372,106338..106425,106479..106559,107643..107792,115049..115241,115463..115628,120032..120101,124709..125039)	note	ID:maker-4-est_gff_Cufflinks-gene-1.0-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	3'UTR	125040..125154	note	ID:maker-4-est_gff_Cufflinks-gene-1.0-mRNA-1:three_prime_utr
+			note	source:maker
+	3'UTR	128029	note	ID:maker-4-est_gff_Cufflinks-gene-1.0-mRNA-1:three_prime_utr
+			note	source:maker
+	mRNA	join(92966..93220,93443..93488,95694..95791,103264..103372,106338..106425,106479..106559,107643..107792,115049..115241,115463..115628,120032..120101,128029)	note	ID:maker-4-est_gff_Cufflinks-gene-1.0-mRNA-2
+			note	source:maker
+	5'UTR	92966..93055	note	ID:maker-4-est_gff_Cufflinks-gene-1.0-mRNA-2:five_prime_utr
+			note	source:maker
+	CDS	join(93056..93220,93443..93488,95694..95791,103264..103372,106338..106425,106479..106559,107643..107792,115049..115241,115463..115628,120032..120101,128029..>128029)	note	ID:maker-4-est_gff_Cufflinks-gene-1.0-mRNA-2:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	mRNA	complement(join(135603..137256,137312..139127,139181..139405,139464..139557,140514..140838,141484..142425,142479..142582,142935..144048,144411..144518,149948..150068,150296..150316))	note	ID:maker-4-est_gff_Cufflinks-gene-1.4-mRNA-1
+			note	source:maker
+	3'UTR	complement(135603..137256)	note	ID:maker-4-est_gff_Cufflinks-gene-1.4-mRNA-1:three_prime_utr
+			note	source:maker
+	3'UTR	complement(137312..137494)	note	ID:maker-4-est_gff_Cufflinks-gene-1.4-mRNA-1:three_prime_utr
+			note	source:maker
+	CDS	complement(join(137495..139127,139181..139405,139464..139557,140514..140838,141484..142425,142479..142582,142935..144048,144411..144518,149948..150052))	note	ID:maker-4-est_gff_Cufflinks-gene-1.4-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(150053..150068)	note	ID:maker-4-est_gff_Cufflinks-gene-1.4-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	complement(150296..150316)	note	ID:maker-4-est_gff_Cufflinks-gene-1.4-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(135603..137256,137312..139127,139181..139405,139464..139557,140514..140838,141484..142425,142479..142582,142935..144048,144411..144518,149948..150068,150354..150357))	note	ID:maker-4-est_gff_Cufflinks-gene-1.4-mRNA-2
+			note	source:maker
+	3'UTR	complement(135603..137256)	note	ID:maker-4-est_gff_Cufflinks-gene-1.4-mRNA-2:three_prime_utr
+			note	source:maker
+	3'UTR	complement(137312..137494)	note	ID:maker-4-est_gff_Cufflinks-gene-1.4-mRNA-2:three_prime_utr
+			note	source:maker
+	CDS	complement(join(137495..139127,139181..139405,139464..139557,140514..140838,141484..142425,142479..142582,142935..144048,144411..144518,149948..150052))	note	ID:maker-4-est_gff_Cufflinks-gene-1.4-mRNA-2:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(150053..150068)	note	ID:maker-4-est_gff_Cufflinks-gene-1.4-mRNA-2:five_prime_utr
+			note	source:maker
+	5'UTR	complement(150354..150357)	note	ID:maker-4-est_gff_Cufflinks-gene-1.4-mRNA-2:five_prime_utr
+			note	source:maker
+	mRNA	join(152876..152913,153812..153861,154214..155590,157505..157793,157849..157958,158017..158378,158433..158936,159000..159200,160896..162753,162826..163632)	note	ID:maker-4-est_gff_Cufflinks-gene-1.1-mRNA-1
+			note	source:maker
+	5'UTR	152876..152913	note	ID:maker-4-est_gff_Cufflinks-gene-1.1-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	153812..153861	note	ID:maker-4-est_gff_Cufflinks-gene-1.1-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	154214..155154	note	ID:maker-4-est_gff_Cufflinks-gene-1.1-mRNA-1:five_prime_utr
+			note	source:maker
+	CDS	join(155155..155590,157505..157793,157849..157958,158017..158378,158433..158936,159000..159200,160896..162753,162826..163421)	note	ID:maker-4-est_gff_Cufflinks-gene-1.1-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	3'UTR	163422..163632	note	ID:maker-4-est_gff_Cufflinks-gene-1.1-mRNA-1:three_prime_utr
+			note	source:maker
+	mRNA	complement(join(175393..175591,175653..175773,176391..176844))	note	ID:maker-4-est_gff_Cufflinks-gene-2.3-mRNA-2
+			note	source:maker
+	3'UTR	complement(175393..175404)	note	ID:maker-4-est_gff_Cufflinks-gene-2.3-mRNA-2:three_prime_utr
+			note	source:maker
+	CDS	complement(join(175405..175591,175653..175773,176391..176529))	note	ID:maker-4-est_gff_Cufflinks-gene-2.3-mRNA-2:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(176530..176844)	note	ID:maker-4-est_gff_Cufflinks-gene-2.3-mRNA-2:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(175393..175591,175653..175773,176391..176489,177343..177373))	note	ID:maker-4-est_gff_Cufflinks-gene-2.3-mRNA-1
+			note	source:maker
+	3'UTR	complement(175393..175404)	note	ID:maker-4-est_gff_Cufflinks-gene-2.3-mRNA-1:three_prime_utr
+			note	source:maker
+	CDS	complement(join(175405..175591,175653..175762))	note	ID:maker-4-est_gff_Cufflinks-gene-2.3-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(175763..175773)	note	ID:maker-4-est_gff_Cufflinks-gene-2.3-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	complement(176391..176489)	note	ID:maker-4-est_gff_Cufflinks-gene-2.3-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	complement(177343..177373)	note	ID:maker-4-est_gff_Cufflinks-gene-2.3-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(179122..179330,179848..180338,180393..180901,180958..181087,181151..181389,181448..181592))	note	ID:maker-4-est_gff_Cufflinks-gene-2.4-mRNA-1
+			note	source:maker
+	3'UTR	complement(179122..179257)	note	ID:maker-4-est_gff_Cufflinks-gene-2.4-mRNA-1:three_prime_utr
+			note	source:maker
+	CDS	complement(join(179258..179330,179848..180338,180393..180901,180958..181087,181151..181389,181448..>181592))	note	ID:maker-4-est_gff_Cufflinks-gene-2.4-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	mRNA	complement(join(192255..194362,194737..194790,195411..195594,195736..195746))	note	ID:maker-4-est_gff_Cufflinks-gene-2.5-mRNA-1
+			note	source:maker
+	CDS	complement(join(<192255..194362,194737..194790,195411..195585))	note	ID:maker-4-est_gff_Cufflinks-gene-2.5-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(195586..195594)	note	ID:maker-4-est_gff_Cufflinks-gene-2.5-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	complement(195736..195746)	note	ID:maker-4-est_gff_Cufflinks-gene-2.5-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(194711..194790,195411..195594,195736..195746))	note	ID:maker-4-est_gff_Cufflinks-gene-2.5-mRNA-2
+			note	source:maker
+	CDS	complement(join(<194711..194790,195411..195585))	note	ID:maker-4-est_gff_Cufflinks-gene-2.5-mRNA-2:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(195586..195594)	note	ID:maker-4-est_gff_Cufflinks-gene-2.5-mRNA-2:five_prime_utr
+			note	source:maker
+	5'UTR	complement(195736..195746)	note	ID:maker-4-est_gff_Cufflinks-gene-2.5-mRNA-2:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(198562..198618,199404..199660,199718..199837,199890..199989))	note	ID:maker-4-est_gff_Cufflinks-gene-2.6-mRNA-1
+			note	source:maker
+	3'UTR	complement(198562..198618)	note	ID:maker-4-est_gff_Cufflinks-gene-2.6-mRNA-1:three_prime_utr
+			note	source:maker
+	3'UTR	complement(199404..199543)	note	ID:maker-4-est_gff_Cufflinks-gene-2.6-mRNA-1:three_prime_utr
+			note	source:maker
+	CDS	complement(join(199544..199660,199718..199837,199890..199955))	note	ID:maker-4-est_gff_Cufflinks-gene-2.6-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(199956..199989)	note	ID:maker-4-est_gff_Cufflinks-gene-2.6-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(205008..205240,205296..205421,206453..206542,206604..207466,208623..208795,208856..208995,209051..209149,209204..209874,210624..210687,211935..211962))	note	ID:maker-4-est_gff_Cufflinks-gene-2.7-mRNA-3
+			note	source:maker
+	3'UTR	complement(205008..205140)	note	ID:maker-4-est_gff_Cufflinks-gene-2.7-mRNA-3:three_prime_utr
+			note	source:maker
+	CDS	complement(join(205141..205240,205296..205421,206453..206542,206604..207466,208623..208795,208856..208995,209051..209149,209204..209805))	note	ID:maker-4-est_gff_Cufflinks-gene-2.7-mRNA-3:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(209806..209874)	note	ID:maker-4-est_gff_Cufflinks-gene-2.7-mRNA-3:five_prime_utr
+			note	source:maker
+	5'UTR	complement(210624..210687)	note	ID:maker-4-est_gff_Cufflinks-gene-2.7-mRNA-3:five_prime_utr
+			note	source:maker
+	5'UTR	complement(211935..211962)	note	ID:maker-4-est_gff_Cufflinks-gene-2.7-mRNA-3:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(205008..205240,205296..205421,206453..206542,206604..207466,208623..208795,208856..208995,209051..209149,209204..209874,210624..210687,213970..213974))	note	ID:maker-4-est_gff_Cufflinks-gene-2.7-mRNA-4
+			note	source:maker
+	3'UTR	complement(205008..205140)	note	ID:maker-4-est_gff_Cufflinks-gene-2.7-mRNA-4:three_prime_utr
+			note	source:maker
+	CDS	complement(join(205141..205240,205296..205421,206453..206542,206604..207466,208623..208795,208856..208995,209051..209149,209204..209805))	note	ID:maker-4-est_gff_Cufflinks-gene-2.7-mRNA-4:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(209806..209874)	note	ID:maker-4-est_gff_Cufflinks-gene-2.7-mRNA-4:five_prime_utr
+			note	source:maker
+	5'UTR	complement(210624..210687)	note	ID:maker-4-est_gff_Cufflinks-gene-2.7-mRNA-4:five_prime_utr
+			note	source:maker
+	5'UTR	complement(213970..213974)	note	ID:maker-4-est_gff_Cufflinks-gene-2.7-mRNA-4:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(205008..205240,205296..205421,206453..206542,206604..207466,208623..208795,208856..208995,209051..209149,209204..209874,210624..210687,214020..214070))	note	ID:maker-4-est_gff_Cufflinks-gene-2.7-mRNA-2
+			note	source:maker
+	3'UTR	complement(205008..205140)	note	ID:maker-4-est_gff_Cufflinks-gene-2.7-mRNA-2:three_prime_utr
+			note	source:maker
+	CDS	complement(join(205141..205240,205296..205421,206453..206542,206604..207466,208623..208795,208856..208995,209051..209149,209204..209805))	note	ID:maker-4-est_gff_Cufflinks-gene-2.7-mRNA-2:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(209806..209874)	note	ID:maker-4-est_gff_Cufflinks-gene-2.7-mRNA-2:five_prime_utr
+			note	source:maker
+	5'UTR	complement(210624..210687)	note	ID:maker-4-est_gff_Cufflinks-gene-2.7-mRNA-2:five_prime_utr
+			note	source:maker
+	5'UTR	complement(214020..214070)	note	ID:maker-4-est_gff_Cufflinks-gene-2.7-mRNA-2:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(205008..205240,205296..205421,206453..206542,206604..207466,208623..208795,208856..208995,209051..209149,209204..209874,210624..210687,214299..214363))	note	ID:maker-4-est_gff_Cufflinks-gene-2.7-mRNA-1
+			note	source:maker
+	3'UTR	complement(205008..205140)	note	ID:maker-4-est_gff_Cufflinks-gene-2.7-mRNA-1:three_prime_utr
+			note	source:maker
+	CDS	complement(join(205141..205240,205296..205421,206453..206542,206604..207466,208623..208795,208856..208995,209051..209149,209204..209805))	note	ID:maker-4-est_gff_Cufflinks-gene-2.7-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(209806..209874)	note	ID:maker-4-est_gff_Cufflinks-gene-2.7-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	complement(210624..210687)	note	ID:maker-4-est_gff_Cufflinks-gene-2.7-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	complement(214299..214363)	note	ID:maker-4-est_gff_Cufflinks-gene-2.7-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(218397..222009,222067..222284,224606..224979))	note	ID:maker-4-est_gff_Cufflinks-gene-2.8-mRNA-1
+			note	source:maker
+	3'UTR	complement(218397..218503)	note	ID:maker-4-est_gff_Cufflinks-gene-2.8-mRNA-1:three_prime_utr
+			note	source:maker
+	CDS	complement(join(218504..222009,222067..222284,224606..224973))	note	ID:maker-4-est_gff_Cufflinks-gene-2.8-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(224974..224979)	note	ID:maker-4-est_gff_Cufflinks-gene-2.8-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	join(230941..231112,231184..231306,232216..232420,232480..232608,233254..233355,233417..233775,235322..235351)	note	ID:maker-4-est_gff_Cufflinks-gene-2.0-mRNA-1
+			note	source:maker
+	5'UTR	230941..231080	note	ID:maker-4-est_gff_Cufflinks-gene-2.0-mRNA-1:five_prime_utr
+			note	source:maker
+	CDS	join(231081..231112,231184..231306,232216..232420,232480..232608,233254..233355,233417..233641)	note	ID:maker-4-est_gff_Cufflinks-gene-2.0-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	3'UTR	233642..233775	note	ID:maker-4-est_gff_Cufflinks-gene-2.0-mRNA-1:three_prime_utr
+			note	source:maker
+	3'UTR	235322..235351	note	ID:maker-4-est_gff_Cufflinks-gene-2.0-mRNA-1:three_prime_utr
+			note	source:maker
+	mRNA	complement(join(235620..235893,235956..236186,238032..238120,238874..239006,239072..239516,240517..240654,240770..241063,243167..243224,243280..243362,243417..243638,244183..244512,244571..245065,246272..246293))	note	ID:maker-4-est_gff_Cufflinks-gene-2.9-mRNA-3
+			note	source:maker
+	3'UTR	complement(235620..235730)	note	ID:maker-4-est_gff_Cufflinks-gene-2.9-mRNA-3:three_prime_utr
+			note	source:maker
+	CDS	complement(join(235731..235893,235956..236186,238032..238120,238874..239006,239072..239516,240517..240654,240770..241063,243167..243224,243280..243362,243417..243638,244183..244512,244571..245065,246272..>246293))	note	ID:maker-4-est_gff_Cufflinks-gene-2.9-mRNA-3:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	mRNA	complement(join(235620..235893,235956..236186,238032..238120,238874..239006,239072..239516,240517..240654,240770..241063,243167..243224,243280..243362,243417..243584,244183..244512,244571..245065,246388..246527))	note	ID:maker-4-est_gff_Cufflinks-gene-2.9-mRNA-2
+			note	source:maker
+	3'UTR	complement(235620..235730)	note	ID:maker-4-est_gff_Cufflinks-gene-2.9-mRNA-2:three_prime_utr
+			note	source:maker
+	CDS	complement(join(235731..235893,235956..236186,238032..238120,238874..239006,239072..239516,240517..240654,240770..241063,243167..243224,243280..243362,243417..243584,244183..244512,244571..245065,246388..246460))	note	ID:maker-4-est_gff_Cufflinks-gene-2.9-mRNA-2:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(246461..246527)	note	ID:maker-4-est_gff_Cufflinks-gene-2.9-mRNA-2:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(235620..235893,235956..236186,238032..238120,238874..239006,239072..239516,240517..240654,240770..241063,243167..243224,243280..243362,243417..243638,244183..244512,244571..245065,246388..246420,246933..246974))	note	ID:maker-4-est_gff_Cufflinks-gene-2.9-mRNA-1
+			note	source:maker
+	3'UTR	complement(235620..235730)	note	ID:maker-4-est_gff_Cufflinks-gene-2.9-mRNA-1:three_prime_utr
+			note	source:maker
+	CDS	complement(join(235731..235893,235956..236186,238032..238120,238874..239006,239072..239516,240517..240654,240770..241063,243167..243224,243280..243362,243417..243638,244183..244512,244571..245065,246388..246420,246933..246942))	note	ID:maker-4-est_gff_Cufflinks-gene-2.9-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(246943..246974)	note	ID:maker-4-est_gff_Cufflinks-gene-2.9-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	join(248673..248866,249531..250197,250537..250746)	note	ID:maker-4-est_gff_Cufflinks-gene-2.1-mRNA-1
+			note	source:maker
+	CDS	join(<248673..248866,249531..250197,250537..>250746)	note	ID:maker-4-est_gff_Cufflinks-gene-2.1-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	mRNA	join(251494..251521,252561..252603,252905..253474,254891..254971,257021..257101,257895..258185,260940..261024,263892..264211,264260..264374,265806..266521)	note	ID:maker-4-est_gff_Cufflinks-gene-2.2-mRNA-2
+			note	source:maker
+	5'UTR	251494..251521	note	ID:maker-4-est_gff_Cufflinks-gene-2.2-mRNA-2:five_prime_utr
+			note	source:maker
+	5'UTR	252561..252579	note	ID:maker-4-est_gff_Cufflinks-gene-2.2-mRNA-2:five_prime_utr
+			note	source:maker
+	CDS	join(252580..252603,252905..253474,254891..254971,257021..257101,257895..258185,260940..261024,263892..264211,264260..264374,265806..266389)	note	ID:maker-4-est_gff_Cufflinks-gene-2.2-mRNA-2:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	3'UTR	266390..266521	note	ID:maker-4-est_gff_Cufflinks-gene-2.2-mRNA-2:three_prime_utr
+			note	source:maker
+	mRNA	join(252154..252226,252561..252603,252905..253474,254891..254971,255490..255570,257021..257101,257895..258185,260940..261024,263892..264211,264260..264374,265806..266521)	note	ID:maker-4-est_gff_Cufflinks-gene-2.2-mRNA-1
+			note	source:maker
+	5'UTR	252154..252226	note	ID:maker-4-est_gff_Cufflinks-gene-2.2-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	252561..252579	note	ID:maker-4-est_gff_Cufflinks-gene-2.2-mRNA-1:five_prime_utr
+			note	source:maker
+	CDS	join(252580..252603,252905..253474,254891..254971,255490..255570,257021..257101,257895..258185,260940..261024,263892..264211,264260..264374,265806..266389)	note	ID:maker-4-est_gff_Cufflinks-gene-2.2-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	3'UTR	266390..266521	note	ID:maker-4-est_gff_Cufflinks-gene-2.2-mRNA-1:three_prime_utr
+			note	source:maker
+	mRNA	join(254813..254971,257021..257101,257895..258185,260940..261024,261271..261459,263892..264211,264260..264374,265806..266521)	note	ID:maker-4-est_gff_Cufflinks-gene-2.2-mRNA-3
+			note	source:maker
+	5'UTR	254813..254971	note	ID:maker-4-est_gff_Cufflinks-gene-2.2-mRNA-3:five_prime_utr
+			note	source:maker
+	5'UTR	257021..257101	note	ID:maker-4-est_gff_Cufflinks-gene-2.2-mRNA-3:five_prime_utr
+			note	source:maker
+	5'UTR	257895..258185	note	ID:maker-4-est_gff_Cufflinks-gene-2.2-mRNA-3:five_prime_utr
+			note	source:maker
+	5'UTR	260940..261024	note	ID:maker-4-est_gff_Cufflinks-gene-2.2-mRNA-3:five_prime_utr
+			note	source:maker
+	5'UTR	261271..261401	note	ID:maker-4-est_gff_Cufflinks-gene-2.2-mRNA-3:five_prime_utr
+			note	source:maker
+	CDS	join(261402..261459,263892..264211,264260..264374,265806..266389)	note	ID:maker-4-est_gff_Cufflinks-gene-2.2-mRNA-3:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	3'UTR	266390..266521	note	ID:maker-4-est_gff_Cufflinks-gene-2.2-mRNA-3:three_prime_utr
+			note	source:maker
+	mRNA	complement(join(270233..270361,270416..270762,270816..270869,271941..272151,272681..272796,273450..273635))	note	ID:maker-4-est_gff_Cufflinks-gene-3.2-mRNA-1
+			note	source:maker
+	3'UTR	complement(270233..270361)	note	ID:maker-4-est_gff_Cufflinks-gene-3.2-mRNA-1:three_prime_utr
+			note	source:maker
+	3'UTR	complement(270416..270655)	note	ID:maker-4-est_gff_Cufflinks-gene-3.2-mRNA-1:three_prime_utr
+			note	source:maker
+	CDS	complement(join(270656..270762,270816..270869,271941..272151,272681..272796,273450..273579))	note	ID:maker-4-est_gff_Cufflinks-gene-3.2-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(273580..273635)	note	ID:maker-4-est_gff_Cufflinks-gene-3.2-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	join(277193..278030,278938..279092,279154..279298,279904..279996,280073..280230,281856..282137,282200..282350,282403..282688,283832..283966,284978..285055,285112..285296,285370..285575)	note	ID:maker-4-est_gff_Cufflinks-gene-3.0-mRNA-1
+			note	source:maker
+	CDS	join(<277193..278030,278938..279092,279154..279298,279904..279996,280073..280230,281856..282137,282200..282350,282403..282688,283832..283966,284978..285055,285112..285296,285370..>285575)	note	ID:maker-4-est_gff_Cufflinks-gene-3.0-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	mRNA	join(277193..278030,278938..279092,279154..279298,279904..279996,280073..280230,281861..282137,282200..282688,283832..283966,284978..285055,285112..285296,285370..285576)	note	ID:maker-4-est_gff_Cufflinks-gene-3.0-mRNA-2
+			note	source:maker
+	CDS	join(<277193..278030,278938..279092,279154..279298,279904..279996,280073..280230,281861..281869)	note	ID:maker-4-est_gff_Cufflinks-gene-3.0-mRNA-2:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	3'UTR	281870..282137	note	ID:maker-4-est_gff_Cufflinks-gene-3.0-mRNA-2:three_prime_utr
+			note	source:maker
+	3'UTR	282200..282688	note	ID:maker-4-est_gff_Cufflinks-gene-3.0-mRNA-2:three_prime_utr
+			note	source:maker
+	3'UTR	283832..283966	note	ID:maker-4-est_gff_Cufflinks-gene-3.0-mRNA-2:three_prime_utr
+			note	source:maker
+	3'UTR	284978..285055	note	ID:maker-4-est_gff_Cufflinks-gene-3.0-mRNA-2:three_prime_utr
+			note	source:maker
+	3'UTR	285112..285296	note	ID:maker-4-est_gff_Cufflinks-gene-3.0-mRNA-2:three_prime_utr
+			note	source:maker
+	3'UTR	285370..285576	note	ID:maker-4-est_gff_Cufflinks-gene-3.0-mRNA-2:three_prime_utr
+			note	source:maker
+	mRNA	complement(join(291097..291125,291186..291381,291695..292473,292541..292798,292852..293023))	note	ID:maker-4-est_gff_Cufflinks-gene-3.3-mRNA-1
+			note	source:maker
+	CDS	complement(join(<291097..291125,291186..291381,291695..292473,292541..292798,292852..>293023))	note	ID:maker-4-est_gff_Cufflinks-gene-3.3-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	mRNA	join(328732..328915,329039..329705,330165..330259,330320..330643,330705..330806)	note	ID:maker-4-est_gff_Cufflinks-gene-3.1-mRNA-1
+			note	source:maker
+	5'UTR	328732..328915	note	ID:maker-4-est_gff_Cufflinks-gene-3.1-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	329039..329203	note	ID:maker-4-est_gff_Cufflinks-gene-3.1-mRNA-1:five_prime_utr
+			note	source:maker
+	CDS	join(329204..329705,330165..330259,330320..330643,330705..>330806)	note	ID:maker-4-est_gff_Cufflinks-gene-3.1-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	mRNA	complement(join(333461..333924,333983..334268,334325..334513))	note	ID:maker-4-est_gff_Cufflinks-gene-3.4-mRNA-1
+			note	source:maker
+	CDS	complement(join(<333461..333924,333983..334079))	note	ID:maker-4-est_gff_Cufflinks-gene-3.4-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(334080..334268)	note	ID:maker-4-est_gff_Cufflinks-gene-3.4-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	complement(334325..334513)	note	ID:maker-4-est_gff_Cufflinks-gene-3.4-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(349653..350054,350897..350965,363548..363686,369621..369772,369839..370050,370107..370305,370356..370669,371229..371316,371391..371835,372212..372453,372510..372752,372807..373216,374569..374604,374977..375187,375306..375592,375657..375851,375936..376107,379176..379236))	note	ID:maker-4-est_gff_Cufflinks-gene-4.1-mRNA-1
+			note	source:maker
+	3'UTR	complement(349653..349832)	note	ID:maker-4-est_gff_Cufflinks-gene-4.1-mRNA-1:three_prime_utr
+			note	source:maker
+	CDS	complement(join(349833..350054,350897..350965,363548..363686,369621..369772,369839..370050,370107..370305,370356..370669,371229..371316,371391..371835,372212..372453,372510..372752,372807..373216,374569..374604,374977..375187,375306..375592,375657..375851,375936..376092))	note	ID:maker-4-est_gff_Cufflinks-gene-4.1-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(376093..376107)	note	ID:maker-4-est_gff_Cufflinks-gene-4.1-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	complement(379176..379236)	note	ID:maker-4-est_gff_Cufflinks-gene-4.1-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(352596..352628,363548..363686,369621..369772,369839..370050,370107..370305,370356..370669,371229..371316,371391..371835,372212..372453,372510..372752,372807..373216,374569..374604,374977..375187,375306..375592,375657..375851,375936..376107,379258..379278))	note	ID:maker-4-est_gff_Cufflinks-gene-4.1-mRNA-2
+			note	source:maker
+	CDS	complement(join(<352596..352628,363548..363686,369621..369772,369839..370050,370107..370305,370356..370669,371229..371316,371391..371835,372212..372453,372510..372752,372807..373216,374569..374604,374977..375187,375306..375592,375657..375851,375936..376092))	note	ID:maker-4-est_gff_Cufflinks-gene-4.1-mRNA-2:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(376093..376107)	note	ID:maker-4-est_gff_Cufflinks-gene-4.1-mRNA-2:five_prime_utr
+			note	source:maker
+	5'UTR	complement(379258..379278)	note	ID:maker-4-est_gff_Cufflinks-gene-4.1-mRNA-2:five_prime_utr
+			note	source:maker
+	mRNA	join(381238..381632,382930..383239,383297..383508,383572..383760,384120..384271,384494..385567,386300..387388,390133..390370,390436..390590,391717..391983,392439..392802,392876..393031)	note	ID:maker-4-est_gff_Cufflinks-gene-4.0-mRNA-1
+			note	source:maker
+	5'UTR	381238..381316	note	ID:maker-4-est_gff_Cufflinks-gene-4.0-mRNA-1:five_prime_utr
+			note	source:maker
+	CDS	join(381317..381632,382930..383239,383297..383508,383572..383760,384120..384271,384494..385567,386300..387388,390133..390370,390436..390590,391717..391983,392439..392802,392876..393018)	note	ID:maker-4-est_gff_Cufflinks-gene-4.0-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	3'UTR	393019..393031	note	ID:maker-4-est_gff_Cufflinks-gene-4.0-mRNA-1:three_prime_utr
+			note	source:maker
+	mRNA	complement(join(396531..397257,397720..398295,398384..398451,398511..398828,399022..399187,399342..399526,402749..403034,407533..407610,411051..412170,414488..414714))	note	ID:maker-4-est_gff_Cufflinks-gene-4.2-mRNA-1
+			note	source:maker
+	3'UTR	complement(396531..396588)	note	ID:maker-4-est_gff_Cufflinks-gene-4.2-mRNA-1:three_prime_utr
+			note	source:maker
+	CDS	complement(join(396589..397257,397720..398295,398384..398451,398511..398828,399022..399187,399342..399526,402749..403034,407533..407610,411051..412157))	note	ID:maker-4-est_gff_Cufflinks-gene-4.2-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(412158..412170)	note	ID:maker-4-est_gff_Cufflinks-gene-4.2-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	complement(414488..414714)	note	ID:maker-4-est_gff_Cufflinks-gene-4.2-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(457796..459544,459601..459791,460074..462077,462806..463015,463490..463780,463839..464500))	note	ID:maker-4-est_gff_Cufflinks-gene-4.3-mRNA-1
+			note	source:maker
+	3'UTR	complement(457796..458011)	note	ID:maker-4-est_gff_Cufflinks-gene-4.3-mRNA-1:three_prime_utr
+			note	source:maker
+	CDS	complement(join(458012..459544,459601..459791,460074..462077,462806..463015,463490..463780,463839..464019))	note	ID:maker-4-est_gff_Cufflinks-gene-4.3-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(464020..464500)	note	ID:maker-4-est_gff_Cufflinks-gene-4.3-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	join(466489..466591,467447..467661,467727..467861,470550..470594,470868..470942,470997..471135,471816..472080,473244..473370,473429..473516,473598..473795)	note	ID:maker-4-est_gff_Cufflinks-gene-5.0-mRNA-2
+			note	source:maker
+	5'UTR	466489..466591	note	ID:maker-4-est_gff_Cufflinks-gene-5.0-mRNA-2:five_prime_utr
+			note	source:maker
+	5'UTR	467447..467545	note	ID:maker-4-est_gff_Cufflinks-gene-5.0-mRNA-2:five_prime_utr
+			note	source:maker
+	CDS	join(467546..467661,467727..467861,470550..470594,470868..470942,470997..471135,471816..472080,473244..473370,473429..473516,473598..>473795)	note	ID:maker-4-est_gff_Cufflinks-gene-5.0-mRNA-2:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	mRNA	join(466886..467112,467257..467373,467447..467661,467727..467861,470868..470942,470997..471135,471816..472080,473244..473370,473429..473516,473598..473795)	note	ID:maker-4-est_gff_Cufflinks-gene-5.0-mRNA-1
+			note	source:maker
+	5'UTR	466886..467112	note	ID:maker-4-est_gff_Cufflinks-gene-5.0-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	467257..467373	note	ID:maker-4-est_gff_Cufflinks-gene-5.0-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	467447..467545	note	ID:maker-4-est_gff_Cufflinks-gene-5.0-mRNA-1:five_prime_utr
+			note	source:maker
+	CDS	join(467546..467661,467727..467861,470868..470942,470997..471135,471816..472080,473244..473370,473429..473516,473598..>473795)	note	ID:maker-4-est_gff_Cufflinks-gene-5.0-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	mRNA	complement(join(480540..480767,480829..481282,481340..481673,482131..482954,483014..483127,483681..485366,485423..485941,487127..487434))	note	ID:maker-4-est_gff_Cufflinks-gene-5.2-mRNA-1
+			note	source:maker
+	3'UTR	complement(480540..480646)	note	ID:maker-4-est_gff_Cufflinks-gene-5.2-mRNA-1:three_prime_utr
+			note	source:maker
+	CDS	complement(join(480647..480767,480829..481282,481340..481673,482131..482954,483014..483127,483681..485366,485423..485941,487127..487295))	note	ID:maker-4-est_gff_Cufflinks-gene-5.2-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(487296..487434)	note	ID:maker-4-est_gff_Cufflinks-gene-5.2-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(492376..493146,493204..493303,493773..494345,495079..495394,495586..495730,497589..497728,497918..498709,499164..499364,499426..499494,500661..500864,500928..501767,501835..502330,505836..505868))	note	ID:maker-4-est_gff_Cufflinks-gene-5.3-mRNA-1
+			note	source:maker
+	3'UTR	complement(492376..492914)	note	ID:maker-4-est_gff_Cufflinks-gene-5.3-mRNA-1:three_prime_utr
+			note	source:maker
+	CDS	complement(join(492915..493146,493204..493303,493773..494345,495079..495394,495586..495730,497589..497728,497918..498709,499164..499364,499426..499494,500661..500864,500928..501269))	note	ID:maker-4-est_gff_Cufflinks-gene-5.3-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(501270..501767)	note	ID:maker-4-est_gff_Cufflinks-gene-5.3-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	complement(501835..502330)	note	ID:maker-4-est_gff_Cufflinks-gene-5.3-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	complement(505836..505868)	note	ID:maker-4-est_gff_Cufflinks-gene-5.3-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(495059..495394,497918..498709,499164..499364,499426..499494,500661..500864,500928..501767,501835..502330,502437..502500))	note	ID:maker-4-est_gff_Cufflinks-gene-5.3-mRNA-2
+			note	source:maker
+	CDS	complement(join(<495059..495394,497918..498709,499164..499364,499426..499494,500661..500864,500928..501269))	note	ID:maker-4-est_gff_Cufflinks-gene-5.3-mRNA-2:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(501270..501767)	note	ID:maker-4-est_gff_Cufflinks-gene-5.3-mRNA-2:five_prime_utr
+			note	source:maker
+	5'UTR	complement(501835..502330)	note	ID:maker-4-est_gff_Cufflinks-gene-5.3-mRNA-2:five_prime_utr
+			note	source:maker
+	5'UTR	complement(502437..502500)	note	ID:maker-4-est_gff_Cufflinks-gene-5.3-mRNA-2:five_prime_utr
+			note	source:maker
+	mRNA	join(522482..522483,524477..524764,536208..536257,542099..543730,544957..545138,545530..547146,550319..552005,552062..552409,553409..553552,553609..556506,557801..558525)	note	ID:maker-4-est_gff_Cufflinks-gene-5.1-mRNA-2
+			note	source:maker
+	5'UTR	522482..522483	note	ID:maker-4-est_gff_Cufflinks-gene-5.1-mRNA-2:five_prime_utr
+			note	source:maker
+	5'UTR	524477..524764	note	ID:maker-4-est_gff_Cufflinks-gene-5.1-mRNA-2:five_prime_utr
+			note	source:maker
+	5'UTR	536208..536257	note	ID:maker-4-est_gff_Cufflinks-gene-5.1-mRNA-2:five_prime_utr
+			note	source:maker
+	5'UTR	542099..542129	note	ID:maker-4-est_gff_Cufflinks-gene-5.1-mRNA-2:five_prime_utr
+			note	source:maker
+	CDS	join(542130..543730,544957..545138,545530..547146,550319..551781)	note	ID:maker-4-est_gff_Cufflinks-gene-5.1-mRNA-2:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	3'UTR	551782..552005	note	ID:maker-4-est_gff_Cufflinks-gene-5.1-mRNA-2:three_prime_utr
+			note	source:maker
+	3'UTR	552062..552409	note	ID:maker-4-est_gff_Cufflinks-gene-5.1-mRNA-2:three_prime_utr
+			note	source:maker
+	3'UTR	553409..553552	note	ID:maker-4-est_gff_Cufflinks-gene-5.1-mRNA-2:three_prime_utr
+			note	source:maker
+	3'UTR	553609..556506	note	ID:maker-4-est_gff_Cufflinks-gene-5.1-mRNA-2:three_prime_utr
+			note	source:maker
+	3'UTR	557801..558525	note	ID:maker-4-est_gff_Cufflinks-gene-5.1-mRNA-2:three_prime_utr
+			note	source:maker
+	mRNA	join(522482..522483,524477..524764,536208..536257,542099..543730,544957..545138,545530..547146,550304..552005,552062..552409,553409..553552,553609..556506,557592..557701,557801..558386,559164..559230,559285..559294)	note	ID:maker-4-est_gff_Cufflinks-gene-5.1-mRNA-1
+			note	source:maker
+	5'UTR	522482..522483	note	ID:maker-4-est_gff_Cufflinks-gene-5.1-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	524477..524764	note	ID:maker-4-est_gff_Cufflinks-gene-5.1-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	536208..536257	note	ID:maker-4-est_gff_Cufflinks-gene-5.1-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	542099..542129	note	ID:maker-4-est_gff_Cufflinks-gene-5.1-mRNA-1:five_prime_utr
+			note	source:maker
+	CDS	join(542130..543730,544957..545138,545530..547146,550304..551781)	note	ID:maker-4-est_gff_Cufflinks-gene-5.1-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	3'UTR	551782..552005	note	ID:maker-4-est_gff_Cufflinks-gene-5.1-mRNA-1:three_prime_utr
+			note	source:maker
+	3'UTR	552062..552409	note	ID:maker-4-est_gff_Cufflinks-gene-5.1-mRNA-1:three_prime_utr
+			note	source:maker
+	3'UTR	553409..553552	note	ID:maker-4-est_gff_Cufflinks-gene-5.1-mRNA-1:three_prime_utr
+			note	source:maker
+	3'UTR	553609..556506	note	ID:maker-4-est_gff_Cufflinks-gene-5.1-mRNA-1:three_prime_utr
+			note	source:maker
+	3'UTR	557592..557701	note	ID:maker-4-est_gff_Cufflinks-gene-5.1-mRNA-1:three_prime_utr
+			note	source:maker
+	3'UTR	557801..558386	note	ID:maker-4-est_gff_Cufflinks-gene-5.1-mRNA-1:three_prime_utr
+			note	source:maker
+	3'UTR	559164..559230	note	ID:maker-4-est_gff_Cufflinks-gene-5.1-mRNA-1:three_prime_utr
+			note	source:maker
+	3'UTR	559285..559294	note	ID:maker-4-est_gff_Cufflinks-gene-5.1-mRNA-1:three_prime_utr
+			note	source:maker
+	mRNA	complement(join(566001..568769,569885..570247,570340..570499,571380..572006,572617..574367,578069..578528))	note	ID:maker-4-est_gff_Cufflinks-gene-6.4-mRNA-1
+			note	source:maker
+	3'UTR	complement(566001..566288)	note	ID:maker-4-est_gff_Cufflinks-gene-6.4-mRNA-1:three_prime_utr
+			note	source:maker
+	CDS	complement(join(566289..568769,569885..570247,570340..570499,571380..572006,572617..574202))	note	ID:maker-4-est_gff_Cufflinks-gene-6.4-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(574203..574367)	note	ID:maker-4-est_gff_Cufflinks-gene-6.4-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	complement(578069..578528)	note	ID:maker-4-est_gff_Cufflinks-gene-6.4-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	join(578628..578794,580721..580926,580975..581037,581097..581209,581344..581446,584987..585105,585167..585288,586033..586141,586227..586515)	note	ID:maker-4-est_gff_Cufflinks-gene-6.0-mRNA-1
+			note	source:maker
+	5'UTR	578628..578794	note	ID:maker-4-est_gff_Cufflinks-gene-6.0-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	580721..580883	note	ID:maker-4-est_gff_Cufflinks-gene-6.0-mRNA-1:five_prime_utr
+			note	source:maker
+	CDS	join(580884..580926,580975..581037,581097..581209,581344..581446,584987..585105,585167..585288,586033..586141,586227..586382)	note	ID:maker-4-est_gff_Cufflinks-gene-6.0-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	3'UTR	586383..586515	note	ID:maker-4-est_gff_Cufflinks-gene-6.0-mRNA-1:three_prime_utr
+			note	source:maker
+	mRNA	join(578628..578794,580724..581037,581097..581209,581344..581446,584987..585105,585167..585288,586036..586141,586227..586515)	note	ID:maker-4-est_gff_Cufflinks-gene-6.0-mRNA-2
+			note	source:maker
+	5'UTR	578628..578794	note	ID:maker-4-est_gff_Cufflinks-gene-6.0-mRNA-2:five_prime_utr
+			note	source:maker
+	5'UTR	580724..580991	note	ID:maker-4-est_gff_Cufflinks-gene-6.0-mRNA-2:five_prime_utr
+			note	source:maker
+	CDS	join(580992..581037,581097..581209,581344..581446,584987..585105,585167..585288,586036..586141,586227..586382)	note	ID:maker-4-est_gff_Cufflinks-gene-6.0-mRNA-2:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	3'UTR	586383..586515	note	ID:maker-4-est_gff_Cufflinks-gene-6.0-mRNA-2:three_prime_utr
+			note	source:maker
+	mRNA	join(578874..578926,580721..581037,581097..581209,581344..581446,584987..585105,585167..585288,586033..586141,586227..586515)	note	ID:maker-4-est_gff_Cufflinks-gene-6.0-mRNA-3
+			note	source:maker
+	5'UTR	578874..578926	note	ID:maker-4-est_gff_Cufflinks-gene-6.0-mRNA-3:five_prime_utr
+			note	source:maker
+	5'UTR	580721..580991	note	ID:maker-4-est_gff_Cufflinks-gene-6.0-mRNA-3:five_prime_utr
+			note	source:maker
+	CDS	join(580992..581037,581097..581209,581344..581446,584987..585105,585167..585288,586033..586141,586227..586382)	note	ID:maker-4-est_gff_Cufflinks-gene-6.0-mRNA-3:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	3'UTR	586383..586515	note	ID:maker-4-est_gff_Cufflinks-gene-6.0-mRNA-3:three_prime_utr
+			note	source:maker
+	mRNA	complement(join(588912..589682,589740..589927,590601..590802,590860..590969,591035..591159,591230..591407,592161..592204))	note	ID:maker-4-est_gff_Cufflinks-gene-6.5-mRNA-1
+			note	source:maker
+	3'UTR	complement(588912..588992)	note	ID:maker-4-est_gff_Cufflinks-gene-6.5-mRNA-1:three_prime_utr
+			note	source:maker
+	CDS	complement(join(588993..589682,589740..589927,590601..590802,590860..590969,591035..591159,591230..591321))	note	ID:maker-4-est_gff_Cufflinks-gene-6.5-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(591322..591407)	note	ID:maker-4-est_gff_Cufflinks-gene-6.5-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	complement(592161..592204)	note	ID:maker-4-est_gff_Cufflinks-gene-6.5-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	join(592411..592592,594239..595054,595961..596271,596328..596951,597605..598915)	note	ID:maker-4-est_gff_Cufflinks-gene-6.1-mRNA-1
+			note	source:maker
+	5'UTR	592411..592592	note	ID:maker-4-est_gff_Cufflinks-gene-6.1-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	594239..594374	note	ID:maker-4-est_gff_Cufflinks-gene-6.1-mRNA-1:five_prime_utr
+			note	source:maker
+	CDS	join(594375..595054,595961..596271,596328..596951,597605..597948)	note	ID:maker-4-est_gff_Cufflinks-gene-6.1-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	3'UTR	597949..598915	note	ID:maker-4-est_gff_Cufflinks-gene-6.1-mRNA-1:three_prime_utr
+			note	source:maker
+	mRNA	complement(join(621343..622155,622383..622561,623938..624878,625629..627388))	note	ID:maker-4-est_gff_Cufflinks-gene-6.6-mRNA-1
+			note	source:maker
+	3'UTR	complement(621343..621729)	note	ID:maker-4-est_gff_Cufflinks-gene-6.6-mRNA-1:three_prime_utr
+			note	source:maker
+	CDS	complement(join(621730..622155,622383..622561,623938..624878,625629..627328))	note	ID:maker-4-est_gff_Cufflinks-gene-6.6-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(627329..627388)	note	ID:maker-4-est_gff_Cufflinks-gene-6.6-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	join(631376..631522,631911..632281,632353..632432,634241..634421,634563..635048,635662..636549,636631..636807,638974..639102,639162..639257,639319..639689,640263..640409,640474..640803,640880..640972)	note	ID:maker-4-est_gff_Cufflinks-gene-6.2-mRNA-2
+			note	source:maker
+	5'UTR	631376..631522	note	ID:maker-4-est_gff_Cufflinks-gene-6.2-mRNA-2:five_prime_utr
+			note	source:maker
+	5'UTR	631911..632028	note	ID:maker-4-est_gff_Cufflinks-gene-6.2-mRNA-2:five_prime_utr
+			note	source:maker
+	CDS	join(632029..632281,632353..632432,634241..634421,634563..635048,635662..636549,636631..636807,638974..639102,639162..639257,639319..639689,640263..640409,640474..640803,640880..>640972)	note	ID:maker-4-est_gff_Cufflinks-gene-6.2-mRNA-2:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	mRNA	join(631581..631625,631911..632281,632353..632432,634241..634421,634563..635048,635662..636549,636631..636807,637930..637977,638974..639102,639162..639257,639319..639689,640263..640409,640474..640803,640880..640972)	note	ID:maker-4-est_gff_Cufflinks-gene-6.2-mRNA-1
+			note	source:maker
+	5'UTR	631581..631625	note	ID:maker-4-est_gff_Cufflinks-gene-6.2-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	631911..632028	note	ID:maker-4-est_gff_Cufflinks-gene-6.2-mRNA-1:five_prime_utr
+			note	source:maker
+	CDS	join(632029..632281,632353..632432,634241..634421,634563..635048,635662..636549,636631..636807,637930..637977,638974..639102,639162..639257,639319..639689,640263..640409,640474..640803,640880..>640972)	note	ID:maker-4-est_gff_Cufflinks-gene-6.2-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	mRNA	complement(join(643986..645289,645398..646634))	note	ID:maker-4-est_gff_Cufflinks-gene-6.7-mRNA-1
+			note	source:maker
+	3'UTR	complement(643986..643996)	note	ID:maker-4-est_gff_Cufflinks-gene-6.7-mRNA-1:three_prime_utr
+			note	source:maker
+	CDS	complement(join(643997..645289,645398..646210))	note	ID:maker-4-est_gff_Cufflinks-gene-6.7-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(646211..646634)	note	ID:maker-4-est_gff_Cufflinks-gene-6.7-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	join(650343..650605,652253..652520,652654..652755,652834..653014,653074..653341,653955..654058,654117..654486,654547..654750,654803..654970,655036..655236)	note	ID:maker-4-est_gff_Cufflinks-gene-6.3-mRNA-1
+			note	source:maker
+	5'UTR	650343..650461	note	ID:maker-4-est_gff_Cufflinks-gene-6.3-mRNA-1:five_prime_utr
+			note	source:maker
+	CDS	join(650462..650605,652253..652520,652654..652755,652834..653014,653074..653341,653955..654058,654117..654486,654547..654750,654803..654970,655036..655137)	note	ID:maker-4-est_gff_Cufflinks-gene-6.3-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	3'UTR	655138..655236	note	ID:maker-4-est_gff_Cufflinks-gene-6.3-mRNA-1:three_prime_utr
+			note	source:maker
+	mRNA	complement(join(670820..671656,672931..673210,673272..673677,674496..674674,675131..675424,675687..676061,676842..678310,678528..678886,680120..680159))	note	ID:maker-4-est_gff_Cufflinks-gene-7.3-mRNA-2
+			note	source:maker
+	3'UTR	complement(670820..671656)	note	ID:maker-4-est_gff_Cufflinks-gene-7.3-mRNA-2:three_prime_utr
+			note	source:maker
+	3'UTR	complement(672931..673210)	note	ID:maker-4-est_gff_Cufflinks-gene-7.3-mRNA-2:three_prime_utr
+			note	source:maker
+	3'UTR	complement(673272..673475)	note	ID:maker-4-est_gff_Cufflinks-gene-7.3-mRNA-2:three_prime_utr
+			note	source:maker
+	CDS	complement(join(673476..673677,674496..674674,675131..675424,675687..676061,676842..678310,678528..678846))	note	ID:maker-4-est_gff_Cufflinks-gene-7.3-mRNA-2:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(678847..678886)	note	ID:maker-4-est_gff_Cufflinks-gene-7.3-mRNA-2:five_prime_utr
+			note	source:maker
+	5'UTR	complement(680120..680159)	note	ID:maker-4-est_gff_Cufflinks-gene-7.3-mRNA-2:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(670820..671656,672931..673210,673272..673677,674496..674674,675131..675424,675687..676061,676842..678310,678528..679134,680547..680610))	note	ID:maker-4-est_gff_Cufflinks-gene-7.3-mRNA-1
+			note	source:maker
+	3'UTR	complement(670820..671656)	note	ID:maker-4-est_gff_Cufflinks-gene-7.3-mRNA-1:three_prime_utr
+			note	source:maker
+	3'UTR	complement(672931..673210)	note	ID:maker-4-est_gff_Cufflinks-gene-7.3-mRNA-1:three_prime_utr
+			note	source:maker
+	3'UTR	complement(673272..673475)	note	ID:maker-4-est_gff_Cufflinks-gene-7.3-mRNA-1:three_prime_utr
+			note	source:maker
+	CDS	complement(join(673476..673677,674496..674674,675131..675424,675687..676061,676842..678310,678528..678963))	note	ID:maker-4-est_gff_Cufflinks-gene-7.3-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(678964..679134)	note	ID:maker-4-est_gff_Cufflinks-gene-7.3-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	complement(680547..680610)	note	ID:maker-4-est_gff_Cufflinks-gene-7.3-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	join(684293..684368,684481..684966,685614..685931,686577..687558,689046..689200,689756..690500)	note	ID:maker-4-est_gff_Cufflinks-gene-7.0-mRNA-1
+			note	source:maker
+	5'UTR	684293..684326	note	ID:maker-4-est_gff_Cufflinks-gene-7.0-mRNA-1:five_prime_utr
+			note	source:maker
+	CDS	join(684327..684368,684481..684966,685614..685931,686577..687558,689046..689200,689756..690076)	note	ID:maker-4-est_gff_Cufflinks-gene-7.0-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	3'UTR	690077..690500	note	ID:maker-4-est_gff_Cufflinks-gene-7.0-mRNA-1:three_prime_utr
+			note	source:maker
+	mRNA	join(691790..692013,701066..701761,705207..707851)	note	ID:maker-4-est_gff_Cufflinks-gene-7.1-mRNA-1
+			note	source:maker
+	5'UTR	691790..692013	note	ID:maker-4-est_gff_Cufflinks-gene-7.1-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	701066..701334	note	ID:maker-4-est_gff_Cufflinks-gene-7.1-mRNA-1:five_prime_utr
+			note	source:maker
+	CDS	join(701335..701761,705207..706666)	note	ID:maker-4-est_gff_Cufflinks-gene-7.1-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	3'UTR	706667..707851	note	ID:maker-4-est_gff_Cufflinks-gene-7.1-mRNA-1:three_prime_utr
+			note	source:maker
+	mRNA	join(701001..701761,705207..707851)	note	ID:maker-4-est_gff_Cufflinks-gene-7.1-mRNA-2
+			note	source:maker
+	5'UTR	701001..701334	note	ID:maker-4-est_gff_Cufflinks-gene-7.1-mRNA-2:five_prime_utr
+			note	source:maker
+	CDS	join(701335..701761,705207..706666)	note	ID:maker-4-est_gff_Cufflinks-gene-7.1-mRNA-2:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	3'UTR	706667..707851	note	ID:maker-4-est_gff_Cufflinks-gene-7.1-mRNA-2:three_prime_utr
+			note	source:maker
+	mRNA	complement(join(712620..712985,713051..713469,714007..715042,715840..716065,716323..716425))	note	ID:maker-4-est_gff_Cufflinks-gene-7.4-mRNA-1
+			note	source:maker
+	CDS	complement(join(<712620..712985,713051..713469,714007..715015))	note	ID:maker-4-est_gff_Cufflinks-gene-7.4-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(715016..715042)	note	ID:maker-4-est_gff_Cufflinks-gene-7.4-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	complement(715840..716065)	note	ID:maker-4-est_gff_Cufflinks-gene-7.4-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	complement(716323..716425)	note	ID:maker-4-est_gff_Cufflinks-gene-7.4-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(712620..712985,713051..713469,714007..715042,716323..716425))	note	ID:maker-4-est_gff_Cufflinks-gene-7.4-mRNA-2
+			note	source:maker
+	CDS	complement(join(<712620..712985,713051..713469,714007..715015))	note	ID:maker-4-est_gff_Cufflinks-gene-7.4-mRNA-2:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(715016..715042)	note	ID:maker-4-est_gff_Cufflinks-gene-7.4-mRNA-2:five_prime_utr
+			note	source:maker
+	5'UTR	complement(716323..716425)	note	ID:maker-4-est_gff_Cufflinks-gene-7.4-mRNA-2:five_prime_utr
+			note	source:maker
+	mRNA	join(731566..731708,733119..733299,734484..735138,737753..737926,738280..738548)	note	ID:maker-4-est_gff_Cufflinks-gene-7.2-mRNA-1
+			note	source:maker
+	CDS	join(<731566..731708,733119..733299,734484..735138,737753..737926,738280..>738548)	note	ID:maker-4-est_gff_Cufflinks-gene-7.2-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	mRNA	join(760602..760607,763029..763176,763414..763787,765792..765917,765998..766697,767102..767455,767933..769645,771196..772095,772803..773566,773651..773786,773964..774854,774913..777585,778147..778428,778491..778790,778846..788316,788388..789366,789430..789771,791179..792221,793029..793085,794643..794743,794811..794937,795003..795305,795541..796672)	note	ID:maker-4-est_gff_Cufflinks-gene-8.0-mRNA-1
+			note	source:maker
+	CDS	join(<760602..760607,763029..763176,763414..763787,765792..765917,765998..766697,767102..767455,767933..769645,771196..772095,772803..773566,773651..773786,773964..774854,774913..777585,778147..778428,778491..778790,778846..788316,788388..789366,789430..789771,791179..792221,793029..793085,794643..794743,794811..794937,795003..795305,795541..796175)	note	ID:maker-4-est_gff_Cufflinks-gene-8.0-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	3'UTR	796176..796672	note	ID:maker-4-est_gff_Cufflinks-gene-8.0-mRNA-1:three_prime_utr
+			note	source:maker
+	mRNA	join(771093..771121,771196..772095,772803..773566,773651..773786,773964..774854,774913..777585,778147..778428,778491..778790,778846..788316,788388..789366,789430..789771,791179..792221,794643..794743,794811..794937,795003..795305,795541..796672)	note	ID:maker-4-est_gff_Cufflinks-gene-8.0-mRNA-2
+			note	source:maker
+	5'UTR	771093..771121	note	ID:maker-4-est_gff_Cufflinks-gene-8.0-mRNA-2:five_prime_utr
+			note	source:maker
+	5'UTR	771196..771605	note	ID:maker-4-est_gff_Cufflinks-gene-8.0-mRNA-2:five_prime_utr
+			note	source:maker
+	CDS	join(771606..772095,772803..773566,773651..773786,773964..774854,774913..777585,778147..778428,778491..778790,778846..788316,788388..789366,789430..789771,791179..792221,794643..794743,794811..794937,795003..795305,795541..796175)	note	ID:maker-4-est_gff_Cufflinks-gene-8.0-mRNA-2:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	3'UTR	796176..796672	note	ID:maker-4-est_gff_Cufflinks-gene-8.0-mRNA-2:three_prime_utr
+			note	source:maker
+	mRNA	complement(join(799388..802295,803800..803871,803928..804563,806818..807652,807707..807835,808078..808207))	note	ID:maker-4-est_gff_Cufflinks-gene-8.1-mRNA-1
+			note	source:maker
+	3'UTR	complement(799388..799452)	note	ID:maker-4-est_gff_Cufflinks-gene-8.1-mRNA-1:three_prime_utr
+			note	source:maker
+	CDS	complement(join(799453..802295,803800..803871,803928..804563,806818..807652,807707..807772))	note	ID:maker-4-est_gff_Cufflinks-gene-8.1-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(807773..807835)	note	ID:maker-4-est_gff_Cufflinks-gene-8.1-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	complement(808078..808207)	note	ID:maker-4-est_gff_Cufflinks-gene-8.1-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(799388..802295,803800..803871,803928..804563,806818..807652,807707..807835,809521..809622))	note	ID:maker-4-est_gff_Cufflinks-gene-8.1-mRNA-2
+			note	source:maker
+	3'UTR	complement(799388..799452)	note	ID:maker-4-est_gff_Cufflinks-gene-8.1-mRNA-2:three_prime_utr
+			note	source:maker
+	CDS	complement(join(799453..802295,803800..803871,803928..804563,806818..807652,807707..807772))	note	ID:maker-4-est_gff_Cufflinks-gene-8.1-mRNA-2:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(807773..807835)	note	ID:maker-4-est_gff_Cufflinks-gene-8.1-mRNA-2:five_prime_utr
+			note	source:maker
+	5'UTR	complement(809521..809622)	note	ID:maker-4-est_gff_Cufflinks-gene-8.1-mRNA-2:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(806695..807652,807707..807835,808078..808207))	note	ID:maker-4-est_gff_Cufflinks-gene-8.1-mRNA-3
+			note	source:maker
+	3'UTR	complement(806695..806701)	note	ID:maker-4-est_gff_Cufflinks-gene-8.1-mRNA-3:three_prime_utr
+			note	source:maker
+	CDS	complement(join(806702..807652,807707..807772))	note	ID:maker-4-est_gff_Cufflinks-gene-8.1-mRNA-3:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(807773..807835)	note	ID:maker-4-est_gff_Cufflinks-gene-8.1-mRNA-3:five_prime_utr
+			note	source:maker
+	5'UTR	complement(808078..808207)	note	ID:maker-4-est_gff_Cufflinks-gene-8.1-mRNA-3:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(821759..822736,823024..823953,827812..827924))	note	ID:maker-4-est_gff_Cufflinks-gene-8.2-mRNA-1
+			note	source:maker
+	3'UTR	complement(821759..821908)	note	ID:maker-4-est_gff_Cufflinks-gene-8.2-mRNA-1:three_prime_utr
+			note	source:maker
+	CDS	complement(join(821909..822736,823024..823938))	note	ID:maker-4-est_gff_Cufflinks-gene-8.2-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(823939..823953)	note	ID:maker-4-est_gff_Cufflinks-gene-8.2-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	complement(827812..827924)	note	ID:maker-4-est_gff_Cufflinks-gene-8.2-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(821759..822736,823024..823953,844127..844213))	note	ID:maker-4-est_gff_Cufflinks-gene-8.2-mRNA-2
+			note	source:maker
+	3'UTR	complement(821759..821908)	note	ID:maker-4-est_gff_Cufflinks-gene-8.2-mRNA-2:three_prime_utr
+			note	source:maker
+	CDS	complement(join(821909..822736,823024..823953,844127..844171))	note	ID:maker-4-est_gff_Cufflinks-gene-8.2-mRNA-2:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(844172..844213)	note	ID:maker-4-est_gff_Cufflinks-gene-8.2-mRNA-2:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(876063..876466,880933..881007,881066..882013,882419..885037,885974..886268,886328..886498,886557..886920,887602..887627))	note	ID:maker-4-est_gff_Cufflinks-gene-9.0-mRNA-1
+			note	source:maker
+	3'UTR	complement(876063..876227)	note	ID:maker-4-est_gff_Cufflinks-gene-9.0-mRNA-1:three_prime_utr
+			note	source:maker
+	CDS	complement(join(876228..876466,880933..881007,881066..882013,882419..885037,885974..886268,886328..886498,886557..886892))	note	ID:maker-4-est_gff_Cufflinks-gene-9.0-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(886893..886920)	note	ID:maker-4-est_gff_Cufflinks-gene-9.0-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	complement(887602..887627)	note	ID:maker-4-est_gff_Cufflinks-gene-9.0-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(891969..892280,892346..892472,892538..892700,892753..892851,893840..894197,894261..894552,894620..895093,895829..896110,896169..896336,896740..896865,896922..897080,897143..897415,897496..897820,899477..899728))	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-4
+			note	source:maker
+	3'UTR	complement(891969..892280)	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-4:three_prime_utr
+			note	source:maker
+	3'UTR	complement(892346..892472)	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-4:three_prime_utr
+			note	source:maker
+	3'UTR	complement(892538..892700)	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-4:three_prime_utr
+			note	source:maker
+	3'UTR	complement(892753..892851)	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-4:three_prime_utr
+			note	source:maker
+	3'UTR	complement(893840..894197)	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-4:three_prime_utr
+			note	source:maker
+	3'UTR	complement(894261..894552)	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-4:three_prime_utr
+			note	source:maker
+	3'UTR	complement(894620..894835)	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-4:three_prime_utr
+			note	source:maker
+	CDS	complement(join(894836..895093,895829..896110,896169..896336,896740..896865,896922..897080,897143..897415,897496..897820,899477..899520))	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-4:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(899521..899728)	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-4:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(891969..892280,892346..892472,892538..892700,892753..892851,893840..894197,894261..894552,894620..895093,895829..896110,896169..896336,896740..896865,896922..897080,897143..897415,897496..897820,899477..899618,903243..903349,903587..903707,903769..903988,904193..904267,906080..906088,906386..906517,919019..922018))	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-1
+			note	source:maker
+	3'UTR	complement(891969..892280)	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-1:three_prime_utr
+			note	source:maker
+	3'UTR	complement(892346..892472)	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-1:three_prime_utr
+			note	source:maker
+	3'UTR	complement(892538..892700)	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-1:three_prime_utr
+			note	source:maker
+	3'UTR	complement(892753..892851)	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-1:three_prime_utr
+			note	source:maker
+	3'UTR	complement(893840..894197)	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-1:three_prime_utr
+			note	source:maker
+	3'UTR	complement(894261..894552)	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-1:three_prime_utr
+			note	source:maker
+	3'UTR	complement(894620..894835)	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-1:three_prime_utr
+			note	source:maker
+	CDS	complement(join(894836..895093,895829..896110,896169..896336,896740..896865,896922..897080,897143..897415,897496..897820,899477..899618,903243..903349,903587..903707,903769..903988,904193..904267,906080..906088,906386..906517,919019..>922018))	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	mRNA	complement(join(891969..892280,892346..892472,892538..892700,892753..892851,893840..894197,894261..894552,894620..895093,895829..896110,896169..896336,896740..896865,896922..897080,897143..897415,897496..897820,899477..899618,903243..903349,903587..903707,903769..903988,904193..904267,906386..906517,919019..922018))	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-2
+			note	source:maker
+	3'UTR	complement(891969..892280)	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-2:three_prime_utr
+			note	source:maker
+	3'UTR	complement(892346..892472)	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-2:three_prime_utr
+			note	source:maker
+	3'UTR	complement(892538..892700)	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-2:three_prime_utr
+			note	source:maker
+	3'UTR	complement(892753..892851)	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-2:three_prime_utr
+			note	source:maker
+	3'UTR	complement(893840..894197)	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-2:three_prime_utr
+			note	source:maker
+	3'UTR	complement(894261..894552)	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-2:three_prime_utr
+			note	source:maker
+	3'UTR	complement(894620..894835)	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-2:three_prime_utr
+			note	source:maker
+	CDS	complement(join(894836..895093,895829..896110,896169..896336,896740..896865,896922..897080,897143..897415,897496..897820,899477..899618,903243..903349,903587..903707,903769..903988,904193..904267,906386..906517,919019..>922018))	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-2:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	mRNA	complement(join(891969..892280,892346..892472,892538..892700,892753..892851,893840..894197,894261..894552,894620..895093,895829..896110,896169..896336,896740..896865,896922..897080,897143..897415,897496..897820,899477..899618,902469..902575,903587..903707,903769..903988,904193..904267,906386..906517,919019..922018))	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-3
+			note	source:maker
+	3'UTR	complement(891969..892280)	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-3:three_prime_utr
+			note	source:maker
+	3'UTR	complement(892346..892472)	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-3:three_prime_utr
+			note	source:maker
+	3'UTR	complement(892538..892700)	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-3:three_prime_utr
+			note	source:maker
+	3'UTR	complement(892753..892851)	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-3:three_prime_utr
+			note	source:maker
+	3'UTR	complement(893840..894197)	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-3:three_prime_utr
+			note	source:maker
+	3'UTR	complement(894261..894552)	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-3:three_prime_utr
+			note	source:maker
+	3'UTR	complement(894620..894835)	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-3:three_prime_utr
+			note	source:maker
+	CDS	complement(join(894836..895093,895829..896110,896169..896336,896740..896865,896922..897080,897143..897415,897496..897820,899477..899618,902469..902575,903587..903707,903769..903988,904193..904267,906386..906517,919019..>922018))	note	ID:maker-4-est_gff_Cufflinks-gene-9.1-mRNA-3:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	mRNA	complement(join(922757..923208,923452..923908,923963..924097,924987..925151))	note	ID:maker-4-est_gff_Cufflinks-gene-9.2-mRNA-1
+			note	source:maker
+	CDS	complement(join(<922757..923208,923452..923908,923963..923968))	note	ID:maker-4-est_gff_Cufflinks-gene-9.2-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(923969..924097)	note	ID:maker-4-est_gff_Cufflinks-gene-9.2-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	complement(924987..925151)	note	ID:maker-4-est_gff_Cufflinks-gene-9.2-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(922757..923908,923963..924097,924987..925151))	note	ID:maker-4-est_gff_Cufflinks-gene-9.2-mRNA-2
+			note	source:maker
+	CDS	complement(join(<922757..923908,923963..923968))	note	ID:maker-4-est_gff_Cufflinks-gene-9.2-mRNA-2:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(923969..924097)	note	ID:maker-4-est_gff_Cufflinks-gene-9.2-mRNA-2:five_prime_utr
+			note	source:maker
+	5'UTR	complement(924987..925151)	note	ID:maker-4-est_gff_Cufflinks-gene-9.2-mRNA-2:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(936262..936344,936463..936685,936747..936893,937493..937716,937901..938369,938950..939107,939162..939402,939529..941825,945709..945764,946201..946312,946394..946574,946637..947287,950448..950649,950706..950757,951138..951225))	note	ID:maker-4-est_gff_Cufflinks-gene-9.3-mRNA-1
+			note	source:maker
+	CDS	complement(join(<936262..936344,936463..936685,936747..936893,937493..937716,937901..938369,938950..939107,939162..939402,939529..941825,945709..945764,946201..946312,946394..946574,946637..947287,950448..950525))	note	ID:maker-4-est_gff_Cufflinks-gene-9.3-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(950526..950649)	note	ID:maker-4-est_gff_Cufflinks-gene-9.3-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	complement(950706..950757)	note	ID:maker-4-est_gff_Cufflinks-gene-9.3-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	complement(951138..951225)	note	ID:maker-4-est_gff_Cufflinks-gene-9.3-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(972327..972703,972764..973087,974139..974525,974646..974852,975115..975489,975547..975676,977171..978515,978632..978787))	note	ID:maker-4-est_gff_Cufflinks-gene-10.2-mRNA-2
+			note	source:maker
+	3'UTR	complement(972327..972464)	note	ID:maker-4-est_gff_Cufflinks-gene-10.2-mRNA-2:three_prime_utr
+			note	source:maker
+	CDS	complement(join(972465..972703,972764..973087,974139..974525,974646..974852,975115..975489,975547..975676,977171..978515,978632..978657))	note	ID:maker-4-est_gff_Cufflinks-gene-10.2-mRNA-2:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(978658..978787)	note	ID:maker-4-est_gff_Cufflinks-gene-10.2-mRNA-2:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(972327..972703,972764..973087,974139..974525,974646..974852,975115..975489,975547..975676,977171..978515,978632..978749,978915..978949))	note	ID:maker-4-est_gff_Cufflinks-gene-10.2-mRNA-1
+			note	source:maker
+	3'UTR	complement(972327..972464)	note	ID:maker-4-est_gff_Cufflinks-gene-10.2-mRNA-1:three_prime_utr
+			note	source:maker
+	CDS	complement(join(972465..972703,972764..973087,974139..974525,974646..974852,975115..975489,975547..975676,977171..978515,978632..978657))	note	ID:maker-4-est_gff_Cufflinks-gene-10.2-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(978658..978749)	note	ID:maker-4-est_gff_Cufflinks-gene-10.2-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	complement(978915..978949)	note	ID:maker-4-est_gff_Cufflinks-gene-10.2-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(972327..972703,972764..973087,974139..974525,974646..974852,975115..975489,975547..975676,977171..978515,979866..979913))	note	ID:maker-4-est_gff_Cufflinks-gene-10.2-mRNA-3
+			note	source:maker
+	3'UTR	complement(972327..972464)	note	ID:maker-4-est_gff_Cufflinks-gene-10.2-mRNA-3:three_prime_utr
+			note	source:maker
+	CDS	complement(join(972465..972703,972764..973087,974139..974525,974646..974852,975115..975489,975547..975676,977171..978280))	note	ID:maker-4-est_gff_Cufflinks-gene-10.2-mRNA-3:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(978281..978515)	note	ID:maker-4-est_gff_Cufflinks-gene-10.2-mRNA-3:five_prime_utr
+			note	source:maker
+	5'UTR	complement(979866..979913)	note	ID:maker-4-est_gff_Cufflinks-gene-10.2-mRNA-3:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(972327..972703,972764..973087,974139..974525,974646..974852,975115..975489,975547..975676,977171..978515,980125..980172))	note	ID:maker-4-est_gff_Cufflinks-gene-10.2-mRNA-4
+			note	source:maker
+	3'UTR	complement(972327..972464)	note	ID:maker-4-est_gff_Cufflinks-gene-10.2-mRNA-4:three_prime_utr
+			note	source:maker
+	CDS	complement(join(972465..972703,972764..973087,974139..974525,974646..974852,975115..975489,975547..975676,977171..978280))	note	ID:maker-4-est_gff_Cufflinks-gene-10.2-mRNA-4:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(978281..978515)	note	ID:maker-4-est_gff_Cufflinks-gene-10.2-mRNA-4:five_prime_utr
+			note	source:maker
+	5'UTR	complement(980125..980172)	note	ID:maker-4-est_gff_Cufflinks-gene-10.2-mRNA-4:five_prime_utr
+			note	source:maker
+	mRNA	join(1010750..1011128,1012692..1012872,1017138..1017375,1018333..1018509,1019249..1019331,1024784..1025038,1025096..1025244,1026433..1026635,1026692..1027162)	note	ID:maker-4-est_gff_Cufflinks-gene-10.0-mRNA-1
+			note	source:maker
+	5'UTR	1010750..1010877	note	ID:maker-4-est_gff_Cufflinks-gene-10.0-mRNA-1:five_prime_utr
+			note	source:maker
+	CDS	join(1010878..1011128,1012692..1012872,1017138..1017375,1018333..1018509,1019249..1019331,1024784..1025038,1025096..1025244,1026433..1026635,1026692..1026786)	note	ID:maker-4-est_gff_Cufflinks-gene-10.0-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	3'UTR	1026787..1027162	note	ID:maker-4-est_gff_Cufflinks-gene-10.0-mRNA-1:three_prime_utr
+			note	source:maker
+	mRNA	complement(join(1034274..1034394,1034944..1035152,1035209..1035354,1035404..1035978,1036051..1036246,1037002..1039335,1039396..1040641,1042868..1044306,1047589..1047643))	note	ID:maker-4-est_gff_Cufflinks-gene-10.3-mRNA-1
+			note	source:maker
+	3'UTR	complement(1034274..1034394)	note	ID:maker-4-est_gff_Cufflinks-gene-10.3-mRNA-1:three_prime_utr
+			note	source:maker
+	3'UTR	complement(1034944..1035152)	note	ID:maker-4-est_gff_Cufflinks-gene-10.3-mRNA-1:three_prime_utr
+			note	source:maker
+	3'UTR	complement(1035209..1035354)	note	ID:maker-4-est_gff_Cufflinks-gene-10.3-mRNA-1:three_prime_utr
+			note	source:maker
+	3'UTR	complement(1035404..1035581)	note	ID:maker-4-est_gff_Cufflinks-gene-10.3-mRNA-1:three_prime_utr
+			note	source:maker
+	CDS	complement(join(1035582..1035978,1036051..1036246,1037002..1039335,1039396..1040641,1042868..1044097))	note	ID:maker-4-est_gff_Cufflinks-gene-10.3-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(1044098..1044306)	note	ID:maker-4-est_gff_Cufflinks-gene-10.3-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	complement(1047589..1047643)	note	ID:maker-4-est_gff_Cufflinks-gene-10.3-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(1034861..1035152,1035209..1035354,1035404..1035978,1036051..1036246,1037002..1039335,1039396..1040641,1042868..1044306,1047589..1047643))	note	ID:maker-4-est_gff_Cufflinks-gene-10.3-mRNA-2
+			note	source:maker
+	3'UTR	complement(1034861..1035152)	note	ID:maker-4-est_gff_Cufflinks-gene-10.3-mRNA-2:three_prime_utr
+			note	source:maker
+	3'UTR	complement(1035209..1035354)	note	ID:maker-4-est_gff_Cufflinks-gene-10.3-mRNA-2:three_prime_utr
+			note	source:maker
+	3'UTR	complement(1035404..1035581)	note	ID:maker-4-est_gff_Cufflinks-gene-10.3-mRNA-2:three_prime_utr
+			note	source:maker
+	CDS	complement(join(1035582..1035978,1036051..1036246,1037002..1039335,1039396..1040641,1042868..1044097))	note	ID:maker-4-est_gff_Cufflinks-gene-10.3-mRNA-2:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(1044098..1044306)	note	ID:maker-4-est_gff_Cufflinks-gene-10.3-mRNA-2:five_prime_utr
+			note	source:maker
+	5'UTR	complement(1047589..1047643)	note	ID:maker-4-est_gff_Cufflinks-gene-10.3-mRNA-2:five_prime_utr
+			note	source:maker
+	mRNA	join(1052221..1052579,1053533..1053844,1053898..1055114)	note	ID:maker-4-est_gff_Cufflinks-gene-10.1-mRNA-1
+			note	source:maker
+	5'UTR	1052221..1052515	note	ID:maker-4-est_gff_Cufflinks-gene-10.1-mRNA-1:five_prime_utr
+			note	source:maker
+	CDS	join(1052516..1052579,1053533..1053844,1053898..1055039)	note	ID:maker-4-est_gff_Cufflinks-gene-10.1-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	3'UTR	1055040..1055114	note	ID:maker-4-est_gff_Cufflinks-gene-10.1-mRNA-1:three_prime_utr
+			note	source:maker
+	mRNA	complement(join(1057794..1058048,1058102..1058216,1058272..1058366,1058985..1059063,1064094..1064150,1065782..1065874,1067890..1068016,1068079..1068201,1068261..1068355,1068449..1068774,1069130..1069184,1069813..1069872,1070924..1071018,1071081..1071235,1071320..1071488,1071814..1071961))	note	ID:maker-4-est_gff_Cufflinks-gene-11.3-mRNA-1
+			note	source:maker
+	3'UTR	complement(1057794..1057903)	note	ID:maker-4-est_gff_Cufflinks-gene-11.3-mRNA-1:three_prime_utr
+			note	source:maker
+	CDS	complement(join(1057904..1058048,1058102..1058216,1058272..1058366,1058985..1059063,1064094..1064150,1065782..1065874,1067890..1068016,1068079..1068201,1068261..1068355,1068449..1068774,1069130..1069184,1069813..1069872,1070924..1071018,1071081..1071145))	note	ID:maker-4-est_gff_Cufflinks-gene-11.3-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(1071146..1071235)	note	ID:maker-4-est_gff_Cufflinks-gene-11.3-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	complement(1071320..1071488)	note	ID:maker-4-est_gff_Cufflinks-gene-11.3-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	complement(1071814..1071961)	note	ID:maker-4-est_gff_Cufflinks-gene-11.3-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(1057794..1058048,1058102..1058216,1058272..1058366,1058985..1059060,1060639..1060704,1064094..1064150,1065782..1065874,1067890..1068016,1068079..1068201,1068261..1068355,1068449..1068774,1069130..1069184,1069813..1069872,1070924..1071018,1071081..1071235,1071969..1072032))	note	ID:maker-4-est_gff_Cufflinks-gene-11.3-mRNA-2
+			note	source:maker
+	3'UTR	complement(1057794..1057903)	note	ID:maker-4-est_gff_Cufflinks-gene-11.3-mRNA-2:three_prime_utr
+			note	source:maker
+	CDS	complement(join(1057904..1058048,1058102..1058216,1058272..1058366,1058985..1059060,1060639..1060704,1064094..1064150,1065782..1065874,1067890..1068016,1068079..1068201,1068261..1068355,1068449..1068774,1069130..1069184,1069813..1069872,1070924..1071018,1071081..1071145))	note	ID:maker-4-est_gff_Cufflinks-gene-11.3-mRNA-2:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(1071146..1071235)	note	ID:maker-4-est_gff_Cufflinks-gene-11.3-mRNA-2:five_prime_utr
+			note	source:maker
+	5'UTR	complement(1071969..1072032)	note	ID:maker-4-est_gff_Cufflinks-gene-11.3-mRNA-2:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(1057794..1058048,1058102..1058216,1058272..1058366,1058985..1059063,1065782..1065874,1067890..1068016,1068079..1068201,1068261..1068355,1068449..1068774,1069130..1069184,1069813..1069872,1070924..1071018,1071081..1071235,1074124..1074547))	note	ID:maker-4-est_gff_Cufflinks-gene-11.3-mRNA-3
+			note	source:maker
+	3'UTR	complement(1057794..1057903)	note	ID:maker-4-est_gff_Cufflinks-gene-11.3-mRNA-3:three_prime_utr
+			note	source:maker
+	CDS	complement(join(1057904..1058048,1058102..1058216,1058272..1058366,1058985..1059063,1065782..1065874,1067890..1068016,1068079..1068201,1068261..1068355,1068449..1068774,1069130..1069184,1069813..1069872,1070924..1071018,1071081..1071145))	note	ID:maker-4-est_gff_Cufflinks-gene-11.3-mRNA-3:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(1071146..1071235)	note	ID:maker-4-est_gff_Cufflinks-gene-11.3-mRNA-3:five_prime_utr
+			note	source:maker
+	5'UTR	complement(1074124..1074547)	note	ID:maker-4-est_gff_Cufflinks-gene-11.3-mRNA-3:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(1078076..1078198,1078259..1078379,1078433..1078781,1078836..1079130,1079727..1079977,1080045..1080462,1081039..1081260,1081367..1081443))	note	ID:maker-4-est_gff_Cufflinks-gene-11.4-mRNA-1
+			note	source:maker
+	CDS	complement(join(<1078076..1078198,1078259..1078379,1078433..1078781,1078836..1079130,1079727..1079977,1080045..1080462,1081039..1081230))	note	ID:maker-4-est_gff_Cufflinks-gene-11.4-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(1081231..1081260)	note	ID:maker-4-est_gff_Cufflinks-gene-11.4-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	complement(1081367..1081443)	note	ID:maker-4-est_gff_Cufflinks-gene-11.4-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	join(1085372..1085648,1085710..1085809,1086482..1086511,1086566..1093731,1093787..1094007,1094065..1096183,1096242..1096362,1096418..1096757)	note	ID:maker-4-est_gff_Cufflinks-gene-11.0-mRNA-1
+			note	source:maker
+	5'UTR	1085372..1085648	note	ID:maker-4-est_gff_Cufflinks-gene-11.0-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	1085710..1085733	note	ID:maker-4-est_gff_Cufflinks-gene-11.0-mRNA-1:five_prime_utr
+			note	source:maker
+	CDS	join(1085734..1085809,1086482..1086511,1086566..1093731,1093787..1094007,1094065..1096183,1096242..1096362,1096418..1096740)	note	ID:maker-4-est_gff_Cufflinks-gene-11.0-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	3'UTR	1096741..1096757	note	ID:maker-4-est_gff_Cufflinks-gene-11.0-mRNA-1:three_prime_utr
+			note	source:maker
+	mRNA	complement(join(1101820..1101833,1102753..1103638))	note	ID:maker-4-est_gff_Cufflinks-gene-11.5-mRNA-1
+			note	source:maker
+	CDS	complement(join(<1101820..1101833,1102753..1103560))	note	ID:maker-4-est_gff_Cufflinks-gene-11.5-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(1103561..1103638)	note	ID:maker-4-est_gff_Cufflinks-gene-11.5-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(1136362..1136705,1136952..1137082,1137141..1137224,1137286..1137840,1138477..1138531,1138594..1139643,1140563..1140673,1140732..1141232,1141285..1141427,1142085..1142248,1143849..1143957))	note	ID:maker-4-est_gff_Cufflinks-gene-11.6-mRNA-1
+			note	source:maker
+	3'UTR	complement(1136362..1136561)	note	ID:maker-4-est_gff_Cufflinks-gene-11.6-mRNA-1:three_prime_utr
+			note	source:maker
+	CDS	complement(join(1136562..1136705,1136952..1137082,1137141..1137224,1137286..1137840,1138477..1138531,1138594..1139643,1140563..1140673,1140732..1141232,1141285..1141427,1142085..1142199))	note	ID:maker-4-est_gff_Cufflinks-gene-11.6-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(1142200..1142248)	note	ID:maker-4-est_gff_Cufflinks-gene-11.6-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	complement(1143849..1143957)	note	ID:maker-4-est_gff_Cufflinks-gene-11.6-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	join(1144813..1144957,1145062..1145324,1145394..1145519,1145576..1145683)	note	ID:maker-4-est_gff_Cufflinks-gene-11.1-mRNA-1
+			note	source:maker
+	5'UTR	1144813..1144890	note	ID:maker-4-est_gff_Cufflinks-gene-11.1-mRNA-1:five_prime_utr
+			note	source:maker
+	CDS	join(1144891..1144957,1145062..1145324,1145394..1145519,1145576..1145662)	note	ID:maker-4-est_gff_Cufflinks-gene-11.1-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	3'UTR	1145663..1145683	note	ID:maker-4-est_gff_Cufflinks-gene-11.1-mRNA-1:three_prime_utr
+			note	source:maker
+	mRNA	join(1147493..1147567,1147628..1148041,1150061..1150114,1150192..1150356,1150651..1150809,1151009..1151212,1151819..1152219,1152327..1152584,1154501..1154698,1155720..1156110,1156165..1156515)	note	ID:maker-4-est_gff_Cufflinks-gene-11.2-mRNA-1
+			note	source:maker
+	5'UTR	1147493..1147567	note	ID:maker-4-est_gff_Cufflinks-gene-11.2-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	1147628..1148041	note	ID:maker-4-est_gff_Cufflinks-gene-11.2-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	1150061..1150114	note	ID:maker-4-est_gff_Cufflinks-gene-11.2-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	1150192..1150356	note	ID:maker-4-est_gff_Cufflinks-gene-11.2-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	1150651..1150809	note	ID:maker-4-est_gff_Cufflinks-gene-11.2-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	1151009..1151212	note	ID:maker-4-est_gff_Cufflinks-gene-11.2-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	1151819..1152138	note	ID:maker-4-est_gff_Cufflinks-gene-11.2-mRNA-1:five_prime_utr
+			note	source:maker
+	CDS	join(1152139..1152219,1152327..1152584,1154501..1154698,1155720..1156110,1156165..1156442)	note	ID:maker-4-est_gff_Cufflinks-gene-11.2-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	3'UTR	1156443..1156515	note	ID:maker-4-est_gff_Cufflinks-gene-11.2-mRNA-1:three_prime_utr
+			note	source:maker
+	mRNA	complement(join(1161338..1161527,1161586..1161993,1164075..1164191,1164253..1164494,1164611..1164649))	note	ID:maker-4-est_gff_Cufflinks-gene-11.7-mRNA-1
+			note	source:maker
+	CDS	complement(join(<1161338..1161527,1161586..1161993,1164075..1164191,1164253..1164494,1164611..1164631))	note	ID:maker-4-est_gff_Cufflinks-gene-11.7-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(1164632..1164649)	note	ID:maker-4-est_gff_Cufflinks-gene-11.7-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	complement(join(1193406..1193656,1193710..1193829,1194432..1194723,1194785..1195554,1195608..1195633))	note	ID:maker-4-est_gff_Cufflinks-gene-12.5-mRNA-1
+			note	source:maker
+	3'UTR	complement(1193406..1193508)	note	ID:maker-4-est_gff_Cufflinks-gene-12.5-mRNA-1:three_prime_utr
+			note	source:maker
+	CDS	complement(join(1193509..1193656,1193710..1193829,1194432..1194723,1194785..1195550))	note	ID:maker-4-est_gff_Cufflinks-gene-12.5-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(1195551..1195554)	note	ID:maker-4-est_gff_Cufflinks-gene-12.5-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	complement(1195608..1195633)	note	ID:maker-4-est_gff_Cufflinks-gene-12.5-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	join(1208178..1208240,1208361..1208506,1208815..1208975,1209680..1210315,1210507..1210634,1210693..1211175,1212646..1212788,1212851..1212932,1212983..1213081)	note	ID:maker-4-est_gff_Cufflinks-gene-12.0-mRNA-1
+			note	source:maker
+	CDS	join(<1208178..1208240,1208361..1208506,1208815..1208975,1209680..1210315,1210507..1210634,1210693..1211175,1212646..1212788,1212851..1212932,1212983..1212985)	note	ID:maker-4-est_gff_Cufflinks-gene-12.0-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	3'UTR	1212986..1213081	note	ID:maker-4-est_gff_Cufflinks-gene-12.0-mRNA-1:three_prime_utr
+			note	source:maker
+	mRNA	complement(join(1213070..1213278,1213332..1213396,1214186..1214280,1214334..1214485,1216054..1216222,1216286..1216416,1216468..1216717,1216791..1216888,1216946..1217101))	note	ID:maker-4-est_gff_Cufflinks-gene-12.6-mRNA-1
+			note	source:maker
+	3'UTR	complement(1213070..1213161)	note	ID:maker-4-est_gff_Cufflinks-gene-12.6-mRNA-1:three_prime_utr
+			note	source:maker
+	CDS	complement(join(1213162..1213278,1213332..1213396,1214186..1214280,1214334..1214485,1216054..1216222,1216286..1216416,1216468..1216717,1216791..1216888,1216946..1217083))	note	ID:maker-4-est_gff_Cufflinks-gene-12.6-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(1217084..1217101)	note	ID:maker-4-est_gff_Cufflinks-gene-12.6-mRNA-1:five_prime_utr
+			note	source:maker
+	assembly_gap	1221289..1221388	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	mRNA	join(1223582..1223750,1223802..1223921,1223986..1224414,1224988..1225008,1225217..1225376,1225434..1225603)	note	ID:maker-4-est_gff_Cufflinks-gene-12.1-mRNA-1
+			note	source:maker
+	5'UTR	1223582..1223642	note	ID:maker-4-est_gff_Cufflinks-gene-12.1-mRNA-1:five_prime_utr
+			note	source:maker
+	CDS	join(1223643..1223750,1223802..1223921,1223986..1224414,1224988..1225008,1225217..1225376,1225434..>1225603)	note	ID:maker-4-est_gff_Cufflinks-gene-12.1-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	mRNA	complement(join(1229577..1230170,1230231..1230572,1230625..1231225,1232379..1233241,1233306..1233844,1234032..1234143))	note	ID:maker-4-est_gff_Cufflinks-gene-12.7-mRNA-1
+			note	source:maker
+	3'UTR	complement(1229577..1229883)	note	ID:maker-4-est_gff_Cufflinks-gene-12.7-mRNA-1:three_prime_utr
+			note	source:maker
+	CDS	complement(join(1229884..1230170,1230231..1230572,1230625..1231225,1232379..1233241,1233306..1233699))	note	ID:maker-4-est_gff_Cufflinks-gene-12.7-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	5'UTR	complement(1233700..1233844)	note	ID:maker-4-est_gff_Cufflinks-gene-12.7-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	complement(1234032..1234143)	note	ID:maker-4-est_gff_Cufflinks-gene-12.7-mRNA-1:five_prime_utr
+			note	source:maker
+	mRNA	join(1235794..1235916,1236855..1237236,1238405..1238525,1245456..1245623,1247203..1247226)	note	ID:maker-4-est_gff_Cufflinks-gene-12.2-mRNA-1
+			note	source:maker
+	5'UTR	1235794..1235916	note	ID:maker-4-est_gff_Cufflinks-gene-12.2-mRNA-1:five_prime_utr
+			note	source:maker
+	5'UTR	1236855..1236895	note	ID:maker-4-est_gff_Cufflinks-gene-12.2-mRNA-1:five_prime_utr
+			note	source:maker
+	CDS	join(1236896..1237236,1238405..1238525,1245456..1245623,1247203..>1247226)	note	ID:maker-4-est_gff_Cufflinks-gene-12.2-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	mRNA	join(1247332..1247378,1247445..1247676,1247740..1247990,1248063..1248077,1248827..1249057,1249105..1249249,1249303..1249344)	note	ID:maker-4-est_gff_Cufflinks-gene-12.3-mRNA-1
+			note	source:maker
+	CDS	join(<1247332..1247378,1247445..1247676,1247740..1247990,1248063..1248077,1248827..1249057,1249105..1249249,1249303..>1249344)	note	ID:maker-4-est_gff_Cufflinks-gene-12.3-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	mRNA	join(1249398..1249409,1249478..1249653,1249716..1249919,1250834..1250964,1252040..1252216,1252273..1252562,1254497..1254609,1257732..1257938,1259568..1259724,1259883..1259935)	note	ID:maker-4-est_gff_Cufflinks-gene-12.4-mRNA-3
+			note	source:maker
+	5'UTR	1249398..1249409	note	ID:maker-4-est_gff_Cufflinks-gene-12.4-mRNA-3:five_prime_utr
+			note	source:maker
+	5'UTR	1249478..1249653	note	ID:maker-4-est_gff_Cufflinks-gene-12.4-mRNA-3:five_prime_utr
+			note	source:maker
+	5'UTR	1249716..1249919	note	ID:maker-4-est_gff_Cufflinks-gene-12.4-mRNA-3:five_prime_utr
+			note	source:maker
+	5'UTR	1250834..1250893	note	ID:maker-4-est_gff_Cufflinks-gene-12.4-mRNA-3:five_prime_utr
+			note	source:maker
+	CDS	join(1250894..1250964,1252040..1252216,1252273..1252562,1254497..1254609,1257732..1257938,1259568..1259724,1259883..>1259935)	note	ID:maker-4-est_gff_Cufflinks-gene-12.4-mRNA-3:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	mRNA	join(1249399..1249409,1249478..1249653,1249716..1249922,1250828..1250964,1252029..1252216,1252273..1252562,1254497..1254609,1259568..1259724,1265678..1265819,1266138..1266305,1268382..1268691,1268755..1269135,1274458..1274594,1274651..1274862)	note	ID:maker-4-est_gff_Cufflinks-gene-12.4-mRNA-1
+			note	source:maker
+	CDS	join(<1249399..1249409,1249478..1249653,1249716..1249922,1250828..1250964,1252029..1252216,1252273..1252562,1254497..1254609,1259568..1259724,1265678..1265819,1266138..1266305,1268382..1268691,1268755..1269135,1274458..1274594,1274651..1274855)	note	ID:maker-4-est_gff_Cufflinks-gene-12.4-mRNA-1:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	3'UTR	1274856..1274862	note	ID:maker-4-est_gff_Cufflinks-gene-12.4-mRNA-1:three_prime_utr
+			note	source:maker
+	mRNA	join(1249399..1249409,1249478..1249653,1249716..1249922,1250828..1250964,1252029..1252216,1252273..1252562,1254497..1254609,1259568..1259724,1265678..1265819,1268382..1268691,1268755..1269135,1274458..1274594,1274651..1274862)	note	ID:maker-4-est_gff_Cufflinks-gene-12.4-mRNA-2
+			note	source:maker
+	CDS	join(<1249399..1249409,1249478..1249653,1249716..1249922,1250828..1250964,1252029..1252216,1252273..1252562,1254497..1254609,1259568..1259724,1265678..1265819,1268382..1268691,1268755..1269135,1274458..1274594,1274651..1274855)	note	ID:maker-4-est_gff_Cufflinks-gene-12.4-mRNA-2:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	3'UTR	1274856..1274862	note	ID:maker-4-est_gff_Cufflinks-gene-12.4-mRNA-2:three_prime_utr
+			note	source:maker
+	mRNA	join(1268346..1268691,1268755..1269135,1274458..1274594,1274651..1274862)	note	ID:maker-4-est_gff_Cufflinks-gene-12.4-mRNA-4
+			note	source:maker
+	5'UTR	1268346..1268373	note	ID:maker-4-est_gff_Cufflinks-gene-12.4-mRNA-4:five_prime_utr
+			note	source:maker
+	CDS	join(1268374..1268691,1268755..1269135,1274458..1274594,1274651..1274855)	note	ID:maker-4-est_gff_Cufflinks-gene-12.4-mRNA-4:cds
+			note	source:maker
+			codon_start	1
+			transl_table	1
+			product	hypothetical protein
+	3'UTR	1274856..1274862	note	ID:maker-4-est_gff_Cufflinks-gene-12.4-mRNA-4:three_prime_utr
+			note	source:maker
