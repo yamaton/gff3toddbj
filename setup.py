@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="gff3toddbj",
-    version="0.2.0",
+    version="0.2.1",
     author="Yamato Matsuoka",
     author_email="yamaton@gmail.com",
     description="Create a DDBJ annotation file from GFF3 and FASTA files",
@@ -29,6 +29,7 @@ setuptools.setup(
         "biopython >= 1.75",
         "bcbio-gff >= 0.6.6",
         "toml",
+        "setuptools",
     ],
     entry_points={"console_scripts":
         [

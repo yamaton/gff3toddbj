@@ -10,6 +10,8 @@ import argparse
 import pathlib
 import logging
 
+__version__ = "0.1.0"
+_PROG_NAME = "split-fasta"
 
 def _split_to_parent_stem_ext(p: pathlib.Path) -> Tuple[pathlib.Path, str, str]:
     """Split input file path into (parent, filename_without_ext, ext)"""
@@ -80,10 +82,17 @@ def main():
 
     parser = argparse.ArgumentParser(
         description="Split FASTA from GFF3",
-        )
+        prog=_PROG_NAME,
+    )
     parser.add_argument("gff3", help="Input GFF3")
     parser.add_argument(
         "--suffix", help="Suffix added to the output filenames", default="_splitted"
+    )
+    parser.add_argument(
+        "-v", "--version",
+        action="version",
+        version="%(prog)s {}".format(__version__),
+        help="Show version",
     )
     args = parser.parse_args()
 

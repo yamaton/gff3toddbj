@@ -3,9 +3,15 @@ import argparse
 import logging
 import pathlib
 
+import pkg_resources  # part of setuptools
+
 from . import formatter
 from . import transforms
 from . import utils
+
+_PROJ_NAME = "gff3toddbj"
+_EXEC_NAME = "gff3-to-ddbj"
+__version__ = pkg_resources.require(_PROJ_NAME)[0].version
 
 FORMAT = '%(levelname)s: %(message)s'
 _DIR = pathlib.Path(__file__).parent
@@ -22,7 +28,7 @@ IGNORE_FILTERING_RULES = False
 JOINABLES = ("CDS", "exon")
 
 def main():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(prog=_EXEC_NAME)
     parser.add_argument("--gff3", "--gff", metavar="FILE", help="Input GFF3 file")
     parser.add_argument("--fasta", metavar="FILE", help="Input FASTA file", required=True)
     parser.add_argument(
@@ -62,6 +68,12 @@ def main():
         "-o", "--output",
         metavar="FILE",
         help="Specify annotation file name as output",
+    )
+    parser.add_argument(
+        "-v", "--version",
+        action="version",
+        version="%(prog)s {}".format(__version__),
+        help="Show version",
     )
     parser.add_argument("--log", default=logging.INFO, help="[debug only] Set log level.")
     args = parser.parse_args()

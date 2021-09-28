@@ -14,6 +14,8 @@ from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import SeqFeature
 from BCBio import GFF
 
+__version__ = "0.1.0"
+_PROG_NAME = "list-products"
 
 class OrderedCounter(collections.Counter, collections.OrderedDict):
     pass
@@ -39,8 +41,14 @@ def gen_products(rec: SeqRecord, focused_types: Optional[Tuple]=None) -> Generat
 def main():
     logging.basicConfig(level=logging.INFO)
 
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(prog=_PROG_NAME)
     parser.add_argument("gff3", help="Input GFF3 file")
+    parser.add_argument(
+        "-v", "--version",
+        action="version",
+        version="%(prog)s {}".format(__version__),
+        help="Show version",
+    )
     args = parser.parse_args()
     logging.info("Input GFF   : {}".format(args.gff3))
 

@@ -11,7 +11,8 @@
 ## Table of Contents
 * [What is this?](#what-is-this)
 * [Initial setup](#initial-setup)
-  + [Install via bioconda](#install-via-bioconda)
+  + [Install with bioconda](#install-with-bioconda)
+  + [Install with pip](#install-with-pip)
   + [Install from the source](#install-from-the-source)
 * [Create DDBJ annotation from GFF3 and FASTA](#create-ddbj-annotation-from-gff3-and-fasta)
   + [Run `gff3-to-ddbj`](#run-gff3-to-ddbj)
@@ -41,7 +42,7 @@ Analogous programs are [GAG](https://github.com/genomeannotation/GAG) for submis
 
 ## Initial setup
 
-### Install via bioconda
+### Install with bioconda
 
 ```shell
 # Create a conda environment named "ddbj", and install relevant packages from bioconda channel
@@ -51,6 +52,18 @@ $ conda create -n ddbj -c bioconda -c conda-forge gff3toddbj
 $ conda activate ddbj
 ```
 
+### Install with pip
+
+```shell
+# Create a conda environment named "ddbj" and install pip
+$ conda create -n ddbj pip
+
+# Activate the environment "ddbj"
+$ conda activate ddbj
+
+# Install from pip
+$ pip install gff3toddbj
+```
 
 
 ### Install from the source

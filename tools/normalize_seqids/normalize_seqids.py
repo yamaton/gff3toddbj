@@ -10,6 +10,9 @@ import csv
 import pathlib
 import logging
 
+__version__ = "0.1.0"
+_PROG_NAME = "normalize-entry-names"
+
 INVALID_LETTERS = r'[=|>" \[\]]'  # =|>" [] in regular expression
 NEW_DELIMITER = ":"
 INVALID_PATTERN = re.compile(INVALID_LETTERS)
@@ -50,10 +53,16 @@ def get_rename_dictionary(names: Iterable[str]) -> Dict[str, str]:
 def main():
     logging.basicConfig(level=logging.INFO)
 
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(prog=_PROG_NAME)
     parser.add_argument("file", help="Input annotation file")
     parser.add_argument(
         "--suffix", help="Suffix to output filenames", default="_renamed"
+    )
+    parser.add_argument(
+        "-v", "--version",
+        action="version",
+        version="%(prog)s {}".format(__version__),
+        help="Show version",
     )
     args = parser.parse_args()
 
