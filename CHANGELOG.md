@@ -1,3 +1,6 @@
+## v0.2.1 (2021-09-28)
+* Add the CLI option --version
+
 ## v0.2.0 (2021-09-28)
 * Improve memory usage when reading a large FASTA file
 * Add CLI options: --rename_setting and --filter_setting to load custom settings
