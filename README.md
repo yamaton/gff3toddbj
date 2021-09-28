@@ -1,33 +1,43 @@
 # GFF3-to-DDBJ
 日本語版は[こちら](https://github.com/yamaton/gff3toddbj/blob/main/README-ja.md)。
 
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/yamaton/gff3toddbj?style=for-the-badge)
+![Conda (channel only)](https://img.shields.io/conda/vn/bioconda/gff3toddbj?style=for-the-badge)
+![PyPI](https://img.shields.io/pypi/v/gff3toddbj?style=for-the-badge)
+
+
 [TOC]
 
 ## Table of Contents
-- [GFF3-to-DDBJ](#gff3-to-ddbj)
-  * [What is this?](#what-is-this)
-  * [Initial setup](#initial-setup)
-    + [Install via bioconda](#install-via-bioconda)
-    + [Install from the source](#install-from-the-source)
-  * [Create DDBJ annotation from GFF3 and FASTA](#create-ddbj-annotation-from-gff3-and-fasta)
-    + [Run `gff3-to-ddbj`](#run-gff3-to-ddbj)
-  * [Customize the behavior](#customize-the-behavior)
-    + [Metadata file](#metadata-file)
-    + [[Advanced] Feature/Qualifier renaming schema](#advanced-featurequalifier-renaming-schema)
-  * [Troubleshooting](#troubleshooting)
-    + [Validate GFF3](#validate-gff3)
-    + [Split FASTA from GFF3 (if needed)](#split-fasta-from-gff3-if-needed)
-    + [Normalize entry names (if needed)](#normalize-entry-names-if-needed)
-  * [Under the Hood](#under-the-hood)
-  * [Credit](#credit)
+* [What is this?](#what-is-this)
+* [Initial setup](#initial-setup)
+  + [Install via bioconda](#install-via-bioconda)
+  + [Install from the source](#install-from-the-source)
+* [Create DDBJ annotation from GFF3 and FASTA](#create-ddbj-annotation-from-gff3-and-fasta)
+  + [Run `gff3-to-ddbj`](#run-gff3-to-ddbj)
+* [Under the Hood](#under-the-hood)
+* [Customize the behavior](#customize-the-behavior)
+  + [Metadata file](#metadata-file)
+  + [[Advanced] Feature/Qualifier rename setting](#advanced-featurequalifier-rename-setting)
+    + [Rename types/feature keys](#rename-typesfeature-keys)
+    + [Rename attributes/qualifier keys](#rename-attributesqualifier-keys)
+    + [Translate types to featuress with qualifiers](#translate-types-to-featuress-with-qualifiers)
+    + [Translate (type, attribute) items to features](#translate-type-attribute-items-to-features)
+    + [Run with a custom file](#run-with-a-custom-file)
+  + [[Advanced] Feature/Qualifier filter setting](#advanced-featurequalifier-filter-setting)
+* [Troubleshooting](#troubleshooting)
+  + [Validate GFF3](#validate-gff3)
+  + [Split FASTA from GFF3 (if needed)](#split-fasta-from-gff3-if-needed)
+  + [Normalize entry names (if needed)](#normalize-entry-names-if-needed)
+* [Credit](#credit)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 ## What is this?
 
-GFF3-to-DDBJ creates [an annotation file for the DDBJ submission](https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#annotation) by taking GFF3 and FASTA files as input. It also works with FASTA alone.
+GFF3-to-DDBJ creates [the annotation file for submission to DDBJ](https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#annotation) by taking GFF3 and FASTA files as input. It also works with FASTA alone.
 
-
+Analogous programs are [GAG](https://github.com/genomeannotation/GAG) for submissions to NCBI, and [EMBLmyGFF3](https://github.com/NBISweden/EMBLmyGFF3) for submissions to EMBL.
 
 ## Initial setup
 
@@ -95,6 +105,44 @@ Here is the options:
 
 
 
+## Under the Hood
+
+Here is the list of operations `gff3-to-ddbj` will do:
+
+* Store FASTA sequences to SQLite database to save memory use
+  * The database is deleted after the operation.
+
+* Rename Feature / Qualifiers keys using the translation tables
+
+* Search for `assembly_gap` s in FASTA
+
+* Add `/transl_table` to each CDS
+
+* Insert `source` information from the metadata fie
+
+* Merge `CDS`s having the same parent with `join` notation
+
+* Merge `mRNA` and `exon` in GFF3 and create `mRNA` feature with `join` notation
+
+* Modify locations with inequality signs (`<` and `>`) if start/stop codon is absent.
+  * See [Offset of the frame at translation initiation by codon_start](https://www.ddbj.nig.ac.jp/ddbj/cds-e.html#frame)
+
+* Let CDS have a single `/product` value: Set it to "hypothetical protein" if absent. Move the rest of exising values to `/note`.
+
+  * This is to conform the [instruction](https://www.ddbj.nig.ac.jp/ddbj/qualifiers-e.html#product) on `/product`.
+
+    > * Even if there are multiple general names for the same product, do  not enter multiple names in 'product'. Do not use needless symbolic  letters as delimiter for multiple names. If you would like to describe  more than two names, please enter one of the most representative name in /product qualifier, and other(s) in /[note](https://www.ddbj.nig.ac.jp/ddbj/qualifiers-e.html#note) qualifier.
+    >
+    > * If the name and function are not known, we recommend to describe as "hypothetical protein".
+
+* Remove duplicates in qualifier values
+
+* Sort lines in annotation
+
+* Filter out Feature-Qualifier pairs following [the table](https://www.ddbj.nig.ac.jp/assets/files/pdf/ddbj/fq-e.pdf).
+
+
+
 ## Customize the behavior
 
 ### Metadata file
@@ -137,11 +185,10 @@ The file accommodates following and they are all optional. That is, GFF3-to-DDBJ
 
   * If both `[COMMON.assembly_gap]` and `[COMMON.assembly]` exist in the metadata file, `gff3-to-ddbj` takes the one with COMMON.
 
-For more examples, see [WGS in COMMON](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=1110334278) and [WGS](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=382116224) for DDBJ annotations, and [metadata_WGS_COMMON.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/metadata/metadata_WGS_COMMON.toml) and [metadata_WGS.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/metadata/metadata_WGS.toml) as corresponding metadata files.
+For more examples, see [WGS in COMMON](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=1110334278) and [WGS](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=382116224) provided by DDBJ as annotation examples, and corresponding metadata files [metadata_WGS_COMMON.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/metadata/metadata_WGS_COMMON.toml) and [metadata_WGS.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/metadata/metadata_WGS.toml) in this repository.
 
 
-
-### [Advanced] Feature/Qualifier renaming schema
+### [Advanced] Feature/Qualifier rename setting
 
 GFF3 and DDBJ annotation have rough correspondence as follows:
 
@@ -201,9 +248,9 @@ feature_key = "misc_RNA"
 
 #### Run with a custom file
 
-See [translate_features.toml](https://raw.githubusercontent.com/yamaton/gff3toddbj/main/gff3toddbj/translate_features.toml) and [translate_qualifiers.toml](https://raw.githubusercontent.com/yamaton/gff3toddbj/main/gff3toddbj/translate_qualifiers.toml) for default behavior. To use custom translation tables, use the CLI options:
+See [translate_features_qualifiers.toml](https://github.com/yamaton/gff3toddbj/blob/main/gff3toddbj/translate_features_qualifiers.toml) for the default behavior. To feed a custom translation table, use the CLI option:
 
-* `--renaming_scheme <FILE>`
+* `--rename_setting <FILE>`
 
 And here is an example call:
 
@@ -214,9 +261,33 @@ gff3-to-ddbj \
   --metadata mymetadata.toml \
   --locus_tag_prefix MYOWNPREFIX_ \
   --transl_table 1 \
-  --renaming_scheme my_translate_features_qualifiers.toml \  # Set your customized file here
+  --rename_setting my_translate_features_qualifiers.toml \  # Set your customized file here
   --output myawesome_output.ann
 ```
+
+### [Advanced] Feature/Qualifier filter setting
+
+DDBJ specifies recommended [Feature/Qualifier usage matrix](https://www.ddbj.nig.ac.jp/assets/files/pdf/ddbj/fq-e.pdf). To conform this rule, features and qualifiers appearing in the annotation output are filtered by [the filtering file in TOML](https://github.com/yamaton/gff3toddbj/blob/main/gff3toddbj/ddbj_filter.toml) by default. The file is in TOML format with the structure like this:
+
+```toml
+CDS = [
+"EC_number",
+"inference",
+"locus_tag",
+"note",
+"product",
+]
+
+exon = [
+"gene",
+"locus_tag",
+"note",
+]
+```
+
+The left-hand side of the equal sign `=` represents an allowed feature key, and the right-hand side is a list of allowed qualifier keys. In this example, only `CDS` and `exon` features will show up in the annotation, and qualifiers are limited to the listed items. To customize this filtering function, edit the TOML file first and pass the file with the CLI option:
+
+* `--filter_setting <FILE>`
 
 
 ## Troubleshooting
@@ -249,43 +320,6 @@ normalize-entry-names myannotation_output.txt
 
 This command create as files `myannotation_output_renamed.txt` *if* the invalid letters are found. Otherwise, you'll see no output.
 
-
-
-## Under the Hood
-
-Here is the list of operations done by `gff3-to-ddbj`.
-
-* Store FASTA sequences to SQLite database to save memory use
-  * The database is deleted after the operation.
-
-* Rename Feature / Qualifiers keys using the translation tables
-
-* Search for `assembly_gap` s in FASTA
-
-* Add `/transl_table` to each CDS
-
-* Insert `source` information from the metadata fie
-
-* Merge `CDS`s having the same parent with `join` notation
-
-* Merge `mRNA` and `exon` in GFF3 and create `mRNA` feature with `join` notation
-
-* Modify locations with inequality signs (`<` and `>`) if start/stop codon is absent.
-  * See [Offset of the frame at translation initiation by codon_start](https://www.ddbj.nig.ac.jp/ddbj/cds-e.html#frame)
-
-* Let CDS have a single `/product` value. Move the rest to `/note`.
-
-  * This is to conform the [instruction](https://www.ddbj.nig.ac.jp/ddbj/qualifiers-e.html#product) on `/product`.
-
-    > * Even if there are multiple general names for the same product, do  not enter multiple names in 'product'. Do not use needless symbolic  letters as delimiter for multiple names. If you would like to describe  more than two names, please enter one of the most representative name in /product qualifier, and other(s) in /[note](https://www.ddbj.nig.ac.jp/ddbj/qualifiers-e.html#note) qualifier.
-    >
-    > * If the name and function are not known, we recommend to describe as "hypothetical protein".
-
-* Remove duplicates in qualifier values
-
-* Sort lines in annotation
-
-* Filter out Feature-Qualifier pairs following [the table](https://www.ddbj.nig.ac.jp/assets/files/pdf/ddbj/fq-e.pdf).
 
 
 

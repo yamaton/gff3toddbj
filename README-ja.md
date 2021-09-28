@@ -1,21 +1,30 @@
 # GFF3-to-DDBJ
 
-- [GFF3-to-DDBJ](#gff3-to-ddbj)
-  * [これは何？](#これは何)
-  * [セットアップ](#セットアップ)
-      - [biocondaからconda環境にインストールする場合](#biocondaからconda環境にインストールする場合)
-      - [GitHubソースコードからconda環境にインストールする場合](#githubソースコードからconda環境にインストールする場合)
-  * [GFF3とFASTAからDDBJアノテーションをつくる](#gff3とfastaからddbj-アノテーションをつくる)
-    + [`gff3-to-ddbj` を動かしてみる](#gff3-to-ddbj-を動かしてみる)
-  * [設定いろいろ](#設定いろいろ)
-    + [メタデータファイル](#メタデータファイル)
-    + [[パワーユーザ向け] Feature/Qualifierのリネーム](#パワーユーザ向け-featuresqualifiersのリネーム)
-  * [トラブルシューティング](#トラブルシューティング)
-    + [GFF3の正当性チェック](#gff3の正当性チェック)
-    + [GFF3とFASTAの分離（必要に応じて）](#gff3とfastaの分離必要に応じて)
-    + [Entry名の正規化（必要に応じて）](#entry名の正規化必要に応じて)
-  * [当プログラムが行うこと](#当プログラムが行うこと)
-  * [謝辞](#謝辞)
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/yamaton/gff3toddbj?style=for-the-badge)
+![Conda (channel only)](https://img.shields.io/conda/vn/bioconda/gff3toddbj?style=for-the-badge)
+![PyPI](https://img.shields.io/pypi/v/gff3toddbj?style=for-the-badge)
+
+* [これは何？](#これは何)
+* [セットアップ](#セットアップ)
+    - [biocondaからconda環境にインストールする場合](#biocondaからconda環境にインストールする場合)
+    - [GitHubソースコードからconda環境にインストールする場合](#githubソースコードからconda環境にインストールする場合)
+* [GFF3とFASTAからDDBJアノテーションをつくる](#gff3とfastaからddbjアノテーションをつくる)
+  + [`gff3-to-ddbj` を動かしてみる](#gff3-to-ddbj-を動かしてみる)
+* [当プログラムが行うこと](#当プログラムが行うこと)
+* [設定いろいろ](#設定いろいろ)
+  + [メタデータファイル](#メタデータファイル)
+  + [[パワーユーザ向け] Features/Qualifiersのリネーム](#パワーユーザ向け-featuresqualifiersのリネーム)
+    + [Type / Feature keyのリネーム](#type--feature-keyのリネーム)
+    + [Attribute / Qualifier keyのリネーム](#attribute--qualifier-keyのリネーム)
+    + [指定のTypeをQualifier付きFeatureに置き換え](#指定のtypeをqualifier付きfeatureに置き換え)
+    + [指定の (type, attribute) をFeatureに置き換え](#指定の-type-attribute-をfeatureに置き換え)
+    + [カスタムしたリネーム設定で `gff3-to-ddbj` を実行する](#カスタムしたリネーム設定で-gff3-to-ddbj-を実行する)
+  + [[パワーユーザ向け] Features-Qualifiers出力のカスタマイズ](#パワーユーザ向け-features-qualifiers出力のカスタマイズ)
+* [トラブルシューティング](#トラブルシューティング)
+  + [GFF3の正当性チェック](#gff3の正当性チェック)
+  + [GFF3とFASTAの分離（必要に応じて）](#gff3とfastaの分離必要に応じて)
+  + [Entry名の正規化（必要に応じて）](#entry名の正規化必要に応じて)
+* [謝辞](#謝辞)
 
 
 [TOC]
@@ -23,6 +32,8 @@
 ## これは何？
 
 DDBJへの登録には指定された形式の[アノテーションファイル](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#annotation)が必要です。GFF3-to-DDBJ はこの**アノテーションファイルをFASTA と GFF3ファイルから作る**プログラムです。**FASTA 単体から最小限のアノテーションファイルを作ることも可能**です。
+
+同種のプログラムは、NCBI登録には[GAG](https://github.com/genomeannotation/GAG)、EMBL登録には[EMBLmyGFF3](https://github.com/NBISweden/EMBLmyGFF3)などがあります。
 
 
 ## セットアップ
@@ -87,6 +98,44 @@ gff3-to-ddbj \
 
 
 
+## 当プログラムが行うこと
+
+表示形式を変えるほかに以下のようなことをしています。
+
+* FASTAファイルの配列をSQLiteデータベースに保存（メモリ節約のため）
+  * データベースファイルは処理後に削除されます
+
+* 変換テーブルに基づいたFeatures / Qualifiersのリネーム
+
+* assembly_gap の検索
+
+* /transl_table のCDSへの追加
+
+* メタデータ中のsource情報を各エントリに追加
+
+* 同じ親をもつCDSを`join`記法で結合
+
+* 同じ親をもつexonを`join`記法で結合し、対応するmRNAのattributesと合成してmRNA Featureとする
+
+* CDSに開始・終了コドンが無い場合の位置情報修正
+  * 参照: [codon_start qualifier による翻訳開始の位置補正](https://www.ddbj.nig.ac.jp/ddbj/cds.html#frame)
+
+* CDS下の `/product` が値をひとつだけ持つよう変更。値が無いときには "hypothetical protein" に。複数値の残りは `/note` へ。
+
+  * [DDBJ の/product 詳細](https://www.ddbj.nig.ac.jp/ddbj/qualifiers.html#product)を参照ください
+
+    > * 一般名が複数ある場合でも, 複数の名称を記載しないで下さい。また, そのために不必要な区切り記号を使用しないで下さい。一般名の複数記載を希望される場合は, 代表的な名称を /product qualifier に記載し, その他の名称を /note qualifier に記載して下さい。
+    > * 機能, 名称等が不明な蛋白質の場合は, hypothetical protein と記載することを推奨します。
+
+* Qualifier値に重複があるとき冗長分を削除
+
+* アノテーション行の並び替え
+
+* [DDBJのFeature-Qualifier一覧表](https://www.ddbj.nig.ac.jp/assets/files/pdf/ddbj/fq-j.pdf)に基づいた出力のフィルタリング
+
+
+
+
 ## 設定いろいろ
 
 ### メタデータファイル
@@ -148,7 +197,7 @@ line = [
 
     * COMMON記法と併記されたばあい（たとえば `[COMMON.asembly_gap` と `[assembly_gap]` ）COMMON記法が優先されます。
 
-さらなる例としては、アノテーションファイルとしては [WGS in COMMON](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=1110334278) と [WGS](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=382116224)、そして対応するメタデータファイルでは [metadata_WGS_COMMON.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/metadata/metadata_WGS_COMMON.toml) と [metadata_WGS.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/metadata/metadata_WGS.toml) などを参考にしてください。
+さらなる例としては、DDBJの[サンプルアノテーション](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#sample)の [WGS in COMMON](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=1110334278) と [WGS](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=382116224)に対応するメタデータファイル [metadata_WGS_COMMON.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/metadata/metadata_WGS_COMMON.toml) と [metadata_WGS.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/metadata/metadata_WGS.toml) を用意しています。参考にしてください。
 
 
 
@@ -215,11 +264,11 @@ feature_key = "misc_RNA"
 
 #### カスタムしたリネーム設定で `gff3-to-ddbj` を実行する
 
-詳しくはデフォルト設定 [translate_features_qualifiers.toml](https://raw.githubusercontent.com/yamaton/gff3toddbj/main/gff3toddbj/translate_features_qualifiers.toml) をご覧ください。これらをカスタマイズしたTOMLファイルを読み込むには
+デフォルト設定 [translate_features_qualifiers.toml](https://github.com/yamaton/gff3toddbj/blob/main/gff3toddbj/translate_features_qualifiers.toml) を参考にカスタマイズしたファイルを用意してください。カスタマイズしたTOMLファイルを読み込ませるには
 
-* `--renaming_scheme <file>`
+* `--rename_setting <FILE>`
 
-のオプションを使います。これを利用した呼び出し例は以下のようになります。
+のコマンドラインオプションを使います。これを利用した呼び出し例は以下のようになります。
 
 ```shell
 gff3-to-ddbj \
@@ -228,9 +277,40 @@ gff3-to-ddbj \
   --metadata mymetadata.toml \
   --locus_tag_prefix MYOWNPREFIX_ \
   --transl_table 1 \
-  --renaming_scheme my_translate_features_qualifiers.toml \    # リネーム変換用ファイルを指定
+  --rename_setting my_translate_features_qualifiers.toml \    # リネーム変換用ファイルを指定
   --output myawesome_output.ann
 ```
+
+
+### [パワーユーザ向け] Features-Qualifiers出力のカスタマイズ
+
+DDBJの登録にて推奨される(Feature, Qualifier)の組は限定されているため、アノテーションの出力にフィルタリングを行っています。
+デフォルトでは[DDBJのFeature/Qualifier 対応一覧表](https://www.ddbj.nig.ac.jp/assets/files/pdf/ddbj/fq-j.pdf)に準じた[TOML形式の設定](https://github.com/yamaton/gff3toddbj/blob/main/gff3toddbj/ddbj_filter.toml)を読みこみます。このファイルでは以下のような構造を取ります。
+
+```toml
+CDS = [
+"EC_number",
+"inference",
+"locus_tag",
+"note",
+"product",
+]
+
+exon = [
+"gene",
+"locus_tag",
+"note",
+]
+```
+
+出力として許される Features および Qualifiers を、左辺にFeature名、右辺にQualifier名を要素にもつリストを書くことで表しています。
+
+たとえば上記の設定では、出力は `CDS` および `exon` のFeatures のみ、そして対応する Qualifiers は記述されたキーに限定されます。
+この機能をカスタマイズするばあいには、TOMLファイルを編集したうえで
+
+* `--filter_setting <FILE>`
+
+のコマンドラインオプションを使ってファイルを入力してください。
 
 
 ## トラブルシューティング
@@ -262,42 +342,6 @@ normalize-entry-names myannotation_output.txt
 ```
 アノテーションファイルのエントリ名に正規化の必要があるときには `myannotation_output_renamed.txt` のファイルが作られます。無いときには `Entry names are fine: No need to normalize.` のメッセージが出て終了します。
 
-
-
-## 当プログラムが行うこと
-
-表示形式を変えるほかに以下のようなことをしています。
-
-* 消費メモリを節約しつつ入力FASTAファイルの配列を読むためSQLiteデータベースに保存
-  * データベースは処理後に削除されます
-
-* 変換テーブルに基づいたFeatures / Qualifiersのリネーム
-
-* assembly_gap の検索
-
-* /transl_table のCDSへの追加
-
-* メタデータ中のsource情報を各エントリに追加
-
-* 同じ親をもつCDSを`join`記法で結合
-
-* 同じ親をもつexonを`join`記法で結合し、対応するmRNAのattributesと合成してmRNA Featureとする
-
-* CDSに開始・終了コドンが無い場合の位置情報修正
-  * 参照: [codon_start qualifier による翻訳開始の位置補正](https://www.ddbj.nig.ac.jp/ddbj/cds.html#frame)
-
-* CDS下の `/product` が値をひとつだけ持つよう変更。残りは `/note` へ
-
-  * [DDBJ の/product 詳細](https://www.ddbj.nig.ac.jp/ddbj/qualifiers.html#product)を参照ください
-
-    > * 一般名が複数ある場合でも, 複数の名称を記載しないで下さい。また, そのために不必要な区切り記号を使用しないで下さい。一般名の複数記載を希望される場合は, 代表的な名称を /product qualifier に記載し, その他の名称を /note qualifier に記載して下さい。
-    > * 機能, 名称等が不明な蛋白質の場合は, hypothetical protein と記載することを推奨します。
-
-* Qualifier値に重複があるとき冗長分を削除
-
-* アノテーション行の並び替え
-
-* [DDBJのFeature-Qualifier一覧表](https://www.ddbj.nig.ac.jp/assets/files/pdf/ddbj/fq-j.pdf)に基づいた出力のフィルタリング
 
 
 
