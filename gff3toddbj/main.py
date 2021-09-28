@@ -45,13 +45,13 @@ def main():
         default=1,
     )
     parser.add_argument(
-        "--renaming_scheme",
-        help="Renaming scheme for features and qualifiers",
+        "--rename_setting",
+        help="Rename setting for features and qualifiers",
         metavar="FILE",
         default=PATH_TRANS_FEATURES_QUALIFIERS,
     )
     parser.add_argument(
-        "--filtering_rule",
+        "--filter_setting",
         help="A set of Feature-Qualifier pairs allowed in the output. See https://www.ddbj.nig.ac.jp/assets/files/pdf/ddbj/fq-e.pdf",
         metavar="FILE",
         default=PATH_DDBJ_FILTER,
@@ -70,10 +70,10 @@ def main():
     logging.info("Input metadata      : {}".format(args.metadata))
     logging.info("Prefix of locus_tag : {}".format(args.prefix))
     logging.info("transl_table        : {}".format(args.transl_table))
-    if args.renaming_scheme != PATH_TRANS_FEATURES_QUALIFIERS:
-        logging.info(f"Renaming scheme     : {args.translate_features}")
+    if args.rename_setting != PATH_TRANS_FEATURES_QUALIFIERS:
+        logging.info(f"Rename setting      : {args.rename_setting}")
     if args.filter_setting != PATH_DDBJ_FILTER:
-        logging.info(f"Filtering rule       : {args.filter_setting}")
+        logging.info(f"Filter setting      : {args.filter_setting}")
     output = args.output
     if output:
         logging.info("Output              : {}".format(output))
@@ -83,7 +83,7 @@ def main():
     records = transforms.run(
         args.gff3,
         args.fasta,
-        args.renaming_scheme,
+        args.rename_setting,
         metadata,
         args.prefix,
         args.transl_table,
