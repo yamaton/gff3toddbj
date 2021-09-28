@@ -160,10 +160,6 @@ class RenameHandler(object):
                             if "attribute_value" in below_attribute:
                                 attribute_value = below_attribute["attribute_value"]
                                 if attribute_value in vals:
-                                    msg = "(type, attribute_key, attribute_value, feature_key) = ({}, {}, {}, {})".format(
-                                        type_, key, attribute_value, new_type,
-                                    )
-                                    logging.info(msg)
                                     feature.type = new_type
                                     feature.qualifiers[key].remove(attribute_value)
 
@@ -394,8 +390,11 @@ def fix_locations(cur: sqlite3.Cursor, record: SeqRecord, transl_table: int) -> 
         seq_dict is {SeqID: Record} dict containing sequence info.
         transl_table is the Genetic Code.
     """
+    count_fix_codon_start = 0
     def _runner(features: List[SeqFeature], seq: Seq) -> None:
-         for f in features:
+        nonlocal count_fix_codon_start
+
+        for f in features:
             if f.type == "CDS":
                 cs_list = f.qualifiers.get("codon_start", [1])
                 codon_start = cs_list[0]
@@ -408,7 +407,7 @@ def fix_locations(cur: sqlite3.Cursor, record: SeqRecord, transl_table: int) -> 
                     continue
                 if not utils.has_start_codon(seq, f.location, transl_table, phase):
                     if phase > 0 and utils.has_start_codon(seq, f.location, transl_table):
-                        logging.warning("Change to /codon_start=1: SeqID = {} (was /codon_start={})".format(record.id, phase + 1))
+                        count_fix_codon_start += 1
                         f.qualifiers["codon_start"] = [1]
                     else:
                         f.location = _fix_absent_start_codon(f.location)
@@ -467,6 +466,10 @@ def fix_locations(cur: sqlite3.Cursor, record: SeqRecord, transl_table: int) -> 
     if s:
         seq = Seq(s)
         _runner(record.features, seq)
+
+    if count_fix_codon_start > 0:
+        msg = "Change to /codon_start=1 (count: {}) in (SeqID: {})".format(count_fix_codon_start, record.id)
+        logging.info(msg)
 
 
 def _merge_mrna_qualifiers(rec: SeqRecord) -> None:

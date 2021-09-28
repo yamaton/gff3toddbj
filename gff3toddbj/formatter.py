@@ -210,7 +210,7 @@ class DDBJFormatter(object):
                     rows[2] = "1..E"
                 yield "\t".join(rows)
         else:
-            logging.warning("COMMON is unavailable. Skipping...")
+            logging.warning("COMMON is unavailable")
 
         # Format main genome entries
         for rec in records:
