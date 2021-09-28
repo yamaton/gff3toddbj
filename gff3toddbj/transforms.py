@@ -101,13 +101,12 @@ class RenameHandler(object):
         # which breaks the tree structure, and my traversal visits
         # some nodes more than once.
         #
-        # OTOH, the renaming scheme can contain {mRNA -> __mRNA, exon -> mRNA}
-        # hence the application twice leads unexpected results like exon -> __mRNA.
+        # OTOH, the renaming scheme can contain {A -> B, B -> C}
+        # hence the application twice leads unexpected results like A -> C.
         #
-        # A dummy constant defined as `RenameHandler._DUMMY_PREFIX = "__tempname__"`
-        # prevents collision of keys and values, hence avoiding multiple applications
-        # by
-        # {mRNA -> __tempname____mRNA, exon -> __tempname__mRNA}
+        # A dummy constant defined as `RenameHandler._DUMMY_PREFIX = "__tmpname__"`
+        # prevents collision of keys and values, hence avoiding multiple applications by
+        # {A -> __tmpname__B, B -> __tmpname__C}
         #
         # The dummy prefix is removed in the second scan.
         #
@@ -472,21 +471,24 @@ def fix_locations(cur: sqlite3.Cursor, record: SeqRecord, transl_table: int) -> 
         logging.info(msg)
 
 
-def _merge_mrna_qualifiers(rec: SeqRecord) -> None:
-    """Set qualifiers in __mRNA (orignally mRNA type)
-    as the qualifiers of the merged mRNA feature.
+def _merge_mrna_and_exons(rec: SeqRecord) -> None:
+    """Set .location of joined exons as the location of mRNA,
+    then rename such exons into __exon to discard.
     """
     def _helper(features: List[SeqFeature]) -> None:
         for f in features:
-            if f.type == utils.DUMMY_ORIGINAL_MRNA:
-                mrnas = [subf for subf in f.sub_features if subf.type == "mRNA"]
-                if len(mrnas) != 1:
-                    logging.warning("Something is wrong with mRNA and exons: {}".format(f))
-                    return
-                for subf in f.sub_features:
-                    if subf.type == "mRNA":
-                        for key, val in f.qualifiers.items():
-                            subf.qualifiers[key] = val
+            if f.type == "mRNA":
+                joined_exons = [subf for subf in f.sub_features if subf.type == "exon"]
+                if len(joined_exons) > 1:
+                    logging.warning("Something is wrong with joining exons: {}".format(f))
+                    continue
+                elif not joined_exons:
+                    # when mRNA does not have exons as its children, just leave it as is
+                    continue
+
+                joined_exon = joined_exons[0]
+                f.location = joined_exon.location                # set the location of joined exons as mRNA's location
+                joined_exon.type = utils.DUMMY_ORIGINALLY_EXON   # rename exon to __exon to supress output
 
             if hasattr(f, "sub_features"):
                 _helper(f.sub_features)
@@ -633,11 +635,11 @@ def run(
     if joinables:
         records = [_join_features(rec, joinables) for rec in records]
 
-    # Merge __mRNA with mRNAs (originally mRNA and exons)
+    # Merge exons with their parent mRNA
     for rec in records:
-        _merge_mrna_qualifiers(rec)
+        _merge_mrna_and_exons(rec)
 
-    # # check start codons in CDSs
+    # check start codons in CDSs
     for rec in records:
         fix_locations(cur, rec, transl_table)
 

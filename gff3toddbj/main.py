@@ -17,7 +17,9 @@ PATH_METADATA_DEFAULT = _DIR / "metadata_without_COMMON.toml"
 LOCUS_TAG_PREFIX = "LOCUSTAGPREFIX_"
 
 IGNORE_FILTERING_RULES = False
-JOINABLES = ("mRNA", "CDS")
+
+# [NOTE] joined exons will be treated as mRNA locations
+JOINABLES = ("CDS", "exon")
 
 def main():
     parser = argparse.ArgumentParser()

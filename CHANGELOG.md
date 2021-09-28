@@ -4,6 +4,7 @@
 * Fix locations with inequalities '<' and '>' when start/stop codons are absent
 * Fix a critical bug not inserting source properly
 * Fix a critical bug missing subfeatures in certain cases
+* Fix a critical bug ocassionally getting mRNA's ID wrong.
 * Update the translate-feature renaming table
 * Update the translate-feature pair filtering
 * Add CLI tool: normalize-entry-names for renaming IDs in DDBJ annotation file

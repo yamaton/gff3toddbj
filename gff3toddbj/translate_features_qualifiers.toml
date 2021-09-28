@@ -23,18 +23,8 @@ feature_key = "V_segment"
 # https://https.ncbi.nlm.nih.gov/datasets/docs/reference-docs/file-formats/about-ncbi-gff3/#the-source-region-feature
 feature_key = "source"
 
-## ============== BEGIN ========================
-## DO NOT EDIT [mRNA] and [exon] entries
-## Special treatment to handle exons -> mRNA
 [transcript]
-feature_key = "__mRNA"   # MUST be the same as utils.DUMMY_ORIGINAL_MRNA constant
-
-[mRNA]
-feature_key = "__mRNA"   # MUST be the same as utils.DUMMY_ORIGINAL_MRNA constant
-
-[exon]
 feature_key = "mRNA"
-## ============== END ==========================
 
 
 
