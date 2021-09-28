@@ -64,8 +64,8 @@ conda create -n ddbj
 # 環境ddbjをアクティベート
 conda activate ddbj
 
-# ddbjに依存パッケージ (bioconda, bcbio-gff, toml) をインストール
-conda install -c bioconda -c conda-forge biopython bcbio-gff toml
+# ddbjに依存パッケージ (bioconda, bcbio-gff, toml, setuptools) をインストール
+conda install -c bioconda -c conda-forge biopython bcbio-gff toml setuptools
 
 # gff3-to-ddbj および付属ツールをインストール
 python setup.py install

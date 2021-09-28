@@ -82,7 +82,7 @@ $ conda create -n ddbj
 $ conda activate ddbj
 
 # Install dependencies to "ddbj"
-$ conda install -c bioconda -c conda-forge biopython bcbio-gff toml
+$ conda install -c bioconda -c conda-forge biopython bcbio-gff toml setuptools
 
 # Install gff3-to-ddbj and extra tools
 $ python setup.py install
