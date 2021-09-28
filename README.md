@@ -2,8 +2,8 @@
 日本語版は[こちら](https://github.com/yamaton/gff3toddbj/blob/main/README-ja.md)。
 
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/yamaton/gff3toddbj?style=for-the-badge)
-![Conda (channel only)](https://img.shields.io/conda/vn/bioconda/gff3toddbj?style=for-the-badge)
-![PyPI](https://img.shields.io/pypi/v/gff3toddbj?style=for-the-badge)
+[![Conda (channel only)](https://img.shields.io/conda/vn/bioconda/gff3toddbj?style=for-the-badge)](https://bioconda.github.io/recipes/gff3toddbj/README.html)
+[![PyPI](https://img.shields.io/pypi/v/gff3toddbj?style=for-the-badge)](https://pypi.org/project/gff3toddbj/)
 
 
 [TOC]
