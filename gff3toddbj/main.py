@@ -16,7 +16,7 @@ PATH_METADATA_DEFAULT = _DIR / "metadata_without_COMMON.toml"
 
 LOCUS_TAG_PREFIX = "LOCUSTAGPREFIX_"
 
-IGNORE_FEATURE_QUALIFIER_RULE = False
+IGNORE_FILTERING_RULES = False
 JOINABLES = ("mRNA", "CDS")
 
 def main():
@@ -51,6 +51,12 @@ def main():
         default=PATH_TRANS_FEATURES_QUALIFIERS,
     )
     parser.add_argument(
+        "--filtering_rule",
+        help="A set of Feature-Qualifier pairs allowed in the output. See https://www.ddbj.nig.ac.jp/assets/files/pdf/ddbj/fq-e.pdf",
+        metavar="FILE",
+        default=PATH_DDBJ_FILTER,
+    )
+    parser.add_argument(
         "-o", "--output",
         metavar="FILE",
         help="Specify annotation file name as output",
@@ -66,7 +72,8 @@ def main():
     logging.info("transl_table        : {}".format(args.transl_table))
     if args.renaming_scheme != PATH_TRANS_FEATURES_QUALIFIERS:
         logging.info(f"Renaming scheme     : {args.translate_features}")
-
+    if args.filter_setting != PATH_DDBJ_FILTER:
+        logging.info(f"Filtering rule       : {args.filter_setting}")
     output = args.output
     if output:
         logging.info("Output              : {}".format(output))
@@ -85,8 +92,8 @@ def main():
 
     logging.debug("Records: {}".format(records))
 
-    fmt = formatter.DDBJFormatter(metadata, PATH_DDBJ_FILTER)
-    gen = fmt.run(records, ignore_rules=IGNORE_FEATURE_QUALIFIER_RULE)
+    fmt = formatter.DDBJFormatter(metadata, args.filter_setting)
+    gen = fmt.run(records, ignore_rules=IGNORE_FILTERING_RULES)
 
     if output:
         parent_dir = pathlib.Path(output).parent
