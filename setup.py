@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="gff3toddbj",
-    version="0.1.1",
+    version="0.2.0",
     author="Yamato Matsuoka",
     author_email="yamaton@gmail.com",
     description="Create a DDBJ annotation file from GFF3 and FASTA files",
