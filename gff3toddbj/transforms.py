@@ -218,23 +218,28 @@ def _join_features(record: SeqRecord, joinables: Optional[Tuple[str, ...]]) -> S
         locations = []
         qualifiers = collections.OrderedDict()
         sub_features = []
+        features.sort(key=lambda f: (f.location.strand * f.location.start.position, f.location.strand * f.location.end.position))
         for f in features:
             locations.append(f.location)
             if hasattr(f, "sub_features") and f.sub_features:
                 sub_features.extend(f.sub_features)
 
+        compound_loc = CompoundLocation(locations)
+        if compound_loc.strand is None:
+            ids = [f.id for f in features]
+            logging.error("Something is wrong in joining features:\n    ids = {}".format(ids))
+
         # this is how to set qualifiers of the joined feature
-        # and this matters in setting /codon_start right.
+        # and this matters in setting /codon_start right
         qualifiers = features[0].qualifiers
+        type_ = features[0].type
 
         if not sub_features:
             sub_features = None
 
-        compound_loc = CompoundLocation(locations)
-
         return SeqFeature(
             compound_loc,
-            type=features[0].type,
+            type=type_,
             qualifiers=qualifiers,
             sub_features=sub_features,
         )
@@ -403,7 +408,7 @@ def fix_locations(cur: sqlite3.Cursor, record: SeqRecord, transl_table: int) -> 
                     continue
                 if not utils.has_start_codon(seq, f.location, transl_table, phase):
                     if phase > 0 and utils.has_start_codon(seq, f.location, transl_table):
-                        logging.warning("Fixed /codon_start to 1: SeqID = {} (was /start_codon={})".format(record.id, phase + 1))
+                        logging.warning("Change to /codon_start=1: SeqID = {} (was /codon_start={})".format(record.id, phase + 1))
                         f.qualifiers["codon_start"] = [1]
                     else:
                         f.location = _fix_absent_start_codon(f.location)
