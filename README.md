@@ -19,13 +19,13 @@
 * [Under the Hood](#under-the-hood)
 * [Customize the behavior](#customize-the-behavior)
   + [Metadata file](#metadata-file)
-  + [[Advanced] Feature/Qualifier rename setting](#advanced-featurequalifier-rename-setting)
+  + [[Advanced] Rename features and qualifiers](#advanced-rename-features-and-qualifiers)
     + [Rename types/feature keys](#rename-typesfeature-keys)
     + [Rename attributes/qualifier keys](#rename-attributesqualifier-keys)
-    + [Translate types to featuress with qualifiers](#translate-types-to-featuress-with-qualifiers)
-    + [Translate (type, attribute) items to features](#translate-type-attribute-items-to-features)
-    + [Run with a custom file](#run-with-a-custom-file)
-  + [[Advanced] Feature/Qualifier filter setting](#advanced-featurequalifier-filter-setting)
+    + [Translate GFF3 types to features with qualifiers](#translate-gff3-types-to-features-with-qualifiers)
+    + [Translate (type, attribute) items to features](#translate-type-attribute-item-to-feature)
+    + [Run with custom configuration](#run-with-custom-configuration)
+  + [[Advanced] Filter features and qualifiers](#advanced-filter-features-and-qualifiers)
 * [Troubleshooting](#troubleshooting)
   + [Validate GFF3](#validate-gff3)
   + [Split FASTA from GFF3 (if needed)](#split-fasta-from-gff3-if-needed)
@@ -125,17 +125,17 @@ Here is the list of operations `gff3-to-ddbj` will do:
 * Store FASTA sequences to SQLite database to save memory use
   * The database is deleted after the operation.
 
-* Rename Feature / Qualifiers keys using the translation tables
+* Rename features and qualifiers following the [renaming scheme](#advanced-rename-features-and-qualifiers).
 
-* Search for `assembly_gap` s in FASTA
+* Search for `assembly_gap`s in FASTA.
 
-* Add `/transl_table` to each CDS
+* Add `/transl_table` to each CDS.
 
-* Insert `source` information from the metadata fie
+* Insert `source` information from the [metadata fie](#metadata-file).
 
-* Merge `CDS`s having the same parent with `join` notation
+* Merge `CDS`s having the same parent with `join` notation.
 
-* Merge `mRNA` and `exon` in GFF3 and create `mRNA` feature with `join` notation
+* Merge `mRNA` and `exon` in GFF3 and create `mRNA` feature with `join` notation.
 
 * Modify locations with inequality signs (`<` and `>`) if start/stop codon is absent.
   * See [Offset of the frame at translation initiation by codon_start](https://www.ddbj.nig.ac.jp/ddbj/cds-e.html#frame)
@@ -148,11 +148,11 @@ Here is the list of operations `gff3-to-ddbj` will do:
     >
     > * If the name and function are not known, we recommend to describe as "hypothetical protein".
 
-* Remove duplicates in qualifier values
+* Remove duplicates in qualifier values.
 
 * Sort lines in annotation
 
-* Filter out Feature-Qualifier pairs following [the table](https://www.ddbj.nig.ac.jp/assets/files/pdf/ddbj/fq-e.pdf).
+* Filter features and qualifiers following [the matrix](https://www.ddbj.nig.ac.jp/assets/files/pdf/ddbj/fq-e.pdf).
 
 
 
@@ -201,9 +201,9 @@ The file accommodates following and they are all optional. That is, GFF3-to-DDBJ
 For more examples, see [WGS in COMMON](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=1110334278) and [WGS](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=382116224) provided by DDBJ as annotation examples, and corresponding metadata files [metadata_WGS_COMMON.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/metadata/metadata_WGS_COMMON.toml) and [metadata_WGS.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/metadata/metadata_WGS.toml) in this repository.
 
 
-### [Advanced] Feature/Qualifier rename setting
+### [Advanced] Rename Features and Qualifiers
 
-GFF3 and DDBJ annotation have rough correspondence as follows:
+GFF3 and DDBJ annotation have rough correspondence like:
 
 1. GFF3 column 3 "type" →  DDBJ annotation column 2 as "Feature"
 2. GFF3 column 9 "attribute" →  DDBJ annotation column 4 and 5 as "Qualifier key", and "Qualifier value"
@@ -212,7 +212,7 @@ but nomenclatures in GFF3 often do not conform the annotations set by INSDC. Fur
 
 To meet convensions with the requirement, GFF3-to-DDBJ comes with a TOML file to rename feature keys and qualifier keys/values.
 
-Here is a way to customize the renaming schema.
+Here is how to customize the renaming configuration.
 
 #### Rename types/feature keys
 
@@ -236,7 +236,7 @@ qualifier_key = "note"
 qualifier_value_prefix = "ID:"  # optional
 ```
 
-#### Translate types to featuress with qualifiers
+#### Translate GFF3 types to features with qualifiers
 
 Sometimes we want to replace a certain types with features WITH qualifiers. For example, `snRNA` is an invalid feature in INSDC/DDBJ hence we replace it with `ncRNA` feature with `/ncRNA_class="snRNA"` qualifier. Such transformation is written in TOML as following.
 
@@ -259,11 +259,11 @@ feature_key = "misc_RNA"
 ```
 
 
-#### Run with a custom file
+#### Run with custom configuration
 
-See [translate_features_qualifiers.toml](https://github.com/yamaton/gff3toddbj/blob/main/gff3toddbj/translate_features_qualifiers.toml) for the default behavior. To feed a custom translation table, use the CLI option:
+See [translate_features_qualifiers.toml](https://github.com/yamaton/gff3toddbj/blob/main/gff3toddbj/translate_features_qualifiers.toml) for the default renaming behavior. To feed a custom translation table, use the CLI option:
 
-* `--rename_setting <FILE>`
+* `--config_rename <FILE>`
 
 And here is an example call:
 
@@ -274,11 +274,11 @@ gff3-to-ddbj \
   --metadata mymetadata.toml \
   --locus_tag_prefix MYOWNPREFIX_ \
   --transl_table 1 \
-  --rename_setting my_translate_features_qualifiers.toml \  # Set your customized file here
+  --config_rename my_translate_features_qualifiers.toml \  # Set your customized file here
   --output myawesome_output.ann
 ```
 
-### [Advanced] Feature/Qualifier filter setting
+### [Advanced] Filter features and qualifiers
 
 DDBJ specifies recommended [Feature/Qualifier usage matrix](https://www.ddbj.nig.ac.jp/assets/files/pdf/ddbj/fq-e.pdf). To conform this rule, features and qualifiers appearing in the annotation output are filtered by [the filtering file in TOML](https://github.com/yamaton/gff3toddbj/blob/main/gff3toddbj/ddbj_filter.toml) by default. The file is in TOML format with the structure like this:
 
@@ -300,7 +300,7 @@ exon = [
 
 The left-hand side of the equal sign `=` represents an allowed feature key, and the right-hand side is a list of allowed qualifier keys. In this example, only `CDS` and `exon` features will show up in the annotation, and qualifiers are limited to the listed items. To customize this filtering function, edit the TOML file first and pass the file with the CLI option:
 
-* `--filter_setting <FILE>`
+* `--config_filter <FILE>`
 
 
 ## Troubleshooting

@@ -14,7 +14,7 @@
 * [当プログラムが行うこと](#当プログラムが行うこと)
 * [設定いろいろ](#設定いろいろ)
   + [メタデータファイル](#メタデータファイル)
-  + [[パワーユーザ向け] Features/Qualifiersのリネーム](#パワーユーザ向け-featuresqualifiersのリネーム)
+  + [[パワーユーザ向け] FeaturesとQualifiersのリネーム](#パワーユーザ向け-featuresとqualifiersのリネーム)
     + [Type / Feature keyのリネーム](#type--feature-keyのリネーム)
     + [Attribute / Qualifier keyのリネーム](#attribute--qualifier-keyのリネーム)
     + [指定のTypeをQualifier付きFeatureに置き換え](#指定のtypeをqualifier付きfeatureに置き換え)
@@ -214,7 +214,7 @@ line = [
 
 
 
-### [パワーユーザ向け] Features/Qualifiersのリネーム
+### [パワーユーザ向け] FeaturesとQualifiersのリネーム
 
 GFF3 と DDBJ アノテーションには大まかに以下のような対応があります。
 
@@ -279,7 +279,7 @@ feature_key = "misc_RNA"
 
 デフォルト設定 [translate_features_qualifiers.toml](https://github.com/yamaton/gff3toddbj/blob/main/gff3toddbj/translate_features_qualifiers.toml) を参考にカスタマイズしたファイルを用意してください。カスタマイズしたTOMLファイルを読み込ませるには
 
-* `--rename_setting <FILE>`
+* `--config_rename <FILE>`
 
 のコマンドラインオプションを使います。これを利用した呼び出し例は以下のようになります。
 
@@ -290,7 +290,7 @@ gff3-to-ddbj \
   --metadata mymetadata.toml \
   --locus_tag_prefix MYOWNPREFIX_ \
   --transl_table 1 \
-  --rename_setting my_translate_features_qualifiers.toml \    # リネーム変換用ファイルを指定
+  --config_rename my_translate_features_qualifiers.toml \    # リネーム変換用ファイルを指定
   --output myawesome_output.ann
 ```
 
@@ -321,7 +321,7 @@ exon = [
 たとえば上記の設定では、出力は `CDS` および `exon` のFeatures のみ、そして対応する Qualifiers は記述されたキーに限定されます。
 この機能をカスタマイズするばあいには、TOMLファイルを編集したうえで
 
-* `--filter_setting <FILE>`
+* `--config_filter <FILE>`
 
 のコマンドラインオプションを使ってファイルを入力してください。
 

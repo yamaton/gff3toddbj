@@ -1,3 +1,7 @@
+## latest
+* Rename the CLI option from --rename_setting to --config_rename
+* Rename the CLI option form --filter_setting to --config_filter
+
 ## v0.2.1 (2021-09-28)
 * Add the CLI option --version
 
