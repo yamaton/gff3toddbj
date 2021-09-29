@@ -193,6 +193,28 @@ def debug_checker(
         _helper(rec.features)
 
 
+def to_loglevel(s: str) -> int:
+    """
+    Convert string "INFO" to logging.INFO, "DEBUG" to logging.DEBUG, etc.
+
+    >>> to_loglevel("info")
+    20
+    >>> to_loglevel("30")
+    30
+    """
+    try:
+        x = int(s)
+        return x
+    except ValueError:
+        pass
+
+    s = s.upper()
+    valid = ("DEBUG", "INFO", "WARN", "WARNING", "ERROR", "FATAL")
+    if s in valid:
+        res = getattr(logging, s)
+    else:
+        res = logging.INFO
+    return res
 
 def get_attribute_keys(subtree: OrderedDict[str, Any]) -> List[str]:
     """

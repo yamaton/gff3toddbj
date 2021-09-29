@@ -65,7 +65,7 @@ def main():
         default=PATH_DDBJ_FILTER,
     )
     parser.add_argument(
-        "-o", "--output",
+        "-o", "--out", "--output",
         metavar="FILE",
         help="Specify annotation file name as output",
     )
@@ -75,9 +75,15 @@ def main():
         version="%(prog)s {}".format(__version__),
         help="Show version",
     )
-    parser.add_argument("--log", default=logging.INFO, help="[debug only] Set log level.")
+    parser.add_argument(
+        "--log",
+        default="INFO",
+        metavar="STR",
+        help="[debug] Choose log level from (DEBUG, INFO, WARNING, ERROR) (default: INFO).",
+    )
     args = parser.parse_args()
-    logging.basicConfig(level=args.log, format=FORMAT)
+
+    logging.basicConfig(level=utils.to_loglevel(args.log), format=FORMAT)
 
     logging.info("Input GFF           : {}".format(args.gff3))
     logging.info("Input FASTA         : {}".format(args.fasta))
@@ -88,12 +94,13 @@ def main():
         logging.info(f"Config-Rename       : {args.config_rename}")
     if args.config_filter != PATH_DDBJ_FILTER:
         logging.info(f"Config-Filter       : {args.config_filter}")
-    output = args.output
+    output = args.out
     if output:
         logging.info("Output              : {}".format(output))
 
     metadata = utils.load_metadata_info(args.metadata)
 
+    # Load files, apply transformations, and get a list of SeqRecord
     records = transforms.run(
         args.gff3,
         args.fasta,
