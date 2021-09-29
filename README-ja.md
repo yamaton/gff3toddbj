@@ -7,6 +7,7 @@
 * [これは何？](#これは何)
 * [セットアップ](#セットアップ)
     - [biocondaからconda環境にインストールする場合](#biocondaからconda環境にインストールする場合)
+    - [pipからconda環境にインストールする場合](#pipからconda環境にインストールする場合)
     - [GitHubソースコードからconda環境にインストールする場合](#githubソースコードからconda環境にインストールする場合)
 * [GFF3とFASTAからDDBJアノテーションをつくる](#gff3とfastaからddbjアノテーションをつくる)
   + [`gff3-to-ddbj` を動かしてみる](#gff3-to-ddbj-を動かしてみる)
@@ -48,6 +49,18 @@ conda create -n ddbj -c bioconda -c conda-forge gff3toddbj
 conda activate ddbj
 ```
 
+### pipからconda環境にインストールする場合
+
+```shell
+# ddbjという名前でconda環境をつくってpipコマンドをインストール
+$ conda create -n ddbj pip
+
+# 環境ddbjをアクティベート
+$ conda activate ddbj
+
+# pipからgff3toddbjをインストール
+$ pip install gff3toddbj
+```
 
 #### GitHubソースコードからconda環境にインストールする場合
 
