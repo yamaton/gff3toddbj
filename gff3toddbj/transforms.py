@@ -6,7 +6,13 @@ import sqlite3
 
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
-from Bio.SeqFeature import FeatureLocation, SeqFeature, CompoundLocation, BeforePosition, AfterPosition
+from Bio.SeqFeature import (
+    FeatureLocation,
+    SeqFeature,
+    CompoundLocation,
+    BeforePosition,
+    AfterPosition,
+)
 
 from . import utils
 from . import io
@@ -14,7 +20,11 @@ from . import io
 Interval = Tuple[int, int]
 
 
-def _set_assembly_gap(records: List[SeqRecord], cur: sqlite3.Cursor, metadata: OrderedDict[str, OrderedDict[str, Any]]) -> None:
+def _set_assembly_gap(
+    records: List[SeqRecord],
+    cur: sqlite3.Cursor,
+    metadata: OrderedDict[str, OrderedDict[str, Any]],
+) -> None:
     """
     Set assembly gaps feature to records.
     """
@@ -87,6 +97,7 @@ class RenameHandler(object):
 
     [TODO] Add description of Case 1, 2, 3, 4.
     """
+
     _DUMMY_PREFIX = "__tmpname__"
 
     def __init__(self, filepath: str, locus_tag_prefix: str):
@@ -137,15 +148,19 @@ class RenameHandler(object):
                         else:
                             # (Case 3) Type --> (Feature key, Qualifier key-value)
                             key = below_type["qualifier_key"]
-                            value = below_type.get("qualifier_value", "")
-                            if not value:
-                                logging.error("[{}] should have qualifier_value (case 3)".format(type_))
+                            value = below_type.get("qualifier_value", None)
+                            if value is None:
+                                msg = "[{}] /{} ... qualifier_value is missing in the metadata (case 3)".format(type_, key)
+                                logging.error(msg)
                                 continue
                             feature.type = new_type
                             if key in feature.qualifiers:
-                                msg = "[{}] /{} already exists. Adding more..".format(type_, key)
-                                logging.warning(msg)
-                                feature.qualifiers[key].append(value)
+                                if not isinstance(feature.qualifiers[key], list):
+                                    feature.qualifiers[key] = [feature.qualifiers[key]]
+                                if isinstance(value, list):
+                                    feature.qualifiers[key].extend(value)
+                                else:
+                                    feature.qualifiers[key].append(value)
                             else:
                                 feature.qualifiers[key] = [value]
 
@@ -206,14 +221,19 @@ def _join_features(record: SeqRecord, joinables: Optional[Tuple[str, ...]]) -> S
     """
     joinables_ = [] if joinables is None else joinables
 
+    def sortkey(f: SeqFeature) -> Tuple[int, int]:
+        strand = f.location.strand
+        if strand is None:
+            strand = 0
+        return (strand * f.location.start.position, strand * f.location.end.position)
+
     def _join(features: List[SeqFeature]) -> SeqFeature:
-        """Join features into a single feature assuming the list already has right members
-        """
+        """Join features into a single feature assuming the list already has right members"""
         assert len(features) > 1
         locations = []
         qualifiers = collections.OrderedDict()
         sub_features = []
-        features.sort(key=lambda f: (f.location.strand * f.location.start.position, f.location.strand * f.location.end.position))
+        features.sort(key=sortkey)
         for f in features:
             locations.append(f.location)
             if hasattr(f, "sub_features") and f.sub_features:
@@ -240,33 +260,32 @@ def _join_features(record: SeqRecord, joinables: Optional[Tuple[str, ...]]) -> S
         )
 
     def _runner(features: List[SeqFeature]) -> List[SeqFeature]:
-        """
-        """
-        # `triples_or_features` has either `SeqFeature` or (type, id, product) as its key.
-        # An item with a `SeqFeature` key has dummy while an item with a tuple key has
+        """Scan features and apply _join """
+        # `groups_or_features` has either `SeqFeature` or a group == (type, product) as its key.
+        # An item with a `SeqFeature` key has dummy while an item with the tuple key has
         # List[SeqFeature] as its value.
-        triples_or_features = collections.defaultdict(list)
+        groups_or_features = collections.defaultdict(list)
         for f in features:
             if f.type not in joinables_:
-                triples_or_features[f] = [True]  # dummy values
+                groups_or_features[f] = [True]  # dummy values
             else:
                 if "product" in f.qualifiers:
                     prod = tuple(f.qualifiers["product"])
                 else:
                     prod = None
-                triple = (f.type, prod)
-                triples_or_features[triple].append(f)
+                group = (f.type, prod)
+                groups_or_features[group].append(f)
 
         res = []
         seen = set()
-        for triple_or_f, fs in triples_or_features.items():
-            if isinstance(triple_or_f, SeqFeature):
-                res.append(triple_or_f)
+        for group_or_f, fs in groups_or_features.items():
+            if isinstance(group_or_f, SeqFeature):
+                res.append(group_or_f)
             elif len(fs) == 1:
                 res.extend(fs)
             else:
-                if triple_or_f not in seen:
-                    seen.add(triple_or_f)
+                if group_or_f not in seen:
+                    seen.add(group_or_f)
                     joined_feature = _join(fs)
                     res.append(joined_feature)
 
@@ -277,7 +296,7 @@ def _join_features(record: SeqRecord, joinables: Optional[Tuple[str, ...]]) -> S
 
         return res
 
-    # Do not merge features at the top-level
+    # [NOTE] Do not merge features at the top-level
     for feature in record.features:
         if hasattr(feature, "sub_features"):
             feature.sub_features = _runner(feature.sub_features)
@@ -377,7 +396,6 @@ def _remove_duplicates_in_qualifiers(rec: SeqRecord) -> None:
     _run(rec.features)
 
 
-
 def fix_locations(cur: sqlite3.Cursor, record: SeqRecord, transl_table: int) -> None:
     """
     Fix locations of features in records when start/stop codons are absent.
@@ -390,6 +408,7 @@ def fix_locations(cur: sqlite3.Cursor, record: SeqRecord, transl_table: int) -> 
         transl_table is the Genetic Code.
     """
     count_fix_codon_start = 0
+
     def _runner(features: List[SeqFeature], seq: Seq) -> None:
         nonlocal count_fix_codon_start
 
@@ -397,7 +416,7 @@ def fix_locations(cur: sqlite3.Cursor, record: SeqRecord, transl_table: int) -> 
             if f.type == "CDS":
                 cs_list = f.qualifiers.get("codon_start", [1])
                 codon_start = cs_list[0]
-                phase = codon_start - 1   # to 0-based phase index
+                phase = codon_start - 1  # to 0-based phase index
                 if f.location is None:
                     logging.error("f.location is None. Something is wrong: {}".format(f))
                     continue
@@ -418,8 +437,12 @@ def fix_locations(cur: sqlite3.Cursor, record: SeqRecord, transl_table: int) -> 
                 _runner(f.sub_features, seq)
 
     def _fix_loc(location: FeatureLocation, is_at_start=True) -> FeatureLocation:
-        """Credit: EMBLmyGFF3
-        """
+        """Credit: EMBLmyGFF3"""
+
+        if location.strand is None:
+            logging.error("location.starnd is unavailable!")
+            return location
+
         sign = 1 if is_at_start else -1
         if location.strand * sign > 0:
             # left-end (5' terminal):
@@ -429,13 +452,11 @@ def fix_locations(cur: sqlite3.Cursor, record: SeqRecord, transl_table: int) -> 
                 location.parts[idx] = FeatureLocation(
                     BeforePosition(location.parts[idx].start),
                     location.parts[idx].end,
-                    strand = location.parts[idx].strand
+                    strand=location.parts[idx].strand,
                 )
             else:
                 location = FeatureLocation(
-                    BeforePosition(location.start),
-                    location.end,
-                    strand = location.strand
+                    BeforePosition(location.start), location.end, strand=location.strand
                 )
         else:
             # right-end (3' terminal):
@@ -445,13 +466,11 @@ def fix_locations(cur: sqlite3.Cursor, record: SeqRecord, transl_table: int) -> 
                 location.parts[idx] = FeatureLocation(
                     location.parts[idx].start,
                     AfterPosition(location.parts[idx].end),
-                    strand = location.parts[idx].strand
+                    strand=location.parts[idx].strand,
                 )
             else:
                 location = FeatureLocation(
-                    location.start,
-                    AfterPosition(location.end),
-                    strand = location.strand
+                    location.start, AfterPosition(location.end), strand=location.strand
                 )
         return location
 
@@ -475,6 +494,7 @@ def _merge_mrna_and_exons(rec: SeqRecord) -> None:
     """Set .location of joined exons as the location of mRNA,
     then rename such exons into __exon to discard.
     """
+
     def _helper(features: List[SeqFeature]) -> None:
         for f in features:
             if f.type == "mRNA":
@@ -487,14 +507,54 @@ def _merge_mrna_and_exons(rec: SeqRecord) -> None:
                     continue
 
                 joined_exon = joined_exons[0]
-                f.location = joined_exon.location                # set the location of joined exons as mRNA's location
-                joined_exon.type = utils.DUMMY_ORIGINALLY_EXON   # rename exon to __exon to supress output
+                # set the location of joined exons as mRNA's location
+                f.location = joined_exon.location
+                # rename exon to __exon to supress output
+                joined_exon.type = utils.DUMMY_ORIGINALLY_EXON
 
             if hasattr(f, "sub_features"):
                 _helper(f.sub_features)
 
     # just call the _helper
     _helper(rec.features)
+
+
+def _handle_source(
+    records: List[SeqRecord],
+    metadata: OrderedDict[str, OrderedDict[str, Any]],
+    id_to_seqlen: OrderedDict[str, int],
+) -> None:
+    """
+    Add "source" features in certain cases:
+      [source] in metadata will inserts "source" to each entry
+      UNLESS either of the following applies.
+      [NOTE] GFF3's "region" type corresponds to annotation's "source" feature.
+      [NOTE] User-input metadata may contain "[COMMON.source]" items.
+    """
+    if ("source" in metadata) and ("source" in metadata["COMMON"]):
+        msg = "[COMMON.source] overrides [source] items in metadata."
+        logging.warning(msg)
+    elif "source" in metadata:
+        cnt_skip = 0
+        cnt_insert = 0
+        for rec in records:
+            if rec.features:
+                if rec.features[0].type == "source":
+                    # skip insertion of [source] info
+                    cnt_skip += 1
+                else:
+                    cnt_insert += 1
+                    src_length = id_to_seqlen[rec.id]
+                    src_qualifiers = metadata["source"]
+                    src = _get_source(src_length, src_qualifiers)
+                    rec.features.insert(0, src)
+        if cnt_skip > 0:
+            msg_suffix = " (count: {})".format(cnt_skip)
+            msg = 'Skip [source] in metadata as GFF3\'s "region" type supersedes' + msg_suffix
+            logging.warning(msg)
+        if cnt_insert > 0:
+            msg = "Insert [source] in metadata (count: {})".format(cnt_insert)
+            logging.info(msg)
 
 
 def _assign_single_product(rec: SeqRecord) -> None:
@@ -528,8 +588,8 @@ def _assign_single_product(rec: SeqRecord) -> None:
 
 
 def _sort_features(features: List[SeqFeature]) -> None:
-    """Sort features
-    """
+    """Sort features"""
+
     def type_priority(type_name: str) -> float:
         d = {
             "source": -1,
@@ -605,33 +665,14 @@ def run(
     for rec in records:
         _add_transl_table(rec, transl_table)
 
-    # Add "source" features in certain cases:
-    #   [source] in metadata will inserts "source" to each entry
-    #   UNLESS either of the following applies.
-    #   [NOTE] GFF3's "region" type corresponds to annotation's "source" feature.
-    #   [NOTE] User-input metadata may contain "[COMMON.source]" items.
-    if ("source" in metadata) and ("source" in metadata["COMMON"]):
-        msg = "[COMMON.source] overrides [source] items in metadata."
-        logging.warning(msg)
-    elif "source" in metadata:
-        for rec in records:
-            if rec.features:
-                if rec.features[0].type == "source":
-                    msg = 'Skip [source] in metadata as GFF3 already has "region" line at SeqID = {}'.format(
-                        rec.id
-                    )
-                    logging.warning(msg)
-                else:
-                    src_length = id_to_seqlen[rec.id]
-                    src_qualifiers = metadata["source"]
-                    src = _get_source(src_length, src_qualifiers)
-                    rec.features.insert(0, src)
+    # Insert "source" features from metadata if necessary
+    _handle_source(records, metadata, id_to_seqlen)
 
-    # Regularize characters in qualifier values
+    # Check characters in qualifier values
     for rec in records:
         _regularize_qualifier_value_letters(rec)
 
-    # Join features in `joinables` tuple
+    # Join features if the key is in `joinables`
     if joinables:
         records = [_join_features(rec, joinables) for rec in records]
 
@@ -639,11 +680,11 @@ def run(
     for rec in records:
         _merge_mrna_and_exons(rec)
 
-    # check start codons in CDSs
+    # Check start and stop codons in CDSs
     for rec in records:
         fix_locations(cur, rec, transl_table)
 
-    # assign single value to /product and put the rest to /inference
+    # Assign single value to /product and put the rest to /inference
     for rec in records:
         _assign_single_product(rec)
 

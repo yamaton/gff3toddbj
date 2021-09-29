@@ -124,7 +124,7 @@ class DDBJFormatter(object):
             [       ,         ,                                    , "clone"      ,  "PC0110"        ],
         ...
         """
-        # Check skipped features according to the rule
+        # Collect discarded features by the filter
         if not ignore_rules:
             feature_keys = collections.Counter(f.type for f in utils.flatten_features(rec.features))
             for k, k_count in feature_keys.items():

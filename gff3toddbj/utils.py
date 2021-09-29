@@ -55,35 +55,18 @@ def load_metadata_info(path) -> OrderedDict[str, OrderedDict[str, Any]]:
     try:
         with open(path, "r") as f:
             header_info = toml.load(f, _dict=collections.OrderedDict)
-    except:
+    except FileNotFoundError:
         msg = "Failed to load metadata from {}:".format(path)
         raise FileNotFoundError(msg)
 
-    # Change qualifier type to list
+    # Change qualifier-value type to list
     for k in header_info:
         if k != "COMMON":
             for qkey, qval in header_info[k].items():
                 if not isinstance(qval, list):
                     header_info[k][qkey] = [qval]
 
-    # [FIXME] Disabled till DDBJ rule is counted in the validation
-    # validate_metadata_keys(header_info)
-
     return header_info
-
-
-def validate_metadata_keys(d: Dict[str, Dict[str, Any]]) -> None:
-    """Check if metadata has proper table keys.
-
-    [FIXME] Need to take care of DDBJ features used in main.py
-    """
-    keys = set(d.keys())
-    msg = "Some meta-info keys are invalid: {}".format(keys - METADATA_KEYS)
-    assert keys.issubset(METADATA_KEYS), msg
-
-    common_keys = set(d["COMMON"])
-    msg2 = "Some COMMON keys are invalid: {}".format(common_keys - COMMON_FEATURES)
-    assert common_keys.issubset(COMMON_FEATURES), msg2
 
 
 def flatten_features(
@@ -133,14 +116,16 @@ def has_start_codon(
     strand = location.strand
     start_codons = CodonTable.unambiguous_dna_by_id[transl_table].start_codons
 
-    if strand > 0:
+    codon = "XXX"
+    if not isinstance(strand, int):
+        raise ValueError("Cannot determine as strand = {}".format(strand))
+    elif strand > 0:
         p = location.start.position + phase
         codon = seq[p : p + 3]
-    elif strand < 0:
+    else:
         p = location.end.position - phase
         codon = seq[p - 3 : p].reverse_complement()
-    else:
-        raise ValueError("Cannot determine as strand = {}".format(strand))
+
     return codon in start_codons
 
 
@@ -162,17 +147,17 @@ def has_stop_codon(
     strand = location.strand
     stop_codons = CodonTable.unambiguous_dna_by_id[transl_table].stop_codons
 
-    if strand > 0:
+    codon = "XXX"
+    if not isinstance(strand, int):
+        raise ValueError("Cannot determine as strand = {}".format(strand))
+    elif strand > 0:
         p = location.end.position
         codon = seq[p - 3 : p]
-    elif strand < 0:
+    else:
         p = location.start.position
         codon = seq[p : p + 3].reverse_complement()
-    else:
-        raise ValueError("Cannot determine as strand = {}".format(strand))
+
     return codon in stop_codons
-
-
 
 
 def debug_checker(
