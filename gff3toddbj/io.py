@@ -5,18 +5,21 @@ import logging
 import pathlib
 import pprint
 import re
-import sqlite3
+import shutil
+import subprocess
 import sys
 import tempfile
 import toml
-from typing import OrderedDict, List, Any
+from typing import Optional, OrderedDict, List, Any, Union
 import urllib.parse
 import uuid
 
 import Bio.SeqIO
 from Bio.SeqRecord import SeqRecord
 from BCBio import GFF
+import pysam
 
+Faidx = pysam.libcfaidx.FastaFile
 
 PATH_DATABASE_LOCAL_PREFIX = "temp_gff3-to-ddbj_"
 PATH_DATABASE_LOCAL = PATH_DATABASE_LOCAL_PREFIX + str(uuid.uuid4()) + ".db"
@@ -126,87 +129,66 @@ def load_toml_tables(filepath) -> OrderedDict[str, Any]:
     return d
 
 
-def load_fasta_as_database(filepath) -> sqlite3.Connection:
+def load_fasta_as_faidx(filename: Union[str, pathlib.Path]) -> Faidx:
+    """Load FASTA as indexed data with samtools faidx
+
     """
-    Load FASTA as sqlite3 database with (id, sequence) as keys,
-    mainly for saving memory use.
+    logging.info("Loading FASTA...")
+    try:
+        rec = pysam.FastaFile(str(filename))
+    except OSError:
+        if pathlib.Path(filename).suffix == ".gz":
+            create_bgzipped(filename)
+            rec = pysam.FastaFile(str(filename))
+        else:
+            raise IOError("Failed to load FASTA")
+
+    logging.info("             ... done loading FASTA")
+    return rec
+
+
+def create_bgzipped(path: Union[str, pathlib.Path]):
+    """Create a file compressed in bgzip from
+
     """
-    # remove the database file if exists
-    p = pathlib.Path(PATH_DATABASE_LOCAL)
-    p.unlink(missing_ok=True)
+    path = pathlib.Path(path)
+    assert path.suffix == ".gz"
+    if not path.exists():
+        raise FileNotFoundError("No such file as {}".format(path))
 
-    # create new database
-    con = sqlite3.connect(p)
-    cur = con.cursor()
-    cur.execute(
-        """CREATE TABLE fasta
-            (SeqId VARCHAR(50) PRIMARY KEY, SeqLen INT, Sequence TEXT)"""
-    )
+    backup = path.parent / (path.name + ".bak")
+    shutil.move(path, backup)
 
-    path_fasta = pathlib.Path(filepath)
-    if path_fasta.suffix == ".gz":
-        f = gzip.open(filepath, "rt")
-    else:
-        f = open(filepath, "r")
-
-    logging.info("Loading FASTA data to a local database.")
-    logging.info("    It may take minutes. Coffee break? ☕ ...")
-    for rec in Bio.SeqIO.parse(f, "fasta"):
-        seq = str(rec.upper().seq)
-        seqlen = len(rec)
-        cur.execute(
-            """
-            INSERT INTO fasta VALUES
-            (?, ?, ?)""",
-            (rec.id, seqlen, seq),
-        )
-    logging.info("... Done loading FASTA.")
-
-    cur.close()
-    f.close()
-    return con
+    logging.info("Re-compressing with bgzip (only once): {}".format(path))
+    cmd = "gzip -c -d {} | bgzip --threads=4 > {}".format(str(backup), str(path))
+    logging.info("   $ {}".format(cmd))
+    subprocess.run(cmd, shell=True)
+    logging.info("    ... done re-compressing FASTA with bgzip ")
 
 
-def close_and_remove_database(con: sqlite3.Connection) -> None:
-    """
-    Close the database connection, and REMOVE the sqlite3 file.
-    """
-    con.close()
-    p = pathlib.Path(PATH_DATABASE_LOCAL)
-    p.unlink()
-
-
-def get_seqlens(cur: sqlite3.Cursor) -> OrderedDict[str, int]:
+def get_seqlens(faidx: Faidx) -> OrderedDict[str, int]:
     """
     Get sequence length as ordered dictionary with SeqID as the key.
     """
-    res = cur.execute(
-        """
-        SELECT SeqID, SeqLen FROM fasta"""
-    )
+    assert len(faidx.references) == len(faidx.lengths)
+
     d = collections.OrderedDict()
-    for (seqid, seqlen) in res.fetchall():
+    for (seqid, seqlen) in zip(faidx.references, faidx.lengths):
         d[seqid] = seqlen
     return d
 
 
-def get_seq(cur: sqlite3.Cursor, seqid: str) -> str:
+def get_seq(faidx: Faidx, seqid: str, start:Optional[int]=None, end:Optional[int]=None) -> str:
     """
     Get sequence as str
 
     Args:
-        cur: database cursor
+        faidx: samtool faidx object (pysam.libcfaidx.FastaFile)
         seqid: SeqID
-    """
-    res = cur.execute(
-        """
-        SELECT Sequence FROM fasta
-        WHERE SeqID = ?""",
-        (seqid,),
-    )
-    tup = res.fetchone()
-    if tup is None:
-        logging.warning("Sequence NOT FOUND for SeqID: {}".format(seqid))
-        return ""
+        start: start position
+        end:   end position
 
-    return tup[0]
+    [Note] `start` and `end` follow Python's indexing,
+    i.e., 0-based, left-inclusive, right-exclusive.
+    """
+    return faidx.fetch(reference=seqid, start=start, end=end).upper()

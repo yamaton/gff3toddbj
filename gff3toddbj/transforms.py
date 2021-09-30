@@ -2,7 +2,6 @@ from typing import Any, Dict, List, Optional, Tuple, Iterable, OrderedDict
 import collections
 import re
 import logging
-import sqlite3
 
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
@@ -21,22 +20,21 @@ Interval = Tuple[int, int]
 
 
 def _set_assembly_gap(
-    records: List[SeqRecord],
-    cur: sqlite3.Cursor,
+    record: SeqRecord,
+    faidx: io.Faidx,
     metadata: OrderedDict[str, OrderedDict[str, Any]],
 ) -> None:
     """
     Set assembly gaps feature to records.
     """
     gap_qualifiers = metadata.get("assembly_gap", collections.OrderedDict())
-    for rec in records:
-        seq = io.get_seq(cur, rec.id)
-        if seq:
-            gap = _get_assembly_gap(seq, gap_qualifiers)
-            rec.features.extend(gap)
+    seq = io.get_seq(faidx, record.id)
+    if seq:
+        gap = _get_assembly_gap(seq, gap_qualifiers)
+        record.features.extend(gap)
 
 
-def _get_assembly_gap(seq: Seq, qualifiers: OrderedDict[str, Any]) -> List[SeqFeature]:
+def _get_assembly_gap(seq: str, qualifiers: OrderedDict[str, Any]) -> List[SeqFeature]:
     """
     Get assembly_gap features from seq.
 
@@ -53,26 +51,25 @@ def _get_assembly_gap(seq: Seq, qualifiers: OrderedDict[str, Any]) -> List[SeqFe
     for loc in locs:
         f = SeqFeature(loc, type="assembly_gap", qualifiers=qualifiers)
         if f.qualifiers.get("estimated_length", None) == ["<COMPUTE>"]:
-            length = loc.end - loc.start + 1
+            length = loc.end.position - loc.start.position + 1
             f.qualifiers["estimated_length"] = [length]
         features.append(f)
     return features
 
 
-def _get_assembly_gap_locations(seq: Seq) -> List[Interval]:
+def _get_assembly_gap_locations(seq: str) -> List[Interval]:
     """
     Get assembly_gap locations from seq as a list of intervals.
 
     [NOTE] This interval format [begin, end) is for Biopython
     such that 0-based, left-inclusive and right-exclusive.
 
-    >>> s = Seq("ATATNNNGATTACANCCC")
+    >>> s = "ATATNNNGATTACANCCC"
     >>> _get_assembly_gap_locations(s)
     [(4, 7), (14, 15)]
     """
-    s = str(seq)
     patt = re.compile("N+")
-    matches = patt.finditer(s)
+    matches = patt.finditer(seq)
 
     segments = []
     for m in matches:
@@ -396,7 +393,7 @@ def _remove_duplicates_in_qualifiers(rec: SeqRecord) -> None:
     _run(rec.features)
 
 
-def fix_locations(cur: sqlite3.Cursor, record: SeqRecord, transl_table: int) -> None:
+def _fix_locations(faidx: io.Faidx, record: SeqRecord, transl_table: int) -> None:
     """
     Fix locations of features in records when start/stop codons are absent.
     See DDBJ FAQ for detail.
@@ -480,7 +477,7 @@ def fix_locations(cur: sqlite3.Cursor, record: SeqRecord, transl_table: int) -> 
     def _fix_absent_stop_codon(location: FeatureLocation) -> FeatureLocation:
         return _fix_loc(location, is_at_start=False)
 
-    s = io.get_seq(cur, record.id)
+    s = io.get_seq(faidx, record.id)
     if s:
         seq = Seq(s)
         _runner(record.features, seq)
@@ -635,12 +632,11 @@ def run(
 ) -> List[SeqRecord]:
     """Create a list of `SeqRecord`s and apply various transformations"""
 
-    # Load FASTA to database
-    con = io.load_fasta_as_database(path_fasta)
-    cur = con.cursor()
+    # Load FASTA as pysam class
+    faidx = io.load_fasta_as_faidx(path_fasta)
 
     # Get SeqIDs and Sequence lengths
-    id_to_seqlen = io.get_seqlens(cur)
+    id_to_seqlen = io.get_seqlens(faidx)
     fasta_ids = list(id_to_seqlen.keys())
 
     # Create record from GFF3 (or dummy if unavailable)
@@ -659,7 +655,8 @@ def run(
         _convert_codon_start_to_1_based(rec)
 
     # Add "assembly_gap" features
-    _set_assembly_gap(records, cur, metadata)
+    for rec in records:
+        _set_assembly_gap(rec, faidx, metadata)
 
     # Add the transl_table qualifier to CDS feature each
     for rec in records:
@@ -682,7 +679,7 @@ def run(
 
     # Check start and stop codons in CDSs
     for rec in records:
-        fix_locations(cur, rec, transl_table)
+        _fix_locations(faidx, rec, transl_table)
 
     # Assign single value to /product and put the rest to /inference
     for rec in records:
@@ -706,6 +703,5 @@ def run(
         if utils.is_invalid_as_seqid(rec.id):
             logging.warning(msg.format(rec.id))
 
-    cur.close()
-    io.close_and_remove_database(con)
+    faidx.close()
     return records

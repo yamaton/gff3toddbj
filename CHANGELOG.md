@@ -1,3 +1,7 @@
+## latest
+* Require pysam and samtools to index FASTA (called faidx)
+    * Do not create sqlite3 database when reading FASTA.
+
 ## v0.2.2 (2021-09-30)
 * Rename the CLI option from --rename_setting to --config_rename
 * Rename the CLI option form --filter_setting to --config_filter
