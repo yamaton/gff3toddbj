@@ -1,0 +1,1346 @@
+sample	source	1..26890594	organism	Drosophila melanogaster
+			mol_type	genomic DNA
+	assembly_gap	848852..848861	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	1037995..1038004	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	1268390..1268399	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	1320750..1320759	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	1326129..1326138	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	1368923..1368932	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	1369648..1369657	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	1407014..1407023	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	1547450..1547459	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	1608547..1608556	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	1845750..1845759	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	2092435..2092444	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	2093497..2093506	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	2222806..2222815	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	2226754..2226763	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	2229737..2229746	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	2337459..2337468	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	2361686..2361695	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	2372429..2372438	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	2373972..2373981	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	2376826..2378764	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	2434780..2434789	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	2446911..2446920	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	2725397..2725406	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	2732641..2732650	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	2823806..2823815	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	2901099..2901108	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	2902164..2902173	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	2905544..2905553	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	2909241..2909250	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	2915487..2915496	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	2917500..2917509	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	3133148..3133157	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	3545811..3545820	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	3618053..3618062	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	3626493..3626502	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	3632244..3632253	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	3636722..3636731	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	3721270..3721279	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	3726246..3726255	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	4021210..4021219	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	4022548..4022557	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	4024195..4024204	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	4052792..4052801	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	4110186..4110195	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	4110492..4110501	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	4114367..4114376	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	4115237..4115246	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	4116979..4116988	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	5550335..5550344	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	5568932..5568941	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	5635128..5635137	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	5650742..5650751	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	5654940..5654949	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	5748979..5748988	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	5993499..5993508	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	6003262..6003271	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	6516826..6516835	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	6519898..6519907	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	6520950..6520959	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	6522601..6522610	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	6524132..6524141	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	6530667..6530676	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	6532198..6532207	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	6555518..6555527	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	6559943..6559952	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	6789622..6789631	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	6838903..6838912	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	6860371..6860380	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	6864889..6864898	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	6869179..6869188	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	6871389..6871398	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	7077664..7077673	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	7088554..7088563	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	7432960..7432969	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	7442184..7442193	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	7457371..7457380	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	7464466..7464475	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	7466681..7466690	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	7501376..7501385	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	7615322..7615331	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	7626067..7626076	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	7653483..7653492	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	7664635..7664644	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	7673690..7673699	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	7675242..7675251	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	7688536..7688545	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	7690722..7690731	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	7713834..7713843	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	7777968..7777977	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	7792080..7792089	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	7792414..7792423	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	7793573..7793582	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	7854463..7854472	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	7857465..7857474	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	7910693..7910702	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	7947596..7947605	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	7959871..7959880	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	7968705..7968714	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	7977702..7977711	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	7981760..7981769	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	8030137..8030146	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	8199345..8199354	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	8208066..8208075	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	8271564..8271573	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	8280355..8280364	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	8492384..8492393	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	8522149..8522158	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	8982014..8982023	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	9021419..9021428	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	9280674..9280683	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	9395861..9395870	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	9526217..9526226	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	9962057..9962066	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	9973017..9973026	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	10214912..10214921	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	10324341..10324350	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	10328639..10328648	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	10334663..10334672	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	10337426..10337435	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	10702789..10702798	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	10705832..10705841	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	10708884..10708893	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	10713253..10713262	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	10843468..10843477	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	11149693..11149702	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	11152580..11152589	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	11381149..11381158	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	11438410..11438419	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	11449361..11449370	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	11466183..11466192	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	11531105..11531114	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	11532518..11532527	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	11559441..11559450	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	11573293..11573302	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	11735101..11735110	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	11952018..11952027	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	12052880..12052889	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	12054247..12054256	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	12055614..12055623	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	12116625..12116634	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	12256211..12256220	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	12373138..12373147	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	12375336..12375345	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	12447226..12447235	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	12449986..12449995	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	12450225..12450234	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	12468191..12468200	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	12475487..12475496	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	12529582..12529591	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	12532624..12532633	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	12538138..12538147	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	12879117..12879126	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	12888462..12888471	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	12889128..12889137	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	12891947..12891956	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	12910807..12910816	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	12911642..12911651	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	12937000..12937009	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	13061714..13061723	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	13066908..13066917	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	13070310..13070319	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	13072420..13072429	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	13284013..13284022	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	13289239..13289248	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	13313903..13313912	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	13320108..13320117	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	13325357..13325366	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	13345133..13345142	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	13348488..13348497	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	13351509..13351518	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	13358046..13358055	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	13358499..13358508	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	13476883..13476892	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	13732677..13740092	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	13986027..13986036	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	13998687..13998696	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14041796..14041805	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14047807..14047816	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14070696..14070705	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14074394..14074403	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14075539..14075548	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14127454..14127463	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14133243..14133252	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14135033..14135042	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14135596..14135605	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14138966..14138975	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14140645..14140654	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14162234..14162243	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14368596..14368605	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14409331..14409340	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14541327..14541336	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14545619..14545628	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14557117..14557126	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14565279..14565288	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14570040..14570049	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14571206..14571215	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14576952..14576961	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14606946..14606955	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14741185..14741194	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14747293..14747302	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14756369..14756378	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14760419..14760428	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14763411..14763420	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14765292..14765301	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14786573..14786582	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14792992..14793001	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14798902..14798911	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14824197..14824206	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14837196..14837205	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14844146..14844155	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14846456..14846465	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	14848507..14848516	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	15097589..15097598	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	15112185..15112194	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	15115068..15115077	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	15117812..15117821	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	15123721..15123730	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	15124030..15124039	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	15207465..15207474	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	15380853..15380862	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	15438554..15438563	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	15758971..15759070	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	15804784..15804793	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	15809681..15809690	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	15826620..15826629	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	15830433..15830442	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	15835665..15835674	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	16000711..16000720	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	16002249..16002258	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	16005986..16005995	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	16056696..16056705	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	16141676..16141685	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	16322585..16322594	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	16323488..16323497	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	16346020..16346029	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	16429794..16429803	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	16431216..16431225	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	16434642..16434651	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	16440526..16440535	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	16444632..16444641	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	16449422..16449431	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	16485235..16485244	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	16487943..16487952	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	16550221..16550230	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	16579402..16579411	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	16581792..16581801	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	16689435..16693861	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	16722614..16722623	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	16823495..16823504	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	16913317..16913326	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	17194955..17194964	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	17201454..17201463	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	17210516..17210525	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	17218063..17218072	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	17223043..17223052	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	17242892..17242901	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	17252884..17252893	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	17285902..17285911	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	17372808..17372817	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	17403432..17403441	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	17404289..17404298	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	17525871..17525880	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	17585996..17586005	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	17596766..17596775	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	17657575..17657584	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	17660011..17660020	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	17660498..17660507	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	17661384..17661393	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	17662373..17662382	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	17662804..17662813	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	17663684..17663693	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	17665401..17665410	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	17671414..17671423	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	17697184..17697193	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	17702470..17702479	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	17774072..17774081	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	17784781..17784790	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	17787351..17787360	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	17849136..17849145	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	17912449..17912458	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	18046114..18046123	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	18242751..18242760	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	18414700..18414709	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	18461156..18461165	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	18465915..18465924	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	18468633..18468642	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	18474471..18474480	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	18587848..18587857	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	18618173..18618182	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	18706186..18706195	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	18721362..18721371	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	18724975..18724984	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	18726779..18726788	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	18736257..18736266	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	18739280..18739289	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	18743820..18743829	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	18746819..18746828	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	18957270..18957279	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	18957674..18957683	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	19080272..19080281	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	19085874..19085883	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	19086491..19086500	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	19095154..19095163	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	19098614..19098623	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	19175873..19175882	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	19178736..19178745	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	19181706..19181715	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	19471906..19471915	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	19505553..19505562	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	19581977..19581986	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	19588481..19588490	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	19657163..19657172	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	19660578..19660587	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	19742474..19742483	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	19779255..19779264	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	19783767..19783776	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	19790264..19790273	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	19849564..19849573	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20057221..20057230	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20344830..20344839	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20396598..20396607	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20398135..20398144	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20402304..20402313	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20405382..20405391	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20405844..20405853	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20540016..20540025	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20540537..20540546	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20542163..20542172	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20583374..20583383	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20587809..20587818	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20588250..20588259	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20592858..20592867	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20602469..20602478	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20604190..20604199	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20615140..20615149	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20616812..20616821	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20617920..20617929	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20628046..20628055	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20635741..20635750	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20638073..20638082	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20645157..20645166	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20645710..20645719	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20646498..20646507	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20648452..20648461	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20649170..20649179	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20653809..20653818	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20655498..20655507	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20751006..20751015	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20754654..20754663	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20769001..20769010	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20787156..20787165	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20788068..20788077	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20791400..20791409	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20796541..20796550	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20799065..20799074	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20877183..20877192	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20885556..20885565	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20891528..20891537	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20894097..20894106	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20899933..20899942	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20975609..20975618	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20983385..20983394	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	20991460..20991469	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	21063040..21063049	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	21281182..21281191	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	21387207..21387216	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	21416705..21416714	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	21422106..21422115	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	21425784..21425793	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	21818861..21818870	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	21822227..21822236	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	21837987..21837996	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	21848474..21848483	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	21851782..21851791	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	21854674..21854683	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	22041845..22041854	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	22054671..22054680	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	22074886..22074895	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	22166399..22166408	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	22180817..22180826	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	22508830..22508839	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	22528641..22528650	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	22528953..22528962	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	22533360..22533369	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	22571700..22571709	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	22586888..22586897	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	22602828..22602837	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	22607496..22607505	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	22611942..22611951	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	22615889..22615898	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	22688953..22688962	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	22780030..22780039	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	22896425..22896434	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	22898360..22898369	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	22899388..22899397	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	22929678..22929687	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	22931884..22931893	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	22946294..22946303	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	22946722..22946731	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	22956322..22956331	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	23135437..23135446	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	23341079..23341088	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	23344277..23344286	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	23386388..23386397	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	23400182..23400191	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	23504855..23504864	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	23542470..23542479	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	23697306..23697315	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	23714717..23714726	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	23723331..23723340	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	23977353..23977362	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	23983847..23983856	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	23988185..23988194	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	23993165..23993174	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	24005940..24005949	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	24006738..24006747	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	24013270..24013279	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	24020478..24020487	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	24292394..24292403	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	24700281..24700290	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	25004080..25004089	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	25136206..25136215	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	25143683..25143692	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	25147842..25147851	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	25148460..25148469	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	25148784..25148793	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	25149178..25149187	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	25160045..25160054	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	25160900..25160909	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	25747861..25747870	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	25989324..25989333	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	25990943..25990952	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	26165550..26165559	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	26182276..26182285	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	26231352..26231361	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	26233355..26233364	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	26235636..26235645	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	26237489..26237498	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	26237806..26237815	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	26248521..26248530	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	26264206..26264215	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	26278374..26278383	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	26528721..26528730	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	26880449..26880458	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	26884190..26884199	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	26885196..26885205	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
+	assembly_gap	26885547..26885556	estimated_length	unknown
+			gap_type	within scaffold
+			linkage_evidence	paired-ends
