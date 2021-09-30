@@ -223,9 +223,9 @@ GFF3 と DDBJ アノテーションには大まかに以下のような対応が
 
 そしてDDBJアノテーションとして許されるFeaturesとQualifiersの名前には規定があります [[Feature-Qualifier 一覧表](https://docs.google.com/spreadsheets/d/1qosakEKo-y9JjwUO_OFcmGCUfssxhbFAm5NXUAnT3eM/edit#gid=0)]。
 
-GFF3で使われる名前・値とINSDCやDDBJで定められた名前・値の橋渡しをするため、GFF3-to-DDBJはTOML形式の変換テーブルを読み込んでリネームを行っています。
+GFF3で使われる名前・値とINSDCやDDBJで定められた名前・値の橋渡しをするため、GFF3-to-DDBJはTOML形式の変換設定 を読み込んでリネームを行っています。[デフォルトの変換設定](https://github.com/yamaton/gff3toddbj/blob/main/gff3toddbj/translate_features_qualifiers.toml)は[the Sequence Ontology (SO)](http://sequenceontology.org/browser)や類似ツールを参考に頑張って作ってありますが、まだまだ改善の余地があるでしょうし、またGFF3アノテーションのSequence Ontology準拠レベルにも依存すると思われます。
 
-以下は、デフォルトの変換テーブルで不十分なばあいのカスタマイズについてです。
+以下は、デフォルトの変換テーブルで不十分な場合のカスタマイズについてです。
 
 
 #### Type / Feature keyのリネーム

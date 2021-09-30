@@ -210,7 +210,7 @@ GFF3 and DDBJ annotation have rough correspondence like:
 
 but nomenclatures in GFF3 often do not conform the annotations set by INSDC. Furthermore, DDBJ lists up the [feature-qualifier pairs they accepts](https://docs.google.com/spreadsheets/d/1qosakEKo-y9JjwUO_OFcmGCUfssxhbFAm5NXUAnT3eM/edit#gid=0), a subset of the INSDC definitions.
 
-To meet convensions with the requirement, GFF3-to-DDBJ comes with a TOML file to rename feature keys and qualifier keys/values.
+To meet convensions with the requirement, GFF3-to-DDBJ comes with [a default configuration in TOML](https://github.com/yamaton/gff3toddbj/blob/main/gff3toddbj/translate_features_qualifiers.toml) to rename (or even translate) feature keys and qualifier keys/values. Note that [the Sequence Ontology](http://sequenceontology.org/browser) is helpful in translating a type into a INSDC feature and qualifier(s).
 
 Here is how to customize the renaming configuration.
 
@@ -261,7 +261,7 @@ feature_key = "misc_RNA"
 
 #### Run with custom configuration
 
-See [translate_features_qualifiers.toml](https://github.com/yamaton/gff3toddbj/blob/main/gff3toddbj/translate_features_qualifiers.toml) for the default renaming behavior. To feed a custom translation table, use the CLI option:
+To feed a custom translation table, use the CLI option:
 
 * `--config_rename <FILE>`
 
