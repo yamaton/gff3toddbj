@@ -46,23 +46,26 @@ Analogous programs are [GAG](https://github.com/genomeannotation/GAG) for submis
 
 ```shell
 # Create a conda environment named "ddbj", and install relevant packages from bioconda channel
-$ conda create -n ddbj -c bioconda -c conda-forge gff3toddbj
+conda create -n ddbj -c bioconda -c conda-forge gff3toddbj
 
 # Activate the environment "ddbj"
-$ conda activate ddbj
+conda activate ddbj
 ```
 
 ### Install with pip
 
 ```shell
 # Create a conda environment named "ddbj" and install pip
-$ conda create -n ddbj pip
+conda create -n ddbj pip
 
 # Activate the environment "ddbj"
-$ conda activate ddbj
+conda activate ddbj
+
+# Need bgzip executable in samtools
+conda install -c bioconda samtools
 
 # Install from pip
-$ pip install gff3toddbj
+pip install gff3toddbj
 ```
 
 
@@ -70,22 +73,22 @@ $ pip install gff3toddbj
 
 ```shell
 # Download
-$ wget https://github.com/yamaton/gff3_to_ddbj/archive/refs/heads/main.zip
+wget https://github.com/yamaton/gff3_to_ddbj/archive/refs/heads/main.zip
 
 # Extract, rename, and change directory
-$ unzip main.zip && mv gff3toddbj-main gff3toddbj && cd gff3toddbj
+unzip main.zip && mv gff3toddbj-main gff3toddbj && cd gff3toddbj
 
 # Create a conda environment named "ddbj"
-$ conda create -n ddbj
+conda create -n ddbj
 
 # Activate the environment "ddbj"
-$ conda activate ddbj
+conda activate ddbj
 
 # Install dependencies to "ddbj"
-$ conda install -c bioconda -c conda-forge biopython bcbio-gff toml setuptools
+conda install -c bioconda -c conda-forge biopython bcbio-gff toml setuptools pysam samtools
 
 # Install gff3-to-ddbj and extra tools
-$ python setup.py install
+python setup.py install
 ```
 
 
@@ -122,8 +125,10 @@ Here is the options:
 
 Here is the list of operations `gff3-to-ddbj` will do:
 
-* Store FASTA sequences to SQLite database to save memory use
-  * The database is deleted after the operation.
+* Re-compress FASTA with [bgzip](https://www.htslib.org/doc/bgzip.html) if the FASTA input is compressed with gzip
+  * For indexing and saving memory
+  * The new .gz file should be compatible with gzip
+  * **The original .gz file is renamed to .gz.bak**
 
 * Rename features and qualifiers following the [renaming scheme](#advanced-rename-features-and-qualifiers).
 

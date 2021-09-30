@@ -53,13 +53,16 @@ conda activate ddbj
 
 ```shell
 # ddbjという名前でconda環境をつくってpipコマンドをインストール
-$ conda create -n ddbj pip
+conda create -n ddbj pip
 
 # 環境ddbjをアクティベート
-$ conda activate ddbj
+conda activate ddbj
+
+# samtoolsに含まれる実行ファイルbgzipが必要
+conda install -c bioconda samtools
 
 # pipからgff3toddbjをインストール
-$ pip install gff3toddbj
+pip install gff3toddbj
 ```
 
 #### GitHubソースコードからconda環境にインストールする場合
@@ -78,7 +81,7 @@ conda create -n ddbj
 conda activate ddbj
 
 # ddbjに依存パッケージ (bioconda, bcbio-gff, toml, setuptools) をインストール
-conda install -c bioconda -c conda-forge biopython bcbio-gff toml setuptools
+conda install -c bioconda -c conda-forge biopython bcbio-gff toml setuptools pysam samtools
 
 # gff3-to-ddbj および付属ツールをインストール
 python setup.py install
@@ -115,8 +118,10 @@ gff3-to-ddbj \
 
 表示形式を変えるほかに以下のようなことをしています。
 
-* FASTAファイルの配列をSQLiteデータベースに保存（メモリ節約のため）
-  * データベースファイルは処理後に削除されます
+* FASTAファイルがgzipで圧縮されているばあい[bgzip](https://www.htslib.org/doc/bgzip.html)圧縮に置き換え
+  * FASTAのインデックス化とメモリ節約のため
+  * bgzipはgzipと互換性があるので今まで通りgzipやzcatなどが使えます
+  * **元の.gzファイルは.gz.bakにリネームされます**
 
 * 変換テーブルに基づいたFeatures / Qualifiersのリネーム
 
