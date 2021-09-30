@@ -528,7 +528,7 @@ def _handle_source(
       [NOTE] GFF3's "region" type corresponds to annotation's "source" feature.
       [NOTE] User-input metadata may contain "[COMMON.source]" items.
     """
-    if ("source" in metadata) and ("source" in metadata["COMMON"]):
+    if ("source" in metadata) and ("source" in metadata.get("COMMON", ())):
         msg = "[COMMON.source] overrides [source] items in metadata."
         logging.warning(msg)
     elif "source" in metadata:
