@@ -126,6 +126,10 @@ def has_start_codon(
         p = location.end.position - phase
         codon = seq[p - 3 : p].reverse_complement()
 
+    if len(codon) != 3:
+        msg = "Failed to access codon (pos={}, strand={})".format(p, strand)
+        logging.error(msg)
+
     return codon in start_codons
 
 
@@ -156,6 +160,10 @@ def has_stop_codon(
     else:
         p = location.start.position
         codon = seq[p : p + 3].reverse_complement()
+
+    if len(codon) != 3:
+        msg = "Failed to access codon (pos={}, strand={})".format(p, strand)
+        logging.error(msg)
 
     return codon in stop_codons
 

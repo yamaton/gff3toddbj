@@ -25,6 +25,10 @@ PATH_DATABASE_LOCAL_PREFIX = "temp_gff3-to-ddbj_"
 PATH_DATABASE_LOCAL = PATH_DATABASE_LOCAL_PREFIX + str(uuid.uuid4()) + ".db"
 
 
+class CommandNotFoundError(Exception):
+    pass
+
+
 def load_gff3_as_seqrecords(filepath, unquoting=False) -> List[SeqRecord]:
     """Load GFF3 as iterable of SeqRecord
 
@@ -162,7 +166,15 @@ def create_bgzipped(path: Union[str, pathlib.Path]):
     logging.info("Re-compressing with bgzip (only once): {}".format(path))
     cmd = "gzip -c -d {} | bgzip --threads=4 > {}".format(str(backup), str(path))
     logging.info("   $ {}".format(cmd))
-    subprocess.run(cmd, shell=True)
+    ret = subprocess.run(cmd, shell=True)
+    if ret.returncode == 127:
+        msg = "bgzip is missing: bgzip is a part of samtools"
+        logging.error(msg)
+        raise CommandNotFoundError(msg)
+    if ret.returncode != 0:
+        msg = "Failed to re-compress with bgzip"
+        logging.error(msg)
+        raise ValueError(msg)
     logging.info("    ... done re-compressing FASTA with bgzip ")
 
 

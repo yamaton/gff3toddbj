@@ -697,8 +697,9 @@ def run(
     msg = (
         "\n\n"
         "Found invalid letter(s) in the 1st column of the GFF3: {}\n"
-        "Run following script to generate corrected GFF3 and FASTA files:\n\n"
-    ) + "  $ rename-ids --gff3={} --fasta={}\n".format(path_gff3, path_fasta)
+        "Consider running this script to correct entry names in the DDBJ annotation:\n\n"
+        "   $ normalize-entry-names <output.ann>\n"
+    )
     for rec in records:
         if utils.is_invalid_as_seqid(rec.id):
             logging.warning(msg.format(rec.id))
