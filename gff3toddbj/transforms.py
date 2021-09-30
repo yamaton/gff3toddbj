@@ -490,14 +490,14 @@ def fix_locations(cur: sqlite3.Cursor, record: SeqRecord, transl_table: int) -> 
         logging.info(msg)
 
 
-def _merge_mrna_and_exons(rec: SeqRecord) -> None:
-    """Set .location of joined exons as the location of mRNA,
+def _merge_rna_and_exons(rec: SeqRecord) -> None:
+    """Set .location of joined exons as the location of RNA,
     then rename such exons into __exon to discard.
     """
 
     def _helper(features: List[SeqFeature]) -> None:
         for f in features:
-            if f.type == "mRNA":
+            if "RNA" in f.type:  # f.type can be mRNA, ncRNA, misc_RNA, tRNA, rRNA, etc.
                 joined_exons = [subf for subf in f.sub_features if subf.type == "exon"]
                 if len(joined_exons) > 1:
                     logging.warning("Something is wrong with joining exons: {}".format(f))
@@ -678,7 +678,7 @@ def run(
 
     # Merge exons with their parent mRNA
     for rec in records:
-        _merge_mrna_and_exons(rec)
+        _merge_rna_and_exons(rec)
 
     # Check start and stop codons in CDSs
     for rec in records:
