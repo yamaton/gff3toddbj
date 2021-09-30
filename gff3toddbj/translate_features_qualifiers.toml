@@ -1,4 +1,4 @@
-## --------------------------------------------------------------------------------
+## ================================================================================
 ## Rename features (GFF3 type -> Feature key)
 [five_prime_UTR]
 feature_key = "5'UTR"
@@ -18,21 +18,38 @@ feature_key = "J_segment"
 [V_gene_segment]
 feature_key = "V_segment"
 
-[region]
+# http://sequenceontology.org/browser/current_svn/term/SO:0000478
+[C_gene_segment]
+feature_key = "C_region"
+
 # "region" in GFF3 column 3 corresponds to "source"
 # https://https.ncbi.nlm.nih.gov/datasets/docs/reference-docs/file-formats/about-ncbi-gff3/#the-source-region-feature
+[region]
 feature_key = "source"
 
 [transcript]
 feature_key = "mRNA"
 
+# http://www.sequenceontology.org/browser/current_svn/term/SO:0001503
+# processed_transcript takes transcript whose corrsponding feature is misc_RNA.
+# Then, processed_transcript is regarded as misc_RNA in absense of the parent?
+[processed_transcript]
+feature_key = "misc_RNA"
+
+# http://sequenceontology.org/browser/current_svn/term/SO:0000483
+# Parent of nc_primary_transcript is primary_transcript.
+# And primary_transcript is translated to "precursor_RNA" / "prim_transcript" feature.
+# But neighther exists in the DDBJ matrix...
+[nc_primary_transcript]
+feature_key = "precursor_RNA"
 
 
-## --------------------------------------------------------------------------------
+
+## ================================================================================
 ## Rename qualifiers (GFF3 attribute --> Qualifier key)
 
 [__ANY__]
-## ============== BEGIN ========================
+## ------------- BEGIN ------------------
 # Originally from GFF3 columns ("source", "score", "phase")
 # but translated to qualifier by the GFF parser.
 
@@ -45,10 +62,13 @@ qualifier_key = "score"
 
 [__ANY__.phase]
 qualifier_key = "codon_start"  # 0-based in GFF3. Will be transformed to 1-based.
-## ============== END ==========================
+## ------------- END --------------------
 
 # --------------------------------------------
 # Found in GFF3 attributes
+
+# For example, ID=xyz in GFF3 attribute
+# becomes /note="ID:xyz"
 [__ANY__.ID]
 qualifier_key = "note"
 qualifier_value_prefix =  "ID:"
@@ -82,7 +102,7 @@ qualifier_value_prefix =  "<dummy>"
 qualifier_key = "product"
 
 
-## --------------------------------------------------------------------------------
+## ================================================================================
 ## Translate a GFF3 type (= column 3 value) into a pair of (Feature, Qualifier)
 
 ## ------------- BEGIN ------------------
@@ -124,6 +144,7 @@ qualifier_value = "snoRNA"
 feature_key = "ncRNA"
 qualifier_key = "ncRNA_class"
 qualifier_value = "snRNA"
+## ------------- END --------------------
 
 
 # http://www.sequenceontology.org/browser/current_svn/term/SO:0001877
@@ -132,12 +153,39 @@ feature_key = "ncRNA"
 qualifier_key = "ncRNA_class"
 qualifier_value = "lncRNA"
 
-## ------------- END --------------------
+# this does not conform SO, but probably needed in absense of lncRNA
+[lincRNA]
+feature_key = "ncRNA"
+qualifier_key = "ncRNA_class"
+qualifier_value = "lncRNA"
+
+# http://sequenceontology.org/browser/current_svn/term/SO:0000336
+[pseudogene]
+feature_key = "gene"
+qualifier_key = "pseudo"
+qualifier_value = ""
+
+# http://www.sequenceontology.org/browser/current_svn/term/SO:0000516
+[pseudogenic_transcript]
+feature_key = "misc_RNA"
+qualifier_key = "pseudo"
+qualifier_value = ""
+
+# http://www.sequenceontology.org/browser/current_svn/term/SO:0000043
+[processed_pseudogene]
+feature_key = "gene"
+qualifier_key = "pseudogene"
+qualifier_value = "processed"
+
+# http://sequenceontology.org/browser/current_svn/term/SO:0001411
+[biological_region]
+feature_key = "misc_feature"
+qualifier_key = "note"
+qualifier_value = "biological_region"
 
 
 
-
-## --------------------------------------------------------------------------------
+## ================================================================================
 ## Translate a GFF3 attribute (with certain value) into a Feature
 
 ## In this case, RNA "type" with biotype="misc_RNA" in GFF is translated to
