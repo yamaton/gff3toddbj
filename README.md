@@ -40,6 +40,9 @@ GFF3-to-DDBJ creates [the annotation file for submission to DDBJ](https://www.dd
 
 Analogous programs are [GAG](https://github.com/genomeannotation/GAG) for submissions to NCBI, and [EMBLmyGFF3](https://github.com/NBISweden/EMBLmyGFF3) for submissions to EMBL.
 
+Please take a look at our [test directory](https://github.com/yamaton/gff3toddbj/tree/main/tests/golden) for examples. Files ending with .ann are the DDBJ annotation files produced by thie program.
+
+
 ## Initial setup
 
 ### Install with bioconda

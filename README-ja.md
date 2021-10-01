@@ -36,6 +36,8 @@ DDBJへの登録には指定された形式の[アノテーションファイル
 
 同種のプログラムは、NCBI登録には[GAG](https://github.com/genomeannotation/GAG)、EMBL登録には[EMBLmyGFF3](https://github.com/NBISweden/EMBLmyGFF3)などがあります。
 
+[テストフォルダ](https://github.com/yamaton/gff3toddbj/tree/main/tests/golden)に入出力のファイルの例があるのでご覧ください。.annの拡張子付きがDDBJアノテーションファイルになります。同じファイル名のFASTAとGFF3から生成しています。
+
 
 ## セットアップ
 
