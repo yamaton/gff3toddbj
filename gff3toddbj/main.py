@@ -24,8 +24,8 @@ LOCUS_TAG_PREFIX = "LOCUSTAGPREFIX_"
 
 IGNORE_FILTERING_RULES = False
 
-# [NOTE] joined exons will be treated as mRNA locations
-JOINABLES = ("CDS", "exon")
+# [NOTE] joined-exon locations are taken by their parent RNAs as their locations
+JOINABLES = ("CDS", "exon", "mat_peptide", "V_segment", "C_region", "D-loop", "misc_feature")
 
 def main():
     parser = argparse.ArgumentParser(prog=_EXEC_NAME)

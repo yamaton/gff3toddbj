@@ -12,15 +12,23 @@ feature_key = "3'UTR"
 [three_prime_utr]
 feature_key = "3'UTR"
 
+# http://sequenceontology.org/browser/current_svn/term/SO:0000478
+[C_gene_segment]
+feature_key = "C_region"
+
+# http://sequenceontology.org/browser/current_svn/term/SO:0000458
+[D_gene_segment]
+feature_key = "D_region"
+
+# http://sequenceontology.org/browser/current_svn/term/SO:0000297
+[D_loop]
+feature_key = "D-loop"
+
 [J_gene_segment]
 feature_key = "J_segment"
 
 [V_gene_segment]
 feature_key = "V_segment"
-
-# http://sequenceontology.org/browser/current_svn/term/SO:0000478
-[C_gene_segment]
-feature_key = "C_region"
 
 # "region" in GFF3 column 3 corresponds to "source"
 # https://https.ncbi.nlm.nih.gov/datasets/docs/reference-docs/file-formats/about-ncbi-gff3/#the-source-region-feature
@@ -43,6 +51,52 @@ feature_key = "misc_RNA"
 [nc_primary_transcript]
 feature_key = "precursor_RNA"
 
+[primary_transcript]
+feature_key = "precursor_RNA"
+
+# http://sequenceontology.org/browser/current_svn/term/SO:0002249
+[mature_protein_region_of_CDS]
+feature_key = "mat_peptide"
+
+# http://sequenceontology.org/browser/current_svn/term/SO:0001037
+[mobile_genetic_element]
+feature_key = "mobile_element"
+
+# http://sequenceontology.org/browser/current_svn/term/SO:0000305
+[modified_DNA_base]
+feature_key = "modified_base"
+
+# http://sequenceontology.org/browser/current_svn/term/SO:0000409
+[binding_site]
+feature_key = "misc_binding"
+
+# http://sequenceontology.org/browser/current_svn/term/SO:0005850
+[primer_binding_site]
+feature_key = "primer_bind"
+
+# http://sequenceontology.org/browser/current_svn/term/SO:0000410
+[protein_binding_site]
+feature_key = "protein_bind"
+
+# http://sequenceontology.org/browser/current_svn/term/SO:0000413
+[sequence_difference]
+feature_key = "misc_difference"
+
+# http://sequenceontology.org/browser/current_svn/term/SO:0000418
+[signal_peptide]
+feature_key = "sig_peptide"
+
+# http://sequenceontology.org/browser/current_svn/term/SO:0000296
+[origin_of_replication]
+feature_key = "rep_origin"
+
+# http://sequenceontology.org/browser/current_svn/term/SO:0002250
+[propeptide_region_of_CDS]
+feature_key = "propeptide"
+
+# http://sequenceontology.org/browser/current_svn/term/SO:0000002
+[sequence_secondary_structure]
+feature_key = "misc_structure"
 
 
 ## ================================================================================
@@ -165,6 +219,12 @@ feature_key = "gene"
 qualifier_key = "pseudo"
 qualifier_value = ""
 
+# http://sequenceontology.org/browser/current_svn/term/SO:0002087
+[pseudogenic_CDS]
+feature_key = "CDS"
+qualifier_key = "pseudo"
+qualifier_value = ""
+
 # http://www.sequenceontology.org/browser/current_svn/term/SO:0000516
 [pseudogenic_transcript]
 feature_key = "misc_RNA"
@@ -182,6 +242,42 @@ qualifier_value = "processed"
 feature_key = "misc_feature"
 qualifier_key = "note"
 qualifier_value = "biological_region"
+
+# http://sequenceontology.org/browser/current_svn/term/SO:0000172
+[CAAT_signal]
+feature_key = "regulatory"
+qualifier_key = "regulatory_class"
+qualifier_value = "CAAT_signal"
+
+# http://sequenceontology.org/browser/current_svn/term/SO:0000714
+[nucleotide_motif]
+feature_key = "misc_feature"
+qualifier_key = "note"
+qualifier_value = "nucleotide_motif"
+
+# http://sequenceontology.org/browser/current_svn/term/SO:0001059
+[sequence_alteration]
+feature_key = "variation"
+qualifier_key = "note"
+qualifier_value = "sequence_alteration"
+
+# http://sequenceontology.org/browser/current_svn/term/SO:0002197
+[processed_pseudogenic_tRNA]
+feature_key = "tRNA"
+qualifier_key = "pseudogene"
+qualifier_value = "processed"
+
+# http://sequenceontology.org/browser/current_svn/term/SO:0002194
+[unprocessed_pseudogenic_rRNA]
+feature_key = "rRNA"
+qualifier_key = "pseudogene"
+qualifier_value = "unprocessed"
+
+# http://sequenceontology.org/browser/current_svn/term/SO:0000705
+[tandem_repeat]
+feature_key = "repeat_region"
+qualifier_key = "rpt_type"
+qualifier_value = "tandem"
 
 
 
