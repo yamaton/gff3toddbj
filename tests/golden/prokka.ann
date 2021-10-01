@@ -1270,6 +1270,7 @@ ERS324955|SC|contig000001	source	1..317941	organism	Drosophila melanogaster
 			inference	COORDINATES:profile:Infernal:1.1
 			locus_tag	LOCUSTAGPREFIX_10678_6#23_00082
 			product	PyrR
+			ncRNA_class	other
 	CDS	complement(79052..79681)	note	ID:10678_6#23_00083
 			note	source:Prodigal:2.60
 			note	product:UV-endonuclease
@@ -1883,6 +1884,7 @@ ERS324955|SC|contig000001	source	1..317941	organism	Drosophila melanogaster
 			inference	COORDINATES:profile:Infernal:1.1
 			locus_tag	LOCUSTAGPREFIX_10678_6#23_00128
 			product	L10_leader
+			ncRNA_class	other
 	CDS	complement(114970..116526)	note	ID:10678_6#23_00129
 			note	source:Prodigal:2.60
 			note	product:5-methylthioadenosine/S-adenosylhomocysteine deaminase
@@ -2347,6 +2349,7 @@ ERS324955|SC|contig000001	source	1..317941	organism	Drosophila melanogaster
 			inference	COORDINATES:profile:Infernal:1.1
 			locus_tag	LOCUSTAGPREFIX_10678_6#23_00157
 			product	T-box
+			ncRNA_class	other
 	CDS	complement(149369..150439)	note	ID:10678_6#23_00158
 			note	source:Prodigal:2.60
 			note	product:Spermidine/putrescine-binding periplasmic protein precursor
@@ -4608,6 +4611,7 @@ ERS324955|SC|contig000001	source	1..317941	organism	Drosophila melanogaster
 			inference	COORDINATES:profile:Infernal:1.1
 			locus_tag	LOCUSTAGPREFIX_10678_6#23_00302
 			product	yybP-ykoY
+			ncRNA_class	other
 	CDS	281857..283041	note	ID:10678_6#23_00303
 			note	source:Prodigal:2.60
 			note	product:Ferrous-iron efflux pump FieF
@@ -5373,6 +5377,7 @@ ERS324955|SC|contig000002	source	1..267336	organism	Drosophila melanogaster
 			inference	COORDINATES:profile:Infernal:1.1
 			locus_tag	LOCUSTAGPREFIX_10678_6#23_00354
 			product	L13_leader
+			ncRNA_class	other
 	CDS	12678..12995	note	ID:10678_6#23_00355
 			note	source:Prodigal:2.60
 			inference	ab initio prediction:Prodigal:2.60
@@ -6313,6 +6318,7 @@ ERS324955|SC|contig000002	source	1..267336	organism	Drosophila melanogaster
 			inference	COORDINATES:profile:Infernal:1.1
 			locus_tag	LOCUSTAGPREFIX_10678_6#23_00413
 			product	L17DE
+			ncRNA_class	other
 	CDS	complement(75647..76033)	note	ID:10678_6#23_00414
 			note	source:Prodigal:2.60
 			note	product:BL21
@@ -7291,6 +7297,7 @@ ERS324955|SC|contig000002	source	1..267336	organism	Drosophila melanogaster
 			inference	COORDINATES:profile:Infernal:1.1
 			locus_tag	LOCUSTAGPREFIX_10678_6#23_00481
 			product	FMN
+			ncRNA_class	other
 	CDS	125060..126160	note	ID:10678_6#23_00482
 			note	source:Prodigal:2.60
 			note	product:Riboflavin biosynthesis protein RibD
@@ -10874,6 +10881,7 @@ ERS324955|SC|contig000003	source	1..161432	organism	Drosophila melanogaster
 			inference	COORDINATES:profile:Infernal:1.1
 			locus_tag	LOCUSTAGPREFIX_10678_6#23_00725
 			product	PyrR
+			ncRNA_class	other
 	CDS	118843..119544	note	ID:10678_6#23_00726
 			note	source:Prodigal:2.60
 			note	product:Orotidine 5'-phosphate decarboxylase
@@ -11097,6 +11105,7 @@ ERS324955|SC|contig000003	source	1..161432	organism	Drosophila melanogaster
 			inference	COORDINATES:profile:Infernal:1.1
 			locus_tag	LOCUSTAGPREFIX_10678_6#23_00741
 			product	TPP
+			ncRNA_class	other
 	CDS	130505..131173	note	ID:10678_6#23_00742
 			note	source:Prodigal:2.60
 			note	product:Thiaminase-2
@@ -11154,6 +11163,7 @@ ERS324955|SC|contig000003	source	1..161432	organism	Drosophila melanogaster
 			inference	COORDINATES:profile:Infernal:1.1
 			locus_tag	LOCUSTAGPREFIX_10678_6#23_00745
 			product	TPP
+			ncRNA_class	other
 	CDS	133433..133993	note	ID:10678_6#23_00746
 			note	source:Prodigal:2.60
 			note	product:Putative HMP/thiamine permease protein ykoE
@@ -11296,6 +11306,7 @@ ERS324955|SC|contig000003	source	1..161432	organism	Drosophila melanogaster
 			inference	COORDINATES:profile:Infernal:1.1
 			locus_tag	LOCUSTAGPREFIX_10678_6#23_00754
 			product	TPP
+			ncRNA_class	other
 	CDS	140072..140467	note	ID:10678_6#23_00755
 			note	source:Prodigal:2.60
 			note	product:CopAB ATPases metal-fist type repressor
@@ -11894,6 +11905,7 @@ ERS324955|SC|contig000004	source	1..132407	organism	Drosophila melanogaster
 			inference	COORDINATES:profile:Infernal:1.1
 			locus_tag	LOCUSTAGPREFIX_10678_6#23_00800
 			product	6S
+			ncRNA_class	other
 	tRNA	18874..18949	note	ID:10678_6#23_00801
 			note	source:Aragorn:1.2.36
 			inference	COORDINATES:profile:Aragorn:1.2.36
@@ -12355,6 +12367,7 @@ ERS324955|SC|contig000004	source	1..132407	organism	Drosophila melanogaster
 			inference	COORDINATES:profile:Infernal:1.1
 			locus_tag	LOCUSTAGPREFIX_10678_6#23_00831
 			product	T-box
+			ncRNA_class	other
 	CDS	complement(47496..47702)	note	ID:10678_6#23_00832
 			note	source:Prodigal:2.60
 			inference	ab initio prediction:Prodigal:2.60
@@ -12368,6 +12381,7 @@ ERS324955|SC|contig000004	source	1..132407	organism	Drosophila melanogaster
 			inference	COORDINATES:profile:Infernal:1.1
 			locus_tag	LOCUSTAGPREFIX_10678_6#23_00833
 			product	T-box
+			ncRNA_class	other
 	CDS	complement(48310..49311)	note	ID:10678_6#23_00834
 			note	source:Prodigal:2.60
 			note	product:Catabolite control protein
@@ -12632,6 +12646,7 @@ ERS324955|SC|contig000004	source	1..132407	organism	Drosophila melanogaster
 			inference	COORDINATES:profile:Infernal:1.1
 			locus_tag	LOCUSTAGPREFIX_10678_6#23_00853
 			product	Purine
+			ncRNA_class	other
 	CDS	68428..69009	note	ID:10678_6#23_00854
 			note	source:Prodigal:2.60
 			note	product:Xanthine phosphoribosyltransferase
@@ -13665,6 +13680,7 @@ ERS324955|SC|contig000004	source	1..132407	organism	Drosophila melanogaster
 			inference	COORDINATES:profile:Infernal:1.1
 			locus_tag	LOCUSTAGPREFIX_10678_6#23_00915
 			product	Bacteria_small_SRP
+			ncRNA_class	other
 	CDS	complement(128644..129111)	note	ID:10678_6#23_00916
 			note	source:Prodigal:2.60
 			note	product:tRNA-specific adenosine deaminase
@@ -13860,6 +13876,7 @@ ERS324955|SC|contig000005	source	1..131196	organism	Drosophila melanogaster
 			inference	COORDINATES:profile:Infernal:1.1
 			locus_tag	LOCUSTAGPREFIX_10678_6#23_00931
 			product	group-II-D1D4-3
+			ncRNA_class	other
 	CDS	10576..11853	note	ID:10678_6#23_00932
 			note	source:Prodigal:2.60
 			note	product:Group II intron-encoded protein ltrA
@@ -16068,6 +16085,7 @@ ERS324955|SC|contig000006	source	1..102838	organism	Drosophila melanogaster
 			inference	COORDINATES:profile:Infernal:1.1
 			locus_tag	LOCUSTAGPREFIX_10678_6#23_01074
 			product	T-box
+			ncRNA_class	other
 	CDS	35775..38567	note	ID:10678_6#23_01075
 			note	source:Prodigal:2.60
 			note	product:Isoleucine--tRNA ligase
@@ -16464,6 +16482,7 @@ ERS324955|SC|contig000006	source	1..102838	organism	Drosophila melanogaster
 			inference	COORDINATES:profile:Infernal:1.1
 			locus_tag	LOCUSTAGPREFIX_10678_6#23_01102
 			product	T-box
+			ncRNA_class	other
 	CDS	65890..66519	note	ID:10678_6#23_01103
 			note	source:Prodigal:2.60
 			note	product:Putative NADH-flavin reductase
@@ -16769,6 +16788,7 @@ ERS324955|SC|contig000006	source	1..102838	organism	Drosophila melanogaster
 			inference	COORDINATES:profile:Infernal:1.1
 			locus_tag	LOCUSTAGPREFIX_10678_6#23_01123
 			product	T-box
+			ncRNA_class	other
 	CDS	complement(88344..88739)	note	ID:10678_6#23_01124
 			note	source:Prodigal:2.60
 			inference	ab initio prediction:Prodigal:2.60
@@ -17686,6 +17706,7 @@ ERS324955|SC|contig000007	source	1..85930	organism	Drosophila melanogaster
 			inference	COORDINATES:profile:Infernal:1.1
 			locus_tag	LOCUSTAGPREFIX_10678_6#23_01189
 			product	Lacto-rpoB
+			ncRNA_class	other
 	CDS	38341..41952	note	ID:10678_6#23_01190
 			note	source:Prodigal:2.60
 			note	product:DNA-directed RNA polymerase subunit beta
@@ -19475,6 +19496,7 @@ ERS324955|SC|contig000009	source	1..67683	organism	Drosophila melanogaster
 			inference	COORDINATES:profile:Infernal:1.1
 			locus_tag	LOCUSTAGPREFIX_10678_6#23_01327
 			product	TPP
+			ncRNA_class	other
 	CDS	complement(14156..15502)	note	ID:10678_6#23_01328
 			note	source:Prodigal:2.60
 			note	product:Autolysin
@@ -21607,6 +21629,7 @@ ERS324955|SC|contig000011	source	1..57335	organism	Drosophila melanogaster
 			inference	COORDINATES:profile:Infernal:1.1
 			locus_tag	LOCUSTAGPREFIX_10678_6#23_01469
 			product	FMN
+			ncRNA_class	other
 	CDS	complement(20466..20969)	note	ID:10678_6#23_01470
 			note	source:Prodigal:2.60
 			note	product:Putative tRNA (cytidine(34)-2'-O)-methyltransferase
@@ -21630,6 +21653,7 @@ ERS324955|SC|contig000011	source	1..57335	organism	Drosophila melanogaster
 			inference	COORDINATES:profile:Infernal:1.1
 			locus_tag	LOCUSTAGPREFIX_10678_6#23_01471
 			product	23S-methyl
+			ncRNA_class	other
 	CDS	complement(21162..21992)	note	ID:10678_6#23_01472
 			note	source:Prodigal:2.60
 			note	product:Energy-coupling factor transporter transmembrane protein EcfT
@@ -22325,6 +22349,7 @@ ERS324955|SC|contig000012	source	1..57237	organism	Drosophila melanogaster
 			inference	COORDINATES:profile:Infernal:1.1
 			locus_tag	LOCUSTAGPREFIX_10678_6#23_01518
 			product	T-box
+			ncRNA_class	other
 	CDS	13135..14409	note	ID:10678_6#23_01519
 			note	source:Prodigal:2.60
 			note	product:Serine--tRNA ligase
@@ -22389,6 +22414,7 @@ ERS324955|SC|contig000012	source	1..57237	organism	Drosophila melanogaster
 			inference	COORDINATES:profile:Infernal:1.1
 			locus_tag	LOCUSTAGPREFIX_10678_6#23_01523
 			product	Glycine
+			ncRNA_class	other
 	CDS	complement(17874..20210)	note	ID:10678_6#23_01524
 			note	source:Prodigal:2.60
 			note	product:MutS2 protein
@@ -22871,11 +22897,13 @@ ERS324955|SC|contig000012	source	1..57237	organism	Drosophila melanogaster
 			inference	COORDINATES:profile:Infernal:1.1
 			locus_tag	LOCUSTAGPREFIX_10678_6#23_01556
 			product	RNaseP_bact_a
+			ncRNA_class	other
 	ncRNA	complement(52960..53340)	note	ID:10678_6#23_01557
 			note	source:Infernal:1.1
 			inference	COORDINATES:profile:Infernal:1.1
 			locus_tag	LOCUSTAGPREFIX_10678_6#23_01557
 			product	RNaseP_bact_b
+			ncRNA_class	other
 	CDS	complement(53361..53690)	note	ID:10678_6#23_01558
 			note	source:Prodigal:2.60
 			note	product:Guiding PBP1-shuttling protein
@@ -23247,6 +23275,7 @@ ERS324955|SC|contig000013	source	1..55719	organism	Drosophila melanogaster
 			inference	COORDINATES:profile:Infernal:1.1
 			locus_tag	LOCUSTAGPREFIX_10678_6#23_01580
 			product	L20_leader
+			ncRNA_class	other
 	CDS	18081..18281	note	ID:10678_6#23_01581
 			note	source:Prodigal:2.60
 			note	product:50S ribosomal protein L35
@@ -26789,6 +26818,7 @@ ERS324955|SC|contig000018	source	1..39787	organism	Drosophila melanogaster
 			inference	COORDINATES:profile:Infernal:1.1
 			locus_tag	LOCUSTAGPREFIX_10678_6#23_01809
 			product	L21_leader
+			ncRNA_class	other
 	CDS	complement(26341..27027)	note	ID:10678_6#23_01810
 			note	source:Prodigal:2.60
 			note	product:Predicted membrane protein
@@ -28372,6 +28402,7 @@ ERS324955|SC|contig000021	source	1..33199	organism	Drosophila melanogaster
 			inference	COORDINATES:profile:Infernal:1.1
 			locus_tag	LOCUSTAGPREFIX_10678_6#23_01920
 			product	T-box
+			ncRNA_class	other
 	CDS	16911..17915	note	ID:10678_6#23_01921
 			note	source:Prodigal:2.60
 			note	product:ABC-type uncharacterized transport system, periplasmic component
@@ -28949,6 +28980,7 @@ ERS324955|SC|contig000022	source	1..30628	organism	Drosophila melanogaster
 			inference	COORDINATES:profile:Infernal:1.1
 			locus_tag	LOCUSTAGPREFIX_10678_6#23_01957
 			product	asd
+			ncRNA_class	other
 	tRNA	complement(19278..19350)	note	ID:10678_6#23_01958
 			note	source:Aragorn:1.2.36
 			inference	COORDINATES:profile:Aragorn:1.2.36
@@ -28959,6 +28991,7 @@ ERS324955|SC|contig000022	source	1..30628	organism	Drosophila melanogaster
 			inference	COORDINATES:profile:Infernal:1.1
 			locus_tag	LOCUSTAGPREFIX_10678_6#23_01959
 			product	preQ1-II
+			ncRNA_class	other
 	CDS	20082..20513	note	ID:10678_6#23_01960
 			note	source:Prodigal:2.60
 			note	product:GtrA-like protein

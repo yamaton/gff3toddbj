@@ -1,112 +1,204 @@
+# ===============================================================================
+# This configuration is the default configuration naming features and qualifiers to INSDC style.
+# Most items come from Sequence Ontology (http://www.sequenceontology.org/).
+# ===============================================================================
+
+
 ## ================================================================================
 ## Rename features (GFF3 type -> Feature key)
-[five_prime_UTR]
-feature_key = "5'UTR"
+## ================================================================================
 
-[five_prime_utr]
-feature_key = "5'UTR"
+## -----------------BEGIN-----------------------
+# retrieved then edited Sequence Ontology data
+# as of 2021-10-01 (8687a64)
 
-[three_prime_UTR]
-feature_key = "3'UTR"
+[CDS]
+feature_key = "CDS"
 
-[three_prime_utr]
-feature_key = "3'UTR"
-
-# http://sequenceontology.org/browser/current_svn/term/SO:0000478
 [C_gene_segment]
 feature_key = "C_region"
 
-# http://sequenceontology.org/browser/current_svn/term/SO:0000458
 [D_gene_segment]
-feature_key = "D_region"
+feature_key = "D_segment"
 
-# http://sequenceontology.org/browser/current_svn/term/SO:0000297
 [D_loop]
 feature_key = "D-loop"
 
 [J_gene_segment]
 feature_key = "J_segment"
 
+[N_region]
+feature_key = "N_region"
+
+[STS]
+feature_key = "STS"
+
+[S_region]
+feature_key = "S_region"
+
 [V_gene_segment]
 feature_key = "V_segment"
+
+[V_region]
+feature_key = "V_region"
+
+[binding_site]
+feature_key = "misc_binding"
+
+[centromere]
+feature_key = "centromere"
+
+[exon]
+feature_key = "exon"
+
+[five_prime_UTR]
+feature_key = "5'UTR"
+
+[gap]
+# feature_key = "assembly_gap"
+feature_key = "gap"
+# [NOTE] SO has two entries. Keep one anyway.
+
+[gene]
+feature_key = "gene"
+
+[iDNA]
+feature_key = "iDNA"
+
+[intron]
+feature_key = "intron"
+
+[mRNA]
+feature_key = "mRNA"
+
+[mature_protein_region]
+feature_key = "mat_peptide"
+
+[mature_protein_region_of_CDS]
+feature_key = "mat_peptide"
+
+[mobile_genetic_element]
+feature_key = "mobile_element"
+
+[modified_DNA_base]
+feature_key = "modified_base"
+
+[operon]
+feature_key = "operon"
+
+[oriT]
+feature_key = "oriT"
+
+[origin_of_replication]
+feature_key = "rep_origin"
+
+[polyA_site]
+feature_key = "polyA_site"
+
+[primary_transcript]
+feature_key = "precursor_RNA"
+# feature_key = "prim_transcript"
+# [NOTE] SO has two entries: keep the recommended in DDBJ
+
+[primer_binding_site]
+feature_key = "primer_bind"
+
+[propeptide]
+feature_key = "propeptide"
+
+[propeptide_region_of_CDS]
+feature_key = "propeptide"
+
+[protein_binding_site]
+feature_key = "protein_bind"
+
+[rRNA]
+feature_key = "rRNA"
+# qualifier_value = "unknown"   # SO says so, but...
+
+[sequence_difference]
+feature_key = "misc_difference"
+
+[sequence_secondary_structure]
+feature_key = "misc_structure"
+
+[sequence_source]
+feature_key = "source"
+
+[sequence_uncertainty]
+feature_key = "unsure"
+
+[signal_peptide]
+feature_key = "sig_peptide"
+
+[signal_peptide_region_of_CDS]
+feature_key = "sig_peptide"
+
+[stem_loop]
+feature_key = "stem_loop"
+
+[tRNA]
+feature_key = "tRNA"
+# qualifier_value = "unknown"   # SO says so, but...
+
+[telomere]
+feature_key = "telomere"
+
+[three_prime_UTR]
+feature_key = "3'UTR"
+
+[tmRNA]
+feature_key = "tmRNA"
+
+[transcript]
+feature_key = "misc_RNA"   # [NOTE] sometimes "mRNA", sometimes "misc_RNA"
+
+[transit_peptide]
+feature_key = "transit_peptide"
+
+[transit_peptide_region_of_CDS]
+feature_key = "transit_peptide"
+
+## -------------------END-----------------------
+
+# -------------------
+# Manual additions
+# -------------------
+
+[five_prime_utr]
+feature_key = "5'UTR"
+
+[three_prime_utr]
+feature_key = "3'UTR"
 
 # "region" in GFF3 column 3 corresponds to "source"
 # https://https.ncbi.nlm.nih.gov/datasets/docs/reference-docs/file-formats/about-ncbi-gff3/#the-source-region-feature
 [region]
 feature_key = "source"
 
-[transcript]
-feature_key = "misc_RNA"   # [NOTE] sometimes "mRNA", sometimes "misc_RNA"
-
-# http://www.sequenceontology.org/browser/current_svn/term/SO:0001503
+# SO:0001503
 # processed_transcript takes transcript whose corrsponding feature is misc_RNA.
 # Then, processed_transcript is regarded as misc_RNA in absense of the parent?
 [processed_transcript]
 feature_key = "misc_RNA"
 
-# http://sequenceontology.org/browser/current_svn/term/SO:0000483
+# SO:0000483
 # Parent of nc_primary_transcript is primary_transcript.
 # And primary_transcript is translated to "precursor_RNA" / "prim_transcript" feature.
 # But neighther exists in the DDBJ matrix...
 [nc_primary_transcript]
 feature_key = "precursor_RNA"
 
-[primary_transcript]
-feature_key = "precursor_RNA"
-
-# http://sequenceontology.org/browser/current_svn/term/SO:0002249
-[mature_protein_region_of_CDS]
-feature_key = "mat_peptide"
-
-# http://sequenceontology.org/browser/current_svn/term/SO:0001037
-[mobile_genetic_element]
-feature_key = "mobile_element"
-
-# http://sequenceontology.org/browser/current_svn/term/SO:0000305
-[modified_DNA_base]
-feature_key = "modified_base"
-
-# http://sequenceontology.org/browser/current_svn/term/SO:0000409
-[binding_site]
-feature_key = "misc_binding"
-
-# http://sequenceontology.org/browser/current_svn/term/SO:0005850
-[primer_binding_site]
-feature_key = "primer_bind"
-
-# http://sequenceontology.org/browser/current_svn/term/SO:0000410
-[protein_binding_site]
-feature_key = "protein_bind"
-
-# http://sequenceontology.org/browser/current_svn/term/SO:0000413
-[sequence_difference]
-feature_key = "misc_difference"
-
-# http://sequenceontology.org/browser/current_svn/term/SO:0000418
-[signal_peptide]
-feature_key = "sig_peptide"
-
-# http://sequenceontology.org/browser/current_svn/term/SO:0000296
-[origin_of_replication]
-feature_key = "rep_origin"
-
-# http://sequenceontology.org/browser/current_svn/term/SO:0002250
-[propeptide_region_of_CDS]
-feature_key = "propeptide"
-
-# http://sequenceontology.org/browser/current_svn/term/SO:0000002
-[sequence_secondary_structure]
-feature_key = "misc_structure"
-
 
 ## ================================================================================
-## Rename qualifiers (GFF3 attribute --> Qualifier key)
+## Rename qualifiers (GFF3 attributes --> Qualifier key)
+## ================================================================================
 
 ## [NOTE] Start with __ANY__. to indicate qualifiers for any features
 
 ## ------------- BEGIN ------------------
 # Originally from GFF3 columns ("source", "score", "phase")
-# but translated to qualifier by the GFF parser.
+# translated to qualifier by the GFF parser.
 [__ANY__.source]
 qualifier_key = "note"
 qualifier_value_prefix =  'source:'
@@ -118,14 +210,12 @@ qualifier_key = "score"
 qualifier_key = "codon_start"  # 0-based in GFF3. Will be transformed to 1-based.
 ## ------------- END --------------------
 
-# --------------------------------------------
-# Found in GFF3 attributes
 
-# For example, ID=xyz in GFF3 attribute
-# becomes /note="ID:xyz"
+# For example, ID=xyz in GFF3 attribute becomes /note="ID:xyz"
+# with this configuration below.
 [__ANY__.ID]
 qualifier_key = "note"
-qualifier_value_prefix =  "ID:"
+qualifier_value_prefix = "ID:"
 
 [__ANY__.Note]
 qualifier_key = "note"
@@ -140,7 +230,7 @@ qualifier_key = "gene"
 qualifier_key = "gene"
 
 [__ANY__.description]
-qualifier_key = "product"
+qualifier_key = "note"
 
 [__ANY__.eC_number]
 qualifier_key = "EC_number"
@@ -153,139 +243,524 @@ qualifier_key = "locus_tag"
 qualifier_value_prefix =  "<dummy>"
 
 [__ANY__._Description]
-qualifier_key = "product"
+qualifier_key = "note"
 
 
 ## ================================================================================
 ## Translate a GFF3 type (= column 3 value) into a pair of (Feature, Qualifier)
+## ================================================================================
 
-## ------------- BEGIN ------------------
-## https://www.ddbj.nig.ac.jp/news/ja/2007-12-07.html
+## -----------------BEGIN-----------------------
+# retrieved then edited Sequence Ontology data
+# as of 2021-10-01 (8687a64)
 
-## In this case, "type" value miRNA in GFF3 is translated to
-## ncRNA feature with /ncRNA_class="miRNA" qualifier
+[CAAT_signal]
+feature_key = "regulatory"
+qualifier_key = "regulatory_class"
+qualifier_value = "CAAT_signal"
+
+[CAGE_cluster]
+feature_key = "misc_feature"
+qualifier_key = "note"
+qualifier_value = "CAGE_cluster"
+
+[DNaseI_hypersensitive_site]
+feature_key = "regulatory"
+qualifier_key = "regulatory_class"
+qualifier_value = "DNase_I_hypersensitive_site"
+
+[GC_rich_promoter_region]
+feature_key = "regulatory"
+qualifier_key = "regulatory_class"
+qualifier_value = "GC_rich_promoter_region"
+
+[RNase_MRP_RNA]
+feature_key = "ncRNA"
+qualifier_key = "ncRNA_class"
+qualifier_value = "RNase_MRP_RNA"
+
+[RNase_P_RNA]
+feature_key = "ncRNA"
+qualifier_key = "ncRNA_class"
+qualifier_value = "RNase_P_RNA"
+
+[SRP_RNA]
+feature_key = "ncRNA"
+qualifier_key = "ncRNA_class"
+qualifier_value = "SRP_RNA"
+
+[TATA_box]
+feature_key = "regulatory"
+qualifier_key = "regulatory_class"
+qualifier_value = "TATA_box"
+
+[TSS]
+feature_key = "misc_feature"
+qualifier_key = "note"
+qualifier_value = "transcription_start_site"
+
+[X_element_combinatorial_repeat]
+feature_key = "repeat_region"
+qualifier_key = "rpt_type"
+qualifier_value = "x_element_combinatorial_repeat"
+
+[Y_RNA]
+feature_key = "ncRNA"
+qualifier_key = "ncRNA_class"
+qualifier_value = "Y_RNA"
+
+[Y_prime_element]
+feature_key = "repeat_region"
+qualifier_key = "rpt_type"
+qualifier_value = "Y_prime_element"
+
+[allelic_pseudogene]
+feature_key = "gene"
+qualifier_key = "pseudogene"
+qualifier_value = "allelic"
+
+[allelic_pseudogenic_rRNA]
+feature_key = "rRNA"
+qualifier_key = "pseudogene"
+qualifier_value = "allelic"
+
+[allelic_pseudogenic_tRNA]
+feature_key = "tRNA"
+qualifier_key = "pseudogene"
+qualifier_value = "allelic"
+
+[antisense_RNA]
+feature_key = "ncRNA"
+qualifier_key = "ncRNA_class"
+qualifier_value = "antisense_RNA"
+
+[attenuator]
+feature_key = "regulatory"
+qualifier_key = "regulatory_class"
+qualifier_value = "attenuator"
+
+[autocatalytically_spliced_intron]
+feature_key = "ncRNA"
+qualifier_key = "ncRNA_class"
+qualifier_value = "autocatalytically_spliced_intron"
+
+[biological_region]
+feature_key = "misc_feature"
+qualifier_key = "note"
+qualifier_value = "biological_region"
+
+[centromeric_repeat]
+feature_key = "repeat_region"
+qualifier_key = "rpt_type"
+qualifier_value = "centromeric_repeat"
+
+[chromosome_breakpoint]
+feature_key = "misc_recomb"
+qualifier_key = "recombination_class"
+qualifier_value = "chromosome_breakpoint"
+
+[conserved_region]
+feature_key = "misc_feature"
+qualifier_key = "note"
+qualifier_value = "conserved_region"
+
+[direct_repeat]
+feature_key = "repeat_region"
+qualifier_key = "rpt_type"
+qualifier_value = "direct"
+
+[dispersed_repeat]
+feature_key = "repeat_region"
+qualifier_key = "rpt_type"
+qualifier_value = "dispersed"
+
+[enhancer]
+feature_key = "regulatory"
+qualifier_key = "regulatory_class"
+qualifier_value = "enhancer"
+
+[enhancer_blocking_element]
+feature_key = "regulatory"
+qualifier_key = "regulatory_class"
+qualifier_value = "enhancer_blocking_element"
+
+[flanking_repeat]
+feature_key = "repeat_region"
+qualifier_key = "rpt_type"
+qualifier_value = "flanking"
+
+[guide_RNA]
+feature_key = "ncRNA"
+qualifier_key = "ncRNA_class"
+qualifier_value = "guide_RNA"
+
+[hammerhead_ribozyme]
+feature_key = "ncRNA"
+qualifier_key = "ncRNA_class"
+qualifier_value = "hammerhead_ribozyme"
+
+[imprinting_control_region]
+feature_key = "regulatory"
+qualifier_key = "regulatory_class"
+qualifier_value = "imprinting_control_region"
+
+[insulator]
+feature_key = "regulatory"
+qualifier_key = "regulatory_class"
+qualifier_value = "insulator"
+
+[inverted_repeat]
+feature_key = "repeat_region"
+qualifier_key = "rpt_type"
+qualifier_value = "inverted"
+
+[lncRNA]
+feature_key = "ncRNA"
+qualifier_key = "ncRNA_class"
+qualifier_value = "lncRNA"
+
+[locus_control_region]
+feature_key = "regulatory"
+qualifier_key = "regulatory_class"
+qualifier_value = "locus_control_region"
+
+[long_terminal_repeat]
+feature_key = "repeat_region"
+qualifier_key = "rpt_type"
+qualifier_value = "long_terminal_repeat"
+
+[matrix_attachment_site]
+feature_key = "regulatory"
+qualifier_key = "regulatory_class"
+qualifier_value = "matrix_attachment_region"
+
+[meiotic_recombination_region]
+feature_key = "misc_recomb"
+qualifier_key = "recombination_class"
+qualifier_value = "meiotic"
+# qualifier_value = "meiotic_recombination"  # not found in INSDC table
+
 [miRNA]
 feature_key = "ncRNA"
 qualifier_key = "ncRNA_class"
 qualifier_value = "miRNA"
+
+[microsatellite]
+feature_key = "repeat_region"
+qualifier_key = "rpt_type"
+qualifier_value = "microsatellite"
+
+[minisatellite]
+feature_key = "repeat_region"
+qualifier_key = "rpt_type"
+qualifier_value = "minisatellite"
+
+[minus_10_signal]
+feature_key = "regulatory"
+qualifier_key = "regulatory_class"
+qualifier_value = "minus_10_signal"
+
+[minus_35_signal]
+feature_key = "regulatory"
+qualifier_key = "regulatory_class"
+qualifier_value = "minus_35_signal"
+
+[mitotic_recombination_region]
+feature_key = "misc_recomb"
+qualifier_key = "recombination_class"
+qualifier_value = "mitotic"
+# qualifier_value = "mitotic_recombination" # not found in INSDC table
+
+[ncRNA]
+feature_key = "ncRNA"          # manually added
+qualifier_key = "ncRNA_class"  # manually added
+qualifier_value = "other"
+
+[nested_repeat]
+feature_key = "repeat_region"
+qualifier_key = "rpt_type"
+qualifier_value = "nested"
+
+[non_LTR_retrotransposon_polymeric_tract]
+feature_key = "repeat_region"
+qualifier_key = "rpt_type"
+qualifier_value = "non_ltr_retrotransposon_polymeric_tract"
+
+[non_allelic_homologous_recombination_region]
+feature_key = "misc_recomb"
+qualifier_key = "recombination_class"
+qualifier_value = "non_allelic_homologous"
+# qualifier_value = "non_allelic_homologous_recombination"  # not found in INSDC
+
+[non_processed_pseudogene]
+feature_key = "gene"
+qualifier_key = "pseudogene"
+qualifier_value = "unprocessed"
+
+[nucleotide_cleavage_site]
+feature_key = "misc_feature"
+qualifier_key = "note"
+qualifier_value = "nucleotide_cleavage_site"
+
+[nucleotide_motif]
+feature_key = "misc_feature"
+qualifier_key = "note"
+qualifier_value = "nucleotide_motif"
 
 [piRNA]
 feature_key = "ncRNA"
 qualifier_key = "ncRNA_class"
 qualifier_value = "piRNA"
 
+[polyA_signal_sequence]
+feature_key = "regulatory"
+qualifier_key = "regulatory_class"
+qualifier_value = "polyA_signal_sequence"
+
+[processed_pseudogene]
+feature_key = "gene"
+qualifier_key = "pseudogene"
+qualifier_value = "processed"
+
+[processed_pseudogenic_rRNA]
+feature_key = "rRNA"
+qualifier_key = "pseudogene"
+qualifier_value = "processed"
+
+[processed_pseudogenic_tRNA]
+feature_key = "tRNA"
+qualifier_key = "pseudogene"
+qualifier_value = "processed"
+
+[promoter]
+feature_key = "regulatory"
+qualifier_key = "regulatory_class"
+qualifier_value = "promoter"
+
+[pseudogene]
+feature_key = "gene"
+qualifier_key = "pseudogene"
+# qualifier_value = "pseudo"
+qualifier_value = "unknown"
+
+[pseudogenic_CDS]
+feature_key = "CDS"
+qualifier_key = "pseudogene"
+qualifier_value = "pseudo"
+
+[pseudogenic_rRNA]
+feature_key = "rRNA"
+qualifier_key = "pseudogene"
+qualifier_value = "pseudo"
+
+[pseudogenic_tRNA]
+feature_key = "tRNA"
+qualifier_key = "pseudogene"
+qualifier_value = "pseudo"
+
+[pseudogenic_transcript]
+feature_key = "misc_RNA"
+qualifier_key = "pseudogene"
+qualifier_value = "pseudo"
+
 [rasiRNA]
 feature_key = "ncRNA"
 qualifier_key = "ncRNA_class"
 qualifier_value = "rasiRNA"
+
+[recoding_stimulatory_region]
+feature_key = "regulatory"
+qualifier_key = "regulatory_class"
+qualifier_value = "recoding_stimulatory_region"
+
+[recombination_feature]
+feature_key = "misc_recomb"
+qualifier_key = "recombination_class"
+qualifier_value = "other"
+
+[regulatory_region]
+feature_key = "regulatory"
+qualifier_key = "regulatory_class"
+qualifier_value = "other"
+
+[repeat_instability_region]
+feature_key = "misc_feature"
+qualifier_key = "note"
+qualifier_value = "repeat_instability_region"
+
+[repeat_region]
+feature_key = "repeat_region"
+qualifier_key = "rpt_type"
+qualifier_value = "other"
+
+[replication_regulatory_region]
+feature_key = "regulatory"
+qualifier_key = "regulatory_class"
+qualifier_value = "replication_regulatory_region"
+
+[replication_start_site]
+feature_key = "misc_feature"
+qualifier_key = "note"
+qualifier_value = "replication_start_site"
+
+[response_element]
+feature_key = "regulatory"
+qualifier_key = "regulatory_class"
+qualifier_value = "response_element"
+
+[ribosome_entry_site]
+feature_key = "regulatory"
+qualifier_key = "regulatory_class"
+qualifier_value = "ribosome_binding_site"
+
+[riboswitch]
+feature_key = "regulatory"
+qualifier_key = "regulatory_class"
+qualifier_value = "riboswitch"
+
+[ribozyme]
+feature_key = "ncRNA"
+qualifier_key = "ncRNA_class"
+qualifier_value = "ribozyme"
+
+[satellite_DNA]
+feature_key = "repeat_region"
+qualifier_key = "rpt_type"
+qualifier_value = "satellite"
 
 [scRNA]
 feature_key = "ncRNA"
 qualifier_key = "ncRNA_class"
 qualifier_value = "scRNA"
 
+[sequence_alteration]
+# feature_key = "misc_feature"  # not sure which is right
+feature_key = "variation"
+qualifier_key = "note"
+qualifier_value = "sequence_alteration"
+
+[sequence_comparison]
+feature_key = "misc_feature"
+qualifier_key = "note"
+qualifier_value = "sequence_comparison"
+
+[sequence_feature]
+feature_key = "misc_feature"
+# qualifier_key = "note"
+# qualifier_value = "other"
+qualifier_key = "note"
+qualifier_value = "sequence_feature"
+
 [siRNA]
 feature_key = "ncRNA"
 qualifier_key = "ncRNA_class"
 qualifier_value = "siRNA"
+
+[silencer]
+feature_key = "regulatory"
+qualifier_key = "regulatory_class"
+qualifier_value = "silencer"
+
+[snRNA]
+feature_key = "ncRNA"
+qualifier_key = "ncRNA_class"
+qualifier_value = "snRNA"
 
 [snoRNA]
 feature_key = "ncRNA"
 qualifier_key = "ncRNA_class"
 qualifier_value = "snoRNA"
 
-[snRNA]
-feature_key = "ncRNA"
-qualifier_key = "ncRNA_class"
-qualifier_value = "snRNA"
-## ------------- END --------------------
-
-
-# http://www.sequenceontology.org/browser/current_svn/term/SO:0001877
-[lncRNA]
-feature_key = "ncRNA"
-qualifier_key = "ncRNA_class"
-qualifier_value = "lncRNA"
-
-# this does not conform SO, but probably needed in absense of lncRNA
-[lincRNA]
-feature_key = "ncRNA"
-qualifier_key = "ncRNA_class"
-qualifier_value = "lncRNA"
-
-# http://sequenceontology.org/browser/current_svn/term/SO:0000336
-[pseudogene]
-feature_key = "gene"
-qualifier_key = "pseudo"
-qualifier_value = ""
-
-# http://sequenceontology.org/browser/current_svn/term/SO:0002087
-[pseudogenic_CDS]
-feature_key = "CDS"
-qualifier_key = "pseudo"
-qualifier_value = ""
-
-# http://www.sequenceontology.org/browser/current_svn/term/SO:0000516
-[pseudogenic_transcript]
-feature_key = "misc_RNA"
-qualifier_key = "pseudo"
-qualifier_value = ""
-
-# http://www.sequenceontology.org/browser/current_svn/term/SO:0000043
-[processed_pseudogene]
-feature_key = "gene"
-qualifier_key = "pseudogene"
-qualifier_value = "processed"
-
-# http://sequenceontology.org/browser/current_svn/term/SO:0001411
-[biological_region]
-feature_key = "misc_feature"
-qualifier_key = "note"
-qualifier_value = "biological_region"
-
-# http://sequenceontology.org/browser/current_svn/term/SO:0000172
-[CAAT_signal]
-feature_key = "regulatory"
-qualifier_key = "regulatory_class"
-qualifier_value = "CAAT_signal"
-
-# http://sequenceontology.org/browser/current_svn/term/SO:0000714
-[nucleotide_motif]
-feature_key = "misc_feature"
-qualifier_key = "note"
-qualifier_value = "nucleotide_motif"
-
-# http://sequenceontology.org/browser/current_svn/term/SO:0001059
-[sequence_alteration]
-feature_key = "variation"
-qualifier_key = "note"
-qualifier_value = "sequence_alteration"
-
-# http://sequenceontology.org/browser/current_svn/term/SO:0002197
-[processed_pseudogenic_tRNA]
-feature_key = "tRNA"
-qualifier_key = "pseudogene"
-qualifier_value = "processed"
-
-# http://sequenceontology.org/browser/current_svn/term/SO:0002194
-[unprocessed_pseudogenic_rRNA]
-feature_key = "rRNA"
-qualifier_key = "pseudogene"
-qualifier_value = "unprocessed"
-
-# http://sequenceontology.org/browser/current_svn/term/SO:0000705
 [tandem_repeat]
 feature_key = "repeat_region"
 qualifier_key = "rpt_type"
 qualifier_value = "tandem"
 
+[telomerase_RNA]
+feature_key = "ncRNA"
+qualifier_key = "ncRNA_class"
+qualifier_value = "telomerase_RNA"
+
+[telomeric_repeat]
+feature_key = "repeat_region"
+qualifier_key = "rpt_type"
+qualifier_value = "telomeric_repeat"
+
+[terminal_repeat]
+feature_key = "repeat_region"
+qualifier_key = "rpt_type"
+qualifier_value = "terminal"
+
+[terminator]
+feature_key = "regulatory"
+qualifier_key = "regulatory_class"
+qualifier_value = "terminator"
+
+[trans_spliced_transcript]
+feature_key = "tRNA"
+qualifier_key = "trans_splicing"
+qualifier_value = ""
+
+[transcriptional_cis_regulatory_region]
+feature_key = "regulatory"
+qualifier_key = "regulatory_class"
+qualifier_value = "transcriptional_cis_regulatory_region"
+
+[unitary_pseudogene]
+feature_key = "gene"
+qualifier_key = "pseudogene"
+qualifier_value = "unitary"
+
+[unitary_pseudogenic_rRNA]
+feature_key = "rRNA"
+qualifier_key = "pseudogene"
+qualifier_value = "unitary"
+
+[unitary_pseudogenic_tRNA]
+feature_key = "tRNA"
+qualifier_key = "pseudogene"
+qualifier_value = "unitary"
+
+[unprocessed_pseudogenic_rRNA]
+feature_key = "rRNA"
+qualifier_key = "pseudogene"
+qualifier_value = "unprocessed"
+
+[unprocessed_pseudogenic_tRNA]
+feature_key = "tRNA"
+qualifier_key = "pseudogene"
+qualifier_value = "unprocessed"
+
+[vault_RNA]
+feature_key = "ncRNA"
+qualifier_key = "ncRNA_class"
+qualifier_value = "vault_RNA"
+
+## ------------- END --------------------
+
+
+#--------------------------------------------
+# Manual addition
+
+# I don't know what to do with this...
+[translational_frameshift]
+feature = "CDS"
+qualifier_key = "ribosomal_slippage"
+qualifier_value = ""
+
+# this does not conform SO, but needed when lncRNA is absent
+[lincRNA]
+feature_key = "ncRNA"
+qualifier_key = "ncRNA_class"
+qualifier_value = "lncRNA"
 
 
 ## ================================================================================
-## Translate a GFF3 attribute (with certain value) into a Feature
+## Translate a GFF3 type & attribute (with certain value) into feature
+## ================================================================================
 
-## In this case, RNA "type" with biotype="misc_RNA" in GFF is translated to
-## "misc_RNA" feature in annotation.
+## RNA "type" with biotype="misc_RNA" in GFF is translated to
+## "misc_RNA" feature with this configuration.
 [RNA.biotype]
 attribute_value = "misc_RNA"
 feature_key = "misc_RNA"
