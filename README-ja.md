@@ -250,7 +250,6 @@ Typeに関係なく指定のattributeについて一律リネームを行うば�
 対応する設定はこちらです。`__ANY__` という決め打ちのtype名の下にattributeを書きます。
 
 ```toml
-[__ANY__]  # この行は構造定義のため必要
 [__ANY__.ID]
 qualifier_key = "note"
 qualifier_value_prefix = "ID:"   # qualifier_value_prefixは省略可
@@ -274,7 +273,6 @@ qualifier_value = "snRNA"
 GFF3の特定の (type, attribute) を Feature key で置き換える必要に迫られることもあります。たとえばデフォルト設定では、GFF3中で `biotype="misc_RNA"` という attribute を持つ `RNA` type を `misc_RNA` Featureに変換しています。
 
 ```toml
-[RNA]    # Required though redundant
 [RNA.biotype]
 attribute_value = "misc_RNA"
 feature_key = "misc_RNA"

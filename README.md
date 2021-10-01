@@ -235,7 +235,6 @@ This is about renaming attributes under arbitrary types. By default, `ID=foobar`
 Here is the TOML defining the transformation. `__ANY__` is the special name representing arbitrary types. `ID` is the original attribute key. `note` is the name of corresponding qualifier key. `ID:` is attached as the prefix of the qualifier value.
 
 ```toml
-[__ANY__]  # This lineis required for structural reason
 [__ANY__.ID]
 qualifier_key = "note"
 qualifier_value_prefix = "ID:"  # optional
@@ -257,7 +256,6 @@ qualifier_value = "snRNA"
 Example: some annotation programs produce a GFF3 line containing `RNA` as the type and `biotype=misc_RNA` as one of the attributes. Then it should be translated to `misc_RNA` feature in annoation.
 
 ```toml
-[RNA]    # Required though redundant
 [RNA.biotype]
 attribute_value = "misc_RNA"
 feature_key = "misc_RNA"

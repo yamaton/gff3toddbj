@@ -48,11 +48,11 @@ feature_key = "precursor_RNA"
 ## ================================================================================
 ## Rename qualifiers (GFF3 attribute --> Qualifier key)
 
-[__ANY__]
+## [NOTE] Start with __ANY__. to indicate qualifiers for any features
+
 ## ------------- BEGIN ------------------
 # Originally from GFF3 columns ("source", "score", "phase")
 # but translated to qualifier by the GFF parser.
-
 [__ANY__.source]
 qualifier_key = "note"
 qualifier_value_prefix =  'source:'
@@ -190,7 +190,6 @@ qualifier_value = "biological_region"
 
 ## In this case, RNA "type" with biotype="misc_RNA" in GFF is translated to
 ## "misc_RNA" feature in annotation.
-[RNA]
 [RNA.biotype]
 attribute_value = "misc_RNA"
 feature_key = "misc_RNA"
