@@ -28,7 +28,7 @@ feature_key = "C_region"
 feature_key = "source"
 
 [transcript]
-feature_key = "mRNA"
+feature_key = "misc_RNA"   # [NOTE] sometimes "mRNA", sometimes "misc_RNA"
 
 # http://www.sequenceontology.org/browser/current_svn/term/SO:0001503
 # processed_transcript takes transcript whose corrsponding feature is misc_RNA.
