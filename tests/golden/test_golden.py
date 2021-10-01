@@ -54,7 +54,7 @@ def runner(data: BunchOfFiles, prefix:str=""):
 def tests_refseq():
     ## Testing against GCF_000280675.1_ASM28067v1
     testdata_refseq = BunchOfFiles(
-        WORK_DIR / "expected_GCF_000280675.1_ASM28067v1_genomic.ann",
+        WORK_DIR / "GCF_000280675.1_ASM28067v1_genomic.ann",
         WORK_DIR / "GCF_000280675.1_ASM28067v1_genomic.gff.gz",
         WORK_DIR / "GCF_000280675.1_ASM28067v1_genomic.fna.gz",
         WORK_DIR / "metadata.toml",
