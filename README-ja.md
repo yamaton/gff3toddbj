@@ -122,8 +122,8 @@ gff3-to-ddbj \
 
 * FASTAファイルがgzipで圧縮されているばあい[bgzip](https://www.htslib.org/doc/bgzip.html)圧縮に置き換え
   * FASTAのインデックス化とメモリ節約のため
-  * bgzipはgzipと互換性があるので今まで通りgzipやzcatなどが使えます
-  * **元の.gzファイルは.gz.bakにリネームされます**
+  * `myname_bgzip.fa.gz` のように `_bgzip` の付いたファイルが作成されます
+  * bgzipfファイルはgzipと互換性があるのでそのまま他での利用も可能です
 
 * 変換テーブルに基づいたFeatures / Qualifiersのリネーム
 

@@ -1,6 +1,11 @@
+## current
+* Expand the default config for feature and qualifier names
+    * Now based on Sequence Ontology
+* Create bgzip file as a new file, rather than replacing existing FASTA file
+
 ## v0.2.3 (2021-09-30)
 * Switch to pysam and samtools to index FASTA (called faidx)
-    * No longer create sqlite3 database when reading FASTA
+    * No longer creates sqlite3 database when reading FASTA
 * Minor fixes
 
 ## v0.2.2 (2021-09-30)

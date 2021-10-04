@@ -129,9 +129,9 @@ Here is the options:
 Here is the list of operations `gff3-to-ddbj` will do:
 
 * Re-compress FASTA with [bgzip](https://www.htslib.org/doc/bgzip.html) if the FASTA input is compressed with gzip
+  * A bgzip file is created if absent like `myfile_bgzip.fa.gz`.
   * For indexing and saving memory
-  * The new .gz file should be compatible with gzip
-  * **The original .gz file is renamed to .gz.bak**
+  * The bgzip file should be compatible with gzip
 
 * Rename features and qualifiers following the [renaming scheme](#advanced-rename-features-and-qualifiers).
 

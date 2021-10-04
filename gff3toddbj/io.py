@@ -19,10 +19,9 @@ from Bio.SeqRecord import SeqRecord
 from BCBio import GFF
 import pysam
 
+Path = Union[str, pathlib.Path]
 Faidx = pysam.libcfaidx.FastaFile
-
-PATH_DATABASE_LOCAL_PREFIX = "temp_gff3-to-ddbj_"
-PATH_DATABASE_LOCAL = PATH_DATABASE_LOCAL_PREFIX + str(uuid.uuid4()) + ".db"
+PGZIP_FILE_SUFFIX = "_bgzip"
 
 
 class CommandNotFoundError(Exception):
@@ -142,8 +141,19 @@ def load_fasta_as_faidx(filename: Union[str, pathlib.Path]) -> Faidx:
         rec = pysam.FastaFile(str(filename))
     except OSError:
         if pathlib.Path(filename).suffix == ".gz":
-            create_bgzipped(filename)
-            rec = pysam.FastaFile(str(filename))
+            new_file = _get_indexed_filename(filename)
+            if new_file.exists():
+                # If _bgzip file already exists, try opening as is first
+                # then create a bgzip file if fails.
+                try:
+                    rec = pysam.FastaFile(str(new_file))
+                except OSError:
+                    create_bgzipped(new_file)
+                    rec = pysam.FastaFile(str(new_file))
+            else:
+                # if _bgzip file is absent, just create it.
+                create_bgzipped(new_file, filename)
+                rec = pysam.FastaFile(str(new_file))
         else:
             raise IOError("Failed to load FASTA")
 
@@ -151,20 +161,51 @@ def load_fasta_as_faidx(filename: Union[str, pathlib.Path]) -> Faidx:
     return rec
 
 
-def create_bgzipped(path: Union[str, pathlib.Path]):
-    """Create a file compressed in bgzip from
-
+def _get_indexed_filename(filename: Union[str, pathlib.Path], suffix=PGZIP_FILE_SUFFIX) -> pathlib.Path:
     """
-    path = pathlib.Path(path)
-    assert path.suffix == ".gz"
-    if not path.exists():
-        raise FileNotFoundError("No such file as {}".format(path))
+    Add suffix to a filename.
 
-    backup = path.parent / (path.name + ".bak")
-    shutil.move(path, backup)
+    >>> str(_get_indexed_filename("src/myfile.fa.gz", "_bgzip"))
+    'src/myfile_bgzip.fa.gz'
+    """
+    p = pathlib.Path(filename)
+    parent = p.parent
+    name = p.name
+    xs = name.split(".")
+    if len(xs) > 2:
+        stem = ".".join(xs[:-2])
+        ext = "." + ".".join(xs[-2:])
+    elif len(xs) == 2:
+        stem = xs[0]
+        ext = "." + xs[-1]
+    else:
+        raise ValueError("Check the filename: {}".format(str(filename)))
+    result = parent / (stem + suffix + ext)
+    return result
 
-    logging.info("Re-compressing with bgzip (only once): {}".format(path))
-    cmd = "gzip -c -d {} | bgzip --threads=4 > {}".format(str(backup), str(path))
+
+def create_bgzipped(tgt: Path, src:Optional[Path]=None):
+    """Create a file compressed in bgzip in `tgt` from `src` file.
+    Replace `tgt` with the bgzip version if src is None.
+    """
+    TMP_SUFFIX = ".tmpsrc"
+
+    tgt = pathlib.Path(tgt)
+    if src is None:
+        src = tgt
+    elif isinstance(src, str):
+        src = pathlib.Path(src)
+
+    assert tgt.suffix == src.suffix == ".gz"
+    if not src.exists():
+        raise FileNotFoundError("No such file as {}".format(str(src)))
+
+    if tgt == src:
+        src = src.parent / (src.name + TMP_SUFFIX)
+        shutil.copy(tgt, src)
+
+    logging.info("Re-compressing with bgzip (only once): {}".format(tgt))
+    cmd = "gzip -c -d {} | bgzip --threads=4 > {}".format(str(src), str(tgt))
     logging.info("   $ {}".format(cmd))
     ret = subprocess.run(cmd, shell=True)
     if ret.returncode == 127:
@@ -176,6 +217,10 @@ def create_bgzipped(path: Union[str, pathlib.Path]):
         logging.error(msg)
         raise ValueError(msg)
     logging.info("    ... done re-compressing FASTA with bgzip ")
+
+    # clean up temporary file
+    if src.suffix == TMP_SUFFIX:
+        src.unlink()
 
 
 def get_seqlens(faidx: Faidx) -> OrderedDict[str, int]:
