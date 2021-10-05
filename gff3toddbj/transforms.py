@@ -219,10 +219,7 @@ def _join_features(record: SeqRecord, joinables: Optional[Tuple[str, ...]]) -> S
     joinables_ = [] if joinables is None else joinables
 
     def sortkey(f: SeqFeature) -> Tuple[int, int]:
-        strand = f.location.strand
-        if strand is None:
-            strand = 0
-        return (strand * f.location.start.position, strand * f.location.end.position)
+        return (f.location.start.position, f.location.end.position)
 
     def _join(features: List[SeqFeature]) -> SeqFeature:
         """Join features into a single feature assuming the list already has right members"""
@@ -241,10 +238,13 @@ def _join_features(record: SeqRecord, joinables: Optional[Tuple[str, ...]]) -> S
             ids = [f.id for f in features]
             logging.error("Something is wrong in joining features:\n    ids = {}".format(ids))
 
-        # this is how to set qualifiers of the joined feature
-        # and this matters in setting /codon_start right
-        qualifiers = features[0].qualifiers
-        type_ = features[0].type
+        # set qualifiers of the joined feature from
+        # head of the parts. Here "head" is meant by
+        #   5' terminal for (+) strand
+        #   3' terminal for (-) strand
+        idx = 0 if compound_loc.strand > 0 else -1
+        qualifiers = features[idx].qualifiers
+        type_ = features[idx].type
 
         if not sub_features:
             sub_features = None
@@ -447,12 +447,17 @@ def _fix_locations(record: SeqRecord, faidx: Optional[io.Faidx]=None) -> None:
             logging.error("location.starnd is unavailable!")
             return location
 
+        # Note that elements in location.parts should be already sorted
+        # by _join_features in the order of (location.start, location.end)
+        # regardless of the strand (+/-).
+        # This is why `idx` is set as follows.
+        #
         sign = 1 if is_at_start else -1
         if location.strand * sign > 0:
             # left-end (5' terminal):
             #    start of strand (+)   OR   end of strand (-)
             if len(location.parts) > 1:
-                idx = 0 if location.strand > 0 else -1
+                idx = 0  # always 5' terminal
                 location.parts[idx] = FeatureLocation(
                     BeforePosition(location.parts[idx].start),
                     location.parts[idx].end,
@@ -466,7 +471,7 @@ def _fix_locations(record: SeqRecord, faidx: Optional[io.Faidx]=None) -> None:
             # right-end (3' terminal):
             #    end of strand (+)   OR   start of strand (-)
             if len(location.parts) > 1:
-                idx = -1 if location.strand > 0 else 0
+                idx = -1  # always 3' terminal
                 location.parts[idx] = FeatureLocation(
                     location.parts[idx].start,
                     AfterPosition(location.parts[idx].end),
