@@ -1,4 +1,7 @@
-## current
+## Current
+* Add a non-SO wild items to the default config for feature and qualifier names
+
+## v0.2.4 (2021-10-04)
 * Expand the default config for feature and qualifier names
     * Now based on Sequence Ontology
 * Create bgzip file as a new file, rather than replacing existing FASTA file

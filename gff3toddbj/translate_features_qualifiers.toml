@@ -1,6 +1,6 @@
 # ===============================================================================
 # This configuration is the default configuration naming features and qualifiers to INSDC style.
-# Most items come from Sequence Ontology (http://www.sequenceontology.org/).
+# Most items come from Sequence Ontology (SO) (http://www.sequenceontology.org/).
 # ===============================================================================
 
 
@@ -740,9 +740,9 @@ qualifier_value = "vault_RNA"
 
 
 #--------------------------------------------
-# Manual addition
+# Manual additions
 
-# I don't know what to do with this...
+# SO does not limit the feature to CDS, though
 [translational_frameshift]
 feature = "CDS"
 qualifier_key = "ribosomal_slippage"
@@ -750,6 +750,18 @@ qualifier_value = ""
 
 # this does not conform SO, but needed when lncRNA is absent
 [lincRNA]
+feature_key = "ncRNA"
+qualifier_key = "ncRNA_class"
+qualifier_value = "lncRNA"
+
+# never seen linc_RNA, but add it proactively because of lnc_RNA
+[linc_RNA]
+feature_key = "ncRNA"
+qualifier_key = "ncRNA_class"
+qualifier_value = "lncRNA"
+
+# Undefined in the Sequence Ontology, but seen in a RefSeq GFF
+[lnc_RNA]
 feature_key = "ncRNA"
 qualifier_key = "ncRNA_class"
 qualifier_value = "lncRNA"
