@@ -323,15 +323,21 @@ def _convert_codon_start_to_1_based(rec: SeqRecord) -> None:
         _fix_feature(f)
 
 
-def _add_transl_table(rec: SeqRecord, transl_table: int) -> None:
+def _add_transl_table_to_cds(rec: SeqRecord, transl_table: int) -> None:
     """Add transl_table qualifier to all CDS"""
 
     def _apply(feature: SeqFeature) -> None:
         if hasattr(feature, "sub_features"):
             for f in feature.sub_features:
                 _apply(f)
+
+        # feature-specific transl_table precedes the global setting
         if feature.type == "CDS":
-            feature.qualifiers["transl_table"] = [transl_table]
+            if "transl_table" in feature.qualifiers:
+                genetic_code = int(feature.qualifiers["transl_table"][0])
+            else:
+                genetic_code = transl_table
+            feature.qualifiers["transl_table"] = [genetic_code]
 
     for f in rec.features:
         _apply(f)
@@ -393,22 +399,19 @@ def _remove_duplicates_in_qualifiers(rec: SeqRecord) -> None:
     _run(rec.features)
 
 
-def _fix_locations(faidx: io.Faidx, record: SeqRecord, transl_table: int) -> None:
+def _fix_locations(record: SeqRecord, faidx: Optional[io.Faidx]=None) -> None:
     """
     Fix locations of features in records when start/stop codons are absent.
     See DDBJ FAQ for detail.
     https://www.ddbj.nig.ac.jp/faq/en/how-to-fix-error-msg-codon-start-e.html
 
     Args:
-        seq may contain CDSs as features to be fixed.
-        seq_dict is {SeqID: Record} dict containing sequence info.
-        transl_table is the Genetic Code.
+        `record` may contain CDSs as its features to be fixed.
+        `faidx` is for FASTA info. If None, get sequence from `record.seq` instead.
     """
-    count_fix_codon_start = 0
+    count_fix_codon_start_loc = []
 
     def _runner(features: List[SeqFeature], seq: Seq) -> None:
-        nonlocal count_fix_codon_start
-
         for f in features:
             if f.type == "CDS":
                 cs_list = f.qualifiers.get("codon_start", [1])
@@ -420,14 +423,18 @@ def _fix_locations(faidx: io.Faidx, record: SeqRecord, transl_table: int) -> Non
                 if f.location.strand is None:
                     logging.error("f.location.strand is None! Something is wrong: {}".format(f))
                     continue
-                if not utils.has_start_codon(seq, f.location, transl_table, phase):
-                    if phase > 0 and utils.has_start_codon(seq, f.location, transl_table):
-                        count_fix_codon_start += 1
+
+                # CDS must have the qualifier "transl_table" as done in _add_transl_table_to_cds
+                genetic_code = int(f.qualifiers["transl_table"][0])
+
+                if not utils.has_start_codon(seq, f.location, genetic_code, phase):
+                    if phase > 0 and utils.has_start_codon(seq, f.location, genetic_code):
+                        count_fix_codon_start_loc.append(f.location)
                         f.qualifiers["codon_start"] = [1]
                     else:
                         f.location = _fix_absent_start_codon(f.location)
 
-                if not utils.has_stop_codon(seq, f.location, transl_table):
+                if not utils.has_stop_codon(seq, f.location, genetic_code):
                     f.location = _fix_absent_stop_codon(f.location)
 
             if hasattr(f, "sub_features"):
@@ -477,14 +484,16 @@ def _fix_locations(faidx: io.Faidx, record: SeqRecord, transl_table: int) -> Non
     def _fix_absent_stop_codon(location: FeatureLocation) -> FeatureLocation:
         return _fix_loc(location, is_at_start=False)
 
-    s = io.get_seq(faidx, record.id)
+    s = record.seq if faidx is None else io.get_seq(faidx, record.id)
     if s:
         seq = Seq(s)
         _runner(record.features, seq)
 
-    if count_fix_codon_start > 0:
-        msg = "Change to /codon_start=1 (count: {}) in (SeqID: {})".format(count_fix_codon_start, record.id)
+    if count_fix_codon_start_loc:
+        msg = "Changed to /codon_start=1 in SeqID: {} (count: {})".format(record.id, len(count_fix_codon_start_loc))
         logging.info(msg)
+        msg2 = "   example segment: {}".format(str(count_fix_codon_start_loc[0]))
+        logging.info(msg2)
 
 
 def _merge_rna_and_exons(rec: SeqRecord) -> None:
@@ -660,7 +669,7 @@ def run(
 
     # Add the transl_table qualifier to CDS feature each
     for rec in records:
-        _add_transl_table(rec, transl_table)
+        _add_transl_table_to_cds(rec, transl_table)
 
     # Insert "source" features from metadata if necessary
     _handle_source(records, metadata, id_to_seqlen)
@@ -679,7 +688,7 @@ def run(
 
     # Check start and stop codons in CDSs
     for rec in records:
-        _fix_locations(faidx, rec, transl_table)
+        _fix_locations(rec, faidx=faidx)
 
     # Assign single value to /product and put the rest to /inference
     for rec in records:
