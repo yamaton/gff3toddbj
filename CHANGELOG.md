@@ -1,6 +1,7 @@
 ## Current
 * Add a non-SO wild items to the default config for feature and qualifier names
 * Fix: Respect feature-wise /transl_table value than the globally-set one.
+* Fix an error when joined features have .sub_features
 
 ## v0.2.4 (2021-10-04)
 * Expand the default config for feature and qualifier names

@@ -246,15 +246,16 @@ def _join_features(record: SeqRecord, joinables: Optional[Tuple[str, ...]]) -> S
         qualifiers = features[idx].qualifiers
         type_ = features[idx].type
 
-        if not sub_features:
-            sub_features = None
-
-        return SeqFeature(
+        result = SeqFeature(
             compound_loc,
             type=type_,
             qualifiers=qualifiers,
-            sub_features=sub_features,
         )
+        if sub_features:
+            result.sub_features = sub_features
+
+        return result
+
 
     def _runner(features: List[SeqFeature]) -> List[SeqFeature]:
         """Scan features and apply _join """
