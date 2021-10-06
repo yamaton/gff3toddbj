@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Optional, Tuple, Iterable, OrderedDict
+from typing import Any, Dict, Generator, List, Optional, Tuple, Iterable, OrderedDict
 import collections
 import re
 import logging
@@ -21,14 +21,14 @@ Interval = Tuple[int, int]
 
 def _set_assembly_gap(
     record: SeqRecord,
-    faidx: io.Faidx,
     metadata: OrderedDict[str, OrderedDict[str, Any]],
+    faidx: Optional[io.Faidx]=None,
 ) -> None:
     """
     Set assembly gaps feature to records.
     """
     gap_qualifiers = metadata.get("assembly_gap", collections.OrderedDict())
-    seq = io.get_seq(faidx, record.id)
+    seq = record.seq if faidx is None else io.get_seq(faidx, record.id)
     if seq:
         gap = _get_assembly_gap(seq, gap_qualifiers)
         record.features.extend(gap)
@@ -566,6 +566,35 @@ def _handle_source(
             logging.info(msg)
 
 
+def _handle_source_rec(
+    rec: SeqRecord,
+    metadata: OrderedDict[str, OrderedDict[str, Any]],
+    id_to_seqlen: OrderedDict[str, int],
+) -> bool:
+    """
+    Add "source" features in certain cases:
+      [source] in metadata will inserts "source" to each entry
+      UNLESS either of the following applies.
+      [NOTE] GFF3's "region" type corresponds to annotation's "source" feature.
+      [NOTE] User-input metadata may contain "[COMMON.source]" items.
+    """
+    is_inserting = False
+    if ("source" in metadata) and ("source" in metadata.get("COMMON", ())):
+        msg = "[COMMON.source] overrides [source] items in metadata."
+        logging.warning(msg)
+    elif "source" in metadata:
+        if rec.features:
+            if rec.features[0].type == "source" and add_logging:
+                pass
+            else:
+                is_inserting = True
+                src_length = id_to_seqlen[rec.id]
+                src_qualifiers = metadata["source"]
+                src = _get_source(src_length, src_qualifiers)
+                rec.features.insert(0, src)
+    return is_inserting
+
+
 def _assign_single_product(rec: SeqRecord) -> None:
     """Take the first item in /product values as the value of /product
     and put the rest as /note values
@@ -641,7 +670,7 @@ def run(
     locus_tag_prefix: str,
     transl_table: int,
     joinables: Tuple[str, ...],
-) -> List[SeqRecord]:
+) -> Generator[SeqRecord, None, None]:
     """Create a list of `SeqRecord`s and apply various transformations"""
 
     # Load FASTA as pysam class
@@ -655,66 +684,60 @@ def run(
     if path_gff3 is not None:
         records = io.load_gff3_as_seqrecords(path_gff3)
 
-        # Rename feature keys and/or qualifier keys/values
-        f = RenameHandler(path_rename_scheme, locus_tag_prefix).run
-        records = [f(rec) for rec in records]
     else:
         # Create dummy SeqRecords with IDs from FASTA
         records = [SeqRecord("", id=seq_id) for seq_id in fasta_ids]
 
-    # Convert codon_start value to 1-based indexing
+    # Rename feature keys and/or qualifier keys/values
+    f = RenameHandler(path_rename_scheme, locus_tag_prefix).run
+
     for rec in records:
+        rec = f(rec)
+
+        # Convert codon_start value to 1-based indexing
         _convert_codon_start_to_1_based(rec)
 
-    # Add "assembly_gap" features
-    for rec in records:
-        _set_assembly_gap(rec, faidx, metadata)
+        # Add "assembly_gap" features
+        _set_assembly_gap(rec, metadata, faidx=faidx)
 
-    # Add the transl_table qualifier to CDS feature each
-    for rec in records:
+        # Add the transl_table qualifier to CDS feature each
         _add_transl_table_to_cds(rec, transl_table)
 
-    # Insert "source" features from metadata if necessary
-    _handle_source(records, metadata, id_to_seqlen)
+        # Insert "source" features from metadata if necessary
+        _handle_source_rec(rec, metadata, id_to_seqlen)
 
-    # Check characters in qualifier values
-    for rec in records:
+        # Check characters in qualifier values
         _regularize_qualifier_value_letters(rec)
 
-    # Join features if the key is in `joinables`
-    if joinables:
-        records = [_join_features(rec, joinables) for rec in records]
+        # Join features if the key is in `joinables`
+        if joinables:
+            rec = _join_features(rec, joinables)
 
-    # Merge exons with their parent mRNA
-    for rec in records:
+        # Merge exons with their parent mRNA
         _merge_rna_and_exons(rec)
 
-    # Check start and stop codons in CDSs
-    for rec in records:
+        # Check start and stop codons in CDSs
         _fix_locations(rec, faidx=faidx)
 
-    # Assign single value to /product and put the rest to /inference
-    for rec in records:
+        # Assign single value to /product and put the rest to /inference
         _assign_single_product(rec)
 
-    # Remove duplicates within a qualifier
-    for rec in records:
+        # Remove duplicates within a qualifier
         _remove_duplicates_in_qualifiers(rec)
 
-    # Sort features
-    for rec in records:
+        # Sort features
         _sort_features(rec.features)
 
-    # Check if SeqIDs have valid characters
-    msg = (
-        "\n\n"
-        "Found invalid letter(s) in the 1st column of the GFF3: {}\n"
-        "Consider running this script to correct entry names in the DDBJ annotation:\n\n"
-        "   $ normalize-entry-names <output.ann>\n"
-    )
-    for rec in records:
+        # Check if SeqIDs have valid characters
+        msg = (
+            "\n\n"
+            "Found invalid letter(s) in the 1st column of the GFF3: {}\n"
+            "Consider running this script to correct entry names in the DDBJ annotation:\n\n"
+            "   $ normalize-entry-names <output.ann>\n"
+        )
         if utils.is_invalid_as_seqid(rec.id):
             logging.warning(msg.format(rec.id))
 
+        yield rec
+
     faidx.close()
-    return records
