@@ -495,10 +495,8 @@ def _fix_locations(record: SeqRecord, faidx: Optional[io.Faidx]=None) -> None:
         _runner(record.features, seq)
 
     if count_fix_codon_start_loc:
-        msg = "Changed to /codon_start=1 in SeqID: {} (count: {})".format(record.id, len(count_fix_codon_start_loc))
+        msg = "Changed to /codon_start=1    (SeqID: {},\tcount: {})".format(record.id, len(count_fix_codon_start_loc))
         logging.info(msg)
-        msg2 = "   example segment: {}".format(str(count_fix_codon_start_loc[0]))
-        logging.info(msg2)
 
 
 def _merge_rna_and_exons(rec: SeqRecord) -> None:

@@ -41,7 +41,7 @@ def load_gff3_as_seqrecords(filepath, unquoting=False) -> List[SeqRecord]:
     """
     ext = pathlib.Path(filepath).suffix
 
-    logging.info("Loading GFF3. May take some time ...")
+    logging.info("Loading GFF3...")
     if unquoting:
         # Save unquoted content to tempfile before parsing GFF3
         with tempfile.TemporaryFile(mode="w+") as ftemp:
@@ -61,7 +61,7 @@ def load_gff3_as_seqrecords(filepath, unquoting=False) -> List[SeqRecord]:
         else:
             with open(filepath, "r") as fin:
                 recs = _wrapper_gff_parse(fin)
-    logging.info("... Done Loading GFF3")
+    logging.info("            ...done loading GFF3")
 
     return recs
 
