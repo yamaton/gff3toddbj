@@ -35,6 +35,7 @@ setuptools.setup(
     entry_points={"console_scripts":
         [
             "gff3-to-ddbj = gff3toddbj:main",
+            "genbank-to-ddbj = gff3toddbj.genbank_to_ddbj:main",
             "split-fasta = tools.splitfasta:main",
             "normalize-entry-names = tools.normalize_seqids:main",
             "list-products = tools.list_products:main",

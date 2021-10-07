@@ -28,7 +28,7 @@ def _set_assembly_gap(
     Set assembly gaps feature to records.
     """
     gap_qualifiers = metadata.get("assembly_gap", collections.OrderedDict())
-    seq = record.seq if faidx is None else io.get_seq(faidx, record.id)
+    seq = str(record.seq) if faidx is None else io.get_seq(faidx, record.id)
     if seq:
         gap = _get_assembly_gap(seq, gap_qualifiers)
         record.features.extend(gap)
@@ -247,7 +247,7 @@ def _join_features(record: SeqRecord, joinables: Optional[Tuple[str, ...]]) -> S
         type_ = features[idx].type
 
         result = SeqFeature(
-            compound_loc,
+            location=compound_loc,
             type=type_,
             qualifiers=qualifiers,
         )
@@ -416,7 +416,7 @@ def _fix_locations(record: SeqRecord, faidx: Optional[io.Faidx]=None) -> None:
         for f in features:
             if f.type == "CDS":
                 cs_list = f.qualifiers.get("codon_start", [1])
-                codon_start = cs_list[0]
+                codon_start = int(cs_list[0])
                 phase = codon_start - 1  # to 0-based phase index
                 if f.location is None:
                     logging.error("f.location is None. Something is wrong: {}".format(f))
@@ -570,7 +570,7 @@ def _handle_source(
 def _handle_source_rec(
     rec: SeqRecord,
     metadata: OrderedDict[str, OrderedDict[str, Any]],
-    id_to_seqlen: OrderedDict[str, int],
+    id_to_seqlen: Optional[OrderedDict[str, int]]=None,
 ) -> bool:
     """
     Add "source" features in certain cases:
@@ -581,18 +581,15 @@ def _handle_source_rec(
     """
     is_inserting = False
     if ("source" in metadata) and ("source" in metadata.get("COMMON", ())):
-        msg = "[COMMON.source] overrides [source] items in metadata."
+        msg = "[COMMON.source] precedes [source] in metadata."
         logging.warning(msg)
     elif "source" in metadata:
-        if rec.features:
-            if rec.features[0].type == "source" and add_logging:
-                pass
-            else:
-                is_inserting = True
-                src_length = id_to_seqlen[rec.id]
-                src_qualifiers = metadata["source"]
-                src = _get_source(src_length, src_qualifiers)
-                rec.features.insert(0, src)
+        if rec.features and rec.features[0].type != "source":
+            is_inserting = True
+            src_length = id_to_seqlen[rec.id] if id_to_seqlen else len(rec.seq)
+            src_qualifiers = metadata["source"]
+            src = _get_source(src_length, src_qualifiers)
+            rec.features.insert(0, src)
     return is_inserting
 
 
@@ -742,3 +739,52 @@ def run(
         yield rec
 
     faidx.close()
+
+
+def run_with_genbank(
+    path_genbank: str,
+    path_rename_scheme: str,
+    metadata: OrderedDict[str, OrderedDict[str, Any]],
+    locus_tag_prefix: str,
+    transl_table: int,
+) -> Generator[SeqRecord, None, None]:
+    """Create a list of `SeqRecord`s and apply various transformations"""
+
+    # Load Genbank as a generator of seqrecord
+    records = io.load_genbank_as_seqrecords(path_genbank)
+
+    # Rename feature keys and/or qualifier keys/values
+    f = RenameHandler(path_rename_scheme, locus_tag_prefix).run
+
+    for rec in records:
+        rec = f(rec)
+
+        # Add "assembly_gap" features
+        _set_assembly_gap(rec, metadata)
+
+        # Add the transl_table qualifier to CDS feature each
+        _add_transl_table_to_cds(rec, transl_table)
+
+        # Insert "source" features from metadata if necessary
+        _handle_source_rec(rec, metadata)
+
+        # Check characters in qualifier values
+        _regularize_qualifier_value_letters(rec)
+
+        # Assign single value to /product and put the rest to /inference
+        _assign_single_product(rec)
+
+        # Remove duplicates within a qualifier
+        _remove_duplicates_in_qualifiers(rec)
+
+        # Check if SeqIDs have valid characters
+        msg = (
+            "\n\n"
+            "Found invalid letter(s) in the 1st column of the GFF3: {}\n"
+            "Consider running this script to correct entry names in the DDBJ annotation:\n\n"
+            "   $ normalize-entry-names <output.ann>\n"
+        )
+        if utils.is_invalid_as_seqid(rec.id):
+            logging.warning(msg.format(rec.id))
+
+        yield rec

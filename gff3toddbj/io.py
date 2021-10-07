@@ -10,11 +10,11 @@ import subprocess
 import sys
 import tempfile
 import toml
-from typing import Optional, OrderedDict, List, Any, Union
+from typing import Generator, Optional, OrderedDict, List, Any, Union
 import urllib.parse
 import uuid
 
-import Bio.SeqIO
+from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 from BCBio import GFF
 import pysam
@@ -249,3 +249,18 @@ def get_seq(faidx: Faidx, seqid: str, start:Optional[int]=None, end:Optional[int
     i.e., 0-based, left-inclusive, right-exclusive.
     """
     return faidx.fetch(reference=seqid, start=start, end=end).upper()
+
+
+def load_genbank_as_seqrecords(path_genbank: Path) -> Generator[SeqRecord, None, None]:
+    """
+    Load genbank
+    """
+    p = pathlib.Path(path_genbank)
+    ext = p.suffix
+    if ext == ".gz":
+        f = gzip.open(p, "rt")
+    else:
+        f = open(p, "r")
+
+    recs = SeqIO.parse(f, "genbank")
+    yield from recs
