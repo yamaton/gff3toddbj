@@ -39,5 +39,6 @@ setuptools.setup(
             "split-fasta = tools.splitfasta:main",
             "normalize-entry-names = tools.normalize_seqids:main",
             "list-products = tools.list_products:main",
+            "compare-ddbj = gff3toddbj.evaluate:main"
         ]},
 )

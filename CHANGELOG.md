@@ -1,4 +1,6 @@
 ## Current
+* Add genbank-to-ddbj for Genbank → DDBJ conversion
+* Add compare-ddbj for comparing two DDBJ annotations for evaluation
 * Add a non-SO wild items to the default config for feature and qualifier names
 * Fix: Respect feature-wise /transl_table value than the globally-set one.
 * Fix an error when joined features have .sub_features
