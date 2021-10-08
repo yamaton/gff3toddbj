@@ -2,20 +2,54 @@
 For evaluation of DDBJ annotation
 
 """
-from typing import Iterable, Generator, Set, OrderedDict, Dict, Counter, Tuple
+from typing import Iterable, List, Counter, Tuple, Union
 import argparse
 import collections
 
 from . import parser
 
 from Bio.SeqRecord import SeqRecord
-from Bio.SeqFeature import SeqFeature
+from Bio.SeqFeature import CompoundLocation, FeatureLocation, SeqFeature
 
 
 _EXEC_NAME = "compare-ddbj"
-__version__ = "0.0.0"
+__version__ = "0.0.1"
 
 Troika = Tuple[str, str, str]
+
+
+def patch_up_short_introns(record: SeqRecord, gap_size_to: int=5) -> None:
+    """Fix `CompundLocation` of "CDS" and "exon" features and sub_features of a record
+    if intron gap is shorter than `min_gap_size`.
+    """
+
+    def _runner(features: List[SeqFeature]) -> None:
+        for f in features:
+            if isinstance(f.location, CompoundLocation):
+                f.location = _fix(f.location)
+            if hasattr(f, "sub_features"):
+                _runner(f.sub_features)
+
+    def _fix(loc: CompoundLocation) -> Union[CompoundLocation, FeatureLocation]:
+        parts = sorted(loc.parts, key=lambda x: (x.start.position, x.end.position))
+        acc = []
+        for curr in parts:
+            if not acc:
+                acc.append(curr)
+            elif curr.start.position - acc[-1].end.position - 1 > gap_size_to:
+                acc.append(curr)
+            else:
+                prev = acc.pop()
+                assert prev.strand == curr.strand, "Unmatched strand!"
+                x = FeatureLocation(prev.start, curr.end, strand=curr.strand)
+                acc.append(x)
+
+        if len(acc) == 1:
+            return acc[0]
+
+        return CompoundLocation(acc)
+
+    _runner(record.features)
 
 
 def _get_feature_name(f: SeqFeature) -> str:
@@ -75,12 +109,10 @@ def get_multiset_locations(records: Iterable[SeqRecord]) -> Counter[Troika]:
 
 
 
-def compare(path1: str, path2: str, func) -> Tuple[Counter[Troika], Counter[Troika], Counter[Troika]]:
+def compare(records1: List[SeqRecord], records2: List[SeqRecord], func) -> Tuple[Counter[Troika], Counter[Troika], Counter[Troika]]:
     """
 
     """
-    records1 = parser.load_ddbj(path1)
-    records2 = parser.load_ddbj(path2)
     multiset1 = func(records1)
     multiset2 = func(records2)
 
@@ -91,34 +123,42 @@ def compare(path1: str, path2: str, func) -> Tuple[Counter[Troika], Counter[Troi
 
 
 def main():
-    parser = argparse.ArgumentParser(prog=_EXEC_NAME)
-    parser.add_argument("ddbj1", help="Input DDBJ annotation 1")
-    parser.add_argument("ddbj2", help="Input DDBJ annotation 2")
-    parser.add_argument(
+    argparser = argparse.ArgumentParser(prog=_EXEC_NAME)
+    argparser.add_argument("ddbj1", help="Input DDBJ annotation 1")
+    argparser.add_argument("ddbj2", help="Input DDBJ annotation 2")
+    argparser.add_argument(
         "--name1",
         metavar="STR",
         help="Specify name of the first annotation",
         default="ann1"
     )
-    parser.add_argument(
+    argparser.add_argument(
         "--name2",
         metavar="STR",
         help="Specify name of the second annotation",
         default="ann2"
     )
-    parser.add_argument(
+    argparser.add_argument(
         "--log",
         default="INFO",
         metavar="STR",
         help="[debug] Choose log level from (DEBUG, INFO, WARNING, ERROR) (default: INFO).",
     )
 
-    args = parser.parse_args()
+    args = argparser.parse_args()
 
-    intersect, left_only, right_only = compare(args.ddbj1, args.ddbj2, get_multiset_locations_wo_correction)
+    records1 = list(parser.load_ddbj(args.ddbj1))
+    records2 = list(parser.load_ddbj(args.ddbj2))
+    for rec in records1:
+        patch_up_short_introns(rec)
+
+    for rec in records2:
+        patch_up_short_introns(rec)
+
+    intersect, left_only, right_only = compare(records1, records2, get_multiset_locations_wo_correction)
     cnt_total = sum(map(len, [intersect, left_only, right_only]))
     cnt_correct = len(intersect)
-    print("Stat w/o  location correction: {}/{} ({:.1f} %)  ... (left-only: {}, right-only: {})".format(cnt_correct, cnt_total, 100 * cnt_correct / cnt_total, len(left_only),  len(right_only)))
+    print("Stat w/o  location correction: {}/{} ({:.2f} %)  ... (left-only: {}, right-only: {})".format(cnt_correct, cnt_total, 100 * cnt_correct / cnt_total, len(left_only),  len(right_only)))
     with open("loc_wo_correction_left-only.txt", "w") as fout:
         for tup in left_only:
             print("\t".join(tup), file=fout)
@@ -126,10 +166,10 @@ def main():
         for tup in right_only:
             print("\t".join(tup), file=fout)
 
-    intersect, left_only, right_only = compare(args.ddbj1, args.ddbj2, get_multiset_locations)
+    intersect, left_only, right_only = compare(records1, records2, get_multiset_locations)
     cnt_total = sum(map(len, [intersect, left_only, right_only]))
     cnt_correct = len(intersect)
-    print("Stat with location correction: {}/{} ({:.1f} %)  ... (left-only: {}, right-only: {})".format(cnt_correct, cnt_total, 100 * cnt_correct / cnt_total, len(left_only),  len(right_only)))
+    print("Stat with location correction: {}/{} ({:.2f} %)  ... (left-only: {}, right-only: {})".format(cnt_correct, cnt_total, 100 * cnt_correct / cnt_total, len(left_only),  len(right_only)))
     with open("loc_correction_left-only.txt", "w") as fout:
         for tup in left_only:
             print("\t".join(tup), file=fout)
@@ -137,10 +177,10 @@ def main():
         for tup in right_only:
             print("\t".join(tup), file=fout)
 
-    intersect, left_only, right_only = compare(args.ddbj1, args.ddbj2, get_multiset_feature_qualifier)
+    intersect, left_only, right_only = compare(records1, records2, get_multiset_feature_qualifier)
     cnt_total = sum(map(len, [intersect, left_only, right_only]))
     cnt_correct = len(intersect)
-    print("Stat of feature-qualifier pairs: {}/{} ({:.1f} %)  ... (left-only: {}, right-only: {})".format(cnt_correct, cnt_total, 100 * cnt_correct / cnt_total, len(left_only),  len(right_only)))
+    print("Stat of feature-qualifier pairs: {}/{} ({:.2f} %)  ... (left-only: {}, right-only: {})".format(cnt_correct, cnt_total, 100 * cnt_correct / cnt_total, len(left_only),  len(right_only)))
     with open("quals_left-only.txt", "w") as fout:
         for tup in left_only:
             print("\t".join(tup), file=fout)
