@@ -204,8 +204,6 @@ The file accommodates following and they are all optional. That is, GFF3-to-DDBJ
 
   * Currently supporting `[source]` and `[assembly_gap]` only.
 
-  * If both `[COMMON.assembly_gap]` and `[COMMON.assembly]` exist in the metadata file, `gff3-to-ddbj` takes the one with COMMON.
-
 For more examples, see [WGS in COMMON](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=1110334278) and [WGS](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=382116224) provided by DDBJ as annotation examples, and corresponding metadata files [metadata_WGS_COMMON.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/metadata/metadata_WGS_COMMON.toml) and [metadata_WGS.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/metadata/metadata_WGS.toml) in this repository.
 
 

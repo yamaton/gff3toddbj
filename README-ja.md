@@ -215,7 +215,6 @@ line = [
 
     * FeatureごとのQualifier値の挿入を **gff3-to-ddbj がつくるアノテーションファイルに対して**行います。上記「COMMONに入れるメタ情報」と実質的に同じですが、アノテーションファイルの時点で Feature毎に値が入れられる点が違います。使い方は `[COMMON.assembly_gap]` ではなく `[assembly_gap]` に置き換えるだけになります。現在のところ `[source]` と `[assembly_gap]` のみ対応しています。
 
-    * COMMON記法と併記されたばあい（たとえば `[COMMON.asembly_gap` と `[assembly_gap]` ）COMMON記法が優先されます。
 
 さらなる例としては、DDBJの[サンプルアノテーション](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#sample)の [WGS in COMMON](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=1110334278) と [WGS](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=382116224)に対応するメタデータファイル [metadata_WGS_COMMON.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/metadata/metadata_WGS_COMMON.toml) と [metadata_WGS.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/metadata/metadata_WGS.toml) を用意しています。参考にしてください。
 

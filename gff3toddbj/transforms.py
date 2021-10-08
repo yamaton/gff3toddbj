@@ -529,44 +529,6 @@ def _merge_rna_and_exons(rec: SeqRecord) -> None:
     _helper(rec.features)
 
 
-def _handle_source(
-    records: List[SeqRecord],
-    metadata: OrderedDict[str, OrderedDict[str, Any]],
-    id_to_seqlen: OrderedDict[str, int],
-) -> None:
-    """
-    Add "source" features in certain cases:
-      [source] in metadata will inserts "source" to each entry
-      UNLESS either of the following applies.
-      [NOTE] GFF3's "region" type corresponds to annotation's "source" feature.
-      [NOTE] User-input metadata may contain "[COMMON.source]" items.
-    """
-    if ("source" in metadata) and ("source" in metadata.get("COMMON", ())):
-        msg = "[COMMON.source] overrides [source] items in metadata."
-        logging.warning(msg)
-    elif "source" in metadata:
-        cnt_skip = 0
-        cnt_insert = 0
-        for rec in records:
-            if rec.features:
-                if rec.features[0].type == "source":
-                    # skip insertion of [source] info
-                    cnt_skip += 1
-                else:
-                    cnt_insert += 1
-                    src_length = id_to_seqlen[rec.id]
-                    src_qualifiers = metadata["source"]
-                    src = _get_source(src_length, src_qualifiers)
-                    rec.features.insert(0, src)
-        if cnt_skip > 0:
-            msg_suffix = " (count: {})".format(cnt_skip)
-            msg = 'Skip [source] in metadata as GFF3\'s "region" type supersedes' + msg_suffix
-            logging.warning(msg)
-        if cnt_insert > 0:
-            msg = "Insert [source] in metadata (count: {})".format(cnt_insert)
-            logging.info(msg)
-
-
 def _handle_source_rec(
     rec: SeqRecord,
     metadata: OrderedDict[str, OrderedDict[str, Any]],
@@ -581,15 +543,24 @@ def _handle_source_rec(
     """
     is_inserting = False
     if ("source" in metadata) and ("source" in metadata.get("COMMON", ())):
-        msg = "[COMMON.source] precedes [source] in metadata."
+        msg = "Both [COMMON.source] and [source] exist in the metadata file."
         logging.warning(msg)
-    elif "source" in metadata:
+
+    if "source" in metadata:
         if rec.features and rec.features[0].type != "source":
             is_inserting = True
             src_length = id_to_seqlen[rec.id] if id_to_seqlen else len(rec.seq)
             src_qualifiers = metadata["source"]
             src = _get_source(src_length, src_qualifiers)
             rec.features.insert(0, src)
+        else:
+            source = rec.features[0]
+            for qual_key, qual_val in metadata["source"].items():
+                if qual_key in source.qualifiers:
+                    source.qualifiers[qual_key].extend(qual_val)
+                else:
+                    source.qualifiers[qual_key] = qual_val
+
     return is_inserting
 
 
