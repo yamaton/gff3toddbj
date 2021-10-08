@@ -125,9 +125,9 @@ gff3-to-ddbj \
   * `myname_bgzip.fa.gz` のように `_bgzip` の付いたファイルが作成されます
   * bgzipfファイルはgzipと互換性があるのでそのまま他での利用も可能です
 
-* 変換テーブルに基づいたFeatures / Qualifiersのリネーム
+* Features / Qualifiersの[変換テーブル](#attribute--qualifier-keyのリネーム)に基づいたリネーム
 
-* assembly_gap の検索
+* assembly_gap の検索・追加
 
 * /transl_table のCDSへの追加
 
@@ -137,7 +137,7 @@ gff3-to-ddbj \
   *  `CDS`, `exon`, `mat_peptide`, `V_segment`, `C_region`, `D-loop`, `misc_feature` に対して適用
   * 例外として `gene`を直接の親に持つ `exon` は結合しない
 
-* 同じ親をもつexonを`join`記法で結合し、対応するmRNAのattributesと合成してmRNA Featureとする
+* RNAの位置情報を、ぶら下がる結合されたexonの位置情報で置き換える
 
 * CDSに開始・終了コドンが無い場合の位置情報修正
   * 参照: [codon_start qualifier による翻訳開始の位置補正](https://www.ddbj.nig.ac.jp/ddbj/cds.html#frame)
@@ -154,6 +154,7 @@ gff3-to-ddbj \
 * アノテーション行の並び替え
 
 * [DDBJのFeature-Qualifier一覧表](https://www.ddbj.nig.ac.jp/assets/files/pdf/ddbj/fq-j.pdf)に基づいた出力のフィルタリング
+  * `gene` feature は無くなるので注意。
 
 
 
@@ -246,7 +247,7 @@ GFF3 の type として現れるものがそのままFeature keyになってほ�
 feature_key = "5'UTR"
 ```
 
-#### Attribute / Qualifier keyのリネーム
+#### Attribute / Qualifier のリネーム
 
 Typeに関係なく指定のattributeについて一律リネームを行うばあいです。このケースでは値にprefixを付けることも可能です。たとえばデフォルト設定ではGFF3での `ID=foobar` というattributeはすべて `/note` qualifierとして `/note=ID:foobar` のように置き換えています。(なお Qualifier key を明示するとき `/note` のように `/`をつけて表記する慣習に従っています。ただしアノテーションではスラッシュを付けない規則のため TOMLファイル中にて `/note` のように書くことはありません。)
 
@@ -256,6 +257,14 @@ Typeに関係なく指定のattributeについて一律リネームを行うば�
 [__ANY__.ID]
 qualifier_key = "note"
 qualifier_value_prefix = "ID:"   # qualifier_value_prefixは省略可
+```
+
+またqualifier値を強制的に設定するときには以下のように書きます。`/pseudo` はINSDC/DDBJにおいては値を持たないのに対しGFF3では`/pseudo=true`といった形式がしばしば取られるための対策となっています。
+
+```toml
+[__ANY__.pseudo]
+qualifier_key = "pseudo"
+qualifier_value = ""   # /pseudo値は常に無しにする
 ```
 
 

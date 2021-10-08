@@ -135,7 +135,7 @@ Here is the list of operations `gff3-to-ddbj` will do:
 
 * Rename features and qualifiers following the [renaming scheme](#advanced-rename-features-and-qualifiers).
 
-* Search for `assembly_gap`s in FASTA.
+* Search for `assembly_gap`s in FASTA, and add the feature.
 
 * Add `/transl_table` to each CDS.
 
@@ -145,7 +145,7 @@ Here is the list of operations `gff3-to-ddbj` will do:
   * `CDS`, `exon`, `mat_peptide`, `V_segment`, `C_region`, `D-loop`, and `misc_feature` may be joined.
   * `exon`s are NOT joined if having `gene` as the direct parent.
 
-* Merge `mRNA` and `exon` in GFF3 and create `mRNA` feature with `join` notation.
+* Set the location of joined exons as its parent RNA's location, and discard the exons.
 
 * Modify locations with inequality signs (`<` and `>`) if start/stop codon is absent.
   * See [Offset of the frame at translation initiation by codon_start](https://www.ddbj.nig.ac.jp/ddbj/cds-e.html#frame)
@@ -163,6 +163,7 @@ Here is the list of operations `gff3-to-ddbj` will do:
 * Sort lines in annotation
 
 * Filter features and qualifiers following [the matrix](https://www.ddbj.nig.ac.jp/assets/files/pdf/ddbj/fq-e.pdf).
+  * `gene` feature will be discarded in this process.
 
 
 
@@ -242,6 +243,15 @@ Here is the TOML defining the transformation. `__ANY__` is the special name repr
 qualifier_key = "note"
 qualifier_value_prefix = "ID:"  # optional
 ```
+
+One can also set qualifier value forcefully. For example, `/pseudo` qualifier takes no value in INSDC/DDBJ while you may find notations like `/pseudo=true` in GFF3 files. To enforce this property, we write like this.
+
+```toml
+[__ANY__.pseudo]
+qualifier_key = "pseudo"
+qualifier_value = ""       # /pseudo will always have no value
+```
+
 
 #### Translate GFF3 types to features with qualifiers
 
