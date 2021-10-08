@@ -141,7 +141,9 @@ Here is the list of operations `gff3-to-ddbj` will do:
 
 * Insert `source` information from the [metadata fie](#metadata-file).
 
-* Merge `CDS`s having the same parent with `join` notation.
+* Join locations of features having the same parent with `join` notation.
+  * `CDS`, `exon`, `mat_peptide`, `V_segment`, `C_region`, `D-loop`, and `misc_feature` may be joined.
+  * `exon`s are NOT joined if having `gene` as the direct parent.
 
 * Merge `mRNA` and `exon` in GFF3 and create `mRNA` feature with `join` notation.
 

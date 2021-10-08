@@ -5,6 +5,7 @@
 * Fix: Respect feature-wise /transl_table value than the globally-set one.
 * Fix an error when joined features have .sub_features
 * Fix [source] in metadata not used when "source" feature exists in a entry
+* Change not to join features directly under "gene"
 
 ## v0.2.4 (2021-10-04)
 * Expand the default config for feature and qualifier names

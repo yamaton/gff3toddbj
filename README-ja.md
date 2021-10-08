@@ -133,7 +133,9 @@ gff3-to-ddbj \
 
 * メタデータ中のsource情報を各エントリに追加
 
-* 同じ親をもつCDSを`join`記法で結合
+* 同じ親をもつfeatureを`join`記法で結合
+  *  `CDS`, `exon`, `mat_peptide`, `V_segment`, `C_region`, `D-loop`, `misc_feature` に対して適用
+  * 例外として `gene`を直接の親に持つ `exon` は結合しない
 
 * 同じ親をもつexonを`join`記法で結合し、対応するmRNAのattributesと合成してmRNA Featureとする
 
