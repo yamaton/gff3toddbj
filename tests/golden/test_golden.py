@@ -57,7 +57,7 @@ def tests_refseq():
         WORK_DIR / "GCF_000280675.1_ASM28067v1_genomic.ann",
         WORK_DIR / "GCF_000280675.1_ASM28067v1_genomic.gff.gz",
         WORK_DIR / "GCF_000280675.1_ASM28067v1_genomic.fna.gz",
-        WORK_DIR / "metadata.toml",
+        WORK_DIR / "metadata_GCF_000280675.1_ASM28067v1_genomic.toml",
         4,  # transl_table
     )
     runner(testdata_refseq, "refseq")

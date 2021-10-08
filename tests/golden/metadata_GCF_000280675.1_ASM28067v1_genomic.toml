@@ -44,24 +44,22 @@ status = "Unpublished"
 # circular = ""
 
 [COMMON.COMMENT]
-line = ["Please visit our website URL", "http://www.ddbj.nig.ac.jp/"]
+line = ["NOTE this data is for an example and test purpose only,", "processed by GFF3-to-DDBJ.", "Credit: NCBI Assembly GCF_000280675.1 for data."]
 
 [COMMON.ST_COMMENT]
 tagset_id = "Genome-Assembly-Data"
-"Assembly Method" = "Velvet v.2.0"
-"Assembly Name" = "Sfl_assembly01"
-"Genome Coverage" = "60x"
-"Sequencing Technology" = "454 GS FLX; ABI 3730"
+"Assembly Method" = "Newbler v. 2.3"
+"Genome Coverage" = "28X"
+"Sequencing Technology" = "454"
 
-
-## -----------------------------------------------------------------------
-## Following innvokes DDBJ's macro-processing feature in COMMON.
-##   See https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#common
 [COMMON.source]
-organism = "Drosophila melanogaster"
-mol_type = "genomic DNA"
 submitter_seqid = "@@[entry]@@"
-ff_definition =	"@@[organism]@@ DNA, @@[submitter_seqid]@@"
+
+
+[source]
+organism = "Beauveria bassiana ARSEF 2860"
+mol_type = "genomic DNA"
+strain = "ARSEF 2860"
 
 
 [assembly_gap]

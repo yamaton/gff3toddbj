@@ -20,22 +20,20 @@ COMMON	DATATYPE		type	WGS
 			ab_name	Mishima,H.
 			year	2021
 			status	Unpublished
-	COMMENT		line	Please visit our website URL
-			line	http://www.ddbj.nig.ac.jp/
+	COMMENT		line	NOTE this data is for an example and test purpose only,
+			line	processed by GFF3-to-DDBJ.
+			line	Credit: NCBI Assembly GCF_000280675.1 for data.
 	ST_COMMENT		tagset_id	Genome-Assembly-Data
-			Assembly Method	Velvet v.2.0
-			Assembly Name	Sfl_assembly01
-			Genome Coverage	60x
-			Sequencing Technology	454 GS FLX; ABI 3730
-	source	1..E	organism	Drosophila melanogaster
-			mol_type	genomic DNA
-			submitter_seqid	@@[entry]@@
-			ff_definition	@@[organism]@@ DNA, @@[submitter_seqid]@@
+			Assembly Method	Newbler v. 2.3
+			Genome Coverage	28X
+			Sequencing Technology	454
+	source	1..E	submitter_seqid	@@[entry]@@
 NW_007930836.1	source	1..2084429	note	ID:NW_007930836.1:1..2084429
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(3335..3536,3592..3683)	note	ID:rna-XM_008595098.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_00001
@@ -6251,6 +6249,7 @@ NW_007930837.1	source	1..1964398	note	ID:NW_007930837.1:1..1964398
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(1222..1561,1624..2229,2294..3333)	note	ID:rna-XM_008595779.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_00682
@@ -11434,6 +11433,7 @@ NW_007930838.1	source	1..1736295	note	ID:NW_007930838.1:1..1736295
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(join(2920..4215,4280..4480))	note	ID:rna-XM_008596337.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_01240
@@ -16401,6 +16401,7 @@ NW_007930839.1	source	1..1659581	note	ID:NW_007930839.1:1..1659581
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(686..842,1028..1191)	note	ID:rna-XM_008596875.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_01778
@@ -21320,6 +21321,7 @@ NW_007930840.1	source	1..1467565	note	ID:NW_007930840.1:1..1467565
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1015..1114	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -25339,6 +25341,7 @@ NW_007930841.1	source	1..1419043	note	ID:NW_007930841.1:1..1419043
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(join(74..87,153..324,383..579,632..1007,1062..1253))	note	ID:rna-XM_008597842.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_02745
@@ -29547,6 +29550,7 @@ NW_007930842.1	source	1..1263816	note	ID:NW_007930842.1:1..1263816
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	1125..2813	note	ID:rna-XM_008598301.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_03204
@@ -33428,6 +33432,7 @@ NW_007930843.1	source	1..1169471	note	ID:NW_007930843.1:1..1169471
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	48	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -36820,6 +36825,7 @@ NW_007930844.1	source	1..1153075	note	ID:NW_007930844.1:1..1153075
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	4015..4114	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -40050,6 +40056,7 @@ NW_007930845.1	source	1..980095	note	ID:NW_007930845.1:1..980095
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1750..1849	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -42794,6 +42801,7 @@ NW_007930846.1	source	1..872271	note	ID:NW_007930846.1:1..872271
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(413..744,809..915,986..1086,1174..1629)	note	ID:rna-XM_008599742.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_04645
@@ -45169,6 +45177,7 @@ NW_007930847.1	source	1..736384	note	ID:NW_007930847.1:1..736384
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(779..1861,1908..2408)	note	ID:rna-XM_008599998.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_04901
@@ -47217,6 +47226,7 @@ NW_007930848.1	source	1..729568	note	ID:NW_007930848.1:1..729568
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(256..2040)	note	ID:rna-XM_008600220.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_05123
@@ -49244,6 +49254,7 @@ NW_007930849.1	source	1..724305	note	ID:NW_007930849.1:1..724305
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1836..1935	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -51430,6 +51441,7 @@ NW_007930850.1	source	1..690658	note	ID:NW_007930850.1:1..690658
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(460..683,742..1954)	note	ID:rna-XM_008600678.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_05581
@@ -53463,6 +53475,7 @@ NW_007930851.1	source	1..662422	note	ID:NW_007930851.1:1..662422
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1956..2055	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -55445,6 +55458,7 @@ NW_007930852.1	source	1..642988	note	ID:NW_007930852.1:1..642988
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(1526..1866,1921..2171,2227..2441)	note	ID:rna-XM_008601117.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_06020
@@ -57181,6 +57195,7 @@ NW_007930853.1	source	1..636890	note	ID:NW_007930853.1:1..636890
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(join(114..868,930..1113,1356..2243))	note	ID:rna-XM_008601305.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_06208
@@ -59058,6 +59073,7 @@ NW_007930854.1	source	1..626337	note	ID:NW_007930854.1:1..626337
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(join(660..745,793..832,1054..1418,1502..1527,1599..1801,1894..2151))	note	ID:rna-XM_008601511.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_06414
@@ -61073,6 +61089,7 @@ NW_007930855.1	source	1..540720	note	ID:NW_007930855.1:1..540720
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(1377..1865)	note	ID:rna-XM_008601730.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_06633
@@ -62620,6 +62637,7 @@ NW_007930856.1	source	1..528476	note	ID:NW_007930856.1:1..528476
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(join(971..1632,1703..2003))	note	ID:rna-XM_008601899.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_06802
@@ -64062,6 +64080,7 @@ NW_007930857.1	source	1..527023	note	ID:NW_007930857.1:1..527023
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(join(2692..3487,3541..3591,3643..3734,3804..4057,4116..4239))	note	ID:rna-XM_008602052.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_06955
@@ -65417,6 +65436,7 @@ NW_007930858.1	source	1..517326	note	ID:NW_007930858.1:1..517326
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(join(238..245,287..303,461..480,634..4485,4559..4924))	note	ID:rna-XM_008602200.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_07103
@@ -66991,6 +67011,7 @@ NW_007930859.1	source	1..430724	note	ID:NW_007930859.1:1..430724
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(741..1523)	note	ID:rna-XM_008602371.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_07274
@@ -68367,6 +68388,7 @@ NW_007930860.1	source	1..424472	note	ID:NW_007930860.1:1..424472
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(866..964,1001..1364,1419..1528,1733..1761,2031..2673)	note	ID:rna-XM_008602520.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_07423
@@ -69614,6 +69636,7 @@ NW_007930861.1	source	1..418291	note	ID:NW_007930861.1:1..418291
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(502..519,600..1248,1311..2122)	note	ID:rna-XM_008602653.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_07556
@@ -70735,6 +70758,7 @@ NW_007930862.1	source	1..394139	note	ID:NW_007930862.1:1..394139
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	835..1539	note	ID:rna-XM_008602770.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_07673
@@ -71691,6 +71715,7 @@ NW_007930863.1	source	1..343624	note	ID:NW_007930863.1:1..343624
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(221..487,544..1020,1087..1140)	note	ID:rna-XM_008602871.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_07774
@@ -72668,6 +72693,7 @@ NW_007930864.1	source	1..339650	note	ID:NW_007930864.1:1..339650
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(320..395,485..988,1055..1176)	note	ID:rna-XM_008602976.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_07879
@@ -73591,6 +73617,7 @@ NW_007930865.1	source	1..311377	note	ID:NW_007930865.1:1..311377
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1506..1605	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -74577,6 +74604,7 @@ NW_007930866.1	source	1..300098	note	ID:NW_007930866.1:1..300098
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(2493..2512,2558..3443,3490..4125)	note	ID:rna-XM_008603182.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_08085
@@ -75386,6 +75414,7 @@ NW_007930867.1	source	1..295081	note	ID:NW_007930867.1:1..295081
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(2700..3919,4200..4245)	note	ID:rna-XM_008603270.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_08173
@@ -76267,6 +76296,7 @@ NW_007930868.1	source	1..289244	note	ID:NW_007930868.1:1..289244
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(645..661,748..782,850..1380,1437..1807)	note	ID:rna-XM_008603364.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_08267
@@ -76917,6 +76947,7 @@ NW_007930869.1	source	1..278808	note	ID:NW_007930869.1:1..278808
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(580..756,810..1367)	note	ID:rna-XM_008603428.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_08331
@@ -77885,6 +77916,7 @@ NW_007930870.1	source	1..252385	note	ID:NW_007930870.1:1..252385
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(join(289..358,556..644))	note	ID:rna-XM_008603534.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_08437
@@ -78718,6 +78750,7 @@ NW_007930871.1	source	1..244307	note	ID:NW_007930871.1:1..244307
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	127..1095	note	ID:rna-XM_008603624.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_08527
@@ -79497,6 +79530,7 @@ NW_007930872.1	source	1..203581	note	ID:NW_007930872.1:1..203581
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1950..2049	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -80018,6 +80052,7 @@ NW_007930873.1	source	1..201589	note	ID:NW_007930873.1:1..201589
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	8239..8338	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -80518,6 +80553,7 @@ NW_007930874.1	source	1..199044	note	ID:NW_007930874.1:1..199044
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(546..1391)	note	ID:rna-XM_008603812.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_08715
@@ -81000,6 +81036,7 @@ NW_007930875.1	source	1..193651	note	ID:NW_007930875.1:1..193651
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(join(155..571,632..993,1046..1145,1200..1472,1528..1701))	note	ID:rna-XM_008603862.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_08765
@@ -81608,6 +81645,7 @@ NW_007930876.1	source	1..184981	note	ID:NW_007930876.1:1..184981
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(1821..2684,2740..2808)	note	ID:rna-XM_008603927.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_08830
@@ -82237,6 +82275,7 @@ NW_007930877.1	source	1..181153	note	ID:NW_007930877.1:1..181153
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(join(2294..2417,2475..2549,2608..2927,3104..3256,3320..3574))	note	ID:rna-XM_008603994.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_08897
@@ -82752,6 +82791,7 @@ NW_007930878.1	source	1..175324	note	ID:NW_007930878.1:1..175324
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(join(580..1020,1071..1088))	note	ID:rna-XM_008604050.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_08953
@@ -83429,6 +83469,7 @@ NW_007930879.1	source	1..170958	note	ID:NW_007930879.1:1..170958
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	283..1218	note	ID:rna-XM_008604121.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_09024
@@ -83983,6 +84024,7 @@ NW_007930880.1	source	1..161797	note	ID:NW_007930880.1:1..161797
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	3482..3581	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -84510,6 +84552,7 @@ NW_007930881.1	source	1..146983	note	ID:NW_007930881.1:1..146983
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	4878..5519	note	ID:rna-XM_008604229.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_09132
@@ -84887,6 +84930,7 @@ NW_007930882.1	source	1..128764	note	ID:NW_007930882.1:1..128764
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(2641..3003)	note	ID:rna-XM_008604270.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_09173
@@ -85315,6 +85359,7 @@ NW_007930883.1	source	1..124915	note	ID:NW_007930883.1:1..124915
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(join(482..952,1003..1832,2248..2357,2424..3010,3106..4338))	note	ID:rna-XM_008604314.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_09217
@@ -85680,6 +85725,7 @@ NW_007930884.1	source	1..124733	note	ID:NW_007930884.1:1..124733
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(join(1568..2433,2499..2559,2627..2701))	note	ID:rna-XM_008604353.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_09256
@@ -85985,6 +86031,7 @@ NW_007930885.1	source	1..120337	note	ID:NW_007930885.1:1..120337
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(join(163..312,367..1650))	note	ID:rna-XM_008604385.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_09288
@@ -86362,6 +86409,7 @@ NW_007930886.1	source	1..117908	note	ID:NW_007930886.1:1..117908
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(1340..1345,1719..2144)	note	ID:rna-XM_008604424.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_09327
@@ -86748,6 +86796,7 @@ NW_007930887.1	source	1..102318	note	ID:NW_007930887.1:1..102318
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(1611..1793,1843..2062,2127..2302,2357..2788,2847..4915,4967..5174)	note	ID:rna-XM_008604464.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_09367
@@ -87032,6 +87081,7 @@ NW_007930888.1	source	1..101939	note	ID:NW_007930888.1:1..101939
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(join(690..1149,1221..1834,1884..2108))	note	ID:rna-XM_008604493.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_09396
@@ -87349,6 +87399,7 @@ NW_007930889.1	source	1..101529	note	ID:NW_007930889.1:1..101529
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	632..2197	note	ID:rna-XM_008604526.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_09429
@@ -87717,6 +87768,7 @@ NW_007930890.1	source	1..95598	note	ID:NW_007930890.1:1..95598
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	2606	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -87998,6 +88050,7 @@ NW_007930891.1	source	1..94807	note	ID:NW_007930891.1:1..94807
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(915..935,1022..1207,1353..1403)	note	ID:rna-XM_008604593.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_09496
@@ -88267,6 +88320,7 @@ NW_007930892.1	source	1..93511	note	ID:NW_007930892.1:1..93511
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	1584..3152	note	ID:rna-XM_008604622.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_09525
@@ -88530,6 +88584,7 @@ NW_007930893.1	source	1..91160	note	ID:NW_007930893.1:1..91160
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1723..1822	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -88823,6 +88878,7 @@ NW_007930894.1	source	1..88999	note	ID:NW_007930894.1:1..88999
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	2458..2557	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -89107,6 +89163,7 @@ NW_007930895.1	source	1..86277	note	ID:NW_007930895.1:1..86277
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1606..1705	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -89361,6 +89418,7 @@ NW_007930896.1	source	1..85000	note	ID:NW_007930896.1:1..85000
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1171..1270	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -89621,6 +89679,7 @@ NW_007930897.1	source	1..84717	note	ID:NW_007930897.1:1..84717
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(join(482..718,761..1349,1463..1761))	note	ID:rna-XM_008604759.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_09662
@@ -89896,6 +89955,7 @@ NW_007930898.1	source	1..79466	note	ID:NW_007930898.1:1..79466
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	31..645	note	ID:rna-XM_008604784.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_09687
@@ -90126,6 +90186,7 @@ NW_007930899.1	source	1..78950	note	ID:NW_007930899.1:1..78950
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(1622..2254,2323..2682)	note	ID:rna-XM_008604808.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_09711
@@ -90368,6 +90429,7 @@ NW_007930900.1	source	1..74556	note	ID:NW_007930900.1:1..74556
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1514..1613	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -90541,6 +90603,7 @@ NW_007930901.1	source	1..72897	note	ID:NW_007930901.1:1..72897
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1075..1174	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -90750,6 +90813,7 @@ NW_007930902.1	source	1..71291	note	ID:NW_007930902.1:1..71291
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(137..326,375..427,1267..1360,1401..1658,2061..2248)	note	ID:rna-XM_008604872.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_09775
@@ -90848,6 +90912,7 @@ NW_007930903.1	source	1..70193	note	ID:NW_007930903.1:1..70193
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(2848..3201)	note	ID:rna-XM_008604880.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_09783
@@ -91069,6 +91134,7 @@ NW_007930904.1	source	1..66062	note	ID:NW_007930904.1:1..66062
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(334..1090,1156..1358)	note	ID:rna-XM_008604903.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_09806
@@ -91260,6 +91326,7 @@ NW_007930905.1	source	1..64310	note	ID:NW_007930905.1:1..64310
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(join(740..771,960..1098))	note	ID:rna-XM_008604921.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_09824
@@ -91499,6 +91566,7 @@ NW_007930906.1	source	1..61499	note	ID:NW_007930906.1:1..61499
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	3216..3315	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -91672,6 +91740,7 @@ NW_007930907.1	source	1..54974	note	ID:NW_007930907.1:1..54974
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	1036..1578	note	ID:rna-XM_008604961.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_09864
@@ -91923,6 +91992,7 @@ NW_007930908.1	source	1..54940	note	ID:NW_007930908.1:1..54940
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(join(2199..2317,2384..2432))	note	ID:rna-XM_008604988.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_09891
@@ -92114,6 +92184,7 @@ NW_007930909.1	source	1..51310	note	ID:NW_007930909.1:1..51310
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(659..1181,1235..2328)	note	ID:rna-XM_008605005.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_09908
@@ -92242,6 +92313,7 @@ NW_007930910.1	source	1..51040	note	ID:NW_007930910.1:1..51040
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(join(9..708,750..1188,1598..1724,2255..2386))	note	ID:rna-XM_008605017.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_09920
@@ -92415,6 +92487,7 @@ NW_007930911.1	source	1..50656	note	ID:NW_007930911.1:1..50656
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	855..3428	note	ID:rna-XM_008605035.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_09938
@@ -92558,6 +92631,7 @@ NW_007930912.1	source	1..50391	note	ID:NW_007930912.1:1..50391
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(2422..2475,2537..2810,2861..2943)	note	ID:rna-XM_008605049.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_09952
@@ -92731,6 +92805,7 @@ NW_007930913.1	source	1..48784	note	ID:NW_007930913.1:1..48784
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1025..1124	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -92892,6 +92967,7 @@ NW_007930914.1	source	1..48467	note	ID:NW_007930914.1:1..48467
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(7379..7930,7999..8118,8158..8208)	note	ID:rna-XM_008605082.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_09985
@@ -93029,6 +93105,7 @@ NW_007930915.1	source	1..48414	note	ID:NW_007930915.1:1..48414
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(959..1062,1157..1355)	note	ID:rna-XM_008605096.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_09999
@@ -93190,6 +93267,7 @@ NW_007930916.1	source	1..47271	note	ID:NW_007930916.1:1..47271
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(1612..1969,2026..2078,2218..2225,2283..2376,2429..2590,2650..2701,2769..3202,3255..3539)	note	ID:rna-XM_008605110.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10013
@@ -93330,6 +93408,7 @@ NW_007930917.1	source	1..46474	note	ID:NW_007930917.1:1..46474
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(join(126..133,438..518,560..567,718..725,796..800,1040..1130))	note	ID:rna-XM_008605125.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10028
@@ -93437,6 +93516,7 @@ NW_007930918.1	source	1..44755	note	ID:NW_007930918.1:1..44755
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	1250..2083	note	ID:rna-XM_008605136.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10039
@@ -93559,6 +93639,7 @@ NW_007930919.1	source	1..42791	note	ID:NW_007930919.1:1..42791
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(1000..1063,1133..2304,2366..2470,2521..2772)	note	ID:rna-XM_008605147.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10050
@@ -93729,6 +93810,7 @@ NW_007930920.1	source	1..42128	note	ID:NW_007930920.1:1..42128
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(1255..1289,1337..1550,1618..2541)	note	ID:rna-XM_008605165.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10068
@@ -93902,6 +93984,7 @@ NW_007930921.1	source	1..42044	note	ID:NW_007930921.1:1..42044
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(1214..1373,1513..1670,1865..2344,2399..2863)	note	ID:rna-XM_008605181.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10084
@@ -94003,6 +94086,7 @@ NW_007930922.1	source	1..40964	note	ID:NW_007930922.1:1..40964
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(1237..1446,1502..2162,2538..3290,3335..3913,3968..4136,4334..4379)	note	ID:rna-XM_008605191.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10094
@@ -94098,6 +94182,7 @@ NW_007930923.1	source	1..40209	note	ID:NW_007930923.1:1..40209
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1798..1897	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -94181,6 +94266,7 @@ NW_007930924.1	source	1..39074	note	ID:NW_007930924.1:1..39074
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(3155..3694,3749..5230)	note	ID:rna-XM_008605204.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10107
@@ -94258,6 +94344,7 @@ NW_007930925.1	source	1..38302	note	ID:NW_007930925.1:1..38302
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(join(438..2330,2721..2856,3105..3127))	note	ID:rna-XM_008605211.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10114
@@ -94377,6 +94464,7 @@ NW_007930926.1	source	1..34855	note	ID:NW_007930926.1:1..34855
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1551..1650	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -94475,6 +94563,7 @@ NW_007930927.1	source	1..32420	note	ID:NW_007930927.1:1..32420
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	1801..2865	note	ID:rna-XM_008605231.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10134
@@ -94567,6 +94656,7 @@ NW_007930928.1	source	1..32175	note	ID:NW_007930928.1:1..32175
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(149..972,1037..1241,1313..1489)	note	ID:rna-XM_008605240.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10143
@@ -94686,6 +94776,7 @@ NW_007930929.1	source	1..32149	note	ID:NW_007930929.1:1..32149
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(545..1216,1288..1299)	note	ID:rna-XM_008605250.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10153
@@ -94823,6 +94914,7 @@ NW_007930930.1	source	1..30842	note	ID:NW_007930930.1:1..30842
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1603..1702	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -94882,6 +94974,7 @@ NW_007930931.1	source	1..30689	note	ID:NW_007930931.1:1..30689
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(2154..2483)	note	ID:rna-XM_008605268.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10171
@@ -94986,6 +95079,7 @@ NW_007930932.1	source	1..28440	note	ID:NW_007930932.1:1..28440
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(2054..2378,2417..3552)	note	ID:rna-XM_008605279.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10182
@@ -95093,6 +95187,7 @@ NW_007930933.1	source	1..28184	note	ID:NW_007930933.1:1..28184
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(join(2160..2305,2369..4367,4414..4834,4889..5193))	note	ID:rna-XM_008605289.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10192
@@ -95206,6 +95301,7 @@ NW_007930934.1	source	1..26947	note	ID:NW_007930934.1:1..26947
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(292..681,738..1201,1256..1874)	note	ID:rna-XM_008605301.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10204
@@ -95283,6 +95379,7 @@ NW_007930935.1	source	1..25325	note	ID:NW_007930935.1:1..25325
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1550..1649	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -95330,6 +95427,7 @@ NW_007930936.1	source	1..24803	note	ID:NW_007930936.1:1..24803
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(join(155..597,882..1227))	note	ID:rna-XM_008605312.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10215
@@ -95416,6 +95514,7 @@ NW_007930937.1	source	1..23527	note	ID:NW_007930937.1:1..23527
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1573..1672	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -95448,6 +95547,7 @@ NW_007930938.1	source	1..23207	note	ID:NW_007930938.1:1..23207
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(join(2161..2690,2740..2816,2995..3521,3574..3621))	note	ID:rna-XM_008605322.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10225
@@ -95507,6 +95607,7 @@ NW_007930939.1	source	1..21115	note	ID:NW_007930939.1:1..21115
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(77..101,148..356)	note	ID:rna-XM_008605328.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10231
@@ -95560,6 +95661,7 @@ NW_007930940.1	source	1..20957	note	ID:NW_007930940.1:1..20957
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1526..1625	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -95631,6 +95733,7 @@ NW_007930941.1	source	1..20355	note	ID:NW_007930941.1:1..20355
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(1893..2217,2284..2895,2953..3356)	note	ID:rna-XM_008605339.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10242
@@ -95666,6 +95769,7 @@ NW_007930942.1	source	1..20191	note	ID:NW_007930942.1:1..20191
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	2168..2267	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -95713,6 +95817,7 @@ NW_007930943.1	source	1..20129	note	ID:NW_007930943.1:1..20129
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(1015..1254,1284..2051)	note	ID:rna-XM_008605345.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10248
@@ -95781,6 +95886,7 @@ NW_007930944.1	source	1..19999	note	ID:NW_007930944.1:1..19999
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	2201..2300	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -95837,6 +95943,7 @@ NW_007930945.1	source	1..19937	note	ID:NW_007930945.1:1..19937
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(1557..1719,2094..3371,3532..4962,5017..6537,6717..6823)	note	ID:rna-XM_008605355.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10258
@@ -95899,6 +96006,7 @@ NW_007930946.1	source	1..19038	note	ID:NW_007930946.1:1..19038
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(1083..1238,1302..2003)	note	ID:rna-XM_008605360.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10263
@@ -95958,6 +96066,7 @@ NW_007930947.1	source	1..18493	note	ID:NW_007930947.1:1..18493
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	4451..4550	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -95987,6 +96096,7 @@ NW_007930948.1	source	1..18177	note	ID:NW_007930948.1:1..18177
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1086..1185	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -96031,6 +96141,7 @@ NW_007930949.1	source	1..15365	note	ID:NW_007930949.1:1..15365
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(16..587,679..742)	note	ID:rna-XM_008605372.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10275
@@ -96099,6 +96210,7 @@ NW_007930950.1	source	1..15306	note	ID:NW_007930950.1:1..15306
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1622..1721	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -96134,6 +96246,7 @@ NW_007930951.1	source	1..12883	note	ID:NW_007930951.1:1..12883
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(1227..1628)	note	ID:rna-XM_008605381.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10284
@@ -96190,6 +96303,7 @@ NW_007930952.1	source	1..12836	note	ID:NW_007930952.1:1..12836
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(join(745..1430,1487..2075))	note	ID:rna-XM_008605386.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10289
@@ -96219,6 +96333,7 @@ NW_007930953.1	source	1..12644	note	ID:NW_007930953.1:1..12644
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(1078..3471,3526..4754,4809..4971)	note	ID:rna-XM_008605388.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10291
@@ -96260,6 +96375,7 @@ NW_007930954.1	source	1..12383	note	ID:NW_007930954.1:1..12383
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(268..501)	note	ID:rna-XM_008605391.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10294
@@ -96301,6 +96417,7 @@ NW_007930955.1	source	1..12195	note	ID:NW_007930955.1:1..12195
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	631..1824	note	ID:rna-XM_008605394.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10297
@@ -96342,6 +96459,7 @@ NW_007930956.1	source	1..12040	note	ID:NW_007930956.1:1..12040
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(643..684,754..1473,1783..1803)	note	ID:rna-XM_008605398.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10301
@@ -96365,6 +96483,7 @@ NW_007930957.1	source	1..11899	note	ID:NW_007930957.1:1..11899
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(589..594,697..1604,2219..2739,2800..3133,3321..4142,4371..4671)	note	ID:rna-XM_008605400.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10303
@@ -96403,6 +96522,7 @@ NW_007930958.1	source	1..11814	note	ID:NW_007930958.1:1..11814
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	7146..7245	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -96417,6 +96537,7 @@ NW_007930959.1	source	1..11761	note	ID:NW_007930959.1:1..11761
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(487..1446)	note	ID:rna-XM_008605403.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10306
@@ -96452,6 +96573,7 @@ NW_007930960.1	source	1..11469	note	ID:NW_007930960.1:1..11469
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	239..1378	note	ID:rna-XM_008605406.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10309
@@ -96499,6 +96621,7 @@ NW_007930961.1	source	1..10582	note	ID:NW_007930961.1:1..10582
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(804..937,990..1347)	note	ID:rna-XM_008605410.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10313
@@ -96537,6 +96660,7 @@ NW_007930962.1	source	1..10467	note	ID:NW_007930962.1:1..10467
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(3325..4272)	note	ID:rna-XM_008605413.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10316
@@ -96569,6 +96693,7 @@ NW_007930963.1	source	1..10079	note	ID:NW_007930963.1:1..10079
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	2309..2408	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -96598,6 +96723,7 @@ NW_007930964.1	source	1..9169	note	ID:NW_007930964.1:1..9169
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(1758..1771,1850..3668,3728..3968,4021..4280)	note	ID:rna-XM_008605418.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10321
@@ -96627,6 +96753,7 @@ NW_007930965.1	source	1..9046	note	ID:NW_007930965.1:1..9046
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(366..390,438..2002)	note	ID:rna-XM_008605420.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10323
@@ -96641,6 +96768,7 @@ NW_007930966.1	source	1..8820	note	ID:NW_007930966.1:1..8820
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(899..1152,1258..1618,1660..1674,1941..2183)	note	ID:rna-XM_008605421.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10324
@@ -96688,6 +96816,7 @@ NW_007930967.1	source	1..8066	note	ID:NW_007930967.1:1..8066
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	2115..2214	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -96702,6 +96831,7 @@ NW_007930968.1	source	1..7588	note	ID:NW_007930968.1:1..7588
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(join(4084..4369,4429..5021))	note	ID:rna-XM_008605425.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10328
@@ -96725,6 +96855,7 @@ NW_007930969.1	source	1..7432	note	ID:NW_007930969.1:1..7432
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(2611..3864,3921..3965)	note	ID:rna-XM_008605427.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10330
@@ -96748,6 +96879,7 @@ NW_007930970.1	source	1..7206	note	ID:NW_007930970.1:1..7206
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(3697..3741,3797..3940)	note	ID:rna-XM_008605429.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10332
@@ -96771,11 +96903,13 @@ NW_007930971.1	source	1..7167	note	ID:NW_007930971.1:1..7167
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007930972.1	source	1..6985	note	ID:NW_007930972.1:1..6985
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(1211..1285,1580..2353)	note	ID:rna-XM_008605431.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10334
@@ -96820,6 +96954,7 @@ NW_007930973.1	source	1..6867	note	ID:NW_007930973.1:1..6867
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(join(1736..2817,2871..4572,4634..4987,5054..5128))	note	ID:rna-XM_008605434.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10337
@@ -96834,6 +96969,7 @@ NW_007930974.1	source	1..6710	note	ID:NW_007930974.1:1..6710
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(join(3463..4465,4518..4703,4770..4804))	note	ID:rna-XM_008605435.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10338
@@ -96848,6 +96984,7 @@ NW_007930975.1	source	1..6650	note	ID:NW_007930975.1:1..6650
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(join(1238..1915,2111..2117,2435..2454))	note	ID:rna-XM_008605436.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10339
@@ -96871,6 +97008,7 @@ NW_007930976.1	source	1..6620	note	ID:NW_007930976.1:1..6620
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1614..1713	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -96882,6 +97020,7 @@ NW_007930977.1	source	1..6409	note	ID:NW_007930977.1:1..6409
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(join(676..1115,1710..1780,1848..2011))	note	ID:rna-XM_008605438.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10341
@@ -96905,6 +97044,7 @@ NW_007930978.1	source	1..6075	note	ID:NW_007930978.1:1..6075
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	3077..3176	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -96913,6 +97053,7 @@ NW_007930979.1	source	1..5390	note	ID:NW_007930979.1:1..5390
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(2130..3353,3486..3644)	note	ID:rna-XM_008605440.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10343
@@ -96927,6 +97068,7 @@ NW_007930980.1	source	1..5151	note	ID:NW_007930980.1:1..5151
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(356..483,543..556,612..674,731..825,880..971,1020..1161,1209..1367,1444..1749,1808..1906)	note	ID:rna-XM_008605441.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10344
@@ -96950,6 +97092,7 @@ NW_007930981.1	source	1..5141	note	ID:NW_007930981.1:1..5141
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	2068..2167	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -96967,6 +97110,7 @@ NW_007930982.1	source	1..5120	note	ID:NW_007930982.1:1..5120
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(877..916,981..1603,1668..1961,2009..2961,3017..3095)	note	ID:rna-XM_008605444.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10347
@@ -96981,6 +97125,7 @@ NW_007930983.1	source	1..5091	note	ID:NW_007930983.1:1..5091
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(130..156,400..690)	note	ID:rna-XM_008605445.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10348
@@ -97016,6 +97161,7 @@ NW_007930984.1	source	1..5000	note	ID:NW_007930984.1:1..5000
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(join(170..666,720..1254))	note	ID:rna-XM_008605448.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10351
@@ -97039,6 +97185,7 @@ NW_007930985.1	source	1..4537	note	ID:NW_007930985.1:1..4537
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(929..1141,1299..2853,3333..4381)	note	ID:rna-XM_008605450.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10353
@@ -97053,6 +97200,7 @@ NW_007930986.1	source	1..4296	note	ID:NW_007930986.1:1..4296
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	2608..2707	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -97061,6 +97209,7 @@ NW_007930987.1	source	1..4226	note	ID:NW_007930987.1:1..4226
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	1305..3035	note	ID:rna-XM_008605451.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10354
@@ -97084,6 +97233,7 @@ NW_007930988.1	source	1..4136	note	ID:NW_007930988.1:1..4136
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1038..1137	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -97101,6 +97251,7 @@ NW_007930989.1	source	1..4126	note	ID:NW_007930989.1:1..4126
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1048..1147	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -97112,6 +97263,7 @@ NW_007930990.1	source	1..3812	note	ID:NW_007930990.1:1..3812
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(join(1961..2212,2266..2343))	note	ID:rna-XM_008605454.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10357
@@ -97126,6 +97278,7 @@ NW_007930991.1	source	1..3747	note	ID:NW_007930991.1:1..3747
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	2500..2599	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -97134,11 +97287,13 @@ NW_007930992.1	source	1..3622	note	ID:NW_007930992.1:1..3622
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007930993.1	source	1..3475	note	ID:NW_007930993.1:1..3475
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	2265..2364	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -97147,6 +97302,7 @@ NW_007930994.1	source	1..3442	note	ID:NW_007930994.1:1..3442
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	2170..2269	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -97155,6 +97311,7 @@ NW_007930995.1	source	1..3376	note	ID:NW_007930995.1:1..3376
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1818..1917	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -97163,6 +97320,7 @@ NW_007930996.1	source	1..3028	note	ID:NW_007930996.1:1..3028
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1347..1446	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -97171,6 +97329,7 @@ NW_007930997.1	source	1..2999	note	ID:NW_007930997.1:1..2999
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1464..1563	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -97188,6 +97347,7 @@ NW_007930998.1	source	1..2961	note	ID:NW_007930998.1:1..2961
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1764..1863	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -97196,6 +97356,7 @@ NW_007930999.1	source	1..2878	note	ID:NW_007930999.1:1..2878
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1674..1773	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -97204,6 +97365,7 @@ NW_007931000.1	source	1..2853	note	ID:NW_007931000.1:1..2853
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1310..1409	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -97212,6 +97374,7 @@ NW_007931001.1	source	1..2804	note	ID:NW_007931001.1:1..2804
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	307..987	note	ID:rna-XM_008605456.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10359
@@ -97229,6 +97392,7 @@ NW_007931002.1	source	1..2781	note	ID:NW_007931002.1:1..2781
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(587..727,789..1735,1844..1956,2079..2238,2292..2736)	note	ID:rna-XM_008605457.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10360
@@ -97243,6 +97407,7 @@ NW_007931003.1	source	1..2753	note	ID:NW_007931003.1:1..2753
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1356..1455	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -97251,6 +97416,7 @@ NW_007931004.1	source	1..2586	note	ID:NW_007931004.1:1..2586
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1420..1519	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -97259,6 +97425,7 @@ NW_007931005.1	source	1..2503	note	ID:NW_007931005.1:1..2503
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1225..1324	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -97267,6 +97434,7 @@ NW_007931006.1	source	1..2416	note	ID:NW_007931006.1:1..2416
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1211..1310	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -97275,6 +97443,7 @@ NW_007931007.1	source	1..2326	note	ID:NW_007931007.1:1..2326
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1159..1258	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -97283,6 +97452,7 @@ NW_007931008.1	source	1..2274	note	ID:NW_007931008.1:1..2274
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1114..1213	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -97291,46 +97461,55 @@ NW_007931009.1	source	1..1882	note	ID:NW_007931009.1:1..1882
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931010.1	source	1..1823	note	ID:NW_007931010.1:1..1823
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931011.1	source	1..1726	note	ID:NW_007931011.1:1..1726
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931012.1	source	1..1705	note	ID:NW_007931012.1:1..1705
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931013.1	source	1..1683	note	ID:NW_007931013.1:1..1683
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931014.1	source	1..1557	note	ID:NW_007931014.1:1..1557
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931015.1	source	1..1499	note	ID:NW_007931015.1:1..1499
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931016.1	source	1..1490	note	ID:NW_007931016.1:1..1490
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931017.1	source	1..1488	note	ID:NW_007931017.1:1..1488
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(244..379,436..1088,1134..1310,1379..1486)	note	ID:rna-XM_008605458.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10362
@@ -97345,61 +97524,73 @@ NW_007931018.1	source	1..1488	note	ID:NW_007931018.1:1..1488
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931019.1	source	1..1459	note	ID:NW_007931019.1:1..1459
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931020.1	source	1..1456	note	ID:NW_007931020.1:1..1456
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931021.1	source	1..1453	note	ID:NW_007931021.1:1..1453
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931022.1	source	1..1446	note	ID:NW_007931022.1:1..1446
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931023.1	source	1..1428	note	ID:NW_007931023.1:1..1428
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931024.1	source	1..1427	note	ID:NW_007931024.1:1..1427
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931025.1	source	1..1420	note	ID:NW_007931025.1:1..1420
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931026.1	source	1..1412	note	ID:NW_007931026.1:1..1412
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931027.1	source	1..1410	note	ID:NW_007931027.1:1..1410
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931028.1	source	1..1398	note	ID:NW_007931028.1:1..1398
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931029.1	source	1..1384	note	ID:NW_007931029.1:1..1384
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1129	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -97408,6 +97599,7 @@ NW_007931030.1	source	1..1371	note	ID:NW_007931030.1:1..1371
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	15..428	note	ID:rna-XM_008605459.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10364
@@ -97422,26 +97614,31 @@ NW_007931031.1	source	1..1352	note	ID:NW_007931031.1:1..1352
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931032.1	source	1..1351	note	ID:NW_007931032.1:1..1351
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931033.1	source	1..1324	note	ID:NW_007931033.1:1..1324
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931034.1	source	1..1321	note	ID:NW_007931034.1:1..1321
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931035.1	source	1..1307	note	ID:NW_007931035.1:1..1307
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	join(106..1245,1295..1300)	note	ID:rna-XM_008605460.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10365
@@ -97456,111 +97653,133 @@ NW_007931036.1	source	1..1272	note	ID:NW_007931036.1:1..1272
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931037.1	source	1..1269	note	ID:NW_007931037.1:1..1269
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931038.1	source	1..1265	note	ID:NW_007931038.1:1..1265
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931039.1	source	1..1252	note	ID:NW_007931039.1:1..1252
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931040.1	source	1..1231	note	ID:NW_007931040.1:1..1231
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931041.1	source	1..1217	note	ID:NW_007931041.1:1..1217
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931042.1	source	1..1212	note	ID:NW_007931042.1:1..1212
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931043.1	source	1..1206	note	ID:NW_007931043.1:1..1206
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931044.1	source	1..1201	note	ID:NW_007931044.1:1..1201
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931045.1	source	1..1145	note	ID:NW_007931045.1:1..1145
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931046.1	source	1..1136	note	ID:NW_007931046.1:1..1136
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931047.1	source	1..1136	note	ID:NW_007931047.1:1..1136
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931048.1	source	1..1131	note	ID:NW_007931048.1:1..1131
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931049.1	source	1..1130	note	ID:NW_007931049.1:1..1130
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931050.1	source	1..1128	note	ID:NW_007931050.1:1..1128
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931051.1	source	1..1120	note	ID:NW_007931051.1:1..1120
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931052.1	source	1..1117	note	ID:NW_007931052.1:1..1117
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931053.1	source	1..1114	note	ID:NW_007931053.1:1..1114
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931054.1	source	1..1108	note	ID:NW_007931054.1:1..1108
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931055.1	source	1..1107	note	ID:NW_007931055.1:1..1107
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931056.1	source	1..1096	note	ID:NW_007931056.1:1..1096
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931057.1	source	1..1092	note	ID:NW_007931057.1:1..1092
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	mRNA	complement(join(20..87,150..953,1010..1052))	note	ID:rna-XM_008605461.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_10366
@@ -97575,11 +97794,13 @@ NW_007931058.1	source	1..1090	note	ID:NW_007931058.1:1..1090
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931059.1	source	1..1090	note	ID:NW_007931059.1:1..1090
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	139..140	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -97588,60 +97809,72 @@ NW_007931060.1	source	1..1083	note	ID:NW_007931060.1:1..1083
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931061.1	source	1..1083	note	ID:NW_007931061.1:1..1083
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931062.1	source	1..1081	note	ID:NW_007931062.1:1..1081
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931063.1	source	1..1079	note	ID:NW_007931063.1:1..1079
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931064.1	source	1..1058	note	ID:NW_007931064.1:1..1058
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931065.1	source	1..1051	note	ID:NW_007931065.1:1..1051
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931066.1	source	1..1039	note	ID:NW_007931066.1:1..1039
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931067.1	source	1..1032	note	ID:NW_007931067.1:1..1032
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931068.1	source	1..1022	note	ID:NW_007931068.1:1..1022
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931069.1	source	1..1021	note	ID:NW_007931069.1:1..1021
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931070.1	source	1..1004	note	ID:NW_007931070.1:1..1004
 			note	source:RefSeq
 			chromosome	Unknown
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 NW_007931071.1	source	1..2575	note	ID:NW_007931071.1:1..2575
 			note	source:RefSeq
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
 	assembly_gap	1235..1334	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -97649,3 +97882,4 @@ NW_007931072.1	source	1..1283	note	ID:NW_007931072.1:1..1283
 			note	source:RefSeq
 			mol_type	genomic DNA
 			strain	ARSEF 2860
+			organism	Beauveria bassiana ARSEF 2860
