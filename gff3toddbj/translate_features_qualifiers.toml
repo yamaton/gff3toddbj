@@ -245,6 +245,14 @@ qualifier_value_prefix =  "<dummy>"
 [__ANY__._Description]
 qualifier_key = "note"
 
+# --------------
+# Force setting null as the value of /pseudo qualifier
+#   i.e. convert from /pseudo=true
+[__ANY__._pseudo]
+qualifier_key = "pseudo"
+qualifier_value = ""
+
+
 
 ## ================================================================================
 ## Translate a GFF3 type (= column 3 value) into a pair of (Feature, Qualifier)
@@ -540,28 +548,27 @@ qualifier_value = "promoter"
 [pseudogene]
 feature_key = "gene"
 qualifier_key = "pseudogene"
-# qualifier_value = "pseudo"
 qualifier_value = "unknown"
 
 [pseudogenic_CDS]
 feature_key = "CDS"
-qualifier_key = "pseudogene"
-qualifier_value = "pseudo"
+qualifier_key = "pseudo"
+qualifier_value = ""
 
 [pseudogenic_rRNA]
 feature_key = "rRNA"
-qualifier_key = "pseudogene"
-qualifier_value = "pseudo"
+qualifier_key = "pseudo"
+qualifier_value = ""
 
 [pseudogenic_tRNA]
 feature_key = "tRNA"
-qualifier_key = "pseudogene"
-qualifier_value = "pseudo"
+qualifier_key = "pseudo"
+qualifier_value = ""
 
 [pseudogenic_transcript]
 feature_key = "misc_RNA"
-qualifier_key = "pseudogene"
-qualifier_value = "pseudo"
+qualifier_key = "pseudo"
+qualifier_value = ""
 
 [rasiRNA]
 feature_key = "ncRNA"

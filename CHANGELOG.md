@@ -6,6 +6,7 @@
 * Fix an error when joined features have .sub_features
 * Fix [source] in metadata not used when "source" feature exists in a entry
 * Change not to join features directly under "gene"
+* Fix the default config for feature and qualifier names around /pseudo
 
 ## v0.2.4 (2021-10-04)
 * Expand the default config for feature and qualifier names

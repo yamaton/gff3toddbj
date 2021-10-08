@@ -186,9 +186,13 @@ class RenameHandler(object):
                 # Replace the item name
                 new_name = subtree[name].get("qualifier_key", "")
                 if new_name:
-                    prefix = subtree[name].get("qualifier_value_prefix", "")
-                    if prefix:
-                        vals = [prefix + v for v in vals]
+                    if "qualifier_value" in subtree[name]:
+                        # overwrite qualifier value with the setting
+                        vals = [subtree[name]["qualifier_value"]]
+                    else:
+                        prefix = subtree[name].get("qualifier_value_prefix", "")
+                        if prefix:
+                            vals = [prefix + v for v in vals]
 
                     if new_name not in res:
                         res[new_name] = []
