@@ -7,6 +7,7 @@
 * Fix [source] in metadata not used when "source" feature exists in a entry
 * Change not to join features directly under "gene"
 * Fix the default config for feature and qualifier names around /pseudo
+* Fix a bug getting incorrect codon when CompoundLocation has a part < 3bp.
 
 ## v0.2.4 (2021-10-04)
 * Expand the default config for feature and qualifier names

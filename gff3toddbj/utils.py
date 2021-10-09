@@ -1,4 +1,4 @@
-from typing import Iterable, Generator, Dict, List, FrozenSet, Optional, OrderedDict, Union, Any
+from typing import Iterable, Generator, Dict, List, FrozenSet, OrderedDict, Union, Any
 import logging
 import re
 import collections
@@ -108,9 +108,9 @@ def has_start_codon(
     >>> from Bio.Seq import Seq
     >>> seq = Seq("AATTCGAGGGG")
     >>> loc = FeatureLocation(1, 7, strand=1)
-    >>> table = 11
+    >>> genetic_code = 11
     >>> phase = 0
-    >>> has_start_codon(seq, loc, table, phase)
+    >>> has_start_codon(seq, loc, genetic_code, phase)
     True
     """
     strand = location.strand
@@ -119,18 +119,15 @@ def has_start_codon(
     codon = "XXX"
     if not isinstance(strand, int):
         raise ValueError("Cannot determine as strand = {}".format(strand))
-    elif strand > 0:
-        p = location.start.position + phase
-        codon = seq[p : p + 3]
-    else:
-        p = location.end.position - phase
-        codon = seq[p - 3 : p].reverse_complement()
+
+    cds = _get_cds(seq, location)
+    codon = cds[phase : phase + 3]
 
     if len(codon) != 3:
-        msg = "Failed to access codon (pos={}, strand={})".format(p, strand)
+        msg = "Failed to access codon (loc={})".format(location)
         logging.error(msg)
 
-    return codon in start_codons
+    return str(codon) in start_codons
 
 
 def has_stop_codon(
@@ -142,10 +139,10 @@ def has_stop_codon(
     Stop codons correspond to the Genetic Code transl_table.
 
     >>> from Bio.Seq import Seq
-    >>> seq = Seq("GAATGCGAGGGTAG")
+    >>> seq = Seq("GAATGCGAGGGTAGT")
     >>> loc = FeatureLocation(2, 14, strand=1)
-    >>> table = 1
-    >>> has_stop_codon(seq, loc, table)
+    >>> genetic_code = 1
+    >>> has_stop_codon(seq, loc, genetic_code)
     True
     """
     strand = location.strand
@@ -154,18 +151,33 @@ def has_stop_codon(
     codon = "XXX"
     if not isinstance(strand, int):
         raise ValueError("Cannot determine as strand = {}".format(strand))
-    elif strand > 0:
-        p = location.end.position
-        codon = seq[p - 3 : p]
-    else:
-        p = location.start.position
-        codon = seq[p : p + 3].reverse_complement()
+
+    cds = _get_cds(seq, location)
+    codon = cds[-3:]
 
     if len(codon) != 3:
-        msg = "Failed to access codon (pos={}, strand={})".format(p, strand)
+        msg = "Failed to access codon (loc={})".format(location)
         logging.error(msg)
 
-    return codon in stop_codons
+    return str(codon) in stop_codons
+
+
+def _get_cds(seq: Seq, location: Union[FeatureLocation, CompoundLocation]):
+    """wrapper of SeqFeature.extract()
+
+    CompoundLocation.part is ordered by (loc.start.position, loc.end.position)
+    in this code base, hence loc.extract() gives wrong answer if loc is
+    a CompoundLocation with strand (-1).
+
+    Ref: https://github.com/biopython/biopython/issues/570
+    """
+    if isinstance(location, FeatureLocation) or location.strand > 0:
+        f = SeqFeature(location, type="tmp")
+    else:
+        location = sorted(location.parts, key=lambda x: (x.end.position, x.start.position), reverse=True)
+        x = CompoundLocation(location)
+        f = SeqFeature(x, type="domain")
+    return f.extract(seq)
 
 
 def debug_checker(
@@ -209,6 +221,7 @@ def to_loglevel(s: str) -> int:
         res = logging.INFO
     return res
 
+
 def get_attribute_keys(subtree: OrderedDict[str, Any]) -> List[str]:
     """
     Get associated attribute keys in the translation subtable.
@@ -217,4 +230,3 @@ def get_attribute_keys(subtree: OrderedDict[str, Any]) -> List[str]:
     if set(subtree.keys()) < TARGET_KEYS_IN_TRANSLATION:
         return []
     return subtree.keys()
-
