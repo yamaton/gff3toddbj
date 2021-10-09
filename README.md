@@ -10,6 +10,7 @@
 
 ## Table of Contents
 * [What is this?](#what-is-this)
+* [How accurate is the conversion?](#how-accurate-is-the-conversion)
 * [Initial setup](#initial-setup)
   + [Install with bioconda](#install-with-bioconda)
   + [Install with pip](#install-with-pip)
@@ -41,6 +42,15 @@ GFF3-to-DDBJ creates [the annotation file for submission to DDBJ](https://www.dd
 Analogous programs are [GAG](https://github.com/genomeannotation/GAG) for submissions to NCBI, and [EMBLmyGFF3](https://github.com/NBISweden/EMBLmyGFF3) for submissions to EMBL.
 
 Please take a look at our [test directory](https://github.com/yamaton/gff3toddbj/tree/main/tests/golden) for examples. Files ending with .ann are the DDBJ annotation files produced by thie program.
+
+## How accurate is the conversion?
+
+While there are many rules a DDBJ annotation file needs to comply with, it's difficult to tell what the correct GFF3→DDBJ conversion is.
+There is no example of full-fledged GFF3 → DDBJ conversion available, either. So, we define GFF3-GenBank correspondence in RefSeq as the "correct" examples. To evaluate GFF3-to-DDBJ, we use RefSeq data and compare `gff3-to-ddbj` output with the other DDBJ annotation from `genbank-to-ddbj` using the GenBank format. Please take a look at our evaluation dcoument for the detail as well as the current status. ([TODO] Add the page...)
+
+Here `genbank-to-ddbj` is an executable included in this package. It shares codebase with `gff3-to-ddbj`, but we believe it does not bring any complexity to our evaluation due to its much simpler internals.
+
+Also note that we also use DDBJ's [Parser](https://www.ddbj.nig.ac.jp/ddbj/parser-e.html) for checking the annotation files.
 
 
 ## Initial setup

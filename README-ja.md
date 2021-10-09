@@ -5,6 +5,7 @@
 [![PyPI](https://img.shields.io/pypi/v/gff3toddbj?style=for-the-badge)](https://pypi.org/project/gff3toddbj/)
 
 * [これは何？](#これは何)
+* [出力の「正しさ」について](#出力の「正しさ」について)
 * [セットアップ](#セットアップ)
     - [biocondaからconda環境にインストールする場合](#biocondaからconda環境にインストールする場合)
     - [pipからconda環境にインストールする場合](#pipからconda環境にインストールする場合)
@@ -37,6 +38,15 @@ DDBJへの登録には指定された形式の[アノテーションファイル
 同種のプログラムは、NCBI登録には[GAG](https://github.com/genomeannotation/GAG)、EMBL登録には[EMBLmyGFF3](https://github.com/NBISweden/EMBLmyGFF3)などがあります。
 
 [テストフォルダ](https://github.com/yamaton/gff3toddbj/tree/main/tests/golden)に入出力のファイルの例があるのでご覧ください。.annの拡張子付きがDDBJアノテーションファイルになります。同じファイル名のFASTAとGFF3から生成しています。
+
+
+## 出力の「正しさ」について
+
+DDBJアノテーション出力には幾多の守るべきルールはあるものの、正解には曖昧さが伴います。そのため当ツールではRefSeqの出すGFF3とGenBank形式の対応をもって「正解」と定義しています。これに基づいて、RefSeqのGenBank形式をできるだけシンプルにDDBJアノテーション形式に変換した正解例を、当ツールで作られるDDBJアノテーション出力とを比べることで評価をしています。詳細と現状は別ページに置いています。（[TODO] ページ作成。）
+
+なお評価の副産物としてのGenBankからDDBJアノテーションの変換ツール `genbank-to-ddbj` を同梱しています。良い品質のGenBank形式があるときにはGFF3から作るよりも有用かもしれません。
+
+評価の一環として、DDBJ公開の[Parser](https://www.ddbj.nig.ac.jp/ddbj/parser.html)もフォーマットチェックに利用させていただいています。
 
 
 ## セットアップ
