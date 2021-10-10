@@ -254,12 +254,13 @@ qualifier_key = "note"
 qualifier_value_prefix = "ID:"  # optional
 ```
 
-One can also set qualifier value forcefully. For example, `/pseudo` qualifier takes no value in INSDC/DDBJ while you may find notations like `/pseudo=true` in GFF3 files. To enforce this property, we write like this.
+One can also set a qualifier key and a value together. For example, `/pseudo` qualifier is discouraged by DDBJ regardless of features. We may enforce the replacement by,
 
 ```toml
+# /pseudo is always replaced by /pseudogene="unknown"
 [__ANY__.pseudo]
-qualifier_key = "pseudo"
-qualifier_value = ""       # /pseudo will always have no value
+qualifier_key = "pseudogene"
+qualifier_value = "unknown"
 ```
 
 

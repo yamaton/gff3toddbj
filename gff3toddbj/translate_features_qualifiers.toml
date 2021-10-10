@@ -242,15 +242,15 @@ qualifier_key = "EC_number"
 qualifier_key = "locus_tag"
 qualifier_value_prefix =  "<dummy>"
 
-[__ANY__._Description]
+[__ANY__.Description]
 qualifier_key = "note"
 
 # --------------
 # Force setting null as the value of /pseudo qualifier
 #   i.e. convert from /pseudo=true
-[__ANY__._pseudo]
-qualifier_key = "pseudo"
-qualifier_value = ""
+[__ANY__.pseudo]
+qualifier_key = "pseudogene"
+qualifier_value = "unknown"
 
 
 

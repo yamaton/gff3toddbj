@@ -269,12 +269,13 @@ qualifier_key = "note"
 qualifier_value_prefix = "ID:"   # qualifier_value_prefixは省略可
 ```
 
-またqualifier値を強制的に設定するときには以下のように書きます。`/pseudo` はINSDC/DDBJにおいては値を持たないのに対しGFF3では`/pseudo=true`といった形式がしばしば取られるための対策となっています。
+またqualifierキーと値の両方を設定するには以下のように書きます。たとえば `/pseudo` DDBJ新規登録において非推奨のため、 `/pseudo=true`といった値に関係なく `/pseudogene="unknown"` で置き換える措置をデフォルトで行っています。
 
 ```toml
+# /pseudo は常に /pseudogene="unknown" に置き換える
 [__ANY__.pseudo]
-qualifier_key = "pseudo"
-qualifier_value = ""   # /pseudo値は常に無しにする
+qualifier_key = "pseudogene"
+qualifier_value = "unknown"
 ```
 
 
