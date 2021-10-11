@@ -8,7 +8,7 @@ from . import transforms
 from . import utils
 
 _EXEC_NAME = "genbank-to-ddbj"
-__version__ = "0.0.0"
+__version__ = "0.0.1"
 
 FORMAT = '%(levelname)s: %(message)s'
 _DIR = pathlib.Path(__file__).parent
@@ -47,12 +47,6 @@ def main():
         default=1,
     )
     parser.add_argument(
-        "--config_rename",
-        help="Rename setting for features and qualifiers",
-        metavar="FILE",
-        default=PATH_TRANS_FEATURES_QUALIFIERS,
-    )
-    parser.add_argument(
         "--config_filter",
         help="A set of Feature-Qualifier pairs allowed in the output. See https://www.ddbj.nig.ac.jp/assets/files/pdf/ddbj/fq-e.pdf",
         metavar="FILE",
@@ -83,8 +77,6 @@ def main():
     logging.info("Input metadata      : {}".format(args.metadata))
     logging.info("Prefix of locus_tag : {}".format(args.prefix))
     logging.info("transl_table        : {}".format(args.transl_table))
-    if args.config_rename != PATH_TRANS_FEATURES_QUALIFIERS:
-        logging.info(f"Config-Rename       : {args.config_rename}")
     if args.config_filter != PATH_DDBJ_FILTER:
         logging.info(f"Config-Filter       : {args.config_filter}")
     output = args.out
@@ -96,9 +88,7 @@ def main():
     # Load files, apply transformations, and get a list of SeqRecord
     records = transforms.run_with_genbank(
         args.gbk,
-        args.config_rename,
         metadata,
-        args.prefix,
         args.transl_table,
     )
 

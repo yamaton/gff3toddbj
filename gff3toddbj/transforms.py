@@ -728,9 +728,7 @@ def run(
 
 def run_with_genbank(
     path_genbank: str,
-    path_rename_scheme: str,
     metadata: OrderedDict[str, OrderedDict[str, Any]],
-    locus_tag_prefix: str,
     transl_table: int,
 ) -> Generator[SeqRecord, None, None]:
     """Create a list of `SeqRecord`s and apply various transformations"""
@@ -738,26 +736,13 @@ def run_with_genbank(
     # Load Genbank as a generator of seqrecord
     records = io.load_genbank_as_seqrecords(path_genbank)
 
-    # Rename feature keys and/or qualifier keys/values
-    f = RenameHandler(path_rename_scheme, locus_tag_prefix).run
-
     for rec in records:
-        rec = f(rec)
 
         # Add "assembly_gap" features
         _set_assembly_gap(rec, metadata)
 
         # Add the transl_table qualifier to CDS feature each
         _add_transl_table_to_cds(rec, transl_table)
-
-        # Insert "source" features from metadata if necessary
-        _handle_source_rec(rec, metadata)
-
-        # Check characters in qualifier values
-        _regularize_qualifier_value_letters(rec)
-
-        # Assign single value to /product and put the rest to /inference
-        _assign_single_product(rec)
 
         # Remove duplicates within a qualifier
         _remove_duplicates_in_qualifiers(rec)
