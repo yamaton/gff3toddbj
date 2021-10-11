@@ -2,7 +2,7 @@
 For evaluation of DDBJ annotation
 
 """
-from typing import Iterable, List, Counter, Tuple, Union
+from typing import Callable, Iterable, List, Counter, Tuple, Union
 import argparse
 import collections
 
@@ -13,7 +13,7 @@ from Bio.SeqFeature import CompoundLocation, FeatureLocation, SeqFeature
 
 
 _EXEC_NAME = "compare-ddbj"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 
 Troika = Tuple[str, str, str]
 
@@ -122,6 +122,23 @@ def compare(records1: List[SeqRecord], records2: List[SeqRecord], func) -> Tuple
     return intersect, left_only, right_only
 
 
+
+def compare_and_report(records1: List[SeqRecord], records2: List[SeqRecord], f: Callable[[Iterable[SeqRecord]], Counter[Troika]], title: str, file_prefix: str):
+    intersect, left_only, right_only = compare(records1, records2, f)
+    cnt_match, cnt_leftonly, cnt_rightonly = map(len, [intersect, left_only, right_only])
+
+    print(title)
+    print("    Left  mismatching: {} / {} \t({:.2f} %)".format(cnt_leftonly, cnt_match + cnt_leftonly, 100 * cnt_leftonly / (cnt_match + cnt_leftonly)))
+    print("    Right mismatching: {} / {} \t({:.2f} %)".format(cnt_rightonly, cnt_match + cnt_rightonly, 100 * cnt_rightonly / (cnt_match + cnt_rightonly)))
+
+    with open(file_prefix + "left-only.txt", "w") as fout:
+        for tup in left_only:
+            print("\t".join(tup), file=fout)
+    with open(file_prefix + "right-only.txt", "w") as fout:
+        for tup in right_only:
+            print("\t".join(tup), file=fout)
+
+
 def main():
     argparser = argparse.ArgumentParser(prog=_EXEC_NAME)
     argparser.add_argument("ddbj1", help="Input DDBJ annotation 1")
@@ -155,36 +172,6 @@ def main():
     for rec in records2:
         patch_up_short_introns(rec)
 
-    intersect, left_only, right_only = compare(records1, records2, get_multiset_locations_wo_correction)
-    cnt_total = sum(map(len, [intersect, left_only, right_only]))
-    cnt_correct = len(intersect)
-    print("Stat w/o  location correction: {}/{} ({:.2f} %)  ... (left-only: {}, right-only: {})".format(cnt_correct, cnt_total, 100 * cnt_correct / cnt_total, len(left_only),  len(right_only)))
-    with open("loc_wo_correction_left-only.txt", "w") as fout:
-        for tup in left_only:
-            print("\t".join(tup), file=fout)
-    with open("loc_wo_correction_right-only.txt", "w") as fout:
-        for tup in right_only:
-            print("\t".join(tup), file=fout)
-
-    intersect, left_only, right_only = compare(records1, records2, get_multiset_locations)
-    cnt_total = sum(map(len, [intersect, left_only, right_only]))
-    cnt_correct = len(intersect)
-    print("Stat with location correction: {}/{} ({:.2f} %)  ... (left-only: {}, right-only: {})".format(cnt_correct, cnt_total, 100 * cnt_correct / cnt_total, len(left_only),  len(right_only)))
-    with open("loc_correction_left-only.txt", "w") as fout:
-        for tup in left_only:
-            print("\t".join(tup), file=fout)
-    with open("loc_correction_right-only.txt", "w") as fout:
-        for tup in right_only:
-            print("\t".join(tup), file=fout)
-
-    intersect, left_only, right_only = compare(records1, records2, get_multiset_feature_qualifier)
-    cnt_total = sum(map(len, [intersect, left_only, right_only]))
-    cnt_correct = len(intersect)
-    print("Stat of feature-qualifier pairs: {}/{} ({:.2f} %)  ... (left-only: {}, right-only: {})".format(cnt_correct, cnt_total, 100 * cnt_correct / cnt_total, len(left_only),  len(right_only)))
-    with open("quals_left-only.txt", "w") as fout:
-        for tup in left_only:
-            print("\t".join(tup), file=fout)
-    with open("quals_right-only.txt", "w") as fout:
-        for tup in right_only:
-            print("\t".join(tup), file=fout)
-
+    compare_and_report(records1, records2, get_multiset_locations_wo_correction, "Stat w/o location correction:", "loc_wo_correction_")
+    compare_and_report(records1, records2, get_multiset_locations, "Stat with location correction:", "loc_corrected_")
+    compare_and_report(records1, records2, get_multiset_feature_qualifier, "Stat of feature-qualifier pairs:", "quals_")
