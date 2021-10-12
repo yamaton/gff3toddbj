@@ -31,6 +31,7 @@ COMMON	DATATYPE		type	WGS
 NW_007930836.1	source	1..2084429	note	ID:NW_007930836.1:1..2084429
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -6247,6 +6248,7 @@ NW_007930836.1	source	1..2084429	note	ID:NW_007930836.1:1..2084429
 NW_007930837.1	source	1..1964398	note	ID:NW_007930837.1:1..1964398
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -11431,6 +11433,7 @@ NW_007930837.1	source	1..1964398	note	ID:NW_007930837.1:1..1964398
 NW_007930838.1	source	1..1736295	note	ID:NW_007930838.1:1..1736295
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -16399,6 +16402,7 @@ NW_007930838.1	source	1..1736295	note	ID:NW_007930838.1:1..1736295
 NW_007930839.1	source	1..1659581	note	ID:NW_007930839.1:1..1659581
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -21319,6 +21323,7 @@ NW_007930839.1	source	1..1659581	note	ID:NW_007930839.1:1..1659581
 NW_007930840.1	source	1..1467565	note	ID:NW_007930840.1:1..1467565
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -25339,6 +25344,7 @@ NW_007930840.1	source	1..1467565	note	ID:NW_007930840.1:1..1467565
 NW_007930841.1	source	1..1419043	note	ID:NW_007930841.1:1..1419043
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -29548,6 +29554,7 @@ NW_007930841.1	source	1..1419043	note	ID:NW_007930841.1:1..1419043
 NW_007930842.1	source	1..1263816	note	ID:NW_007930842.1:1..1263816
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -33430,6 +33437,7 @@ NW_007930842.1	source	1..1263816	note	ID:NW_007930842.1:1..1263816
 NW_007930843.1	source	1..1169471	note	ID:NW_007930843.1:1..1169471
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -36823,6 +36831,7 @@ NW_007930843.1	source	1..1169471	note	ID:NW_007930843.1:1..1169471
 NW_007930844.1	source	1..1153075	note	ID:NW_007930844.1:1..1153075
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -40054,6 +40063,7 @@ NW_007930844.1	source	1..1153075	note	ID:NW_007930844.1:1..1153075
 NW_007930845.1	source	1..980095	note	ID:NW_007930845.1:1..980095
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -42799,6 +42809,7 @@ NW_007930845.1	source	1..980095	note	ID:NW_007930845.1:1..980095
 NW_007930846.1	source	1..872271	note	ID:NW_007930846.1:1..872271
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -45175,6 +45186,7 @@ NW_007930846.1	source	1..872271	note	ID:NW_007930846.1:1..872271
 NW_007930847.1	source	1..736384	note	ID:NW_007930847.1:1..736384
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -47224,6 +47236,7 @@ NW_007930847.1	source	1..736384	note	ID:NW_007930847.1:1..736384
 NW_007930848.1	source	1..729568	note	ID:NW_007930848.1:1..729568
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -49252,6 +49265,7 @@ NW_007930848.1	source	1..729568	note	ID:NW_007930848.1:1..729568
 NW_007930849.1	source	1..724305	note	ID:NW_007930849.1:1..724305
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -51439,6 +51453,7 @@ NW_007930849.1	source	1..724305	note	ID:NW_007930849.1:1..724305
 NW_007930850.1	source	1..690658	note	ID:NW_007930850.1:1..690658
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -53473,6 +53488,7 @@ NW_007930850.1	source	1..690658	note	ID:NW_007930850.1:1..690658
 NW_007930851.1	source	1..662422	note	ID:NW_007930851.1:1..662422
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -55456,6 +55472,7 @@ NW_007930851.1	source	1..662422	note	ID:NW_007930851.1:1..662422
 NW_007930852.1	source	1..642988	note	ID:NW_007930852.1:1..642988
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -57193,6 +57210,7 @@ NW_007930852.1	source	1..642988	note	ID:NW_007930852.1:1..642988
 NW_007930853.1	source	1..636890	note	ID:NW_007930853.1:1..636890
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -59071,6 +59089,7 @@ NW_007930853.1	source	1..636890	note	ID:NW_007930853.1:1..636890
 NW_007930854.1	source	1..626337	note	ID:NW_007930854.1:1..626337
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -61087,6 +61106,7 @@ NW_007930854.1	source	1..626337	note	ID:NW_007930854.1:1..626337
 NW_007930855.1	source	1..540720	note	ID:NW_007930855.1:1..540720
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -62635,6 +62655,7 @@ NW_007930855.1	source	1..540720	note	ID:NW_007930855.1:1..540720
 NW_007930856.1	source	1..528476	note	ID:NW_007930856.1:1..528476
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -64078,6 +64099,7 @@ NW_007930856.1	source	1..528476	note	ID:NW_007930856.1:1..528476
 NW_007930857.1	source	1..527023	note	ID:NW_007930857.1:1..527023
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -65434,6 +65456,7 @@ NW_007930857.1	source	1..527023	note	ID:NW_007930857.1:1..527023
 NW_007930858.1	source	1..517326	note	ID:NW_007930858.1:1..517326
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -67009,6 +67032,7 @@ NW_007930858.1	source	1..517326	note	ID:NW_007930858.1:1..517326
 NW_007930859.1	source	1..430724	note	ID:NW_007930859.1:1..430724
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -68386,6 +68410,7 @@ NW_007930859.1	source	1..430724	note	ID:NW_007930859.1:1..430724
 NW_007930860.1	source	1..424472	note	ID:NW_007930860.1:1..424472
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -69634,6 +69659,7 @@ NW_007930860.1	source	1..424472	note	ID:NW_007930860.1:1..424472
 NW_007930861.1	source	1..418291	note	ID:NW_007930861.1:1..418291
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -70756,6 +70782,7 @@ NW_007930861.1	source	1..418291	note	ID:NW_007930861.1:1..418291
 NW_007930862.1	source	1..394139	note	ID:NW_007930862.1:1..394139
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -71713,6 +71740,7 @@ NW_007930862.1	source	1..394139	note	ID:NW_007930862.1:1..394139
 NW_007930863.1	source	1..343624	note	ID:NW_007930863.1:1..343624
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -72691,6 +72719,7 @@ NW_007930863.1	source	1..343624	note	ID:NW_007930863.1:1..343624
 NW_007930864.1	source	1..339650	note	ID:NW_007930864.1:1..339650
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -73615,6 +73644,7 @@ NW_007930864.1	source	1..339650	note	ID:NW_007930864.1:1..339650
 NW_007930865.1	source	1..311377	note	ID:NW_007930865.1:1..311377
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -74602,6 +74632,7 @@ NW_007930865.1	source	1..311377	note	ID:NW_007930865.1:1..311377
 NW_007930866.1	source	1..300098	note	ID:NW_007930866.1:1..300098
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -75412,6 +75443,7 @@ NW_007930866.1	source	1..300098	note	ID:NW_007930866.1:1..300098
 NW_007930867.1	source	1..295081	note	ID:NW_007930867.1:1..295081
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -76294,6 +76326,7 @@ NW_007930867.1	source	1..295081	note	ID:NW_007930867.1:1..295081
 NW_007930868.1	source	1..289244	note	ID:NW_007930868.1:1..289244
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -76945,6 +76978,7 @@ NW_007930868.1	source	1..289244	note	ID:NW_007930868.1:1..289244
 NW_007930869.1	source	1..278808	note	ID:NW_007930869.1:1..278808
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -77914,6 +77948,7 @@ NW_007930869.1	source	1..278808	note	ID:NW_007930869.1:1..278808
 NW_007930870.1	source	1..252385	note	ID:NW_007930870.1:1..252385
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -78748,6 +78783,7 @@ NW_007930870.1	source	1..252385	note	ID:NW_007930870.1:1..252385
 NW_007930871.1	source	1..244307	note	ID:NW_007930871.1:1..244307
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -79528,6 +79564,7 @@ NW_007930871.1	source	1..244307	note	ID:NW_007930871.1:1..244307
 NW_007930872.1	source	1..203581	note	ID:NW_007930872.1:1..203581
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -80050,6 +80087,7 @@ NW_007930872.1	source	1..203581	note	ID:NW_007930872.1:1..203581
 NW_007930873.1	source	1..201589	note	ID:NW_007930873.1:1..201589
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -80551,6 +80589,7 @@ NW_007930873.1	source	1..201589	note	ID:NW_007930873.1:1..201589
 NW_007930874.1	source	1..199044	note	ID:NW_007930874.1:1..199044
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -81034,6 +81073,7 @@ NW_007930874.1	source	1..199044	note	ID:NW_007930874.1:1..199044
 NW_007930875.1	source	1..193651	note	ID:NW_007930875.1:1..193651
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -81643,6 +81683,7 @@ NW_007930875.1	source	1..193651	note	ID:NW_007930875.1:1..193651
 NW_007930876.1	source	1..184981	note	ID:NW_007930876.1:1..184981
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -82273,6 +82314,7 @@ NW_007930876.1	source	1..184981	note	ID:NW_007930876.1:1..184981
 NW_007930877.1	source	1..181153	note	ID:NW_007930877.1:1..181153
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -82789,6 +82831,7 @@ NW_007930877.1	source	1..181153	note	ID:NW_007930877.1:1..181153
 NW_007930878.1	source	1..175324	note	ID:NW_007930878.1:1..175324
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -83467,6 +83510,7 @@ NW_007930878.1	source	1..175324	note	ID:NW_007930878.1:1..175324
 NW_007930879.1	source	1..170958	note	ID:NW_007930879.1:1..170958
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -84022,6 +84066,7 @@ NW_007930879.1	source	1..170958	note	ID:NW_007930879.1:1..170958
 NW_007930880.1	source	1..161797	note	ID:NW_007930880.1:1..161797
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -84550,6 +84595,7 @@ NW_007930880.1	source	1..161797	note	ID:NW_007930880.1:1..161797
 NW_007930881.1	source	1..146983	note	ID:NW_007930881.1:1..146983
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -84928,6 +84974,7 @@ NW_007930881.1	source	1..146983	note	ID:NW_007930881.1:1..146983
 NW_007930882.1	source	1..128764	note	ID:NW_007930882.1:1..128764
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -85357,6 +85404,7 @@ NW_007930882.1	source	1..128764	note	ID:NW_007930882.1:1..128764
 NW_007930883.1	source	1..124915	note	ID:NW_007930883.1:1..124915
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -85723,6 +85771,7 @@ NW_007930883.1	source	1..124915	note	ID:NW_007930883.1:1..124915
 NW_007930884.1	source	1..124733	note	ID:NW_007930884.1:1..124733
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -86029,6 +86078,7 @@ NW_007930884.1	source	1..124733	note	ID:NW_007930884.1:1..124733
 NW_007930885.1	source	1..120337	note	ID:NW_007930885.1:1..120337
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -86407,6 +86457,7 @@ NW_007930885.1	source	1..120337	note	ID:NW_007930885.1:1..120337
 NW_007930886.1	source	1..117908	note	ID:NW_007930886.1:1..117908
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -86794,6 +86845,7 @@ NW_007930886.1	source	1..117908	note	ID:NW_007930886.1:1..117908
 NW_007930887.1	source	1..102318	note	ID:NW_007930887.1:1..102318
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -87079,6 +87131,7 @@ NW_007930887.1	source	1..102318	note	ID:NW_007930887.1:1..102318
 NW_007930888.1	source	1..101939	note	ID:NW_007930888.1:1..101939
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -87397,6 +87450,7 @@ NW_007930888.1	source	1..101939	note	ID:NW_007930888.1:1..101939
 NW_007930889.1	source	1..101529	note	ID:NW_007930889.1:1..101529
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -87766,6 +87820,7 @@ NW_007930889.1	source	1..101529	note	ID:NW_007930889.1:1..101529
 NW_007930890.1	source	1..95598	note	ID:NW_007930890.1:1..95598
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -88048,6 +88103,7 @@ NW_007930890.1	source	1..95598	note	ID:NW_007930890.1:1..95598
 NW_007930891.1	source	1..94807	note	ID:NW_007930891.1:1..94807
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -88318,6 +88374,7 @@ NW_007930891.1	source	1..94807	note	ID:NW_007930891.1:1..94807
 NW_007930892.1	source	1..93511	note	ID:NW_007930892.1:1..93511
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -88582,6 +88639,7 @@ NW_007930892.1	source	1..93511	note	ID:NW_007930892.1:1..93511
 NW_007930893.1	source	1..91160	note	ID:NW_007930893.1:1..91160
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -88876,6 +88934,7 @@ NW_007930893.1	source	1..91160	note	ID:NW_007930893.1:1..91160
 NW_007930894.1	source	1..88999	note	ID:NW_007930894.1:1..88999
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -89161,6 +89220,7 @@ NW_007930894.1	source	1..88999	note	ID:NW_007930894.1:1..88999
 NW_007930895.1	source	1..86277	note	ID:NW_007930895.1:1..86277
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -89416,6 +89476,7 @@ NW_007930895.1	source	1..86277	note	ID:NW_007930895.1:1..86277
 NW_007930896.1	source	1..85000	note	ID:NW_007930896.1:1..85000
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -89677,6 +89738,7 @@ NW_007930896.1	source	1..85000	note	ID:NW_007930896.1:1..85000
 NW_007930897.1	source	1..84717	note	ID:NW_007930897.1:1..84717
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -89953,6 +90015,7 @@ NW_007930897.1	source	1..84717	note	ID:NW_007930897.1:1..84717
 NW_007930898.1	source	1..79466	note	ID:NW_007930898.1:1..79466
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -90184,6 +90247,7 @@ NW_007930898.1	source	1..79466	note	ID:NW_007930898.1:1..79466
 NW_007930899.1	source	1..78950	note	ID:NW_007930899.1:1..78950
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -90427,6 +90491,7 @@ NW_007930899.1	source	1..78950	note	ID:NW_007930899.1:1..78950
 NW_007930900.1	source	1..74556	note	ID:NW_007930900.1:1..74556
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -90601,6 +90666,7 @@ NW_007930900.1	source	1..74556	note	ID:NW_007930900.1:1..74556
 NW_007930901.1	source	1..72897	note	ID:NW_007930901.1:1..72897
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -90811,6 +90877,7 @@ NW_007930901.1	source	1..72897	note	ID:NW_007930901.1:1..72897
 NW_007930902.1	source	1..71291	note	ID:NW_007930902.1:1..71291
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -90910,6 +90977,7 @@ NW_007930902.1	source	1..71291	note	ID:NW_007930902.1:1..71291
 NW_007930903.1	source	1..70193	note	ID:NW_007930903.1:1..70193
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -91132,6 +91200,7 @@ NW_007930903.1	source	1..70193	note	ID:NW_007930903.1:1..70193
 NW_007930904.1	source	1..66062	note	ID:NW_007930904.1:1..66062
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -91324,6 +91393,7 @@ NW_007930904.1	source	1..66062	note	ID:NW_007930904.1:1..66062
 NW_007930905.1	source	1..64310	note	ID:NW_007930905.1:1..64310
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -91564,6 +91634,7 @@ NW_007930905.1	source	1..64310	note	ID:NW_007930905.1:1..64310
 NW_007930906.1	source	1..61499	note	ID:NW_007930906.1:1..61499
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -91738,6 +91809,7 @@ NW_007930906.1	source	1..61499	note	ID:NW_007930906.1:1..61499
 NW_007930907.1	source	1..54974	note	ID:NW_007930907.1:1..54974
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -91990,6 +92062,7 @@ NW_007930907.1	source	1..54974	note	ID:NW_007930907.1:1..54974
 NW_007930908.1	source	1..54940	note	ID:NW_007930908.1:1..54940
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -92182,6 +92255,7 @@ NW_007930908.1	source	1..54940	note	ID:NW_007930908.1:1..54940
 NW_007930909.1	source	1..51310	note	ID:NW_007930909.1:1..51310
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -92311,6 +92385,7 @@ NW_007930909.1	source	1..51310	note	ID:NW_007930909.1:1..51310
 NW_007930910.1	source	1..51040	note	ID:NW_007930910.1:1..51040
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -92485,6 +92560,7 @@ NW_007930910.1	source	1..51040	note	ID:NW_007930910.1:1..51040
 NW_007930911.1	source	1..50656	note	ID:NW_007930911.1:1..50656
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -92629,6 +92705,7 @@ NW_007930911.1	source	1..50656	note	ID:NW_007930911.1:1..50656
 NW_007930912.1	source	1..50391	note	ID:NW_007930912.1:1..50391
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -92803,6 +92880,7 @@ NW_007930912.1	source	1..50391	note	ID:NW_007930912.1:1..50391
 NW_007930913.1	source	1..48784	note	ID:NW_007930913.1:1..48784
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -92965,6 +93043,7 @@ NW_007930913.1	source	1..48784	note	ID:NW_007930913.1:1..48784
 NW_007930914.1	source	1..48467	note	ID:NW_007930914.1:1..48467
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -93103,6 +93182,7 @@ NW_007930914.1	source	1..48467	note	ID:NW_007930914.1:1..48467
 NW_007930915.1	source	1..48414	note	ID:NW_007930915.1:1..48414
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -93265,6 +93345,7 @@ NW_007930915.1	source	1..48414	note	ID:NW_007930915.1:1..48414
 NW_007930916.1	source	1..47271	note	ID:NW_007930916.1:1..47271
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -93406,6 +93487,7 @@ NW_007930916.1	source	1..47271	note	ID:NW_007930916.1:1..47271
 NW_007930917.1	source	1..46474	note	ID:NW_007930917.1:1..46474
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -93514,6 +93596,7 @@ NW_007930917.1	source	1..46474	note	ID:NW_007930917.1:1..46474
 NW_007930918.1	source	1..44755	note	ID:NW_007930918.1:1..44755
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -93637,6 +93720,7 @@ NW_007930918.1	source	1..44755	note	ID:NW_007930918.1:1..44755
 NW_007930919.1	source	1..42791	note	ID:NW_007930919.1:1..42791
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -93808,6 +93892,7 @@ NW_007930919.1	source	1..42791	note	ID:NW_007930919.1:1..42791
 NW_007930920.1	source	1..42128	note	ID:NW_007930920.1:1..42128
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -93982,6 +94067,7 @@ NW_007930920.1	source	1..42128	note	ID:NW_007930920.1:1..42128
 NW_007930921.1	source	1..42044	note	ID:NW_007930921.1:1..42044
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -94084,6 +94170,7 @@ NW_007930921.1	source	1..42044	note	ID:NW_007930921.1:1..42044
 NW_007930922.1	source	1..40964	note	ID:NW_007930922.1:1..40964
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -94180,6 +94267,7 @@ NW_007930922.1	source	1..40964	note	ID:NW_007930922.1:1..40964
 NW_007930923.1	source	1..40209	note	ID:NW_007930923.1:1..40209
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -94264,6 +94352,7 @@ NW_007930923.1	source	1..40209	note	ID:NW_007930923.1:1..40209
 NW_007930924.1	source	1..39074	note	ID:NW_007930924.1:1..39074
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -94342,6 +94431,7 @@ NW_007930924.1	source	1..39074	note	ID:NW_007930924.1:1..39074
 NW_007930925.1	source	1..38302	note	ID:NW_007930925.1:1..38302
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -94462,6 +94552,7 @@ NW_007930925.1	source	1..38302	note	ID:NW_007930925.1:1..38302
 NW_007930926.1	source	1..34855	note	ID:NW_007930926.1:1..34855
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -94561,6 +94652,7 @@ NW_007930926.1	source	1..34855	note	ID:NW_007930926.1:1..34855
 NW_007930927.1	source	1..32420	note	ID:NW_007930927.1:1..32420
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -94654,6 +94746,7 @@ NW_007930927.1	source	1..32420	note	ID:NW_007930927.1:1..32420
 NW_007930928.1	source	1..32175	note	ID:NW_007930928.1:1..32175
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -94774,6 +94867,7 @@ NW_007930928.1	source	1..32175	note	ID:NW_007930928.1:1..32175
 NW_007930929.1	source	1..32149	note	ID:NW_007930929.1:1..32149
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -94912,6 +95006,7 @@ NW_007930929.1	source	1..32149	note	ID:NW_007930929.1:1..32149
 NW_007930930.1	source	1..30842	note	ID:NW_007930930.1:1..30842
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -94972,6 +95067,7 @@ NW_007930930.1	source	1..30842	note	ID:NW_007930930.1:1..30842
 NW_007930931.1	source	1..30689	note	ID:NW_007930931.1:1..30689
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -95077,6 +95173,7 @@ NW_007930931.1	source	1..30689	note	ID:NW_007930931.1:1..30689
 NW_007930932.1	source	1..28440	note	ID:NW_007930932.1:1..28440
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -95185,6 +95282,7 @@ NW_007930932.1	source	1..28440	note	ID:NW_007930932.1:1..28440
 NW_007930933.1	source	1..28184	note	ID:NW_007930933.1:1..28184
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -95299,6 +95397,7 @@ NW_007930933.1	source	1..28184	note	ID:NW_007930933.1:1..28184
 NW_007930934.1	source	1..26947	note	ID:NW_007930934.1:1..26947
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -95377,6 +95476,7 @@ NW_007930934.1	source	1..26947	note	ID:NW_007930934.1:1..26947
 NW_007930935.1	source	1..25325	note	ID:NW_007930935.1:1..25325
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -95425,6 +95525,7 @@ NW_007930935.1	source	1..25325	note	ID:NW_007930935.1:1..25325
 NW_007930936.1	source	1..24803	note	ID:NW_007930936.1:1..24803
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -95512,6 +95613,7 @@ NW_007930936.1	source	1..24803	note	ID:NW_007930936.1:1..24803
 NW_007930937.1	source	1..23527	note	ID:NW_007930937.1:1..23527
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -95545,6 +95647,7 @@ NW_007930937.1	source	1..23527	note	ID:NW_007930937.1:1..23527
 NW_007930938.1	source	1..23207	note	ID:NW_007930938.1:1..23207
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -95605,6 +95708,7 @@ NW_007930938.1	source	1..23207	note	ID:NW_007930938.1:1..23207
 NW_007930939.1	source	1..21115	note	ID:NW_007930939.1:1..21115
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -95659,6 +95763,7 @@ NW_007930939.1	source	1..21115	note	ID:NW_007930939.1:1..21115
 NW_007930940.1	source	1..20957	note	ID:NW_007930940.1:1..20957
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -95731,6 +95836,7 @@ NW_007930940.1	source	1..20957	note	ID:NW_007930940.1:1..20957
 NW_007930941.1	source	1..20355	note	ID:NW_007930941.1:1..20355
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -95767,6 +95873,7 @@ NW_007930941.1	source	1..20355	note	ID:NW_007930941.1:1..20355
 NW_007930942.1	source	1..20191	note	ID:NW_007930942.1:1..20191
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -95815,6 +95922,7 @@ NW_007930942.1	source	1..20191	note	ID:NW_007930942.1:1..20191
 NW_007930943.1	source	1..20129	note	ID:NW_007930943.1:1..20129
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -95884,6 +95992,7 @@ NW_007930943.1	source	1..20129	note	ID:NW_007930943.1:1..20129
 NW_007930944.1	source	1..19999	note	ID:NW_007930944.1:1..19999
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -95941,6 +96050,7 @@ NW_007930944.1	source	1..19999	note	ID:NW_007930944.1:1..19999
 NW_007930945.1	source	1..19937	note	ID:NW_007930945.1:1..19937
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -96004,6 +96114,7 @@ NW_007930945.1	source	1..19937	note	ID:NW_007930945.1:1..19937
 NW_007930946.1	source	1..19038	note	ID:NW_007930946.1:1..19038
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -96064,6 +96175,7 @@ NW_007930946.1	source	1..19038	note	ID:NW_007930946.1:1..19038
 NW_007930947.1	source	1..18493	note	ID:NW_007930947.1:1..18493
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -96094,6 +96206,7 @@ NW_007930947.1	source	1..18493	note	ID:NW_007930947.1:1..18493
 NW_007930948.1	source	1..18177	note	ID:NW_007930948.1:1..18177
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -96139,6 +96252,7 @@ NW_007930948.1	source	1..18177	note	ID:NW_007930948.1:1..18177
 NW_007930949.1	source	1..15365	note	ID:NW_007930949.1:1..15365
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -96208,6 +96322,7 @@ NW_007930949.1	source	1..15365	note	ID:NW_007930949.1:1..15365
 NW_007930950.1	source	1..15306	note	ID:NW_007930950.1:1..15306
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -96244,6 +96359,7 @@ NW_007930950.1	source	1..15306	note	ID:NW_007930950.1:1..15306
 NW_007930951.1	source	1..12883	note	ID:NW_007930951.1:1..12883
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -96301,6 +96417,7 @@ NW_007930951.1	source	1..12883	note	ID:NW_007930951.1:1..12883
 NW_007930952.1	source	1..12836	note	ID:NW_007930952.1:1..12836
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -96331,6 +96448,7 @@ NW_007930952.1	source	1..12836	note	ID:NW_007930952.1:1..12836
 NW_007930953.1	source	1..12644	note	ID:NW_007930953.1:1..12644
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -96373,6 +96491,7 @@ NW_007930953.1	source	1..12644	note	ID:NW_007930953.1:1..12644
 NW_007930954.1	source	1..12383	note	ID:NW_007930954.1:1..12383
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -96415,6 +96534,7 @@ NW_007930954.1	source	1..12383	note	ID:NW_007930954.1:1..12383
 NW_007930955.1	source	1..12195	note	ID:NW_007930955.1:1..12195
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -96457,6 +96577,7 @@ NW_007930955.1	source	1..12195	note	ID:NW_007930955.1:1..12195
 NW_007930956.1	source	1..12040	note	ID:NW_007930956.1:1..12040
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -96481,6 +96602,7 @@ NW_007930956.1	source	1..12040	note	ID:NW_007930956.1:1..12040
 NW_007930957.1	source	1..11899	note	ID:NW_007930957.1:1..11899
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -96520,6 +96642,7 @@ NW_007930957.1	source	1..11899	note	ID:NW_007930957.1:1..11899
 NW_007930958.1	source	1..11814	note	ID:NW_007930958.1:1..11814
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -96535,6 +96658,7 @@ NW_007930958.1	source	1..11814	note	ID:NW_007930958.1:1..11814
 NW_007930959.1	source	1..11761	note	ID:NW_007930959.1:1..11761
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -96571,6 +96695,7 @@ NW_007930959.1	source	1..11761	note	ID:NW_007930959.1:1..11761
 NW_007930960.1	source	1..11469	note	ID:NW_007930960.1:1..11469
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -96619,6 +96744,7 @@ NW_007930960.1	source	1..11469	note	ID:NW_007930960.1:1..11469
 NW_007930961.1	source	1..10582	note	ID:NW_007930961.1:1..10582
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -96658,6 +96784,7 @@ NW_007930961.1	source	1..10582	note	ID:NW_007930961.1:1..10582
 NW_007930962.1	source	1..10467	note	ID:NW_007930962.1:1..10467
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -96691,6 +96818,7 @@ NW_007930962.1	source	1..10467	note	ID:NW_007930962.1:1..10467
 NW_007930963.1	source	1..10079	note	ID:NW_007930963.1:1..10079
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -96721,6 +96849,7 @@ NW_007930963.1	source	1..10079	note	ID:NW_007930963.1:1..10079
 NW_007930964.1	source	1..9169	note	ID:NW_007930964.1:1..9169
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -96751,6 +96880,7 @@ NW_007930964.1	source	1..9169	note	ID:NW_007930964.1:1..9169
 NW_007930965.1	source	1..9046	note	ID:NW_007930965.1:1..9046
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -96766,6 +96896,7 @@ NW_007930965.1	source	1..9046	note	ID:NW_007930965.1:1..9046
 NW_007930966.1	source	1..8820	note	ID:NW_007930966.1:1..8820
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -96814,6 +96945,7 @@ NW_007930966.1	source	1..8820	note	ID:NW_007930966.1:1..8820
 NW_007930967.1	source	1..8066	note	ID:NW_007930967.1:1..8066
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -96829,6 +96961,7 @@ NW_007930967.1	source	1..8066	note	ID:NW_007930967.1:1..8066
 NW_007930968.1	source	1..7588	note	ID:NW_007930968.1:1..7588
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -96853,6 +96986,7 @@ NW_007930968.1	source	1..7588	note	ID:NW_007930968.1:1..7588
 NW_007930969.1	source	1..7432	note	ID:NW_007930969.1:1..7432
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -96877,6 +97011,7 @@ NW_007930969.1	source	1..7432	note	ID:NW_007930969.1:1..7432
 NW_007930970.1	source	1..7206	note	ID:NW_007930970.1:1..7206
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -96901,12 +97036,14 @@ NW_007930970.1	source	1..7206	note	ID:NW_007930970.1:1..7206
 NW_007930971.1	source	1..7167	note	ID:NW_007930971.1:1..7167
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007930972.1	source	1..6985	note	ID:NW_007930972.1:1..6985
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -96952,6 +97089,7 @@ NW_007930972.1	source	1..6985	note	ID:NW_007930972.1:1..6985
 NW_007930973.1	source	1..6867	note	ID:NW_007930973.1:1..6867
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -96967,6 +97105,7 @@ NW_007930973.1	source	1..6867	note	ID:NW_007930973.1:1..6867
 NW_007930974.1	source	1..6710	note	ID:NW_007930974.1:1..6710
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -96982,6 +97121,7 @@ NW_007930974.1	source	1..6710	note	ID:NW_007930974.1:1..6710
 NW_007930975.1	source	1..6650	note	ID:NW_007930975.1:1..6650
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97006,6 +97146,7 @@ NW_007930975.1	source	1..6650	note	ID:NW_007930975.1:1..6650
 NW_007930976.1	source	1..6620	note	ID:NW_007930976.1:1..6620
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97018,6 +97159,7 @@ NW_007930976.1	source	1..6620	note	ID:NW_007930976.1:1..6620
 NW_007930977.1	source	1..6409	note	ID:NW_007930977.1:1..6409
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97042,6 +97184,7 @@ NW_007930977.1	source	1..6409	note	ID:NW_007930977.1:1..6409
 NW_007930978.1	source	1..6075	note	ID:NW_007930978.1:1..6075
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97051,6 +97194,7 @@ NW_007930978.1	source	1..6075	note	ID:NW_007930978.1:1..6075
 NW_007930979.1	source	1..5390	note	ID:NW_007930979.1:1..5390
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97066,6 +97210,7 @@ NW_007930979.1	source	1..5390	note	ID:NW_007930979.1:1..5390
 NW_007930980.1	source	1..5151	note	ID:NW_007930980.1:1..5151
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97090,6 +97235,7 @@ NW_007930980.1	source	1..5151	note	ID:NW_007930980.1:1..5151
 NW_007930981.1	source	1..5141	note	ID:NW_007930981.1:1..5141
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97108,6 +97254,7 @@ NW_007930981.1	source	1..5141	note	ID:NW_007930981.1:1..5141
 NW_007930982.1	source	1..5120	note	ID:NW_007930982.1:1..5120
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97123,6 +97270,7 @@ NW_007930982.1	source	1..5120	note	ID:NW_007930982.1:1..5120
 NW_007930983.1	source	1..5091	note	ID:NW_007930983.1:1..5091
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97159,6 +97307,7 @@ NW_007930983.1	source	1..5091	note	ID:NW_007930983.1:1..5091
 NW_007930984.1	source	1..5000	note	ID:NW_007930984.1:1..5000
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97183,6 +97332,7 @@ NW_007930984.1	source	1..5000	note	ID:NW_007930984.1:1..5000
 NW_007930985.1	source	1..4537	note	ID:NW_007930985.1:1..4537
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97198,6 +97348,7 @@ NW_007930985.1	source	1..4537	note	ID:NW_007930985.1:1..4537
 NW_007930986.1	source	1..4296	note	ID:NW_007930986.1:1..4296
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97207,6 +97358,7 @@ NW_007930986.1	source	1..4296	note	ID:NW_007930986.1:1..4296
 NW_007930987.1	source	1..4226	note	ID:NW_007930987.1:1..4226
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97231,6 +97383,7 @@ NW_007930987.1	source	1..4226	note	ID:NW_007930987.1:1..4226
 NW_007930988.1	source	1..4136	note	ID:NW_007930988.1:1..4136
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97249,6 +97402,7 @@ NW_007930988.1	source	1..4136	note	ID:NW_007930988.1:1..4136
 NW_007930989.1	source	1..4126	note	ID:NW_007930989.1:1..4126
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97261,6 +97415,7 @@ NW_007930989.1	source	1..4126	note	ID:NW_007930989.1:1..4126
 NW_007930990.1	source	1..3812	note	ID:NW_007930990.1:1..3812
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97276,6 +97431,7 @@ NW_007930990.1	source	1..3812	note	ID:NW_007930990.1:1..3812
 NW_007930991.1	source	1..3747	note	ID:NW_007930991.1:1..3747
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97285,12 +97441,14 @@ NW_007930991.1	source	1..3747	note	ID:NW_007930991.1:1..3747
 NW_007930992.1	source	1..3622	note	ID:NW_007930992.1:1..3622
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007930993.1	source	1..3475	note	ID:NW_007930993.1:1..3475
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97300,6 +97458,7 @@ NW_007930993.1	source	1..3475	note	ID:NW_007930993.1:1..3475
 NW_007930994.1	source	1..3442	note	ID:NW_007930994.1:1..3442
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97309,6 +97468,7 @@ NW_007930994.1	source	1..3442	note	ID:NW_007930994.1:1..3442
 NW_007930995.1	source	1..3376	note	ID:NW_007930995.1:1..3376
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97318,6 +97478,7 @@ NW_007930995.1	source	1..3376	note	ID:NW_007930995.1:1..3376
 NW_007930996.1	source	1..3028	note	ID:NW_007930996.1:1..3028
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97327,6 +97488,7 @@ NW_007930996.1	source	1..3028	note	ID:NW_007930996.1:1..3028
 NW_007930997.1	source	1..2999	note	ID:NW_007930997.1:1..2999
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97345,6 +97507,7 @@ NW_007930997.1	source	1..2999	note	ID:NW_007930997.1:1..2999
 NW_007930998.1	source	1..2961	note	ID:NW_007930998.1:1..2961
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97354,6 +97517,7 @@ NW_007930998.1	source	1..2961	note	ID:NW_007930998.1:1..2961
 NW_007930999.1	source	1..2878	note	ID:NW_007930999.1:1..2878
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97363,6 +97527,7 @@ NW_007930999.1	source	1..2878	note	ID:NW_007930999.1:1..2878
 NW_007931000.1	source	1..2853	note	ID:NW_007931000.1:1..2853
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97372,6 +97537,7 @@ NW_007931000.1	source	1..2853	note	ID:NW_007931000.1:1..2853
 NW_007931001.1	source	1..2804	note	ID:NW_007931001.1:1..2804
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97390,6 +97556,7 @@ NW_007931001.1	source	1..2804	note	ID:NW_007931001.1:1..2804
 NW_007931002.1	source	1..2781	note	ID:NW_007931002.1:1..2781
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97405,6 +97572,7 @@ NW_007931002.1	source	1..2781	note	ID:NW_007931002.1:1..2781
 NW_007931003.1	source	1..2753	note	ID:NW_007931003.1:1..2753
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97414,6 +97582,7 @@ NW_007931003.1	source	1..2753	note	ID:NW_007931003.1:1..2753
 NW_007931004.1	source	1..2586	note	ID:NW_007931004.1:1..2586
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97423,6 +97592,7 @@ NW_007931004.1	source	1..2586	note	ID:NW_007931004.1:1..2586
 NW_007931005.1	source	1..2503	note	ID:NW_007931005.1:1..2503
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97432,6 +97602,7 @@ NW_007931005.1	source	1..2503	note	ID:NW_007931005.1:1..2503
 NW_007931006.1	source	1..2416	note	ID:NW_007931006.1:1..2416
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97441,6 +97612,7 @@ NW_007931006.1	source	1..2416	note	ID:NW_007931006.1:1..2416
 NW_007931007.1	source	1..2326	note	ID:NW_007931007.1:1..2326
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97450,6 +97622,7 @@ NW_007931007.1	source	1..2326	note	ID:NW_007931007.1:1..2326
 NW_007931008.1	source	1..2274	note	ID:NW_007931008.1:1..2274
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97459,54 +97632,63 @@ NW_007931008.1	source	1..2274	note	ID:NW_007931008.1:1..2274
 NW_007931009.1	source	1..1882	note	ID:NW_007931009.1:1..1882
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931010.1	source	1..1823	note	ID:NW_007931010.1:1..1823
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931011.1	source	1..1726	note	ID:NW_007931011.1:1..1726
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931012.1	source	1..1705	note	ID:NW_007931012.1:1..1705
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931013.1	source	1..1683	note	ID:NW_007931013.1:1..1683
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931014.1	source	1..1557	note	ID:NW_007931014.1:1..1557
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931015.1	source	1..1499	note	ID:NW_007931015.1:1..1499
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931016.1	source	1..1490	note	ID:NW_007931016.1:1..1490
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931017.1	source	1..1488	note	ID:NW_007931017.1:1..1488
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97522,72 +97704,84 @@ NW_007931017.1	source	1..1488	note	ID:NW_007931017.1:1..1488
 NW_007931018.1	source	1..1488	note	ID:NW_007931018.1:1..1488
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931019.1	source	1..1459	note	ID:NW_007931019.1:1..1459
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931020.1	source	1..1456	note	ID:NW_007931020.1:1..1456
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931021.1	source	1..1453	note	ID:NW_007931021.1:1..1453
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931022.1	source	1..1446	note	ID:NW_007931022.1:1..1446
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931023.1	source	1..1428	note	ID:NW_007931023.1:1..1428
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931024.1	source	1..1427	note	ID:NW_007931024.1:1..1427
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931025.1	source	1..1420	note	ID:NW_007931025.1:1..1420
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931026.1	source	1..1412	note	ID:NW_007931026.1:1..1412
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931027.1	source	1..1410	note	ID:NW_007931027.1:1..1410
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931028.1	source	1..1398	note	ID:NW_007931028.1:1..1398
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931029.1	source	1..1384	note	ID:NW_007931029.1:1..1384
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97597,6 +97791,7 @@ NW_007931029.1	source	1..1384	note	ID:NW_007931029.1:1..1384
 NW_007931030.1	source	1..1371	note	ID:NW_007931030.1:1..1371
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97612,30 +97807,35 @@ NW_007931030.1	source	1..1371	note	ID:NW_007931030.1:1..1371
 NW_007931031.1	source	1..1352	note	ID:NW_007931031.1:1..1352
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931032.1	source	1..1351	note	ID:NW_007931032.1:1..1351
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931033.1	source	1..1324	note	ID:NW_007931033.1:1..1324
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931034.1	source	1..1321	note	ID:NW_007931034.1:1..1321
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931035.1	source	1..1307	note	ID:NW_007931035.1:1..1307
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97651,132 +97851,154 @@ NW_007931035.1	source	1..1307	note	ID:NW_007931035.1:1..1307
 NW_007931036.1	source	1..1272	note	ID:NW_007931036.1:1..1272
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931037.1	source	1..1269	note	ID:NW_007931037.1:1..1269
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931038.1	source	1..1265	note	ID:NW_007931038.1:1..1265
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931039.1	source	1..1252	note	ID:NW_007931039.1:1..1252
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931040.1	source	1..1231	note	ID:NW_007931040.1:1..1231
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931041.1	source	1..1217	note	ID:NW_007931041.1:1..1217
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931042.1	source	1..1212	note	ID:NW_007931042.1:1..1212
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931043.1	source	1..1206	note	ID:NW_007931043.1:1..1206
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931044.1	source	1..1201	note	ID:NW_007931044.1:1..1201
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931045.1	source	1..1145	note	ID:NW_007931045.1:1..1145
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931046.1	source	1..1136	note	ID:NW_007931046.1:1..1136
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931047.1	source	1..1136	note	ID:NW_007931047.1:1..1136
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931048.1	source	1..1131	note	ID:NW_007931048.1:1..1131
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931049.1	source	1..1130	note	ID:NW_007931049.1:1..1130
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931050.1	source	1..1128	note	ID:NW_007931050.1:1..1128
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931051.1	source	1..1120	note	ID:NW_007931051.1:1..1120
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931052.1	source	1..1117	note	ID:NW_007931052.1:1..1117
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931053.1	source	1..1114	note	ID:NW_007931053.1:1..1114
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931054.1	source	1..1108	note	ID:NW_007931054.1:1..1108
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931055.1	source	1..1107	note	ID:NW_007931055.1:1..1107
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931056.1	source	1..1096	note	ID:NW_007931056.1:1..1096
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931057.1	source	1..1092	note	ID:NW_007931057.1:1..1092
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97792,12 +98014,14 @@ NW_007931057.1	source	1..1092	note	ID:NW_007931057.1:1..1092
 NW_007931058.1	source	1..1090	note	ID:NW_007931058.1:1..1090
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931059.1	source	1..1090	note	ID:NW_007931059.1:1..1090
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97807,71 +98031,83 @@ NW_007931059.1	source	1..1090	note	ID:NW_007931059.1:1..1090
 NW_007931060.1	source	1..1083	note	ID:NW_007931060.1:1..1083
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931061.1	source	1..1083	note	ID:NW_007931061.1:1..1083
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931062.1	source	1..1081	note	ID:NW_007931062.1:1..1081
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931063.1	source	1..1079	note	ID:NW_007931063.1:1..1079
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931064.1	source	1..1058	note	ID:NW_007931064.1:1..1058
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931065.1	source	1..1051	note	ID:NW_007931065.1:1..1051
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931066.1	source	1..1039	note	ID:NW_007931066.1:1..1039
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931067.1	source	1..1032	note	ID:NW_007931067.1:1..1032
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931068.1	source	1..1022	note	ID:NW_007931068.1:1..1022
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931069.1	source	1..1021	note	ID:NW_007931069.1:1..1021
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931070.1	source	1..1004	note	ID:NW_007931070.1:1..1004
 			note	source:RefSeq
 			chromosome	Unknown
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
 NW_007931071.1	source	1..2575	note	ID:NW_007931071.1:1..2575
 			note	source:RefSeq
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -97880,6 +98116,7 @@ NW_007931071.1	source	1..2575	note	ID:NW_007931071.1:1..2575
 			linkage_evidence	paired-ends
 NW_007931072.1	source	1..1283	note	ID:NW_007931072.1:1..1283
 			note	source:RefSeq
+			culture_collection	ARSEF:2860
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860

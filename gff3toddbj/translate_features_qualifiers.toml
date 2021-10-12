@@ -245,6 +245,142 @@ qualifier_value_prefix =  "<dummy>"
 [__ANY__.Description]
 qualifier_key = "note"
 
+## ----------------BEGIN-------------------
+## Qualifiers with hyphens are replaced with underscores
+[__ANY__.bio-material]
+qualifier_key = "bio_material"
+
+[__ANY__.cell-line]
+qualifier_key = "cell_line"
+
+[__ANY__.cell-type]
+qualifier_key = "cell_type"
+
+[__ANY__.clone-lib]
+qualifier_key = "clone_lib"
+
+[__ANY__.collected-by]
+qualifier_key = "collected_by"
+
+[__ANY__.collection-date]
+qualifier_key = "collection_date"
+
+[__ANY__.culture-collection]
+qualifier_key = "culture_collection"
+
+[__ANY__.dev-stage]
+qualifier_key = "dev_stage"
+
+[__ANY__.environmental-sample]
+qualifier_key = "environmental_sample"
+
+[__ANY__.identified-by]
+qualifier_key = "identified_by"
+
+[__ANY__.isolation-source]
+qualifier_key = "isolation_source"
+
+[__ANY__.lab-host]
+qualifier_key = "lab_host"
+
+[__ANY__.lat-lon]
+qualifier_key = "lat_lon"
+
+[__ANY__.mating-type]
+qualifier_key = "mating_type"
+
+[__ANY__.mol-type]
+qualifier_key = "mol_type"
+
+[__ANY__.PCR-primers]
+qualifier_key = "PCR_primers"
+
+[__ANY__.specimen-voucher]
+qualifier_key = "specimen_voucher"
+
+[__ANY__.submitter-seqid]
+qualifier_key = "submitter_seqid"
+
+[__ANY__.sub-clone]
+qualifier_key = "sub_clone"
+
+[__ANY__.sub-species]
+qualifier_key = "sub_species"
+
+[__ANY__.sub-strain]
+qualifier_key = "sub_strain"
+
+[__ANY__.tissue-type]
+qualifier_key = "tissue_type"
+
+[__ANY__.artificial-location]
+qualifier_key = "artificial_location"
+
+[__ANY__.bound-moiety]
+qualifier_key = "bound_moiety"
+
+[__ANY__.codon-start]
+qualifier_key = "codon_start"
+
+[__ANY__.EC-number]
+qualifier_key = "EC_number"
+
+[__ANY__.estimated-length]
+qualifier_key = "estimated_length"
+
+[__ANY__.gap-type]
+qualifier_key = "gap_type"
+
+[__ANY__.gene-synonym]
+qualifier_key = "gene_synonym"
+
+[__ANY__.linkage-evidence]
+qualifier_key = "linkage_evidence"
+
+[__ANY__.locus-tag]
+qualifier_key = "locus_tag"
+
+[__ANY__.mobile_element-type]
+qualifier_key = "mobile_element_type"
+
+[__ANY__.mod-base]
+qualifier_key = "mod_base"
+
+[__ANY__.ncRNA-class]
+qualifier_key = "ncRNA_class"
+
+[__ANY__.PCR-conditions]
+qualifier_key = "PCR_conditions"
+
+[__ANY__.regulatory-class]
+qualifier_key = "regulatory_class"
+
+[__ANY__.ribosomal-slippage]
+qualifier_key = "ribosomal_slippage"
+
+[__ANY__.rpt-family]
+qualifier_key = "rpt_family"
+
+[__ANY__.rpt-type]
+qualifier_key = "rpt_type"
+
+[__ANY__.rpt_unit-seq]
+qualifier_key = "rpt_unit_seq"
+
+[__ANY__.tag-peptide]
+qualifier_key = "tag_peptide"
+
+[__ANY__.transl-except]
+qualifier_key = "transl_except"
+
+[__ANY__.transl-table]
+qualifier_key = "transl_table"
+
+[__ANY__.trans-splicing]
+qualifier_key = "trans_splicing"
+## -----------------END--------------------
+
+
 # --------------
 # Force setting null as the value of /pseudo qualifier
 #   i.e. convert from /pseudo=true
