@@ -229,21 +229,16 @@ qualifier_key = "gene"
 [__ANY__.geneID]
 qualifier_key = "gene"
 
-[__ANY__.description]
+[__ANY__.Description]
 qualifier_key = "note"
 
-[__ANY__.eC_number]
-qualifier_key = "EC_number"
-
-[__ANY__.ec_number]
+[__ANY__.EC_number]
 qualifier_key = "EC_number"
 
 [__ANY__.locus_tag]
 qualifier_key = "locus_tag"
 qualifier_value_prefix =  "<dummy>"
 
-[__ANY__.Description]
-qualifier_key = "note"
 
 ## ----------------BEGIN-------------------
 ## Qualifiers with hyphens are replaced with underscores

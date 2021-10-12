@@ -98,7 +98,8 @@ class RenameHandler(object):
     _DUMMY_PREFIX = "__tmpname__"
 
     def __init__(self, filepath: str, locus_tag_prefix: str):
-        self.d = io.load_toml_tables(filepath)
+        self.d = utils.to_lowercase_keys(io.load_toml_tables(filepath))
+
         # overwrite with locus_tag_prefix
         self.d["__ANY__"]["locus_tag"]["qualifier_value_prefix"] = locus_tag_prefix
 
@@ -132,8 +133,9 @@ class RenameHandler(object):
                 feature.qualifiers = self._run_on_qualifiers(feature.qualifiers, self.d["__ANY__"])
 
             type_ = feature.type
-            if type_ in self.d:
-                below_type = self.d[type_]
+            type_lower = type_.lower()
+            if type_lower in self.d:
+                below_type = self.d[type_lower]
                 attribute_keys = utils.get_attribute_keys(below_type)
                 new_type = below_type.get("feature_key", "")
                 if new_type:
@@ -182,15 +184,16 @@ class RenameHandler(object):
         """
         res = collections.OrderedDict()
         for name, vals in qualifiers.items():
-            if name in subtree:
+            qual_key = name.lower()
+            if qual_key in subtree:
                 # Replace the item name
-                new_name = subtree[name].get("qualifier_key", "")
+                new_name = subtree[qual_key].get("qualifier_key", "")
                 if new_name:
-                    if "qualifier_value" in subtree[name]:
+                    if "qualifier_value" in subtree[qual_key]:
                         # overwrite qualifier value with the setting
-                        vals = [subtree[name]["qualifier_value"]]
+                        vals = [subtree[qual_key]["qualifier_value"]]
                     else:
-                        prefix = subtree[name].get("qualifier_value_prefix", "")
+                        prefix = subtree[qual_key].get("qualifier_value_prefix", "")
                         if prefix:
                             vals = [prefix + v for v in vals]
 

@@ -1,6 +1,7 @@
 ## Current
 * Change `genbank-to-ddbj` to simplify its internals as much as possible
 * Change `compare-ddbj` to always count elements as multiset
+* Change to accept case variants in feature/qualifier names
 
 
 ## v0.3.0 (2021-10-12)

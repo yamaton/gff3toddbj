@@ -241,3 +241,24 @@ def get_attribute_keys(subtree: OrderedDict[str, Any]) -> List[str]:
     if set(subtree.keys()) < TARGET_KEYS_IN_TRANSLATION:
         return []
     return subtree.keys()
+
+
+def to_lowercase_keys(table: OrderedDict[str, Any]) -> OrderedDict[str, Any]:
+    """
+    Convert all dictionary keys to lowercase. It can be nested.
+    """
+    res = collections.OrderedDict()
+
+    for key in table:
+        val = table[key]
+        if ("feature_key" in val) or ("qualifier_key" in val):
+            res[key.lower()] = val
+        elif key == "__ANY__":
+            res["__ANY__"] = to_lowercase_keys(val)
+        elif isinstance(val, OrderedDict):
+            res[key.lower()] = to_lowercase_keys(val)
+        else:
+            logging.error("Something is wrong with the dictionary!")
+            return table
+
+    return res
