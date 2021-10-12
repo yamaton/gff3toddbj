@@ -134,6 +134,7 @@ def has_stop_codon(
     seq: Seq,
     location: Union[FeatureLocation, CompoundLocation],
     transl_table: int,
+    phase : int,
 ) -> bool:
     """Check if stop codon exists in seq.
     Stop codons correspond to the Genetic Code transl_table.
@@ -142,9 +143,13 @@ def has_stop_codon(
     >>> seq = Seq("GAATGCGAGGGTAGT")
     >>> loc = FeatureLocation(2, 14, strand=1)
     >>> genetic_code = 1
-    >>> has_stop_codon(seq, loc, genetic_code)
+    >>> has_stop_codon(seq, loc, genetic_code, phase=0)
     True
     """
+    # if the length is not multiple of 3, stop codon does not exist.
+    if (len(location) - phase) % 3 > 0:
+        return False
+
     strand = location.strand
     stop_codons = CodonTable.unambiguous_dna_by_id[transl_table].stop_codons
 

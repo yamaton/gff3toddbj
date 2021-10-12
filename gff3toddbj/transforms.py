@@ -449,7 +449,7 @@ def _fix_locations(record: SeqRecord, faidx: Optional[io.Faidx]=None) -> None:
                     else:
                         f.location = _fix_absent_start_codon(f.location)
 
-                if not utils.has_stop_codon(seq, f.location, genetic_code):
+                if not utils.has_stop_codon(seq, f.location, genetic_code, phase):
                     f.location = _fix_absent_stop_codon(f.location)
 
             if hasattr(f, "sub_features"):
