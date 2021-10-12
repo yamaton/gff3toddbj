@@ -443,11 +443,7 @@ def _fix_locations(record: SeqRecord, faidx: Optional[io.Faidx]=None) -> None:
                 genetic_code = int(f.qualifiers["transl_table"][0])
 
                 if not utils.has_start_codon(seq, f.location, genetic_code, phase):
-                    if phase > 0 and utils.has_start_codon(seq, f.location, genetic_code):
-                        count_fix_codon_start_loc.append(f.location)
-                        f.qualifiers["codon_start"] = [1]
-                    else:
-                        f.location = _fix_absent_start_codon(f.location)
+                    f.location = _fix_absent_start_codon(f.location)
 
                 if not utils.has_stop_codon(seq, f.location, genetic_code, phase):
                     f.location = _fix_absent_stop_codon(f.location)

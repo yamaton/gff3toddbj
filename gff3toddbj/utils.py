@@ -113,6 +113,12 @@ def has_start_codon(
     >>> has_start_codon(seq, loc, genetic_code, phase)
     True
     """
+    # when phase is > 0 at the head of joined featute,
+    # there must be some problems or corrections about
+    # the start codon.
+    if phase > 0:
+        return False
+
     strand = location.strand
     start_codons = CodonTable.unambiguous_dna_by_id[transl_table].start_codons
 
