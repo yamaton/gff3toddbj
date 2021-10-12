@@ -42,11 +42,11 @@ DDBJへの登録には指定された形式の[アノテーションファイル
 
 ## 出力の「正しさ」について
 
-DDBJアノテーション出力には幾多の守るべきルールはあるものの、正解には曖昧さが伴います。そのため当ツールではRefSeqの出すGFF3とGenBank形式の対応をもって「正解」と定義しています。これに基づいて、RefSeqのGenBank形式をできるだけシンプルにDDBJアノテーション形式に変換した正解例を、当ツールで作られるDDBJアノテーション出力とを比べることで評価をしています。詳細と現状は別ページに置いています。（[TODO] ページ作成。）
+DDBJアノテーション出力には幾多の守るべきルールはあるものの、正解には曖昧さが伴います。そのため当ツールではRefSeqの出すGFF3とGenBank形式の対応をもって「正解」と定義しています。これに基づいて、RefSeqのGenBank形式をできるだけシンプルにDDBJアノテーション形式に変換した正解例を、当ツールで作られるDDBJアノテーション出力とを比べることで評価をしています。[評価の詳細ページはこちら](https://github.com/yamaton/gff3toddbj/tree/main/evaluation)。
 
 なお評価の副産物としてのGenBankからDDBJアノテーションの変換ツール `genbank-to-ddbj` を同梱しています。良い品質のGenBank形式があるときにはGFF3から作るよりも有用かもしれません。
 
-評価の一環として、DDBJ公開の[Parser](https://www.ddbj.nig.ac.jp/ddbj/parser.html)もフォーマットチェックに利用させていただいています。
+評価の一環として、DDBJ公開の[Parser](https://www.ddbj.nig.ac.jp/ddbj/parser.html)も利用しています。
 
 
 ## セットアップ
@@ -356,13 +356,13 @@ exon = [
 
 ### GFF3の正当性チェック
 
-アノテーションファイルへの変換を始めるまえに、手持ちのファイルがGFF3形式を満たしているかチェックをかけておくのが良いプラクティスです。オンラインで利用可能なものは [GFF3 online validator](http://genometools.org/cgi-bin/gff3validator.cgi) が便利です。ファイル上限が 50MB なのが玉に瑕ですが。
+アノテーションファイルへの変換を始めるまえに、手持ちのファイルがGFF3形式を満たしているかチェックをかけておくのが良いプラクティスです。オンラインで利用可能なものは [GFF3 online validator](http://genometools.org/cgi-bin/gff3validator.cgi) が便利です。ファイル上限が 50MB なのが玉に瑕です。
 
 
 
-### GFF3とFASTA の分離（必要に応じて）
+### GFF3とFASTA の分離
 
-GFF3 ファイル中に `##FASTA` を使っての塩基配列が含まれている場合には、同梱のツールを使うなどして分割してください。
+GFF3 ファイル中に `##FASTA` を使っての塩基配列が含まれている場合にはその旨のエラーが出ます。同梱のツールを使うなどして分割してください。
 
 ```shell
 split-fasta path/to/myfile.gff3 --suffix "_splitted"
@@ -372,14 +372,14 @@ split-fasta path/to/myfile.gff3 --suffix "_splitted"
 
 
 
-### Entry名の正規化（必要に応じて）
+### Entry名の正規化
 
 DDBJ のアノテーションチェックによると `=|>" []` といった文字は Entry として使えないとのことです。違反文字が含まれるときにはアノテーションの1列目エントリ名を正規化する（＝リネームする）必要があり、同梱のツール `normalize-entry-names`が役立ちます。これはたとえば `ERS324955|SC|contig000013` というエントリ名を `ERS324955:SC:contig000013` に直します。
 
 ```shell
-normalize-entry-names myannotation_output.txt
+normalize-entry-names myannotation_output.ann
 ```
-アノテーションファイルのエントリ名に正規化の必要があるときには `myannotation_output_renamed.txt` のファイルが作られます。無いときには `Entry names are fine: No need to normalize.` のメッセージが出て終了します。
+アノテーションファイルのエントリ名に正規化の必要があるときには `myannotation_output_renamed.ann` のファイルが作られます。無いときには `Entry names are fine: No need to normalize.` のメッセージが出て終了します。
 
 
 
@@ -388,3 +388,8 @@ normalize-entry-names myannotation_output.txt
 ## 謝辞
 このプログラムの設計には、EMBL向けGFF3の変換ソフトである [EMBLmyGFF3](https://github.com/NBISweden/EMBLmyGFF3) のつくりを参考にさせていただきました。
 
+
+
+## 今後の予定
+
+現段階は仕様を固めているところなので、処理速度が後回しになっています。
