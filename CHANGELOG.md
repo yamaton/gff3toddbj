@@ -2,6 +2,7 @@
 * Change `genbank-to-ddbj` to simplify its internals as much as possible
 * Change `compare-ddbj` to always count elements as multiset
 * Change to accept case variants in feature/qualifier names
+* Add TOPOLOGY feature if Is_circular=true exists in "source"
 
 
 ## v0.3.0 (2021-10-12)

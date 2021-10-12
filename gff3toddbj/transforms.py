@@ -577,6 +577,20 @@ def _handle_source_rec(
     return is_inserting
 
 
+def _handle_topology(rec: SeqRecord) -> None:
+    """Add TOPOLOGY feature with /circular qualifier if "source" has
+    Is_circular=true value.
+    """
+    # Assume "source" always comes to the top if exists
+    first_feature = rec.features[0]
+    if first_feature.type == "source":
+        k = next((k for k in first_feature.qualifiers if k.lower() == "is_circular"), None)
+        if k is not None:
+            del first_feature.qualifiers[k]
+            new_feature = SeqFeature(None, type="TOPOLOGY", qualifiers={"circular": [""]})
+            rec.features.insert(1, new_feature)
+
+
 def _assign_single_product(rec: SeqRecord) -> None:
     """Take the first item in /product values as the value of /product
     and put the rest as /note values
@@ -613,6 +627,7 @@ def _sort_features(features: List[SeqFeature]) -> None:
     def type_priority(type_name: str) -> float:
         d = {
             "source": -1,
+            "TOPOLOGY": -0.9,
             "gene": 0,
             "mRNA": 1,
             "rRNA": 1,
@@ -636,7 +651,11 @@ def _sort_features(features: List[SeqFeature]) -> None:
         return d[type_name] if (type_name in d) else 10
 
     def keyfunc(f: SeqFeature) -> Tuple[int, float, int, str]:
-        return (f.location.start, type_priority(f.type), f.location.end, f.id)
+        if f.location:
+            res = (f.location.start, type_priority(f.type), f.location.end, f.id)
+        else:
+            res = (0, type_priority(f.type), 100000000, f.id)
+        return res
 
     features.sort(key=keyfunc)
     for f in features:
@@ -687,6 +706,9 @@ def run(
 
         # Insert "source" features from metadata if necessary
         _handle_source_rec(rec, metadata, id_to_seqlen)
+
+        # Add TOPOLOGY feature /circular qualifier if "source" has "Is_circular"
+        _handle_topology(rec)
 
         # Check characters in qualifier values
         _regularize_qualifier_value_letters(rec)

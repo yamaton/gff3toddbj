@@ -518,4 +518,6 @@ variation = [
 ]
 
 # https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#primary_contig
-"PRIMARY_CONTIG" = ["entry", "primary_bases", "complement"]
+PRIMARY_CONTIG = ["entry", "primary_bases", "complement"]
+
+TOPOLOGY = ["circular"]
