@@ -1,13 +1,18 @@
 ## Current
-* Add genbank-to-ddbj for Genbank → DDBJ conversion
-* Add compare-ddbj for comparing two DDBJ annotations for evaluation
+* Add `genbank-to-ddbj` for Genbank → DDBJ conversion
+* Add `compare-ddbj`s for comparing two DDBJ annotations for evaluation
 * Add a non-SO wild items to the default config for feature and qualifier names
+* Update the default config: replace hyphens in qualifier keys with underscores.
 * Fix: Respect feature-wise /transl_table value than the globally-set one.
 * Fix an error when joined features have .sub_features
 * Fix [source] in metadata not used when "source" feature exists in a entry
 * Change not to join features directly under "gene"
 * Fix the default config for feature and qualifier names around /pseudo
 * Fix a bug getting incorrect codon when CompoundLocation has a part < 3bp.
+* Fix start codon detection: no longer change /codon_start value even when !=1
+* Fix stop codon detection
+    * consider stop codon does not exists whenever the length
+      (after subtraction by "phase") is not a multiple of 3.
 
 ## v0.2.4 (2021-10-04)
 * Expand the default config for feature and qualifier names
