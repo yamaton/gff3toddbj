@@ -8,7 +8,7 @@ from . import transforms
 from . import utils
 
 _EXEC_NAME = "genbank-to-ddbj"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 
 FORMAT = '%(levelname)s: %(message)s'
 _DIR = pathlib.Path(__file__).parent

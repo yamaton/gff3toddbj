@@ -1,3 +1,6 @@
+## Current
+* Change `genbank-to-ddbj` to simplify its internals as much as possible
+
 ## v0.3.0 (2021-10-12)
 * Add `genbank-to-ddbj` for Genbank → DDBJ conversion
 * Add `compare-ddbj`s for comparing two DDBJ annotations for evaluation

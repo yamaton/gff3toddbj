@@ -731,26 +731,4 @@ def run_with_genbank(
 
     # Load Genbank as a generator of seqrecord
     records = io.load_genbank_as_seqrecords(path_genbank)
-
-    for rec in records:
-
-        # Add "assembly_gap" features
-        _set_assembly_gap(rec, metadata)
-
-        # Add the transl_table qualifier to CDS feature each
-        _add_transl_table_to_cds(rec, transl_table)
-
-        # Remove duplicates within a qualifier
-        _remove_duplicates_in_qualifiers(rec)
-
-        # Check if SeqIDs have valid characters
-        msg = (
-            "\n\n"
-            "Found invalid letter(s) in the 1st column of the GFF3: {}\n"
-            "Consider running this script to correct entry names in the DDBJ annotation:\n\n"
-            "   $ normalize-entry-names <output.ann>\n"
-        )
-        if utils.is_invalid_as_seqid(rec.id):
-            logging.warning(msg.format(rec.id))
-
-        yield rec
+    yield from records
