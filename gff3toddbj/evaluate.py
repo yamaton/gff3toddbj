@@ -13,7 +13,7 @@ from Bio.SeqFeature import CompoundLocation, FeatureLocation, SeqFeature
 
 
 _EXEC_NAME = "compare-ddbj"
-__version__ = "0.0.2"
+__version__ = "0.0.3"
 
 Troika = Tuple[str, str, str]
 
@@ -58,6 +58,8 @@ def _get_feature_name(f: SeqFeature) -> str:
     """
     if f.type == "ncRNA":
         res = "ncRNA_" + f.qualifiers["ncRNA_class"][0]
+    elif f.type == "regulatory":
+        res = "regulatory_" + f.qualifiers["regulatory_class"][0]
     else:
         res = f.type
     return res
@@ -125,18 +127,20 @@ def compare(records1: List[SeqRecord], records2: List[SeqRecord], func) -> Tuple
 
 def compare_and_report(records1: List[SeqRecord], records2: List[SeqRecord], f: Callable[[Iterable[SeqRecord]], Counter[Troika]], title: str, file_prefix: str):
     intersect, left_only, right_only = compare(records1, records2, f)
-    cnt_match, cnt_leftonly, cnt_rightonly = map(len, [intersect, left_only, right_only])
+    cnt_match, cnt_leftonly, cnt_rightonly = map(lambda multiset: sum(multiset.values()), [intersect, left_only, right_only])
 
     print(title)
     print("    Left  mismatching: {} / {} \t({:.2f} %)".format(cnt_leftonly, cnt_match + cnt_leftonly, 100 * cnt_leftonly / (cnt_match + cnt_leftonly)))
     print("    Right mismatching: {} / {} \t({:.2f} %)".format(cnt_rightonly, cnt_match + cnt_rightonly, 100 * cnt_rightonly / (cnt_match + cnt_rightonly)))
 
     with open(file_prefix + "left-only.txt", "w") as fout:
-        for tup in left_only:
-            print("\t".join(tup), file=fout)
+        for tup, count in left_only.items():
+            for _ in range(count):
+                print("\t".join(tup), file=fout)
     with open(file_prefix + "right-only.txt", "w") as fout:
-        for tup in right_only:
-            print("\t".join(tup), file=fout)
+        for tup, count in right_only.items():
+            for _ in range(count):
+                print("\t".join(tup), file=fout)
 
 
 def main():

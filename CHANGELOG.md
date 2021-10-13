@@ -1,5 +1,7 @@
 ## Current
 * Change `genbank-to-ddbj` to simplify its internals as much as possible
+* Change `compare-ddbj` to always count elements as multiset
+
 
 ## v0.3.0 (2021-10-12)
 * Add `genbank-to-ddbj` for Genbank → DDBJ conversion
