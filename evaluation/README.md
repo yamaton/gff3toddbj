@@ -63,31 +63,31 @@ RefSeqが高品質データをGFF3+FASTAおよびGenBank形式を公開してい
 ## RefSeqのマウスの参照ゲノムでの結果
 
 ### サマリー
-[RefSeqの代表的なゲノム](https://www.ncbi.nlm.nih.gov/genome/annotation_euk/all/?utm_source=blog&utm_medium=referrer&utm_campaign=gdv&utm_term=intron&utm_content=20210202link1)のひとつである、マウスゲノム(GRCm39) についての評価サマリーです。割合としての数字じたいにはあまり意味はなく、差異が生まれる要因に意味があります。
+[RefSeqの代表的なゲノム](https://www.ncbi.nlm.nih.gov/genome/annotation_euk/all/?utm_source=blog&utm_medium=referrer&utm_campaign=gdv&utm_term=intron&utm_content=20210202link1)のひとつである、マウスゲノム(GRCm39) についての評価サマリーです。ここの数字じたいにはあまり意味はなく、差異の原因究明が肝要です。
 
 ```shell
+
 $ compare-ddbj GCF_000001635.27_GRCm39_genomic.ann refseq_GCF_000001635.27_GRCm39_genomic.ann
+WARNING:root:Location missing after a feature: ['', 'TOPOLOGY', '', 'circular', '']
 Stat w/o location correction:
-    Left  mismatching: 1248 / 238958    (0.52 %)
-    Right mismatching: 575 / 238285     (0.24 %)
+    Left  mismatching: 212 / 238410     (0.09 %)
+    Right mismatching: 87 / 238285      (0.04 %)
 Stat with location correction:
-    Left  mismatching: 1988 / 238958    (0.83 %)
-    Right mismatching: 1315 / 238285    (0.55 %)
+    Left  mismatching: 952 / 238410     (0.40 %)
+    Right mismatching: 827 / 238285     (0.35 %)
 Stat of feature-qualifier pairs:
-    Left  mismatching: 104990 / 829632  (12.66 %)
-    Right mismatching: 292303 / 1016945 (28.74 %)
+    Left  mismatching: 103494 / 828478  (12.49 %)
+    Right mismatching: 291961 / 1016945 (28.71 %)
 ```
 
 
 ### Feature-Qualifier の差異について
 
-まずは差異のおおきい feature-qualifierペアに注目します。左側（＝ `gff3-to-ddbj`出力側）の104990個の差要素は以下のように要約されます。
+まずは差異のおおきい feature-qualifierペアに注目します。左側（＝ `gff3-to-ddbj`出力側）の103494個の差要素は以下のように要約されます。
 ```shell
-$ cat quals_left-only.txt | awk '{print $2, $3}' | sort | uniq -c | sort -rhb
+ $ cat quals_left-only.txt | awk '{print $2, $3}' | sort | uniq -c | sort -rhb
   93152 CDS transl_table
-   8302 exon pseudogene
-    666 exon note
-    666 exon gene
+   8126 exon pseudogene
     666 CDS product
     530 misc_RNA pseudogene
     268 assembly_gap linkage_evidence
@@ -97,20 +97,26 @@ $ cat quals_left-only.txt | awk '{print $2, $3}' | sort | uniq -c | sort -rhb
     134 assembly_gap estimated_length
      63 source note
      21 tRNA note
+     13 regulatory_TATA_box note
      12 J_segment pseudogene
-     10 regulatory note
      10 D_segment pseudogene
       8 protein_bind note
+      7 regulatory_enhancer note
       7 CDS note
       6 CDS exception
       4 ncRNA_lncRNA pseudogene
+      3 regulatory_CAAT_signal note
+      2 regulatory_promoter note
       1 rRNA note
+      1 regulatory_locus_control_region note
+      1 regulatory_imprinting_control_region note
+      1 regulatory_enhancer_blocking_element note
       1 C_region pseudogene
 ```
 
-同様に右側（`genbank-to-ddbj`側）の292303個の差異は以下のようになります。
+同様に右側（`genbank-to-ddbj`側）の291967個の差異は以下のようになります。
 
-```
+```shell
 $ cat quals_right-only.txt | awk '{print $2, $3}' | sort | uniq -c | sort -rhb
   92499 CDS translation
   86831 CDS gene_synonym
@@ -125,10 +131,7 @@ $ cat quals_right-only.txt | awk '{print $2, $3}' | sort | uniq -c | sort -rhb
     431 V_segment gene_synonym
     176 CDS pseudo
     153 V_segment pseudo
-    118 regulatory regulatory_class
-    118 regulatory experiment
     110 ncRNA_snoRNA gene_synonym
-    100 regulatory note
      90 J_segment gene_synonym
      31 rRNA gene_synonym
      24 D_segment gene_synonym
@@ -145,7 +148,7 @@ $ cat quals_right-only.txt | awk '{print $2, $3}' | sort | uniq -c | sort -rhb
       6 CDS ribosomal_slippage
       4 ncRNA_RNase_P_RNA gene_synonym
       4 ncRNA_lncRNA pseudo
-      3 regulatory gene_synonym
+      3 regulatory_enhancer gene_synonym
       2 ncRNA_scRNA gene_synonym
       2 misc_feature note
       2 misc_feature gene_synonym
@@ -159,6 +162,7 @@ $ cat quals_right-only.txt | awk '{print $2, $3}' | sort | uniq -c | sort -rhb
 ここから以下のようなことが判ります。
 
 * 左側（＝ `gff3-to-ddbj` 出力側）ではすべてのCDSに `/transl_table` qualifier を付けているのに対し、GenBank側はあまり付けてない。方針の違いによるもの。
+* GFF3にて `ID=` となっているものはそのまま `/note=ID:...` に記録されるため、左側のみに `note` が多い。
 * 右側（＝ `genbank-to-ddbj` 出力側）ではCDSに基本 `/translate` qualifier がついている。これはGenBankが最終形のフラットファイルであるのに対し、DDBJアノテーションは最終処理前で `/translate` が付けられる前の状態であるのが理由。
 * DDBJの `/pseudo` qualifier を使わない方針に従って `/pseudogene` で代替している。そのため左右に `/pseudogene` と `pseudo` が来るのは折込み済み。
 * GenBankデータでは `/gene` および `/gene_synonym` qualifier が `gene` feature のみならずその下層feature にもコピーされている。
