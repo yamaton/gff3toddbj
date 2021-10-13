@@ -165,12 +165,6 @@ feature_key = "transit_peptide"
 # Manual additions
 # -------------------
 
-[five_prime_utr]
-feature_key = "5'UTR"
-
-[three_prime_utr]
-feature_key = "3'UTR"
-
 # "region" in GFF3 column 3 corresponds to "source"
 # https://https.ncbi.nlm.nih.gov/datasets/docs/reference-docs/file-formats/about-ncbi-gff3/#the-source-region-feature
 [region]
