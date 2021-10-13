@@ -98108,6 +98108,7 @@ NW_007931070.1	source	1..1004	note	ID:NW_007931070.1:1..1004
 NW_007931071.1	source	1..2575	note	ID:NW_007931071.1:1..2575
 			note	source:RefSeq
 			culture_collection	ARSEF:2860
+			organelle	mitochondrion
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
@@ -98117,6 +98118,7 @@ NW_007931071.1	source	1..2575	note	ID:NW_007931071.1:1..2575
 NW_007931072.1	source	1..1283	note	ID:NW_007931072.1:1..1283
 			note	source:RefSeq
 			culture_collection	ARSEF:2860
+			organelle	mitochondrion
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860

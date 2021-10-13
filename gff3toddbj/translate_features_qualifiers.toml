@@ -376,7 +376,8 @@ qualifier_key = "trans_splicing"
 ## -----------------END--------------------
 
 
-# --------------
+## Manual entries
+
 # Force setting null as the value of /pseudo qualifier
 #   i.e. convert from /pseudo=true
 [__ANY__.pseudo]
@@ -384,12 +385,19 @@ qualifier_key = "pseudogene"
 qualifier_value = "unknown"
 
 
-# This replaces the qualifier /exception="ribosomal slippage"
+# This replaces the qualifier (key, value) pair /exception="ribosomal slippage"
 # with /ribosomal_slippage (no value)
 [__ANY__.exception]
 attribute_value = "ribosomal slippage"
 qualifier_key = "ribosomal_slippage"
 qualifier_value = ""
+
+
+# Replace: /genome="mitochondrion" --> /organelle="mitochondrion"
+[__ANY__.genome]
+attribute_value = "mitochondrion"
+qualifier_key = "organelle"
+qualifier_value = "mitochondrion"
 
 
 ## ================================================================================
@@ -916,8 +924,8 @@ qualifier_value = "lncRNA"
 ## Translate a GFF3 type & attribute (with certain value) into feature
 ## ================================================================================
 
-## RNA "type" with biotype="misc_RNA" in GFF is translated to
-## "misc_RNA" feature with this configuration.
+## The "RNA" feature with /biotype="misc_RNA" is replaced with
+## a "misc_RNA" feature.
 [RNA.biotype]
 attribute_value = "misc_RNA"
 feature_key = "misc_RNA"
