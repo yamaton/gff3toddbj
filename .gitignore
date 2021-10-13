@@ -1,3 +1,7 @@
+# faidx indexing
+*.gzi
+*.fai
+
 .vscode
 gff3toddbj/modules
 examples
