@@ -6,9 +6,9 @@
 
 ![](../images/evaluation.png)
 
-RefSeqが GFF3+FASTA および GenBank 形式を公開しているので、これを利用して `gff3-to-ddbj` の評価をしています。`gff3-to-ddbj` はGFF3とFASTAから、`genbank-to-ddbj`はGenBank形式からそれぞれDDBJアノテーションを作成したうえで、2ファイルを比べています。ここで `genbank-to-ddbj` はGenbank形式の読み取りとDDBJ形式への書き込みに限定したつくりのため、評価に影響はないものと仮定しています。
+RefSeqが高品質データをGFF3+FASTAおよびGenBank形式を公開しているため、これを用いて `gff3-to-ddbj` の評価を行います。上の図のように `gff3-to-ddbj` はGFF3とFASTAから、そして`genbank-to-ddbj`はGenBank形式からそれぞれDDBJアノテーションを作成し、このふたつの出力ファイルを比べます。ここで `genbank-to-ddbj` はGenbank形式の読み取りとDDBJ形式への書き込みに限定したつくりのため、評価に影響はないものと仮定しています。
 
-評価は２つのDDBJ出力に対して現在３点で比べることで行います。どの場合も[多重集合](https://ja.wikipedia.org/wiki/多重集合) (multiset) を作ったうえで、交わりと全体の要素数比から左側・右側それぞれについて**不一致**具合を求めています。ベン図でいう以下のような分子分母の計算です。
+比較は３つの基準で行います。どの場合も[多重集合](https://ja.wikipedia.org/wiki/多重集合) (multiset) を作ったうえで、集合の差と全体の要素数比から左側・右側それぞれについて**不一致**度合いを求める形です。ベン図で示すと以下のように、分子に差となる要素数、分母に参照データ側の全要素数が入ります。
 
 ![](../images/fraction.png)
 
@@ -16,14 +16,12 @@ RefSeqが GFF3+FASTA および GenBank 形式を公開しているので、こ�
 
 #### 1. 位置情報（開始・終了点補正を無視）
 
-アノテーションファイルの位置情報を含む各行から（エントリ名、Feature名、Location補正なし）を要素とする多重集合を作ります。Locationでは開始点・終了点が不明であることを示す不等号は無視します。たとえば `join(12..78,134..202)` と `join(<12..78,134..202)`は同じものとみなします。
-
+アノテーションファイルの位置情報を含む各行から（エントリ名、feature名、補正なしのlocation）を要素とする多重集合を作ります。Locationでは開始点・終了点が不明であることを示す不等号は無視します。たとえば `join(12..78,134..202)` と `join(<12..78,134..202)`は同じものとみなします。
 
 
 #### 2. 位置情報（補正等すべて含む）
 
-１と同様に（エントリ名、Feature名、Location情報）を要素とする多重集合をつくります。ここでlocation情報には不等号等も含めます。つまり`join(12..78,134..202)` と `join(<12..78,134..202)`は違うものとして扱います。
-
+１と同様に（エントリ名、feature名、location情報）を要素とする多重集合をつくります。しかし、２ではlocation情報には開始・終了点に付けられる不等号も含みます。つまり`join(12..78,134..202)` と `join(<12..78,134..202)`は違うものとして扱います。
 
 
 ### 3. Feature-Qualifier 情報
@@ -65,7 +63,7 @@ RefSeqが GFF3+FASTA および GenBank 形式を公開しているので、こ�
 ## RefSeqのマウスの参照ゲノムでの結果
 
 ### サマリー
-[RefSeqの代表的なゲノム](https://www.ncbi.nlm.nih.gov/genome/annotation_euk/all/?utm_source=blog&utm_medium=referrer&utm_campaign=gdv&utm_term=intron&utm_content=20210202link1)のひとつである、マウスゲノム(GRCm39) についての評価サマリーです。
+[RefSeqの代表的なゲノム](https://www.ncbi.nlm.nih.gov/genome/annotation_euk/all/?utm_source=blog&utm_medium=referrer&utm_campaign=gdv&utm_term=intron&utm_content=20210202link1)のひとつである、マウスゲノム(GRCm39) についての評価サマリーです。割合としての数字じたいにはあまり意味はなく、差異が生まれる要因に意味があります。
 
 ```shell
 $ compare-ddbj GCF_000001635.27_GRCm39_genomic.ann refseq_GCF_000001635.27_GRCm39_genomic.ann
@@ -81,7 +79,9 @@ Stat of feature-qualifier pairs:
 ```
 
 
-### 左側 Feature-Qualifier の差異
+### Feature-Qualifier の差異について
+
+まずは差異のおおきい feature-qualifierペアに注目します。左側（＝ `gff3-to-ddbj`出力側）の104990個の差要素は以下のように要約されます。
 ```shell
 $ cat quals_left-only.txt | awk '{print $2, $3}' | sort | uniq -c | sort -rhb
   93152 CDS transl_table
@@ -108,8 +108,7 @@ $ cat quals_left-only.txt | awk '{print $2, $3}' | sort | uniq -c | sort -rhb
       1 C_region pseudogene
 ```
 
-
-### 右側 Feature-Qualifier の差異分
+同様に右側（`genbank-to-ddbj`側）の292303個の差異は以下のようになります。
 
 ```
 $ cat quals_right-only.txt | awk '{print $2, $3}' | sort | uniq -c | sort -rhb
@@ -157,22 +156,26 @@ $ cat quals_right-only.txt | awk '{print $2, $3}' | sort | uniq -c | sort -rhb
       1 C_region pseudo
 ```
 
-## 差異の原因
+ここから以下のようなことが判ります。
 
-### trivial な点
-* GenBank形式はフラットファイルとされる最終形式に対して、DDBJアノテーションファイルはフラットファイルに変換される以前の形式。そのため
-    * `/translation` は DDBJアノテーションには含まれない
-* DDBJ では `assembly_gap` をきちんと付ける傾向がありますが、RefSeqはそうでもないようです。
-* DDBJ では `/pseudo` を新規登録では使わない方針を示していますが、RefSeqはそうでもないようです。
-* DDBJ では `transl_table` を各CDSに付ける傾向にありますが、RefSeqはそうでもないようです。
+* 左側（＝ `gff3-to-ddbj` 出力側）ではすべてのCDSに `/transl_table` qualifier を付けているのに対し、GenBank側はあまり付けてない。方針の違いによるもの。
+* 右側（＝ `genbank-to-ddbj` 出力側）ではCDSに基本 `/translate` qualifier がついている。これはGenBankが最終形のフラットファイルであるのに対し、DDBJアノテーションは最終処理前で `/translate` が付けられる前の状態であるのが理由。
+* DDBJの `/pseudo` qualifier を使わない方針に従って `/pseudogene` で代替している。そのため左右に `/pseudogene` と `pseudo` が来るのは折込み済み。
+* GenBankデータでは `/gene` および `/gene_synonym` qualifier が `gene` feature のみならずその下層feature にもコピーされている。
+    * この点において `gff3-to-ddbj` を修正すべきかは検討中。
 
 
-### 改善の可能性として
+## 位置情報の差異について
+
+位置情報の差異の元をたどるには、位置情報に基づいて精査する必要があります。以下、確認済みの要因をを並べます。
+
+
+* NCBI には < 10bp 長のイントロンを載せない方針があります。結果として、`exon` 間の隙間が小さいときには `join()`記法ではなく、ひとつの`exon` としてGenBank版に記載されています。
+    * 同様の操作がDDBJ登録で求められるのか確認中。
 
 * RefSeq は 各種RNA と CDS Feature が locationにおいて完全一致するばあい GenBank出力にて RNAを削除することがあります。
     * 同様の操作がDDBJ登録で求められるのか確認中。
-* NCBI には < 10bp 長のイントロンを載せない方針があります。結果として、`exon` 間の隙間が小さいときには `join()`記法ではなく、ひとつの`exon` としてGenBank版に記載されています。
-    * 同様の操作がDDBJ登録で求められるのか確認中。
+
 
 * `gff3-to-ddbj` は CDS にのみ、start codon, stop codon に応じた `<` や `>` による開始・終了点の補正を行っています。いっぽう RefSeq の.gb形式は各種RNAなど、CDS の上位階層のFeatureにもCDSに対応した位置の補正が行われています。
     * 同様の操作がDDBJ登録で求められるのか確認中。
@@ -189,7 +192,7 @@ $ cat quals_right-only.txt | awk '{print $2, $3}' | sort | uniq -c | sort -rhb
   ```
 
 * `gff3-to-ddbj` は start codon, stop codon を Biopython の `Bio.Data.CodonTable.unambiguous_dna_by_id[transl_table]` に基づいて一律に判定している反面、RefSeq は状況に応じた start/stop codon 判定をしているようです。たとえば Genetic Code が 1 のときに CTG や TTG  が start codon として扱われない場合が確認されています。
-    * 作者が生物知識に疎いため深掘り出来ていません。
+    * 作者が生物知識が足りないため深掘り出来ていません。
 
 * RefSeq は `gene` feature における `/gene` や `/gene_synonym` を下の階層の qualifiers にもコピーする。
     * 導入検討中
