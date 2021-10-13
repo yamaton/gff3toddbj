@@ -513,14 +513,15 @@ def _fix_locations(record: SeqRecord, faidx: Optional[io.Faidx]=None) -> None:
         logging.info(msg)
 
 
-def _merge_rna_and_exons(rec: SeqRecord) -> None:
-    """Set .location of joined exons as the location of RNA,
-    then rename such exons into __exon to discard.
+def _merge_exons_with_parent(rec: SeqRecord) -> None:
+    """Set .location of joined exons as the location of RNA, or *_segment, or *_region
+    then rename such exons into __exon to be discarded.
     """
 
     def _helper(features: List[SeqFeature]) -> None:
         for f in features:
-            if "RNA" in f.type:  # f.type can be mRNA, ncRNA, misc_RNA, tRNA, rRNA, etc.
+            # f.type can be mRNA, ncRNA, misc_RNA, tRNA, rRNA, V_segment, C_region, etc.
+            if any(kwd in f.type for kwd in ["RNA", "_segment", "_region"]):
                 joined_exons = [subf for subf in f.sub_features if subf.type == "exon"]
                 if len(joined_exons) > 1:
                     logging.warning("Something is wrong with joining exons: {}".format(f))
@@ -717,8 +718,8 @@ def run(
         if joinables:
             rec = _join_features(rec, joinables)
 
-        # Merge exons with their parent mRNA
-        _merge_rna_and_exons(rec)
+        # Merge exons with their parent such as mRNA, misc_RNA, V_segment, C_region
+        _merge_exons_with_parent(rec)
 
         # Check start and stop codons in CDSs
         _fix_locations(rec, faidx=faidx)
