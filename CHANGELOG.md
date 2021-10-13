@@ -7,6 +7,7 @@
 * Enable replacement of a certain qualifier (key, value) with another
     * This enables the replacement: /exception="ribosomal slippage" --> /ribosomal_slippage
 * Add the renaming /genome="mitochondrion" -> /organelle="mitochondrion" to the default config
+* Enforce single value to /gene if it has multiple. Put the rest to /gene_synonym.
 
 ## v0.3.0 (2021-10-12)
 * Add `genbank-to-ddbj` for Genbank → DDBJ conversion

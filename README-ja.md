@@ -159,6 +159,9 @@ gff3-to-ddbj \
     > * 一般名が複数ある場合でも, 複数の名称を記載しないで下さい。また, そのために不必要な区切り記号を使用しないで下さい。一般名の複数記載を希望される場合は, 代表的な名称を /product qualifier に記載し, その他の名称を /note qualifier に記載して下さい。
     > * 機能, 名称等が不明な蛋白質の場合は, hypothetical protein と記載することを推奨します。
 
+* `/gene` が値を複数持つときには、ひとつだけを `/gene` の値とする。残りを `/gene_synonym` の値に。
+  * 参照: [Qualifier Key の定義: /gene](https://www.ddbj.nig.ac.jp/ddbj/qualifiers.html#gene).
+
 * Qualifier値に重複があるとき冗長分を削除
 
 * アノテーション行の並び替え

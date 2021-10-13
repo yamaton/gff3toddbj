@@ -628,6 +628,31 @@ def _assign_single_product(rec: SeqRecord) -> None:
     _helper(rec.features)
 
 
+def _make_gene_have_single_value(rec: SeqRecord) -> None:
+    """Take the first item in /gene values as the value of /gene
+    and put the rest as /gene_synonym values
+
+    Ref: https://www.ddbj.nig.ac.jp/ddbj/qualifiers-e.html#gene
+    """
+    def _helper(features: List[SeqFeature]) -> None:
+        for f in features:
+            if ("gene" in f.qualifiers) and len(f.qualifiers["gene"]) > 1:
+                values = f.qualifiers["gene"]
+                head = values[0]
+                f.qualifiers["gene"] = [head]
+
+                rest = values[1:]
+                if "gene_synonym" not in f.qualifiers:
+                    f.qualifiers["gene_synonym"] = []
+                f.qualifiers["gene_synonym"].extend(rest)
+
+            if hasattr(f, "sub_features"):
+                _helper(f.sub_features)
+
+    # just call the _helper
+    _helper(rec.features)
+
+
 def _sort_features(features: List[SeqFeature]) -> None:
     """Sort features"""
 
@@ -732,6 +757,9 @@ def run(
 
         # Assign single value to /product and put the rest to /inference
         _assign_single_product(rec)
+
+        # Make /gene have a single value; put the rest to /gene_synonym
+        _make_gene_have_single_value(rec)
 
         # Remove duplicates within a qualifier
         _remove_duplicates_in_qualifiers(rec)

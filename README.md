@@ -168,6 +168,9 @@ Here is the list of operations `gff3-to-ddbj` will do:
     >
     > * If the name and function are not known, we recommend to describe as "hypothetical protein".
 
+* Make `/gene` have a single value, and put the rest to `/gene_synonym`.
+  * Reference: [Definition of Qualifier key: /gene](https://www.ddbj.nig.ac.jp/ddbj/qualifiers-e.html#gene).
+
 * Remove duplicates in qualifier values.
 
 * Sort lines in annotation
