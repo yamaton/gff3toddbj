@@ -384,6 +384,13 @@ qualifier_key = "pseudogene"
 qualifier_value = "unknown"
 
 
+# This replaces the qualifier /exception="ribosomal slippage"
+# with /ribosomal_slippage (no value)
+[__ANY__.exception]
+attribute_value = "ribosomal slippage"
+qualifier_key = "ribosomal_slippage"
+qualifier_value = ""
+
 
 ## ================================================================================
 ## Translate a GFF3 type (= column 3 value) into a pair of (Feature, Qualifier)

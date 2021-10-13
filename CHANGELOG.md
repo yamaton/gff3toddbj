@@ -4,6 +4,8 @@
 * Change to accept case variants in feature/qualifier names
 * Add TOPOLOGY feature if Is_circular=true exists in "source"
 * Change exons to be merged with their parent of type *_segment and *_regionas well as RNA.
+* Enable replacement of a certain qualifier (key, value) with another
+    * This enables the replacement: /exception="ribosomal slippage" --> /ribosomal_slippage
 
 
 ## v0.3.0 (2021-10-12)

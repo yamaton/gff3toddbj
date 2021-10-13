@@ -189,24 +189,30 @@ class RenameHandler(object):
                 # Replace the item name
                 new_name = subtree[qual_key].get("qualifier_key", "")
                 if new_name:
-                    if "qualifier_value" in subtree[qual_key]:
-                        # overwrite qualifier value with the setting
-                        vals = [subtree[qual_key]["qualifier_value"]]
+                    if "attribute_value" in subtree[qual_key]:
+                        # replace certain qualifier with (key, value) pair with another
+                        if "qualifier_value" not in subtree[qual_key]:
+                            logging.error("__ANY__.{} is missing qualifier_value".format(name))
+                        elif vals[0] == subtree[qual_key]["attribute_value"]:
+                            name = new_name
+                            vals = [subtree[qual_key]["qualifier_value"]]
                     else:
-                        prefix = subtree[qual_key].get("qualifier_value_prefix", "")
-                        if prefix:
-                            vals = [prefix + v for v in vals]
-
-                    if new_name not in res:
-                        res[new_name] = []
-                    res[new_name] += vals
+                        name = new_name
+                        if "qualifier_value" in subtree[qual_key]:
+                            # overwrite qualifier value with the setting
+                            vals = [subtree[qual_key]["qualifier_value"]]
+                        else:
+                            prefix = subtree[qual_key].get("qualifier_value_prefix", "")
+                            if prefix:
+                                vals = [prefix + v for v in vals]
                 else:
-                    # Remove the item from qualifiers if "target" is not set, or emtpy
-                    pass
-            else:
-                if name not in res:
-                    res[name] = []
-                res[name] += vals
+                    # Remove the item from qualifiers if "qualifier_key" is not set, or emtpy
+                    continue
+
+            # add to res
+            if name not in res:
+                res[name] = []
+            res[name] += vals
         return res
 
     def _remove_dummy_prefix_features(self, features: List[SeqFeature]) -> List[SeqFeature]:
