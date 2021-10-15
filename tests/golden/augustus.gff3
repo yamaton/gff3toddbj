@@ -29,7 +29,7 @@
 4	AUGUSTUS	intron	11033	11140	0.75	+	.	Parent=g1.t1
 4	AUGUSTUS	intron	11852	11972	0.49	+	.	Parent=g1.t1
 4	AUGUSTUS	intron	12259	12368	0.97	+	.	Parent=g1.t1
-4	AUGUSTUS	CDS	914	1014	0.01	+	0	ID=g1.t1.cds;Parent=g1.t1
+4	AUGUSTUS	CDS	914	1014	0.01	+	0	ID=g1.t1.cds;Parent=g1.t1;exception="ribosomal slippage"
 4	AUGUSTUS	CDS	3018	3070	0.02	+	1	ID=g1.t1.cds;Parent=g1.t1
 4	AUGUSTUS	exon	3018	3070	.	+	.	Parent=g1.t1
 4	AUGUSTUS	CDS	3124	3482	0.01	+	2	ID=g1.t1.cds;Parent=g1.t1
@@ -152,12 +152,10 @@
 ###
 # start gene g4
 4	AUGUSTUS	gene	80617	87875	0.02	-	.	ID=g4
-4	AUGUSTUS	transcript	80617	87875	0.02	-	.	ID=g4.t1;Parent=g4
-4	AUGUSTUS	transcription_end_site	80617	80617	.	-	.	Parent=g4.t1
+4	AUGUSTUS	V_segment	80617	87875	0.02	-	.	ID=g4.t1;Parent=g4
 4	AUGUSTUS	exon	80617	81770	.	-	.	Parent=g4.t1
 4	AUGUSTUS	exon	85857	86147	.	-	.	Parent=g4.t1
 4	AUGUSTUS	exon	86626	87364	.	-	.	Parent=g4.t1
-4	AUGUSTUS	stop_codon	86899	86901	.	-	0	Parent=g4.t1
 4	AUGUSTUS	intron	87365	87465	1	-	.	Parent=g4.t1
 4	AUGUSTUS	CDS	86899	87364	0.99	-	1	ID=g4.t1.cds;Parent=g4.t1
 4	AUGUSTUS	CDS	87466	87806	0.97	-	0	ID=g4.t1.cds;Parent=g4.t1

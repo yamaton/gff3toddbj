@@ -4,6 +4,7 @@
 			note	source:AUGUSTUS
 	CDS	join(914..1014,3018..3070,3124..3482,8166..8720,9026..10377,10460..11032,11141..11851,11973..12258,12369..12911)	note	ID:g1.t1.cds
 			note	source:AUGUSTUS
+			ribosomal_slippage	
 			codon_start	1
 			transl_table	1
 			product	hypothetical protein
@@ -41,7 +42,7 @@
 	intron	complement(57754..61299)	note	source:AUGUSTUS
 	intron	complement(61912..63539)	note	source:AUGUSTUS
 	intron	complement(63970..70653)	note	source:AUGUSTUS
-	misc_RNA	complement(join(80617..81770,85857..86147,86626..87364,87466..87875))	note	ID:g4.t1
+	V_segment	complement(join(80617..81770,85857..86147,86626..87364,87466..87875))	note	ID:g4.t1
 			note	source:AUGUSTUS
 	CDS	complement(join(86899..87364,87466..87806))	note	ID:g4.t1.cds
 			note	source:AUGUSTUS
