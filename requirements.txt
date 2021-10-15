@@ -2,4 +2,3 @@ biopython
 bcbio-gff
 pysam
 toml
-setuptools

@@ -1,11 +1,16 @@
 import setuptools
+import pathlib
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
+# sets __version__
+with open(pathlib.Path("gff3toddbj") / "version.py") as f:
+    exec(f.read())
+
 setuptools.setup(
     name="gff3toddbj",
-    version="0.3.0",
+    version=__version__,
     author="Yamato Matsuoka",
     author_email="yamaton@gmail.com",
     description="Create a DDBJ annotation file from GFF3 and FASTA files",
@@ -30,7 +35,6 @@ setuptools.setup(
         "bcbio-gff >= 0.6.6",
         "pysam",
         "toml",
-        "setuptools",
     ],
     entry_points={"console_scripts":
         [

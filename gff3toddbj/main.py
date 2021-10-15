@@ -3,18 +3,18 @@ import argparse
 import logging
 import pathlib
 
-import pkg_resources  # part of setuptools
-
+from . import version
 from . import formatter
 from . import transforms
 from . import utils
 
 _PROJ_NAME = "gff3toddbj"
 _EXEC_NAME = "gff3-to-ddbj"
-__version__ = pkg_resources.require(_PROJ_NAME)[0].version
 
 FORMAT = '%(levelname)s: %(message)s'
 _DIR = pathlib.Path(__file__).parent
+__version__ = version.__version__
+
 PATH_TRANS_FEATURES_QUALIFIERS = _DIR / "translate_features_qualifiers.toml"
 
 PATH_DDBJ_FILTER = _DIR / "ddbj_filter.toml"
