@@ -1,4 +1,4 @@
-from typing import Iterable, Generator, Dict, List, FrozenSet, OrderedDict, Union, Any
+from typing import Iterable, Generator, Dict, List, FrozenSet, Optional, OrderedDict, Union, Any
 import logging
 import re
 import collections
@@ -36,7 +36,6 @@ TARGET_KEYS_IN_TRANSLATION = {
     "qualifier_key",
     "qualifier_value",
     "qualifier_value_prefix",
-    "attribute_value",
 }
 
 
@@ -240,7 +239,10 @@ def get_attribute_keys(subtree: OrderedDict[str, Any]) -> List[str]:
     """
     if set(subtree.keys()) < TARGET_KEYS_IN_TRANSLATION:
         return []
-    return subtree.keys()
+    return list(subtree.keys())
+
+
+get_attribute_values = get_attribute_keys
 
 
 def to_lowercase_keys(table: OrderedDict[str, Any]) -> OrderedDict[str, Any]:

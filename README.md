@@ -98,10 +98,10 @@ conda create -n ddbj
 conda activate ddbj
 
 # Install dependencies to "ddbj"
-conda install -c bioconda -c conda-forge biopython bcbio-gff toml setuptools pysam samtools
+conda install -c bioconda -c conda-forge biopython bcbio-gff toml pysam samtools pip build
 
 # Install gff3-to-ddbj and extra tools
-python setup.py install
+python -m build && pip install -e ./
 ```
 
 
@@ -280,11 +280,10 @@ qualifier_value = "snRNA"
 
 #### Translate (type, attribute) items to features
 
-Example: some annotation programs produce a GFF3 line containing `RNA` as the type and `biotype=misc_RNA` as one of the attributes. Then it should be translated to `misc_RNA` feature in annoation.
+Here is a story in setting the default renaming scheme: Some annotation programs produce a GFF3 line containing `RNA` as the type and `biotype=misc_RNA` as one of the attributes. But it should be treated as `misc_RNA` feature in DDBJ annoation. In such case, we join (feature key, qualifier key, qualifier value) with dot as delimiter, and write as follows.
 
 ```toml
-[RNA.biotype]
-attribute_value = "misc_RNA"
+[RNA.biotype.misc_RNA]
 feature_key = "misc_RNA"
 ```
 

@@ -129,7 +129,6 @@ class RenameHandler(object):
                 feature.sub_features = self._run_on_features(feature.sub_features)
 
             if "__ANY__" in self.d:
-                # (Case 1) Attribute --> Qualifier case
                 feature.qualifiers = self._run_on_qualifiers(feature.qualifiers, self.d["__ANY__"])
 
             type_ = feature.type
@@ -137,44 +136,71 @@ class RenameHandler(object):
             if type_lower in self.d:
                 below_type = self.d[type_lower]
                 attribute_keys = utils.get_attribute_keys(below_type)
-                new_type = below_type.get("feature_key", "")
-                if new_type:
-                    new_type = RenameHandler._DUMMY_PREFIX + new_type
-                    if not attribute_keys:
-                        if "qualifier_key" not in below_type.keys():
-                            # (Case 2) Type --> Feature key
-                            feature.type = new_type
-                        else:
-                            # (Case 3) Type --> (Feature key, Qualifier key-value)
-                            key = below_type["qualifier_key"]
-                            value = below_type.get("qualifier_value", None)
-                            if value is None:
-                                msg = "[{}] /{} ... qualifier_value is missing in the metadata (case 3)".format(type_, key)
-                                logging.error(msg)
-                                continue
-                            feature.type = new_type
-                            if key in feature.qualifiers:
-                                if not isinstance(feature.qualifiers[key], list):
-                                    feature.qualifiers[key] = [feature.qualifiers[key]]
-                                if isinstance(value, list):
-                                    feature.qualifiers[key].extend(value)
-                                else:
-                                    feature.qualifiers[key].append(value)
-                            else:
-                                feature.qualifiers[key] = [value]
+                if not attribute_keys:
+                    # ------- level-1: type name matching only -------
+                    if "feature_key" not in below_type:
+                        logging.error("Renaming config requires feature_key at [{}]".format(type))
+                        continue
 
+                    new_type = RenameHandler._DUMMY_PREFIX + below_type["feature_key"]
+                    if "qualifier_key" not in below_type.keys():
+                        # Rename Type / Feature
+                        feature.type = new_type
+                    else:
+                        # (Case 3) Type --> (Feature key, Qualifier key-value)
+                        qual_key = below_type["qualifier_key"]
+                        value = below_type.get("qualifier_value", None)
+                        if value is None:
+                            msg = "[{}] /{} ... qualifier_value is missing in the metadata (case 3)".format(type_, qual_key)
+                            logging.error(msg)
+                            continue
+                        feature.type = new_type
+                        if qual_key in feature.qualifiers:
+                            if not isinstance(feature.qualifiers[qual_key], list):
+                                feature.qualifiers[qual_key] = [feature.qualifiers[qual_key]]
+                            if isinstance(value, list):
+                                feature.qualifiers[qual_key].extend(value)
+                            else:
+                                feature.qualifiers[qual_key].append(value)
+                        else:
+                            feature.qualifiers[qual_key] = [value]
                 else:
-                    # (Case 4) (Type, Attribute) --> Feature key
-                    for (key, vals) in feature.qualifiers.items():
-                        if key in attribute_keys:
-                            below_attribute = below_type[key]
+                    # Going deeper the renaming config like [CDS.*]
+                    for (qual_key, qual_vals) in feature.qualifiers.items():
+                        qual_vals_lowered = [s.lower() for s in qual_vals]
+                        qual_key_lower = qual_key.lower()
+                        if qual_key_lower in attribute_keys:
+                            below_attribute = below_type[qual_key_lower]
+                            attribute_values = utils.get_attribute_values(below_attribute)
                             new_type = below_attribute.get("feature_key", "")
-                            new_type = RenameHandler._DUMMY_PREFIX + new_type
-                            if "attribute_value" in below_attribute:
-                                attribute_value = below_attribute["attribute_value"]
-                                if attribute_value in vals:
-                                    feature.type = new_type
-                                    feature.qualifiers[key].remove(attribute_value)
+                            if new_type and (not attribute_values):
+                                # ------- level-2: (feature_key, qualifier_key) matching
+                                feature.type = RenameHandler._DUMMY_PREFIX + new_type
+                                if "qualifier_key" in below_attribute:
+                                    new_qual_key = below_attribute["qualifier_key"]
+                                    if "qualifier_value" in below_attribute:
+                                        # set qualifier value
+                                        feature.qualifiers[new_qual_key] = below_attribute["qualifier_value"]
+                                    else:
+                                        # rename qualifier
+                                        feature.qualifiers[new_qual_key] = feature.qualifiers[qual_key]
+                                        del feature.qualifiers[qual_key]
+
+                            elif set(qual_vals_lowered) & set(attribute_values):
+                                # ------- level-3: (feature key, qualifier key, qualifier value) matching
+                                intersect = set(qual_vals_lowered) & set(attribute_values)
+                                for attribute_value in intersect:
+                                    bottom = below_attribute[attribute_value]
+                                    if "feature_key" in bottom:
+                                        feature.type = bottom["feature_key"]
+                                    elif all(x in bottom for x in ("qualifier_key", "qualifier_value")):
+                                        new_key = bottom["qualifier_key"]
+                                        new_val = bottom["qualifier_value"]
+                                        feature.qualifiers[new_key] = [new_val]
+                                        matched_val = next(v for v in qual_vals if v.lower() == attribute_value)
+                                        feature.qualifiers[qual_key].remove(matched_val)
+                                        if not feature.qualifiers[qual_key]:
+                                            del feature.qualifiers[qual_key]
 
         return features
 
@@ -184,30 +210,41 @@ class RenameHandler(object):
         """
         res = collections.OrderedDict()
         for name, vals in qualifiers.items():
-            qual_key = name.lower()
-            if qual_key in subtree:
-                # Replace the item name
-                new_name = subtree[qual_key].get("qualifier_key", "")
-                if new_name:
-                    if "attribute_value" in subtree[qual_key]:
-                        # replace certain qualifier with (key, value) pair with another
-                        if "qualifier_value" not in subtree[qual_key]:
-                            logging.error("__ANY__.{} is missing qualifier_value".format(name))
-                        elif vals[0] == subtree[qual_key]["attribute_value"]:
-                            name = new_name
-                            vals = [subtree[qual_key]["qualifier_value"]]
-                    else:
+            attr_key = name.lower()
+            if attr_key in subtree:
+                attr_vals = utils.get_attribute_values(subtree[attr_key])
+                vals_lower = [v.lower() for v in vals]
+                if not attr_vals:
+                    # ---- level-2: matching to the 2nd depth ----
+                    new_name = subtree[attr_key].get("qualifier_key", "")
+                    if new_name:
                         name = new_name
-                        if "qualifier_value" in subtree[qual_key]:
+                        if "qualifier_value" in subtree[attr_key]:
                             # overwrite qualifier value with the setting
-                            vals = [subtree[qual_key]["qualifier_value"]]
+                            vals = [subtree[attr_key]["qualifier_value"]]
                         else:
-                            prefix = subtree[qual_key].get("qualifier_value_prefix", "")
-                            if prefix:
-                                vals = [prefix + v for v in vals]
-                else:
-                    # Remove the item from qualifiers if "qualifier_key" is not set, or emtpy
-                    continue
+                            prefix = subtree[attr_key].get("qualifier_value_prefix", "")
+                            vals = [prefix + v for v in vals]
+                    else:
+                        # Remove the item from qualifiers if "qualifier_key" is not set, or emtpy
+                        continue
+
+                elif set(attr_vals) & set(vals_lower):
+                    intersect = set(attr_vals) & set(vals_lower)
+                    for attr_val in intersect:
+                        # ---- level-3: matching to the 3rd depth ----
+                        subsubtree = subtree[attr_key]
+                        d = subsubtree[attr_val]
+                        if not all(x in d for x in ("qualifier_key", "qualifier_value")):
+                            logging.error("Bad format in the renaming config: {} - {}".format(attr_key, attr_val))
+                        # following will drop the rest of values under attr_key. ok???
+                        name = d["qualifier_key"]
+                        vals = [d["qualifier_value"]]
+                        # add to res
+                        if name not in res:
+                            res[name] = []
+                        res[name] += vals
+                        continue
 
             # add to res
             if name not in res:

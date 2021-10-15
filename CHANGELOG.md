@@ -1,4 +1,6 @@
 ## Current
+* Change the structure of renaming config in TOML.
+    * We no longer use "attribute_value = ..."
 * Change `genbank-to-ddbj` to simplify its internals as much as possible
 * Change `compare-ddbj` to always count elements as multiset
 * Change to accept case variants in feature/qualifier names
@@ -8,6 +10,7 @@
     * This enables the replacement: /exception="ribosomal slippage" --> /ribosomal_slippage
 * Add the renaming /genome="mitochondrion" -> /organelle="mitochondrion" to the default config
 * Enforce single value to /gene if it has multiple. Put the rest to /gene_synonym.
+
 
 ## v0.3.0 (2021-10-12)
 * Add `genbank-to-ddbj` for Genbank → DDBJ conversion

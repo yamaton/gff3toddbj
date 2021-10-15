@@ -167,8 +167,12 @@ feature_key = "transit_peptide"
 
 # "region" in GFF3 column 3 corresponds to "source"
 # https://https.ncbi.nlm.nih.gov/datasets/docs/reference-docs/file-formats/about-ncbi-gff3/#the-source-region-feature
-[region]
+[region.gbkey.Src]
 feature_key = "source"
+
+[region.gbkey.Region]
+feature_key = "misc_feature"
+
 
 # SO:0001503
 # processed_transcript takes transcript whose corrsponding feature is misc_RNA.
@@ -381,15 +385,13 @@ qualifier_value = "unknown"
 
 # This replaces the qualifier (key, value) pair /exception="ribosomal slippage"
 # with /ribosomal_slippage (no value)
-[__ANY__.exception]
-attribute_value = "ribosomal slippage"
+[__ANY__.exception."ribosomal slippage"]
 qualifier_key = "ribosomal_slippage"
 qualifier_value = ""
 
 
 # Replace: /genome="mitochondrion" --> /organelle="mitochondrion"
-[__ANY__.genome]
-attribute_value = "mitochondrion"
+[__ANY__.genome.mitochondrion]
 qualifier_key = "organelle"
 qualifier_value = "mitochondrion"
 
@@ -920,6 +922,5 @@ qualifier_value = "lncRNA"
 
 ## The "RNA" feature with /biotype="misc_RNA" is replaced with
 ## a "misc_RNA" feature.
-[RNA.biotype]
-attribute_value = "misc_RNA"
+[RNA.biotype.misc_RNA]
 feature_key = "misc_RNA"

@@ -93,10 +93,10 @@ conda create -n ddbj
 conda activate ddbj
 
 # ddbjに依存パッケージ (bioconda, bcbio-gff, toml, setuptools) をインストール
-conda install -c bioconda -c conda-forge biopython bcbio-gff toml setuptools pysam samtools
+conda install -c bioconda -c conda-forge biopython bcbio-gff toml pysam samtools pip build
 
 # gff3-to-ddbj および付属ツールをインストール
-python setup.py install
+python -m build && pip install -e ./
 ```
 
 
@@ -296,11 +296,10 @@ qualifier_value = "snRNA"
 
 #### 指定の (type, attribute) をFeatureに置き換え
 
-GFF3の特定の (type, attribute) を Feature key で置き換える必要に迫られることもあります。たとえばデフォルト設定では、GFF3中で `biotype="misc_RNA"` という attribute を持つ `RNA` type を `misc_RNA` Featureに変換しています。
+GFF3にてとある (type名, attributeキー, attribute value) があるとき、これを Feature key として表す必要に迫られることがあります。たとえばデフォルト設定では、GFF3の３列目が `RNA` かつ９列目が `biotype="misc_RNA"` であるとき `misc_RNA` Featureとして扱うよう変換をかけています。マッチさせたい単語をドット区切りで、featureキー、qualifierキー、qualifier値の順に書きます。
 
 ```toml
-[RNA.biotype]
-attribute_value = "misc_RNA"
+[RNA.biotype.misc_RNA]
 feature_key = "misc_RNA"
 ```
 
