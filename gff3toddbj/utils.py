@@ -112,14 +112,19 @@ def has_start_codon(
     >>> has_start_codon(seq, loc, genetic_code, phase)
     True
     """
-    # when phase is > 0 at the head of joined featute,
-    # there must be some problems or corrections about
-    # the start codon.
+    # when phase is > 0 (i.e. codon_start > 1) at the head of joined featute,
+    # there must be some problems or corrections about the start codon.
     if phase > 0:
         return False
 
     strand = location.strand
     start_codons = CodonTable.unambiguous_dna_by_id[transl_table].start_codons
+    # Bio.Data.CodonTable says start codons are ATG, CTG, TTG,
+    # but limit it to ATG because of following.
+    # https://www.ddbj.nig.ac.jp/ddbj/geneticcode.html#1
+    # https://www.ddbj.nig.ac.jp/faq/ja/how-to-describe-not-standard-genetic-code.html
+    if transl_table == 1:
+        start_codons = ["ATG"]
 
     codon = "XXX"
     if not isinstance(strand, int):

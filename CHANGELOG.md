@@ -11,6 +11,7 @@
 * Add the renaming /genome="mitochondrion" -> /organelle="mitochondrion" to the default config
 * Enforce single value to /gene if it has multiple. Put the rest to /gene_synonym.
 * Change not to correct position with `<` or `>` if the part is `/pseudo` or `/pseudogene`.
+* Change start codons to only ATG when transl_table=1
 
 
 ## v0.3.0 (2021-10-12)
