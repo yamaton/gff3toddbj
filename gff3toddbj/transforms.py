@@ -474,7 +474,8 @@ def _fix_locations(record: SeqRecord, faidx: Optional[io.Faidx]=None) -> None:
 
     def _runner(features: List[SeqFeature], seq: Seq) -> None:
         for f in features:
-            if f.type == "CDS":
+            # skip if CDS has /pseudo or /pseudogene=...
+            if f.type == "CDS" and all(x not in f.qualifiers for x in ("pseudo", "pseudogene")):
                 cs_list = f.qualifiers.get("codon_start", [1])
                 codon_start = int(cs_list[0])
                 phase = codon_start - 1  # to 0-based phase index
