@@ -624,8 +624,30 @@ def _handle_source_rec(
 
 def _handle_topology(rec: SeqRecord) -> None:
     """Add TOPOLOGY feature with /circular qualifier if "source" has
-    Is_circular=true value.
+    Is_circular=true value. Also handle origin-spanning features.
+
+    https://https.ncbi.nlm.nih.gov/datasets/docs/v1/reference-docs/file-formats/about-ncbi-gff3/#origin-spanning-features
     """
+    def _scan_origin_spannig(features: List[SeqFeature], record_end_pos: int) -> None:
+        for f in features:
+            if f.location is None:
+                continue
+            try:
+                start = int(f.location.start.position)
+                end = int(f.location.end.position)
+            except (AttributeError, TypeError, ValueError):
+                continue
+            if end > record_end_pos:
+                before_origin = FeatureLocation(start, record_end_pos, strand=f.location.strand)
+                end_true = end - record_end_pos
+                after_origin = FeatureLocation(0, end_true, strand=f.location.strand)
+                f.location = CompoundLocation([before_origin, after_origin])
+
+                # scan only the children of matched features
+                if hasattr(f, "sub_features"):
+                    _scan_origin_spannig(f.sub_features, record_end_pos)
+
+
     # Assume "source" always comes to the top if exists
     first_feature = rec.features[0]
     if first_feature.type == "source":
@@ -634,6 +656,9 @@ def _handle_topology(rec: SeqRecord) -> None:
             del first_feature.qualifiers[k]
             new_feature = SeqFeature(None, type="TOPOLOGY", qualifiers={"circular": [""]})
             rec.features.insert(1, new_feature)
+
+            record_end_pos = int(first_feature.location.end.position)
+            _scan_origin_spannig(rec.features, record_end_pos)
 
 
 def _assign_single_product(rec: SeqRecord) -> None:
