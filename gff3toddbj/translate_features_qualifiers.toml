@@ -396,6 +396,11 @@ qualifier_key = "organelle"
 qualifier_value = "mitochondrion"
 
 
+# Seen in RefSeq coronavirus
+[__ANY__.nat-host]
+qualifier_key = "host"
+
+
 ## ================================================================================
 ## Translate a GFF3 type (= column 3 value) into a pair of (Feature, Qualifier)
 ## ================================================================================
