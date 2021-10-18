@@ -151,6 +151,9 @@ Here is the list of operations `gff3-to-ddbj` will do:
 
 * Insert `source` information from the [metadata fie](#metadata-file).
 
+* Insert `TOPOLOGY` feature if GFF3 has `Is_circular=true` in an entry.
+  * Also handle [origin-spaning features](https://https.ncbi.nlm.nih.gov/datasets/docs/v1/reference-docs/file-formats/about-ncbi-gff3/#origin-spanning-features).
+
 * Join locations of features having the same parent with `join` notation.
   * `CDS`, `exon`, `mat_peptide`, `V_segment`, `C_region`, `D-loop`, and `misc_feature` may be joined.
   * `exon`s are NOT joined if having `gene` as the direct parent.

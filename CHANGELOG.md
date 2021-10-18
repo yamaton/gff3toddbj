@@ -5,6 +5,7 @@
 * Change `compare-ddbj` to always count elements as multiset
 * Change to accept case variants in feature/qualifier names
 * Add TOPOLOGY feature if Is_circular=true exists in "source"
+    * Add handling of origin-spanning features in circular genome
 * Change exons to be merged with their parent of type \*\_segment and \*\_region as well as RNA.
 * Enable replacement of a certain qualifier (key, value) with another
     * This enables the replacement: /exception="ribosomal slippage" --> /ribosomal_slippage
@@ -12,7 +13,7 @@
 * Enforce single value to /gene if it has multiple. Put the rest to /gene_synonym.
 * Change not to correct position with `<` or `>` if the part is `/pseudo` or `/pseudogene`.
 * Change start codons to only ATG when transl_table=1
-
+* Add an item `nat-host` --> `/host` to the default config
 
 ## v0.3.0 (2021-10-12)
 * Add `genbank-to-ddbj` for Genbank → DDBJ conversion

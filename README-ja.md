@@ -143,6 +143,9 @@ gff3-to-ddbj \
 
 * メタデータ中のsource情報を各エントリに追加
 
+* GFF3が `Is_circular=true` を含むばあい `TOPOLOGY` を `/circular` 付で追加して環状ゲノムであることを明示
+  * このとき[始点・終点をまたぐ featureのlocation処理](https://www.ddbj.nig.ac.jp/faq/ja/how-to-describe-location-circular-genome.html)も行う
+
 * 同じ親をもつfeatureを`join`記法で結合
   *  `CDS`, `exon`, `mat_peptide`, `V_segment`, `C_region`, `D-loop`, `misc_feature` に対して適用
   * 例外として `gene`を直接の親に持つ `exon` は結合しない
