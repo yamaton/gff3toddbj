@@ -25,6 +25,20 @@ def format_location(loc: Location) -> str:
             assert all(isinstance(x, ExactPosition) for x in (loc.start, loc.end)), msg
             s = "{}".format(start)  # convert to 1-based
         else:
+            try:
+                if int(start) > int(end):
+                    # this is ad-hoc workaround because Bio.parse() creates a strange location like
+                    # FeatureLocation(ExactPosition(138683), ExactPosition(138683), strand=1)
+                    # which translates to start > end in 1-based both-inclusive indexing.
+                    # Confirmed this with biopython=1.79 when Bio.SeqIO.parse() takes
+                    # a genbank format using BetweenLocation notation 138683^138684
+                    res = "{}^{}".format(int(start) - 1, start)
+                    msg = "Workaround for invalid location: {} --> {}".format(str(loc), res)
+                    logging.warning(msg)
+                    return res
+            except:
+                pass
+
             s = "{}..{}".format(start, end)  # convert to 1-based, both-inclusive
         return s
 

@@ -16,6 +16,8 @@
 * Add an item `nat-host` --> `/host` to the default config
 * Fix a bug in DDBJ parser used in evaluation
     * It gave wrong position when location string is digits.
+* Add preliminary handling of "between-position" location like `138683^138684`
+    * Not using `BetweenPosition` because `Bio.SeqIO.parse()` creates `FeatureLocation` instead.
 
 ## v0.3.0 (2021-10-12)
 * Add `genbank-to-ddbj` for Genbank → DDBJ conversion

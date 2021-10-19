@@ -21,11 +21,20 @@ def _to_featureloc(s: str, is_positive_strand: bool) -> FeatureLocation:
 
     >>> _to_featureloc("<23..35", True)
     FeatureLocation(BeforePosition(23), ExactPosition(35), strand=1)
+
+    >>> _to_featureloc("123^124", True)
+    FeatureLocation(ExactPosition(123), ExactPosition(124), strand=1)
     """
     if ".." in s:
         start, end = s.split("..")
         start = BeforePosition(int(start[1:])) if start.startswith("<") else int(start)
         end = AfterPosition(int(end[1:])) if end.startswith(">") else int(end)
+    elif "^" in s:
+        # I'm not sure this is the right way to handle "between-position" notation
+        # but this is the way RefSeq's GFF3 (GCF_902167145.1) shows as the counterpart
+        # to "138683^138684"
+        start, end = map(int, s.split("^"))
+        assert start + 1 == end
     else:
         start = int(s)
         end = start + 1
