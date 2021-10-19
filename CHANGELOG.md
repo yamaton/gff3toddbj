@@ -13,6 +13,7 @@
 * Enforce single value to /gene if it has multiple. Put the rest to /gene_synonym.
 * Change not to correct position with `<` or `>` if the part is `/pseudo` or `/pseudogene`.
 * Change start codons to only ATG when transl_table=1
+* Change not to add `assembly_gap` if the gap is < 10bp long.
 * Add an item `nat-host` --> `/host` to the default config
 * Fix a bug in DDBJ parser used in evaluation
     * It gave wrong position when location string is digits.

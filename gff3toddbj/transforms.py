@@ -50,10 +50,11 @@ def _get_assembly_gap(seq: str, qualifiers: OrderedDict[str, Any]) -> List[SeqFe
     features = []
     for loc in locs:
         f = SeqFeature(loc, type="assembly_gap", qualifiers=qualifiers)
+        length = loc.end.position - loc.start.position
         if f.qualifiers.get("estimated_length", None) == ["<COMPUTE>"]:
-            length = loc.end.position - loc.start.position + 1
             f.qualifiers["estimated_length"] = [length]
-        features.append(f)
+        if length >= 10:
+            features.append(f)
     return features
 
 
@@ -833,7 +834,7 @@ def run(
         # Check if SeqIDs have valid characters
         msg = (
             "\n\n"
-            "Found invalid letter(s) in the 1st column of the GFF3: {}\n"
+            "Found invalid letter(s) in the 1st column of the GFF3 (or FASTA header if fasta-only): {}\n"
             "Consider running this script to correct entry names in the DDBJ annotation:\n\n"
             "   $ normalize-entry-names <output.ann>\n"
         )
