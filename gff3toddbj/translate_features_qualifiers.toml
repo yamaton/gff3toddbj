@@ -404,6 +404,14 @@ qualifier_value = "mitochondrion"
 qualifier_key = "host"
 
 
+# Seen in RefSeq E. Coli
+[__ANY__.substrain]
+qualifier_key = "sub_strain"
+
+[__ANY__.plasmid-name]
+qualifier_key = "plasmid"
+
+
 ## ================================================================================
 ## Translate a GFF3 type (= column 3 value) into a pair of (Feature, Qualifier)
 ## ================================================================================
