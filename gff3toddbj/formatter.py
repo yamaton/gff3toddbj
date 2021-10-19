@@ -21,8 +21,6 @@ def format_location(loc: Location) -> str:
         start = str(PositionType(loc.start.position + 1))
         end = str(loc.end)
         if start == end:
-            msg = "Something is wrong with position type!"
-            assert all(isinstance(x, ExactPosition) for x in (loc.start, loc.end)), msg
             s = "{}".format(start)  # convert to 1-based
         else:
             try:
