@@ -60,6 +60,9 @@ def _get_feature_name(f: SeqFeature) -> str:
         res = "ncRNA_" + f.qualifiers["ncRNA_class"][0]
     elif f.type == "regulatory":
         res = "regulatory_" + f.qualifiers["regulatory_class"][0]
+    elif f.type == "repeat_region":
+        qual_value = f.qualifiers.get("rpt_type", ["other"])[0]
+        res = "repeat_region_" + qual_value
     else:
         res = f.type
     return res
