@@ -2,7 +2,7 @@
 For evaluation of DDBJ annotation
 
 """
-from typing import Callable, Iterable, List, Counter, Tuple, Union
+from typing import Callable, Hashable, Iterable, List, Counter, Tuple, Union
 import argparse
 import collections
 
@@ -18,8 +18,8 @@ __version__ = "0.0.3"
 Troika = Tuple[str, str, str]
 
 
-def patch_up_short_introns(record: SeqRecord, gap_size_to: int=5) -> None:
-    """Fix `CompundLocation` of "CDS" and "exon" features and sub_features of a record
+def remove_short_introns(record: SeqRecord, gap_size_to: int=5) -> None:
+    """Patch parts of `CompundLocation` together
     if intron gap is shorter than `min_gap_size`.
     """
 
@@ -105,10 +105,11 @@ def _get_multiset_locations(
 def get_multiset_locations_wo_correction(records: Iterable[SeqRecord]) -> Counter[Troika]:
     return _get_multiset_locations(records, True)
 
-
 def get_multiset_locations(records: Iterable[SeqRecord]) -> Counter[Troika]:
     return _get_multiset_locations(records, False)
 
+def get_multiset_entry_name(records: Iterable[SeqRecord]) -> Counter[Tuple[str]]:
+    return collections.Counter((rec.id, ) for rec in records)
 
 
 def compare(records1: List[SeqRecord], records2: List[SeqRecord], func) -> Tuple[Counter[Troika], Counter[Troika], Counter[Troika]]:
@@ -124,8 +125,7 @@ def compare(records1: List[SeqRecord], records2: List[SeqRecord], func) -> Tuple
     return intersect, left_only, right_only
 
 
-
-def compare_and_report(records1: List[SeqRecord], records2: List[SeqRecord], f: Callable[[Iterable[SeqRecord]], Counter[Troika]], title: str, file_prefix: str):
+def compare_and_report(records1: List[SeqRecord], records2: List[SeqRecord], f: Callable[[Iterable[SeqRecord]], Counter[Hashable]], title: str, file_prefix: str):
     intersect, left_only, right_only = compare(records1, records2, f)
     cnt_match, cnt_leftonly, cnt_rightonly = map(lambda multiset: sum(multiset.values()), [intersect, left_only, right_only])
 
@@ -143,21 +143,32 @@ def compare_and_report(records1: List[SeqRecord], records2: List[SeqRecord], f: 
                 print("\t".join(tup), file=fout)
 
 
+def set_accession_as_entry_name(rec: SeqRecord):
+    """Replace the ID with accession part if it contains '|'
+
+    According to FASTA format, `dbj|accession|locus` is the one in DDBJ.
+    https://en.wikipedia.org/wiki/FASTA_format
+    """
+    if "|" in rec.id:
+        accession = rec.id.split("|")[1]
+        rec.id = accession
+
+
 def main():
     argparser = argparse.ArgumentParser(prog=_EXEC_NAME)
     argparser.add_argument("ddbj1", help="Input DDBJ annotation 1")
     argparser.add_argument("ddbj2", help="Input DDBJ annotation 2")
     argparser.add_argument(
-        "--name1",
-        metavar="STR",
-        help="Specify name of the first annotation",
-        default="ann1"
+        "--no-rename-entry",
+        default=False,
+        action="store_true",
+        help="Disable renaming of entries by extracting accession part assuming dbj|accession|locus format",
     )
     argparser.add_argument(
-        "--name2",
-        metavar="STR",
-        help="Specify name of the second annotation",
-        default="ann2"
+        "--patch-features",
+        default=False,
+        action="store_true",
+        help="Remove short (< 10bp) introns by patching feature gaps",
     )
     argparser.add_argument(
         "--log",
@@ -171,11 +182,22 @@ def main():
     records1 = list(parser.load_ddbj(args.ddbj1))
     records2 = list(parser.load_ddbj(args.ddbj2))
     for rec in records1:
-        patch_up_short_introns(rec)
+        if args.patch_features:
+            remove_short_introns(rec)
+        if not args.no_rename_entry:
+            set_accession_as_entry_name(rec)
 
     for rec in records2:
-        patch_up_short_introns(rec)
+        if args.patch_features:
+            remove_short_introns(rec)
+        if not args.no_rename_entry:
+          set_accession_as_entry_name(rec)
 
+    print("------------------------------------------------------------")
+    print("!! Other stats are affected if entry names are different !!")
+    compare_and_report(records1, records2, get_multiset_entry_name, "    Stat of entry names ...", "entry_names_")
+    print("------------------------------------------------------------")
+    print()
     compare_and_report(records1, records2, get_multiset_locations_wo_correction, "Stat w/o location correction:", "loc_wo_correction_")
     compare_and_report(records1, records2, get_multiset_locations, "Stat with location correction:", "loc_corrected_")
     compare_and_report(records1, records2, get_multiset_feature_qualifier, "Stat of feature-qualifier pairs:", "quals_")
