@@ -173,6 +173,9 @@ feature_key = "source"
 [region.gbkey.Region]
 feature_key = "misc_feature"
 
+# Seen in GCF_000008865.2
+[region.gbkey.Comment]
+feature_key = "misc_feature"
 
 # SO:0001503
 # processed_transcript takes transcript whose corrsponding feature is misc_RNA.
