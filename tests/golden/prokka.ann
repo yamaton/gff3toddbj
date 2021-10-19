@@ -13582,9 +13582,6 @@ ERS324955|SC|contig000004	source	1..132407	organism	Drosophila melanogaster
 			product	transposase-like protein
 			codon_start	1
 			transl_table	11
-	assembly_gap	123260	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	CDS	complement(123601..124569)	note	ID:10678_6#23_00909
 			note	source:Prodigal:2.60
 			note	product:Ribose-phosphate pyrophosphokinase

@@ -6756,9 +6756,6 @@ NW_007930837.1	source	1..1964398	note	ID:NW_007930837.1:1..1964398
 			product	GNAT family acetyltransferase, putative
 			codon_start	1
 			transl_table	4
-	assembly_gap	163495	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	mRNA	join(164716..165567,165621..165923,165976..166137)	note	ID:rna-XM_008595829.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_00732
@@ -17783,9 +17780,6 @@ NW_007930839.1	source	1..1659581	note	ID:NW_007930839.1:1..1659581
 			product	3-isopropylmalate dehydrogenase
 			codon_start	1
 			transl_table	4
-	assembly_gap	439374	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	assembly_gap	439409..439508	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -18806,12 +18800,6 @@ NW_007930839.1	source	1..1659581	note	ID:NW_007930839.1:1..1659581
 			product	efflux pump antibiotic resistance protein
 			codon_start	1
 			transl_table	4
-	assembly_gap	781606	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
-	assembly_gap	781609	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	assembly_gap	781615..781714	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -22017,9 +22005,6 @@ NW_007930840.1	source	1..1467565	note	ID:NW_007930840.1:1..1467565
 			product	hypothetical protein
 			codon_start	1
 			transl_table	4
-	assembly_gap	274639	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	mRNA	join(279948..280298,280351..280363,280410..280616,280681..280722,280771..280911,280961..281790,281852..281890)	note	ID:rna-XM_008597481.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_02384
@@ -22128,9 +22113,6 @@ NW_007930840.1	source	1..1467565	note	ID:NW_007930840.1:1..1467565
 			product	Zn(2)-C6-type transcriptional repressor
 			codon_start	1
 			transl_table	4
-	assembly_gap	305670	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	mRNA	complement(307587..308207)	note	ID:rna-XM_008597493.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_02396
@@ -24489,12 +24471,6 @@ NW_007930840.1	source	1..1467565	note	ID:NW_007930840.1:1..1467565
 			product	centromere/microtubule-binding protein cbf5
 			codon_start	1
 			transl_table	4
-	assembly_gap	1187190	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
-	assembly_gap	1193008	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	mRNA	complement(join(1193394..1193758,1193962..1194734,1194795..1194807,1194881..1195171,1195257..1195413))	note	ID:rna-XM_008597750.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_02653
@@ -25150,9 +25126,6 @@ NW_007930840.1	source	1..1467565	note	ID:NW_007930840.1:1..1467565
 			codon_start	1
 			transl_table	4
 	assembly_gap	1407327..1407426	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
-	assembly_gap	1407437	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
 	mRNA	1407616..1408743	note	ID:rna-XM_008597822.1
@@ -26608,9 +26581,6 @@ NW_007930841.1	source	1..1419043	note	ID:NW_007930841.1:1..1419043
 			product	zinc knuckle protein
 			codon_start	1
 			transl_table	4
-	assembly_gap	449415	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	mRNA	complement(450155..450763)	note	ID:rna-XM_008597980.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_02883
@@ -26917,12 +26887,6 @@ NW_007930841.1	source	1..1419043	note	ID:NW_007930841.1:1..1419043
 			product	MFS transporter, putative
 			codon_start	1
 			transl_table	4
-	assembly_gap	537609	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
-	assembly_gap	537613	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	assembly_gap	537625..537724	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -29176,9 +29140,6 @@ NW_007930841.1	source	1..1419043	note	ID:NW_007930841.1:1..1419043
 	assembly_gap	1277975..1278074	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
-	assembly_gap	1278093	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	mRNA	join(1286747..1286986,1287315..1287803)	note	ID:rna-XM_008598261.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_03164
@@ -31283,9 +31244,6 @@ NW_007930842.1	source	1..1263816	note	ID:NW_007930842.1:1..1263816
 			product	membrane protein, putative
 			codon_start	1
 			transl_table	4
-	assembly_gap	533725	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	mRNA	complement(join(542975..543094,543190..543764,543883..544081))	note	ID:rna-XM_008598490.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_03393
@@ -31757,9 +31715,6 @@ NW_007930842.1	source	1..1263816	note	ID:NW_007930842.1:1..1263816
 			product	POT family protein
 			codon_start	1
 			transl_table	4
-	assembly_gap	726923	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	assembly_gap	726927..727026	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -33441,9 +33396,6 @@ NW_007930843.1	source	1..1169471	note	ID:NW_007930843.1:1..1169471
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
-	assembly_gap	48	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	mRNA	103..732	note	ID:rna-XM_008598726.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_03629
@@ -34659,9 +34611,6 @@ NW_007930843.1	source	1..1169471	note	ID:NW_007930843.1:1..1169471
 			product	protein kinase subdomain-containing protein
 			codon_start	1
 			transl_table	4
-	assembly_gap	409966	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	mRNA	join(411772..412515,412570..412987,413046..414307)	note	ID:rna-XM_008598860.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_03763
@@ -35884,12 +35833,6 @@ NW_007930843.1	source	1..1169471	note	ID:NW_007930843.1:1..1169471
 			codon_start	1
 			transl_table	4
 	assembly_gap	849805..849904	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
-	assembly_gap	849922	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
-	assembly_gap	849926	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
 	assembly_gap	856016..856115	estimated_length	unknown
@@ -37925,9 +37868,6 @@ NW_007930844.1	source	1..1153075	note	ID:NW_007930844.1:1..1153075
 			codon_start	1
 			transl_table	4
 	assembly_gap	367575..367674	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
-	assembly_gap	368600	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
 	assembly_gap	368681..368780	estimated_length	unknown
@@ -41006,9 +40946,6 @@ NW_007930845.1	source	1..980095	note	ID:NW_007930845.1:1..980095
 			product	helix-loop-helix DNA-binding domain-containing protein
 			codon_start	1
 			transl_table	4
-	assembly_gap	331148	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	assembly_gap	331176..331275	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -43365,9 +43302,6 @@ NW_007930846.1	source	1..872271	note	ID:NW_007930846.1:1..872271
 			product	hypothetical protein
 			codon_start	1
 			transl_table	4
-	assembly_gap	174581	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	mRNA	join(174987..175105,175171..175347,175440..175722,175822..176004,176218..176286,176349..176580,176675..177051)	note	ID:rna-XM_008599802.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_04705
@@ -44062,9 +43996,6 @@ NW_007930846.1	source	1..872271	note	ID:NW_007930846.1:1..872271
 			codon_start	1
 			transl_table	4
 	assembly_gap	444793..444892	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
-	assembly_gap	444930	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
 	mRNA	complement(join(445042..445925,446022..446454))	note	ID:rna-XM_008599876.1
@@ -46984,9 +46915,6 @@ NW_007930847.1	source	1..736384	note	ID:NW_007930847.1:1..736384
 			product	hypothetical protein
 			codon_start	1
 			transl_table	4
-	assembly_gap	656069	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	mRNA	complement(join(656358..656586,656709..658582))	note	ID:rna-XM_008600194.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_05097
@@ -47372,9 +47300,6 @@ NW_007930848.1	source	1..729568	note	ID:NW_007930848.1:1..729568
 	assembly_gap	66502..66601	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
-	assembly_gap	66615	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	mRNA	complement(join(70764..70955,71006..71060,71123..71307,71379..71645))	note	ID:rna-XM_008600234.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_05137
@@ -47540,9 +47465,6 @@ NW_007930848.1	source	1..729568	note	ID:NW_007930848.1:1..729568
 			product	phosphatidylethanolamine N-methyltransferase
 			codon_start	1
 			transl_table	4
-	assembly_gap	130104	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	mRNA	join(130130..130545,130670..131123,131278..131616)	note	ID:rna-XM_008600252.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_05155
@@ -55884,9 +55806,6 @@ NW_007930852.1	source	1..642988	note	ID:NW_007930852.1:1..642988
 			product	hypothetical protein
 			codon_start	1
 			transl_table	4
-	assembly_gap	129544	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	mRNA	complement(join(133034..133213,133268..133573,133632..134375))	note	ID:rna-XM_008601161.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_06064
@@ -60374,9 +60293,6 @@ NW_007930854.1	source	1..626337	note	ID:NW_007930854.1:1..626337
 			product	C6 finger domain protein
 			codon_start	1
 			transl_table	4
-	assembly_gap	405316	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	mRNA	join(410702..410907,410985..411978)	note	ID:rna-XM_008601650.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_06553
@@ -63466,9 +63382,6 @@ NW_007930856.1	source	1..528476	note	ID:NW_007930856.1:1..528476
 			product	pentatricopeptide repeat domain-containing protein
 			codon_start	1
 			transl_table	4
-	assembly_gap	291545	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	mRNA	join(293233..294088,294163..294504,294562..295136)	note	ID:rna-XM_008601987.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_06890
@@ -63811,24 +63724,6 @@ NW_007930856.1	source	1..528476	note	ID:NW_007930856.1:1..528476
 	assembly_gap	411908..412007	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
-	assembly_gap	412021	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
-	assembly_gap	412023	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
-	assembly_gap	412025	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
-	assembly_gap	412027	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
-	assembly_gap	412029	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
-	assembly_gap	412031	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	mRNA	complement(join(412246..412691,412764..413016,413076..413735,413778..413835,413870..413895,413996..414279,414595..415187,415235..415545))	note	ID:rna-XM_008602024.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_06927
@@ -63973,9 +63868,6 @@ NW_007930856.1	source	1..528476	note	ID:NW_007930856.1:1..528476
 			product	MFS multidrug transporter, putative
 			codon_start	1
 			transl_table	4
-	assembly_gap	467023	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	assembly_gap	471497..471596	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -66619,9 +66511,6 @@ NW_007930858.1	source	1..517326	note	ID:NW_007930858.1:1..517326
 			codon_start	1
 			transl_table	4
 	assembly_gap	367354..367453	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
-	assembly_gap	367460	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
 	assembly_gap	369047..369146	estimated_length	unknown
@@ -69708,9 +69597,6 @@ NW_007930861.1	source	1..418291	note	ID:NW_007930861.1:1..418291
 			product	hypothetical protein
 			codon_start	1
 			transl_table	4
-	assembly_gap	17080	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	mRNA	17661..18464	note	ID:rna-XM_008602658.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_07561
@@ -69864,9 +69750,6 @@ NW_007930861.1	source	1..418291	note	ID:NW_007930861.1:1..418291
 			product	ABC transporter
 			codon_start	1
 			transl_table	4
-	assembly_gap	63751	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	mRNA	complement(64503..66083)	note	ID:rna-XM_008602674.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_07577
@@ -76675,9 +76558,6 @@ NW_007930868.1	source	1..289244	note	ID:NW_007930868.1:1..289244
 			product	acetyltransferase, gnat family
 			codon_start	1
 			transl_table	4
-	assembly_gap	151905	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	mRNA	join(152765..153096,153205..153826)	note	ID:rna-XM_008603397.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_08300
@@ -80136,9 +80016,6 @@ NW_007930873.1	source	1..201589	note	ID:NW_007930873.1:1..201589
 	assembly_gap	35790..35889	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
-	assembly_gap	39671	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	assembly_gap	39685..39784	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -80648,9 +80525,6 @@ NW_007930874.1	source	1..199044	note	ID:NW_007930874.1:1..199044
 			codon_start	1
 			transl_table	4
 	assembly_gap	21234..21333	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
-	assembly_gap	24251	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
 	mRNA	complement(join(25283..26101,26170..26355))	note	ID:rna-XM_008603817.1
@@ -81975,9 +81849,6 @@ NW_007930876.1	source	1..184981	note	ID:NW_007930876.1:1..184981
 			product	TPR repeat-containing protein
 			codon_start	1
 			transl_table	4
-	assembly_gap	83374	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	mRNA	join(84284..84305,84360..85225)	note	ID:rna-XM_008603958.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_08861
@@ -84073,15 +83944,6 @@ NW_007930880.1	source	1..161797	note	ID:NW_007930880.1:1..161797
 	assembly_gap	3482..3581	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
-	assembly_gap	3715	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
-	assembly_gap	3723	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
-	assembly_gap	3782	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	mRNA	join(3915..4334,4391..4402)	note	ID:rna-XM_008604174.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_09077
@@ -84091,12 +83953,6 @@ NW_007930880.1	source	1..161797	note	ID:NW_007930880.1:1..161797
 			product	transposase-like protein
 			codon_start	1
 			transl_table	4
-	assembly_gap	4653	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
-	assembly_gap	4742	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	assembly_gap	4775..4874	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -86858,9 +86714,6 @@ NW_007930887.1	source	1..102318	note	ID:NW_007930887.1:1..102318
 			product	importin subunit beta-3
 			codon_start	1
 			transl_table	4
-	assembly_gap	5795	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	assembly_gap	5859..5958	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -87824,9 +87677,6 @@ NW_007930890.1	source	1..95598	note	ID:NW_007930890.1:1..95598
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
-	assembly_gap	2606	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	assembly_gap	2794..2893	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -87893,9 +87743,6 @@ NW_007930890.1	source	1..95598	note	ID:NW_007930890.1:1..95598
 			product	dethiobiotin synthetase
 			codon_start	1
 			transl_table	4
-	assembly_gap	24082	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	assembly_gap	24105..24204	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -89964,12 +89811,6 @@ NW_007930897.1	source	1..84717	note	ID:NW_007930897.1:1..84717
 			product	transposase-like protein
 			codon_start	1
 			transl_table	4
-	assembly_gap	66515	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
-	assembly_gap	66580	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	assembly_gap	67863..67962	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -90106,9 +89947,6 @@ NW_007930898.1	source	1..79466	note	ID:NW_007930898.1:1..79466
 			product	cell wall glucanosyltransferase Mwg1
 			codon_start	1
 			transl_table	4
-	assembly_gap	34357	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	mRNA	join(36391..36477,36766..37678,37836..37963,38222..38396,38528..38946,39022..40056)	note	ID:rna-XM_008604793.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_09696
@@ -91499,9 +91337,6 @@ NW_007930905.1	source	1..64310	note	ID:NW_007930905.1:1..64310
 	assembly_gap	28804..28903	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
-	assembly_gap	28910	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	mRNA	complement(29396..29767)	note	ID:rna-XM_008604931.1
 			note	source:RefSeq
 			locus_tag	LOCUSTAGPREFIX_BBA_09834
@@ -92749,9 +92584,6 @@ NW_007930912.1	source	1..50391	note	ID:NW_007930912.1:1..50391
 			codon_start	1
 			transl_table	4
 	assembly_gap	17475..17574	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
-	assembly_gap	17576	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
 	assembly_gap	18991..19090	estimated_length	unknown
@@ -94813,9 +94645,6 @@ NW_007930928.1	source	1..32175	note	ID:NW_007930928.1:1..32175
 			product	hypothetical protein
 			codon_start	1
 			transl_table	4
-	assembly_gap	16193	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	assembly_gap	16195..16294	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -95770,9 +95599,6 @@ NW_007930940.1	source	1..20957	note	ID:NW_007930940.1:1..20957
 	assembly_gap	1526..1625	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
-	assembly_gap	3848	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 	assembly_gap	4025..4124	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
@@ -96480,9 +96306,6 @@ NW_007930953.1	source	1..12644	note	ID:NW_007930953.1:1..12644
 			codon_start	1
 			transl_table	4
 	assembly_gap	10390..10489	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
-	assembly_gap	10600	estimated_length	unknown
 			gap_type	within scaffold
 			linkage_evidence	paired-ends
 	assembly_gap	11493..11592	estimated_length	unknown
@@ -97785,9 +97608,6 @@ NW_007931029.1	source	1..1384	note	ID:NW_007931029.1:1..1384
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
-	assembly_gap	1129	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 NW_007931030.1	source	1..1371	note	ID:NW_007931030.1:1..1371
 			note	source:RefSeq
 			chromosome	Unknown
@@ -98025,9 +97845,6 @@ NW_007931059.1	source	1..1090	note	ID:NW_007931059.1:1..1090
 			mol_type	genomic DNA
 			strain	ARSEF 2860
 			organism	Beauveria bassiana ARSEF 2860
-	assembly_gap	139..140	estimated_length	unknown
-			gap_type	within scaffold
-			linkage_evidence	paired-ends
 NW_007931060.1	source	1..1083	note	ID:NW_007931060.1:1..1083
 			note	source:RefSeq
 			chromosome	Unknown
