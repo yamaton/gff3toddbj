@@ -398,6 +398,51 @@ qualifier_value = ""
 qualifier_key = "organelle"
 qualifier_value = "mitochondrion"
 
+[__ANY__.genome.kinetoplast]
+qualifier_key = "organelle"
+qualifier_value = "mitochondrion:kinetoplast"
+
+[__ANY__.genome.hydrogenosome]
+qualifier_key = "organelle"
+qualifier_value = "hydrogenosome"
+
+# seen in RefSeq maise genome
+[__ANY__.genome.chloroplast]
+qualifier_key = "organelle"
+qualifier_value = "plastid:chloroplast"
+
+[__ANY__.genome.apicoplast]
+qualifier_key = "organelle"
+qualifier_value = "plastid:apicoplast"
+
+[__ANY__.genome.chromoplast]
+qualifier_key = "organelle"
+qualifier_value = "plastid:chromoplast"
+
+[__ANY__.genome.cyanelle]
+qualifier_key = "organelle"
+qualifier_value = "plastid:cyanelle"
+
+[__ANY__.genome.leucoplast]
+qualifier_key = "organelle"
+qualifier_value = "plastid:leucoplast"
+
+[__ANY__.genome.proplastid]
+qualifier_key = "organelle"
+qualifier_value = "plastid:proplastid"
+
+[__ANY__.genome.plastid]
+qualifier_key = "organelle"
+qualifier_value = "plastid"
+
+[__ANY__.genome.chromatophore]
+qualifier_key = "organelle"
+qualifier_value = "chromatophore"
+
+[__ANY__.genome.nucleomorph]
+qualifier_key = "organelle"
+qualifier_value = "nucleomorph"
+
 
 # Seen in RefSeq coronavirus
 [__ANY__.nat-host]
