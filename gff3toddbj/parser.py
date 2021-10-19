@@ -17,7 +17,7 @@ def _to_featureloc(s: str, is_positive_strand: bool) -> FeatureLocation:
     """Parse simple location of the form like
 
     >>> _to_featureloc("123", False)
-    FeatureLocation(ExactPosition(123), ExactPosition(123), strand=-1)
+    FeatureLocation(ExactPosition(123), ExactPosition(124), strand=-1)
 
     >>> _to_featureloc("<23..35", True)
     FeatureLocation(BeforePosition(23), ExactPosition(35), strand=1)
@@ -27,7 +27,8 @@ def _to_featureloc(s: str, is_positive_strand: bool) -> FeatureLocation:
         start = BeforePosition(int(start[1:])) if start.startswith("<") else int(start)
         end = AfterPosition(int(end[1:])) if end.startswith(">") else int(end)
     else:
-        start = end = int(s)
+        start = int(s)
+        end = start + 1
 
     strand = +1 if is_positive_strand else -1
     return FeatureLocation(start, end, strand=strand)
@@ -37,7 +38,7 @@ def _parse_loc(s: str) -> Union[FeatureLocation, CompoundLocation]:
     """Parse location item as either FeatureLocation or CompoundLocation
 
     >>> _parse_loc("10")
-    FeatureLocation(ExactPosition(10), ExactPosition(10), strand=1)
+    FeatureLocation(ExactPosition(10), ExactPosition(11), strand=1)
 
     >>> _parse_loc("complement(333..>350)")
     FeatureLocation(ExactPosition(333), AfterPosition(350), strand=-1)
@@ -100,7 +101,7 @@ def load_ddbj(path_ddbj) -> Generator[SeqRecord, None, None]:
             if row[2]:
                 feature.location = _parse_loc(row[2])
             else:
-                logging.error(f"Something is wrong: {row}")
+                logging.warning(f"Location missing after a feature: {row}")
                 continue
             if record is None:
                 logging.error(f"Something is wrong: {row}")

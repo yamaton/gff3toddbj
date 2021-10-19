@@ -14,6 +14,8 @@
 * Change not to correct position with `<` or `>` if the part is `/pseudo` or `/pseudogene`.
 * Change start codons to only ATG when transl_table=1
 * Add an item `nat-host` --> `/host` to the default config
+* Fix a bug in DDBJ parser used in evaluation
+    * It gave wrong position when location string is digits.
 
 ## v0.3.0 (2021-10-12)
 * Add `genbank-to-ddbj` for Genbank → DDBJ conversion
