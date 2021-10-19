@@ -111,7 +111,7 @@ python -m build && pip install -e ./
 gff3-to-ddbj \
   --gff3 myfile.gff3 \               # この行を削除すると source, assembly_gap のみになります
   --fasta myfile.fa \                # <<必須>>
-  --metadata mymetadata.toml \       # この行を削除すると作成者名などにサンプル値が入ります
+  --metadata mymetadata.toml \       # この行を削除するとCOMMON項目無しのデフォルト値が入ります
   --locus_tag_prefix MYOWNPREFIX \   # この行を削除すると LOCUSTAGPREFIX_ に設定されます
   --transl_table 1 \                 # この行を削除すると 1 に設定されます
   --output myawesome_output.ann      # この行を削除すると標準出力に
