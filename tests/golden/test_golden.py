@@ -4,6 +4,7 @@ from typing import Union
 import subprocess
 import pathlib
 import uuid
+import filecmp
 
 WORK_DIR = pathlib.Path(__file__).parent
 TEST_OUTPUT_DEFAULT_PREFIX = "pytest_"
@@ -42,12 +43,7 @@ def runner(data: BunchOfFiles, prefix:str=""):
     output_file = WORK_DIR / filename
     cmd = data.get_command(output_file)
     subprocess.run(cmd, shell=True)
-
-    with open(data.ref, "r") as f_ref, open(output_file, "r") as f_out:
-        content_ref = f_ref.read()
-        content_out = f_out.read()
-
-    assert content_ref == content_out
+    assert filecmp.cmp(data.ref, output_file)
     output_file.unlink(missing_ok=True)
 
 
