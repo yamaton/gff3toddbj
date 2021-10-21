@@ -1,5 +1,5 @@
 """
-Sketch of DDBJ annotation parser
+Sketch of DDBJ annotation parser providing `load_ddbj()`
 
 """
 from typing import Generator, Union
@@ -11,7 +11,7 @@ from Bio.Seq import Seq
 from Bio.SeqFeature import ExactPosition, SeqFeature, FeatureLocation, CompoundLocation, BeforePosition, AfterPosition
 
 
-FALLBACK_SEQLEN = 100
+FALLBACK_SEQLEN = 0
 
 def _to_featureloc(s: str, is_positive_strand: bool) -> FeatureLocation:
     """Parse simple location of the form.
@@ -99,6 +99,8 @@ def _parse_loc(s: str) -> Union[FeatureLocation, CompoundLocation]:
 def load_ddbj(path_ddbj) -> Generator[SeqRecord, None, None]:
     """Load DDBJ annotation file as a generator of SeqRecords
 
+    [NOTE] COMMON part of annotation will be ignored because
+    SeqRecord does not accomodate COMMON as its feature nicely.
     """
     skipping_entry = False
     record = None
