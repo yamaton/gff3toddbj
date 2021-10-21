@@ -8,35 +8,55 @@ import logging
 
 from Bio.SeqRecord import SeqRecord
 from Bio.Seq import Seq
-from Bio.SeqFeature import SeqFeature, FeatureLocation, CompoundLocation, BeforePosition, AfterPosition
+from Bio.SeqFeature import ExactPosition, SeqFeature, FeatureLocation, CompoundLocation, BeforePosition, AfterPosition
 
 
 FALLBACK_SEQLEN = 100
 
 def _to_featureloc(s: str, is_positive_strand: bool) -> FeatureLocation:
-    """Parse simple location of the form like
+    """Parse simple location of the form.
+
+    Note that FeatureLocation takes 0-based both-inclusive indexing
+    while texts from GFF3/DDBJ/flatfile have 1-based left-inclusive
+    right-exclusive indexing.
 
     >>> _to_featureloc("123", False)
-    FeatureLocation(ExactPosition(123), ExactPosition(124), strand=-1)
+    FeatureLocation(ExactPosition(122), ExactPosition(123), strand=-1)
 
     >>> _to_featureloc("<23..35", True)
-    FeatureLocation(BeforePosition(23), ExactPosition(35), strand=1)
+    FeatureLocation(BeforePosition(22), ExactPosition(35), strand=1)
 
     >>> _to_featureloc("123^124", True)
-    FeatureLocation(ExactPosition(123), ExactPosition(124), strand=1)
+    FeatureLocation(ExactPosition(122), ExactPosition(123), strand=1)
+
+    >>> _to_featureloc("<123", True)
+    FeatureLocation(BeforePosition(122), ExactPosition(123), strand=1)
+
+    >>> _to_featureloc(">123", True)
+    FeatureLocation(ExactPosition(122), AfterPosition(123), strand=1)
     """
     if ".." in s:
         start, end = s.split("..")
-        start = BeforePosition(int(start[1:])) if start.startswith("<") else int(start)
+        start = BeforePosition(int(start[1:]) - 1) if start.startswith("<") else int(start) - 1
         end = AfterPosition(int(end[1:])) if end.startswith(">") else int(end)
     elif "^" in s:
         # I'm not sure this is the right way to handle "between-position" notation
         # but this is the way RefSeq's GFF3 (GCF_902167145.1) shows as the counterpart
         # to "138683^138684"
         start, end = map(int, s.split("^"))
+        start -= 1
+        end -= 1
         assert start + 1 == end
+    elif s.startswith("<"):
+        n = int(s[1:]) - 1
+        start = BeforePosition(n)
+        end = ExactPosition(n + 1)
+    elif s.startswith(">"):
+        n = int(s[1:]) - 1
+        start = ExactPosition(n)
+        end = AfterPosition(n + 1)
     else:
-        start = int(s)
+        start = int(s) - 1
         end = start + 1
 
     strand = +1 if is_positive_strand else -1
@@ -47,16 +67,16 @@ def _parse_loc(s: str) -> Union[FeatureLocation, CompoundLocation]:
     """Parse location item as either FeatureLocation or CompoundLocation
 
     >>> _parse_loc("10")
-    FeatureLocation(ExactPosition(10), ExactPosition(11), strand=1)
+    FeatureLocation(ExactPosition(9), ExactPosition(10), strand=1)
 
     >>> _parse_loc("complement(333..>350)")
-    FeatureLocation(ExactPosition(333), AfterPosition(350), strand=-1)
+    FeatureLocation(ExactPosition(332), AfterPosition(350), strand=-1)
 
     >>> _parse_loc("join(1..5,100..>200)")
-    CompoundLocation([FeatureLocation(ExactPosition(1), ExactPosition(5), strand=1), FeatureLocation(ExactPosition(100), AfterPosition(200), strand=1)], 'join')
+    CompoundLocation([FeatureLocation(ExactPosition(0), ExactPosition(5), strand=1), FeatureLocation(ExactPosition(99), AfterPosition(200), strand=1)], 'join')
 
     >>> _parse_loc("complement(join(1..5,100..>200))")
-    CompoundLocation([FeatureLocation(ExactPosition(1), ExactPosition(5), strand=-1), FeatureLocation(ExactPosition(100), AfterPosition(200), strand=-1)], 'join')
+    CompoundLocation([FeatureLocation(ExactPosition(0), ExactPosition(5), strand=-1), FeatureLocation(ExactPosition(99), AfterPosition(200), strand=-1)], 'join')
     """
     is_positive_strand = True
 
