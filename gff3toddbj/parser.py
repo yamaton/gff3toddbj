@@ -80,20 +80,21 @@ def load_ddbj(path_ddbj) -> Generator[SeqRecord, None, None]:
     """Load DDBJ annotation file as a generator of SeqRecords
 
     """
-    skipping_common = False
+    skipping_entry = False
     record = None
 
     csvfile = open(path_ddbj)
     spamreader = csv.reader(csvfile, delimiter="\t")
     for row in spamreader:
         if row[0] == "COMMON":
-            skipping_common = True
+            skipping_entry = True
             continue
 
-        if skipping_common and (not row[0]):
+        if skipping_entry and (not row[0]):
             continue
 
         if row[0]:
+            skipping_entry = False
             if record is not None:
                 yield record
 
