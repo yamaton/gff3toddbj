@@ -171,6 +171,8 @@ Here is the list of operations `gff3-to-ddbj` will do:
     >
     > * If the name and function are not known, we recommend to describe as "hypothetical protein".
 
+* If a `gene` feature has `/gene` and/or `/gene_synonym`, copy these qualifiers to its children.
+
 * Make `/gene` have a single value, and put the rest to `/gene_synonym`.
   * Reference: [Definition of Qualifier key: /gene](https://www.ddbj.nig.ac.jp/ddbj/qualifiers-e.html#gene).
 

@@ -15,6 +15,7 @@
 * Change start codons to only ATG when transl_table=1
 * Change not to add `assembly_gap` if the gap is < 10bp long.
 * Change to join features with `ribosomal_slippage`.
+* Add copying qualifiers `/gene` and `/gene_synonym` to children if a `gene` feature has them.
 * Add an renaming to `/organelle`, `/host`, `/sub_strain`, `/plasmid` to the default config
 * Fix a bug in DDBJ parser used in evaluation
     * It gave wrong position when location string is digits.

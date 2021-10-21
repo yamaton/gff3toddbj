@@ -27,6 +27,10 @@ IGNORE_FILTERING_RULES = False
 # [NOTE] joined-exon locations are taken by their parent RNAs as their locations
 JOINABLES = ("CDS", "exon", "mat_peptide", "V_segment", "C_region", "D-loop", "misc_feature")
 
+# Copy qualifiers "/gene" and "/gene_synonym" to children of "gene" feature
+DATA_QUALFIERS_TO_CHILDREN = {"gene": frozenset(["gene", "gene_synonym"])}
+
+
 def main():
     parser = argparse.ArgumentParser(prog=_EXEC_NAME)
     parser.add_argument("--gff3", "--gff", metavar="FILE", help="Input GFF3 file")
@@ -110,6 +114,7 @@ def main():
         args.prefix,
         args.transl_table,
         joinables=JOINABLES,
+        data_qualifiers_to_children=DATA_QUALFIERS_TO_CHILDREN,
     )
 
     logging.debug("Records: {}".format(records))

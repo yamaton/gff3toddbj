@@ -1,4 +1,4 @@
-from typing import Any, Dict, Generator, List, Optional, Tuple, Iterable, OrderedDict
+from typing import Any, Dict, FrozenSet, Generator, List, Optional, Tuple, Iterable, OrderedDict
 import collections
 import re
 import logging
@@ -675,6 +675,33 @@ def _handle_topology(rec: SeqRecord) -> None:
             _scan_origin_spannig(rec.features, record_end_pos)
 
 
+def _copy_qualifiers_to_children(rec: SeqRecord, qualifier_key_data: Dict[str, FrozenSet[str]]) -> None:
+    """Copy qualifiers in data.values() to children if a feature in data.keys() has them.
+    """
+    def _assign_qual(features: List[SeqFeature], qkey: str, qvals: List[str]):
+        for f in features:
+            if qkey in f.qualifiers:
+                f.qualifiers[qkey].extend(qvals)
+            else:
+                f.qualifiers[qkey] = qvals
+            if hasattr(f, "sub_features"):
+                _assign_qual(f.sub_features, qkey, qvals)
+
+    def _runner(features: List[SeqFeature]):
+        for f in features:
+            if f.type in qualifier_key_data:
+                qualifier_keys = qualifier_key_data[f.type]
+                for qkey in qualifier_keys:
+                    if qkey in f.qualifiers and hasattr(f, "sub_features"):
+                        qvals = f.qualifiers[qkey]
+                        _assign_qual(f.sub_features, qkey, qvals)
+
+            if hasattr(f, "sub_features"):
+                _runner(f.sub_features)
+
+    _runner(rec.features)
+
+
 def _assign_single_product(rec: SeqRecord) -> None:
     """Take the first item in /product values as the value of /product
     and put the rest as /note values
@@ -780,6 +807,7 @@ def run(
     locus_tag_prefix: str,
     transl_table: int,
     joinables: Tuple[str, ...],
+    data_qualifiers_to_children: Dict[str, FrozenSet[str]],
 ) -> Generator[SeqRecord, None, None]:
     """Create a list of `SeqRecord`s and apply various transformations"""
 
@@ -837,6 +865,9 @@ def run(
 
         # Make /gene have a single value; put the rest to /gene_synonym
         _make_gene_have_single_value(rec)
+
+        # Copy qualifiers to children
+        _copy_qualifiers_to_children(rec, data_qualifiers_to_children)
 
         # Remove duplicates within a qualifier
         _remove_duplicates_in_qualifiers(rec)
