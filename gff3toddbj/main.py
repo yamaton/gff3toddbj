@@ -99,6 +99,7 @@ def main():
         logging.info("Output              : {}".format(output))
 
     metadata = utils.load_metadata_info(args.metadata)
+    config_filter = utils.load_rules(args.config_filter)
 
     # Load files, apply transformations, and get a list of SeqRecord
     records = transforms.run(
@@ -113,7 +114,7 @@ def main():
 
     logging.debug("Records: {}".format(records))
 
-    fmt = formatter.DDBJFormatter(metadata, args.config_filter)
+    fmt = formatter.DDBJFormatter(metadata, config_filter)
     gen = fmt.run(records, ignore_rules=IGNORE_FILTERING_RULES)
 
     if output:

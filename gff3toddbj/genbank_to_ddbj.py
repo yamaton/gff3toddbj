@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import argparse
+import collections
 import logging
 import pathlib
 
@@ -15,8 +16,6 @@ _DIR = pathlib.Path(__file__).parent
 PATH_TRANS_FEATURES_QUALIFIERS = _DIR / "translate_features_qualifiers.toml"
 
 PATH_DDBJ_FILTER = _DIR / "ddbj_filter.toml"
-PATH_METADATA_DEFAULT = _DIR / "metadata_without_COMMON.toml"
-
 LOCUS_TAG_PREFIX = "LOCUSTAGPREFIX_"
 
 IGNORE_FILTERING_RULES = False
@@ -29,7 +28,7 @@ def main():
         "--metadata",
         help="Input metadata in TOML describing COMMON and other entires",
         metavar="FILE",
-        default=PATH_METADATA_DEFAULT,
+        default=None,
     )
     parser.add_argument(
         "-p",
@@ -83,7 +82,8 @@ def main():
     if output:
         logging.info("Output              : {}".format(output))
 
-    metadata = utils.load_metadata_info(args.metadata)
+    metadata = collections.OrderedDict() if args.metadata is None else utils.load_metadata_info(args.metadata)
+    config_filter = utils.load_rules(args.config_filter)
 
     # Load files, apply transformations, and get a list of SeqRecord
     records = transforms.run_with_genbank(
@@ -94,7 +94,8 @@ def main():
 
     logging.debug("Records: {}".format(records))
 
-    fmt = formatter.DDBJFormatter(metadata, args.config_filter)
+
+    fmt = formatter.DDBJFormatter(metadata, config_filter)
     gen = fmt.run(records, ignore_rules=IGNORE_FILTERING_RULES)
 
     if output:

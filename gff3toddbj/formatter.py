@@ -1,6 +1,6 @@
 import collections
 import logging
-from typing import Any, DefaultDict, FrozenSet, List, Optional, Tuple, Iterable, Union, Generator
+from typing import Any, DefaultDict, Dict, FrozenSet, List, Optional, Tuple, Iterable, Union, Generator
 
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import CompoundLocation, ExactPosition, FeatureLocation, SeqFeature
@@ -27,7 +27,7 @@ def format_location(loc: Location) -> str:
                 if int(start) > int(end):
                     # this is ad-hoc workaround because Bio.parse() creates a strange location like
                     # FeatureLocation(ExactPosition(138683), ExactPosition(138683), strand=1)
-                    # which translates to start > end in 1-based both-inclusive indexing.
+                    # which satisfies `start > end` in 1-based both-inclusive indexing.
                     # Confirmed this with biopython=1.79 when Bio.SeqIO.parse() takes
                     # a genbank format using BetweenLocation notation 138683^138684
                     res = "{}^{}".format(int(start) - 1, start)
@@ -90,9 +90,9 @@ def get_common(header_info: DefaultDict[str, DefaultDict[str, Any]]) -> Optional
 class DDBJFormatter(object):
     """Format SeqRecord to DDBJ annotation table."""
 
-    def __init__(self, header_info, ddbj_filter_path: str):
+    def __init__(self, header_info, filter_rules: Dict[str, FrozenSet[str]]):
         self.common = get_common(header_info)
-        self.rules = utils.load_rules(ddbj_filter_path)
+        self.rules = filter_rules
         ## Counter of ignored feature keys
         self.ignored_feature_count = collections.defaultdict(int)
         ## Counter of ignored (feature key, qualifier key) pairs
@@ -155,7 +155,7 @@ class DDBJFormatter(object):
         return table
 
     def _gen_ddbj_table_feature_rows(
-        self, feature: SeqFeature, ignore_rules=True
+        self, feature: SeqFeature, ignore_rules: bool
     ) -> Generator[List[str], None, None]:
         """Convert SeqFeature into DDBJ annotation table format"""
         if ignore_rules or self._is_allowed_feature(feature.type):
