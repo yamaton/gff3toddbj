@@ -311,8 +311,8 @@ def _join_features(record: SeqRecord, joinables: Optional[Tuple[str, ...]]) -> S
     def _runner(features: List[SeqFeature], parent: Optional[str]) -> List[SeqFeature]:
         """Scan features and apply _join """
 
-        # Don't join features if the parent is None or "gene"
-        if (parent is None) or (parent == "gene"):
+        # Don't join features if the parent is None
+        if parent is None:
             for f in features:
                 if hasattr(f, "sub_features") and f.sub_features:
                     f.sub_features = _runner(f.sub_features, f.type)
@@ -320,7 +320,7 @@ def _join_features(record: SeqRecord, joinables: Optional[Tuple[str, ...]]) -> S
 
         # Otherwise, group features that are joined.
         # `groups_or_features` is a bag both to-be-joined and not-joined features.
-        # Type of `groups_or_features` key is either `SeqFeature` or a group == (type, product).
+        # Type of `groups_or_features` key is either `SeqFeature` or a group defined as (type, product).
         # Values for `SeqFeature` keys are dummy, while the type of values for the tuple keys are
         # List[SeqFeature] that are to be joined.
         groups_or_features = collections.defaultdict(list)
@@ -340,8 +340,21 @@ def _join_features(record: SeqRecord, joinables: Optional[Tuple[str, ...]]) -> S
         for group_or_f, fs in groups_or_features.items():
             if isinstance(group_or_f, SeqFeature):
                 res.append(group_or_f)
-            elif len(fs) == 1 or parent == "gene":
+            elif len(fs) == 1:
                 res.extend(fs)
+            elif parent == "gene":
+                # join features only if /ribosomal_slippage exists
+                xs = []
+                rest = []
+                for f in fs:
+                    if "ribosomal_slippage" in f.qualifiers:
+                        xs.append(f)
+                    else:
+                        rest.append(f)
+                if xs:
+                    joined = _join(xs)
+                    res.append(joined)
+                res.extend(rest)
             else:
                 if group_or_f not in seen:
                     seen.add(group_or_f)
