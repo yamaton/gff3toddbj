@@ -765,6 +765,7 @@ def _sort_features(features: List[SeqFeature]) -> None:
             "source": -1,
             "TOPOLOGY": -0.9,
             "gene": 0,
+            "misc_feature": 0.5,
             "mRNA": 1,
             "rRNA": 1,
             "ncRNA": 1,
