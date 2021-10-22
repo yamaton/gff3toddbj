@@ -63,12 +63,14 @@ RefSeqが高品質データをGFF3+FASTAおよびGenBankフラットファイル
 
 * マウスゲノム([GRCm39]((https://www.ncbi.nlm.nih.gov/genome/annotation_euk/all/?utm_source=blog&utm_medium=referrer&utm_campaign=gdv&utm_term=intron&utm_content=20210202link1))) のFASTA, GFF3, GenBankフラットファイルを使っての評価
 * RefSeq仕様との差がいくつか判明
-    * RefSeq側でフラットファイルとGFF3に等価な情報を載せていないケース
+    * GFF3に情報が記載されていないケース
         * 配列・アノテーション以外の情報に基づいたFeature位置の修正など
+        * → `gff3-to-ddbj`の守備範囲外とする
     * 10bp未満の短いイントロン除去に基づいた Featureの接続
-    * `/pseudo`の扱い（DDBJは新規では使わない方針）
+    * `/pseudo`の扱いの違い
+        * DDBJは新規では使わない方針のため、これに従う
     * `assembly_gap` の表記の省略
-        * フラットファイルで省略されるときの条件は不明
+        * フラットファイルにて `assembly_gap` が付けられる基準が不明
 
 
 ```shell

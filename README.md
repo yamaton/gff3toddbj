@@ -31,6 +31,7 @@
   + [Validate GFF3](#validate-gff3)
   + [Split FASTA from GFF3 (if needed)](#split-fasta-from-gff3-if-needed)
   + [Normalize entry names (if needed)](#normalize-entry-names-if-needed)
+* [Known Problems](#knownproblems)
 * [Credit](#credit)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
@@ -369,7 +370,13 @@ This command create as files `myannotation_output_renamed.txt` *if* the invalid 
 
 
 
+## Known Issues
 
+* Need to handle location correction and feature `join()` in presence of `/trans_splicing`
+* Need to handle location correction in presence of `/transl_except` at start/stop codon
+* Needs `/translation` when `/exception` exists.
+* GFF3 handling when the flatfile is supposed to have "between-position" location like `123^124`
+* Currently the development focuses on accuracy; the software runs slow using a single process.
 
 ## Credit
 

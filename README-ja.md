@@ -26,6 +26,7 @@
   + [GFF3の正当性チェック](#gff3の正当性チェック)
   + [GFF3とFASTAの分離（必要に応じて）](#gff3とfastaの分離必要に応じて)
   + [Entry名の正規化（必要に応じて）](#entry名の正規化必要に応じて)
+* [既知の問題](#既知の問題)
 * [謝辞](#謝辞)
 
 
@@ -389,14 +390,15 @@ normalize-entry-names myannotation_output.ann
 アノテーションファイルのエントリ名に正規化の必要があるときには `myannotation_output_renamed.ann` のファイルが作られます。無いときには `Entry names are fine: No need to normalize.` のメッセージが出て終了します。
 
 
+## 既知の問題
 
+* `/trans_splicing` があるときの位置補正およびFeature `join()`
+* `/transl_except` が端に来るときの位置補正
+* `/exception` があるときの `/translation` 対応
+* 位置表記 `123^124` がフラットファイルに記載されるようなケースのGFF3側での表現・処理
+* 現段階は仕様を固めているところなので、処理速度が後回しになっています
 
 
 ## 謝辞
 このプログラムの設計には、EMBL向けGFF3の変換ソフトである [EMBLmyGFF3](https://github.com/NBISweden/EMBLmyGFF3) のつくりを参考にさせていただきました。
 
-
-
-## 今後の予定
-
-現段階は仕様を固めているところなので、処理速度が後回しになっています。
