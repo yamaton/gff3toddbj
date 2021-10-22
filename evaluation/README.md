@@ -63,11 +63,12 @@ RefSeqが高品質データをGFF3+FASTAおよびGenBankフラットファイル
 
 * マウスゲノム([GRCm39]((https://www.ncbi.nlm.nih.gov/genome/annotation_euk/all/?utm_source=blog&utm_medium=referrer&utm_campaign=gdv&utm_term=intron&utm_content=20210202link1))) のFASTA, GFF3, GenBankフラットファイルを使っての評価
 * RefSeq仕様との差がいくつか判明
+    * RefSeq側でフラットファイルとGFF3に等価な情報を載せていないケース
+        * 配列・アノテーション以外の情報に基づいたFeature位置の修正など
     * 10bp未満の短いイントロン除去に基づいた Featureの接続
-    * 配列・アノテーション以外の情報に基づいたFeature位置の修正
     * `/pseudo`の扱い（DDBJは新規では使わない方針）
-    * 下層Featureへの `/gene`, `/gene_synonym` のコピー
-    * `assembly_gap` の省略
+    * `assembly_gap` の表記の省略
+        * フラットファイルで省略されるときの条件は不明
 
 
 ```shell
@@ -87,8 +88,8 @@ Stat with location correction:
     Left  mismatching: 775 / 238362     (0.33 %)
     Right mismatching: 698 / 238285     (0.29 %)
 Stat of feature-qualifier pairs:
-    Left  mismatching: 103360 / 828337  (12.48 %)
-    Right mismatching: 291968 / 1016945 (28.71 %)
+    Left  mismatching: 103360 / 1018736         (10.15 %)
+    Right mismatching: 101569 / 1016945         (9.99 %)
 ```
 
 
@@ -130,39 +131,18 @@ $ cat quals_left-only.txt | awk '{print $2, $3}' | sort | uniq -c | sort -rhb
 ```shell
 $ cat quals_right-only.txt | awk '{print $2, $3}' | sort | uniq -c | sort -rhb
   92499 CDS translation
-  86831 CDS gene_synonym
-  86264 mRNA gene_synonym
-   9456 misc_RNA gene_synonym
    8126 exon pseudo
-   2409 exon gene_synonym
-   2112 ncRNA_miRNA gene_synonym
-   1353 ncRNA_lncRNA gene_synonym
-   1228 precursor_RNA gene_synonym
     530 misc_RNA pseudo
-    431 V_segment gene_synonym
     176 CDS pseudo
     153 V_segment pseudo
-    110 ncRNA_snoRNA gene_synonym
-     90 J_segment gene_synonym
-     31 rRNA gene_synonym
-     24 D_segment gene_synonym
-     21 C_region gene_synonym
      15 assembly_gap gap_type
      15 assembly_gap estimated_length
-     13 ncRNA_snRNA gene_synonym
      13 CDS function
      13 CDS EC_number
      12 J_segment pseudo
      10 D_segment pseudo
-      9 ncRNA_guide_RNA gene_synonym
-      6 ncRNA_antisense_RNA gene_synonym
-      4 ncRNA_RNase_P_RNA gene_synonym
       4 ncRNA_lncRNA pseudo
-      3 regulatory_enhancer gene_synonym
-      2 ncRNA_scRNA gene_synonym
       2 misc_feature gene_synonym
-      1 ncRNA_telomerase_RNA gene_synonym
-      1 ncRNA_RNase_MRP_RNA gene_synonym
       1 C_region pseudo
 ```
 
@@ -170,10 +150,8 @@ $ cat quals_right-only.txt | awk '{print $2, $3}' | sort | uniq -c | sort -rhb
 
 * 左側（＝ `gff3-to-ddbj` 出力側）ではすべてのCDSに `/transl_table` qualifier を付けているのに対し、GenBank側はあまり付けてない。方針の違いによるもの。
 * GFF3にて `ID=` となっているものはそのまま `/note=ID:...` に記録されるため、左側のみに `note` が多い。
-* 右側（＝ `genbank-to-ddbj` 出力側）ではCDSに基本 `/translate` qualifier がついている。これはGenBankが最終形のフラットファイルであるのに対し、DDBJアノテーションは最終処理前で `/translate` が付けられる前の状態であるのが理由。
+* 右側（＝ `genbank-to-ddbj` 出力側）ではCDSに基本 `/translation` qualifier がついている。これはGenBankが最終形のフラットファイルであるのに対し、DDBJアノテーションは最終処理前で `/translation` が付けられる前の状態であるので問題なし。
 * DDBJの `/pseudo` qualifier を使わない方針に従って `/pseudogene` で代替している。そのため左右に `/pseudogene` と `pseudo` が来るのは折込み済み。
-* GenBankデータでは `/gene` および `/gene_synonym` qualifier が `gene` feature のみならずその下層feature にもコピーされている。
-    * この点において `gff3-to-ddbj` を修正すべきかは検討中。
 
 
 ## 位置補正無視時の差分について
@@ -185,13 +163,13 @@ $ cat loc_wo_correction_left-only.txt | awk '{print $2}' | sort | uniq -c | sort
       9 mRNA
       9 CDS
 
-cat loc_wo_correction_right-only.txt | awk '{print $2}' | sort | uniq -c | sort -rhb
+$ cat loc_wo_correction_right-only.txt | awk '{print $2}' | sort | uniq -c | sort -r
      85 assembly_gap
       9 mRNA
       9 CDS
 ```
 
-ここで `mRNA` および `CDS` の位置情報の違いはNCBIには 10bp未満のイントロンを載せない方針のためです。Feature間の隙間が小さいときには `join()`記法ではなくひとつながりのFeatureに置き換えられるようです。同様の操作がDDBJ登録で求められるのかは調査中です。
+ここで `mRNA` および `CDS` の位置情報の違いはNCBIには 10bp未満のイントロンを載せない方針のためです。Feature間の隙間が小さいときには `join()`記法ではなくひとつながりのFeatureに置き換えられるようです。同様の操作がDDBJ登録で求められるのかは調査中ですが、`compare-ddbj` に `--patch-features` を付けるとFeature間の小さな隙間を無視して比べる仕様になっています。
 ```shell
 # gff3-to-ddbjからの出力 (NC_000069.7)
 $ cat GCF_000001635.27_GRCm39_genomic.ann | rg '93184880' | awk '{print $1,$2}'
