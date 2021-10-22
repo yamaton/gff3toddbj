@@ -40,7 +40,7 @@
 
 GFF3-to-DDBJ creates [the annotation file for submission to DDBJ](https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#annotation) by taking GFF3 and FASTA files as input. It also works with FASTA alone.
 
-Analogous programs are [GAG](https://github.com/genomeannotation/GAG) for submissions to NCBI, and [EMBLmyGFF3](https://github.com/NBISweden/EMBLmyGFF3) for submissions to EMBL.
+Analogous programs are [table2asn](https://ftp.ncbi.nih.gov/toolbox/ncbi_tools/converters/by_program/table2asn_GFF/) and [GAG](https://github.com/genomeannotation/GAG) for submissions to NCBI, and [EMBLmyGFF3](https://github.com/NBISweden/EMBLmyGFF3) for submissions to EMBL.
 
 Please take a look at our [test directory](https://github.com/yamaton/gff3toddbj/tree/main/tests/golden) for examples. Files ending with .ann are the DDBJ annotation files produced by thie program.
 
@@ -161,7 +161,7 @@ Here is the list of operations `gff3-to-ddbj` will do:
 
 * Set the location of joined exons as its parent RNA's location, and discard the exons.
 
-* Modify locations with inequality signs (`<` and `>`) if start/stop codon is absent.
+* Add partialness markup (`<` and `>`) to `CDS` locations if start/stop codon is absent.
   * See [Offset of the frame at translation initiation by codon_start](https://www.ddbj.nig.ac.jp/ddbj/cds-e.html#frame)
 
 * Let CDS have a single `/product` value: Set it to "hypothetical protein" if absent. Move the rest of exising values to `/note`.

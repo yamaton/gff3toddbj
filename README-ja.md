@@ -36,7 +36,7 @@
 
 DDBJへの登録には指定された形式の[アノテーションファイル](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#annotation)が必要です。GFF3-to-DDBJ はこの**アノテーションファイルをFASTA と GFF3ファイルから作る**プログラムです。**FASTA 単体から最小限のアノテーションファイルを作ることも可能**です。
 
-同種のプログラムは、NCBI登録には[GAG](https://github.com/genomeannotation/GAG)、EMBL登録には[EMBLmyGFF3](https://github.com/NBISweden/EMBLmyGFF3)などがあります。
+同種のプログラムは、NCBI登録には[table2asn](https://ftp.ncbi.nih.gov/toolbox/ncbi_tools/converters/by_program/table2asn_GFF/)や[GAG](https://github.com/genomeannotation/GAG)、EMBL登録には[EMBLmyGFF3](https://github.com/NBISweden/EMBLmyGFF3)などがあります。
 
 [テストフォルダ](https://github.com/yamaton/gff3toddbj/tree/main/tests/golden)に入出力のファイルの例があるのでご覧ください。.annの拡張子付きがDDBJアノテーションファイルになります。同じファイル名のFASTAとGFF3から生成しています。
 
@@ -153,7 +153,7 @@ gff3-to-ddbj \
 
 * RNAの位置情報を、ぶら下がる結合されたexonの位置情報で置き換える
 
-* CDSに開始・終了コドンが無い場合の位置情報修正
+* CDSに開始・終了コドンが無い場合マークアップ (`<`, `>`) で位置の補正
   * 参照: [codon_start qualifier による翻訳開始の位置補正](https://www.ddbj.nig.ac.jp/ddbj/cds.html#frame)
 
 * CDS下の `/product` が値をひとつだけ持つよう変更。値が無いときには "hypothetical protein" に。複数値の残りは `/note` へ。
@@ -163,7 +163,7 @@ gff3-to-ddbj \
     > * 一般名が複数ある場合でも, 複数の名称を記載しないで下さい。また, そのために不必要な区切り記号を使用しないで下さい。一般名の複数記載を希望される場合は, 代表的な名称を /product qualifier に記載し, その他の名称を /note qualifier に記載して下さい。
     > * 機能, 名称等が不明な蛋白質の場合は, hypothetical protein と記載することを推奨します。
 
-* `gene` feature が `/gene` または `/gene_synonym` を持つばあい、同qualifierを下の階層にある Featureに対してコピー。
+* `gene` featureが `/gene` または `/gene_synonym` を持つ場合、同qualifiersを下層featuresに対しコピー。
 
 * `/gene` が値を複数持つときには、ひとつだけを `/gene` の値とする。残りを `/gene_synonym` の値に。
   * 参照: [Qualifier Key の定義: /gene](https://www.ddbj.nig.ac.jp/ddbj/qualifiers.html#gene).

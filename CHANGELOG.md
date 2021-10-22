@@ -1,27 +1,27 @@
-## Current
+## v0.4.0 (2021-10-22)
 * Change the structure of renaming config in TOML.
     * We no longer use "attribute_value = ..."
-* Change `genbank-to-ddbj` to simplify its internals as much as possible
-* Change `compare-ddbj` to always count elements as multiset
-* Change to accept case variants in feature/qualifier names
-* Add TOPOLOGY feature if Is_circular=true exists in "source"
+* Simplify internals of `genbank-to-ddbj`.
+* Change `compare-ddbj` to always count items as multiset elements.
+* Accept case variants in feature/qualifier names.
+* Add TOPOLOGY feature if `Is_circular=true` exists in `source` feature
     * Add handling of origin-spanning features in circular genome
-* Change exons to be merged with their parent of type \*\_segment and \*\_region as well as RNA.
-* Enable replacement of a certain qualifier (key, value) with another
-    * This enables the replacement: /exception="ribosomal slippage" --> /ribosomal_slippage
+* Merge exons with their parent if its type is `*_segment`, `*_region`, or `*RNA*`.
+* Add new renaming rule: Replace a certain qualifier (key, value) with another
+    * This enables the replacement: `/exception="ribosomal slippage"` --> `/ribosomal_slippage`.
 * Add the renaming /genome="mitochondrion" -> /organelle="mitochondrion" to the default config
-* Enforce single value to /gene if it has multiple. Put the rest to /gene_synonym.
-* Change not to correct position with `<` or `>` if the part is `/pseudo` or `/pseudogene`.
-* Change start codons to only ATG when transl_table=1
-* Change not to add `assembly_gap` if the gap is < 10bp long.
-* Change to join features with `ribosomal_slippage`.
-* Add copying qualifiers `/gene` and `/gene_synonym` to children if a `gene` feature has them.
+* Enforce single value to `/gene` if it has multiple. Put the rest to `/gene_synonym`.
+* Do not add partial markups (`<` or `>`) if `/pseudo` or `/pseudogene` exist.
+* Change start codons to ATG only when the genetic code is 1 (`/transl_table=1`).
+* Do not add `assembly_gap` if the gap is < 10bp long.
+* Join features if `/ribosomal_slippage` exists.
+* Copy qualifiers `/gene` and `/gene_synonym` to children if a `gene` feature has them.
 * Add an renaming to `/organelle`, `/host`, `/sub_strain`, `/plasmid` to the default config
 * Fix a bug in DDBJ parser used in evaluation
     * It gave wrong position when location string is digits.
 * Add preliminary handling of "between-position" location like `138683^138684`
-    * Not using `BetweenPosition` because `Bio.SeqIO.parse()` creates `FeatureLocation` instead.
-* Fix showing a location like `<100..100,200..300` when `<100,200..300` is right.
+    * Without `BetweenPosition` because `Bio.SeqIO.parse()` creates `FeatureLocation` instead.
+* Fix representation of a single-position location with a partial markup (form `<100..100,200..300` to `<100,200..300`).
 
 ## v0.3.0 (2021-10-12)
 * Add `genbank-to-ddbj` for Genbank → DDBJ conversion

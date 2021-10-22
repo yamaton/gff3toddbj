@@ -379,8 +379,14 @@ qualifier_key = "trans_splicing"
 
 ## Manual entries
 
-# Force setting null as the value of /pseudo qualifier
-#   i.e. convert from /pseudo=true
+# Replace with /pseudogene="unknown" regardless of `/pseudo` value.
+#
+# DDBJ says (https://www.ddbj.nig.ac.jp/ddbj/qualifiers-e.html#pseudo)
+# > Do not use for new submission. If necessary, describe /pseudogene qualifier.
+#
+# OTOH, NCBI says differently (https://www.ncbi.nlm.nih.gov/genbank/genomes_gff/)
+# > annotate with pseudo=true any genes that are 'broken' but are not thought to be pseudogenes.
+#
 [__ANY__.pseudo]
 qualifier_key = "pseudogene"
 qualifier_value = "unknown"
