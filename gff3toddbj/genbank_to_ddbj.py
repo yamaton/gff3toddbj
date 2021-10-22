@@ -5,11 +5,11 @@ import logging
 import pathlib
 
 from . import formatter
-from . import transforms
+from . import io
 from . import utils
 
 _EXEC_NAME = "genbank-to-ddbj"
-__version__ = "0.0.2"
+__version__ = "0.0.3"
 
 FORMAT = '%(levelname)s: %(message)s'
 _DIR = pathlib.Path(__file__).parent
@@ -85,16 +85,7 @@ def main():
     metadata = collections.OrderedDict() if args.metadata is None else utils.load_metadata_info(args.metadata)
     config_filter = utils.load_rules(args.config_filter)
 
-    # Load files, apply transformations, and get a list of SeqRecord
-    records = transforms.run_with_genbank(
-        args.gbk,
-        metadata,
-        args.transl_table,
-    )
-
-    logging.debug("Records: {}".format(records))
-
-
+    records = io.load_flatfile_as_seqrecords(args.gbk)
     fmt = formatter.DDBJFormatter(metadata, config_filter)
     gen = fmt.run(records, ignore_rules=IGNORE_FILTERING_RULES)
 

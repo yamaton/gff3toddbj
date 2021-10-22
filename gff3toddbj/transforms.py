@@ -889,15 +889,3 @@ def run(
         yield rec
 
     faidx.close()
-
-
-def run_with_genbank(
-    path_genbank: str,
-    metadata: OrderedDict[str, OrderedDict[str, Any]],
-    transl_table: int,
-) -> Generator[SeqRecord, None, None]:
-    """Create a list of `SeqRecord`s and apply various transformations"""
-
-    # Load Genbank as a generator of seqrecord
-    records = io.load_genbank_as_seqrecords(path_genbank)
-    yield from records

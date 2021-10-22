@@ -127,8 +127,6 @@ def load_toml_tables(filepath) -> OrderedDict[str, Any]:
     """
     with open(filepath) as fp:
         d = toml.load(fp, _dict=collections.OrderedDict)
-
-    logging.debug("TOML table:\n{}".format(pprint.pformat(d)))
     return d
 
 
@@ -251,9 +249,8 @@ def get_seq(faidx: Faidx, seqid: str, start:Optional[int]=None, end:Optional[int
     return faidx.fetch(reference=seqid, start=start, end=end).upper()
 
 
-def load_genbank_as_seqrecords(path_genbank: Path) -> Generator[SeqRecord, None, None]:
-    """
-    Load genbank
+def load_flatfile_as_seqrecords(path_genbank: Path) -> Generator[SeqRecord, None, None]:
+    """Load GenBank flatfile as SeqRecords
     """
     p = pathlib.Path(path_genbank)
     ext = p.suffix

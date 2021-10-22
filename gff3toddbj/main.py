@@ -117,8 +117,6 @@ def main():
         data_qualifiers_to_children=DATA_QUALFIERS_TO_CHILDREN,
     )
 
-    logging.debug("Records: {}".format(records))
-
     fmt = formatter.DDBJFormatter(metadata, config_filter)
     gen = fmt.run(records, ignore_rules=IGNORE_FILTERING_RULES)
 
