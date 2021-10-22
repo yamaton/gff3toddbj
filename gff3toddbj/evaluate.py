@@ -13,7 +13,7 @@ from Bio.SeqFeature import CompoundLocation, FeatureLocation, SeqFeature
 
 
 _EXEC_NAME = "compare-ddbj"
-__version__ = "0.0.3"
+__version__ = "0.0.4"
 
 Troika = Tuple[str, str, str]
 

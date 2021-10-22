@@ -177,7 +177,7 @@ def has_stop_codon(
     return str(codon) in stop_codons
 
 
-def _get_cds(seq: Seq, location: Union[FeatureLocation, CompoundLocation]):
+def _get_cds(seq: Seq, location: Union[FeatureLocation, CompoundLocation]) -> Seq:
     """wrapper of SeqFeature.extract()
 
     CompoundLocation.part is ordered by (loc.start.position, loc.end.position)
