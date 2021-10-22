@@ -21,6 +21,7 @@
     * It gave wrong position when location string is digits.
 * Add preliminary handling of "between-position" location like `138683^138684`
     * Not using `BetweenPosition` because `Bio.SeqIO.parse()` creates `FeatureLocation` instead.
+* Fix showing a location like `<100..100,200..300` when `<100,200..300` is right.
 
 ## v0.3.0 (2021-10-12)
 * Add `genbank-to-ddbj` for Genbank → DDBJ conversion

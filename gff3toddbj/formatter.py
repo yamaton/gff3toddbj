@@ -3,7 +3,7 @@ import logging
 from typing import Any, DefaultDict, Dict, FrozenSet, List, Optional, Tuple, Iterable, Union, Generator
 
 from Bio.SeqRecord import SeqRecord
-from Bio.SeqFeature import CompoundLocation, ExactPosition, FeatureLocation, SeqFeature
+from Bio.SeqFeature import BeforePosition, CompoundLocation, ExactPosition, FeatureLocation, SeqFeature
 
 from . import utils
 
@@ -17,20 +17,26 @@ def format_location(loc: Location) -> str:
     """
 
     def _format_part(loc: FeatureLocation) -> str:
-        PositionType = type(loc.start)
-        start = str(PositionType(loc.start.position + 1))
-        end = str(loc.end)
-        if start == end:
-            s = "{}".format(start)  # convert to 1-based
+        n_start_pos = loc.start.position + 1   # 1-based
+        n_end_pos = loc.end.position           # 1-based
+        type_start = type(loc.start)
+        type_end = type(loc.end)
+        start = str(type_start(n_start_pos))
+        end = str(type_end(n_end_pos))
+        if n_start_pos == n_end_pos:
+            if type_start == type_end or start.startswith("<"):
+                s = "{}".format(start)  # convert to 1-based
+            else:
+                s = "{}".format(end)
         else:
             try:
-                if int(start) > int(end):
+                if n_start_pos > n_end_pos:
                     # this is ad-hoc workaround because Bio.parse() creates a strange location like
                     # FeatureLocation(ExactPosition(138683), ExactPosition(138683), strand=1)
                     # which satisfies `start > end` in 1-based both-inclusive indexing.
                     # Confirmed this with biopython=1.79 when Bio.SeqIO.parse() takes
                     # a genbank format using BetweenLocation notation 138683^138684
-                    res = "{}^{}".format(int(start) - 1, start)
+                    res = "{}^{}".format(n_start_pos - 1, n_start_pos)
                     msg = "Workaround for invalid location: {} --> {}".format(str(loc), res)
                     logging.warning(msg)
                     return res

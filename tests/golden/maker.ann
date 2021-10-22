@@ -71,7 +71,7 @@
 			note	source:maker
 	5'UTR	92966..93055	note	ID:maker-4-est_gff_Cufflinks-gene-1.0-mRNA-2:five_prime_utr
 			note	source:maker
-	CDS	join(93056..93220,93443..93488,95694..95791,103264..103372,106338..106425,106479..106559,107643..107792,115049..115241,115463..115628,120032..120101,128029..>128029)	note	ID:maker-4-est_gff_Cufflinks-gene-1.0-mRNA-2:cds
+	CDS	join(93056..93220,93443..93488,95694..95791,103264..103372,106338..106425,106479..106559,107643..107792,115049..115241,115463..115628,120032..120101,>128029)	note	ID:maker-4-est_gff_Cufflinks-gene-1.0-mRNA-2:cds
 			note	source:maker
 			codon_start	1
 			transl_table	1
