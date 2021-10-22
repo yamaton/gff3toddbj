@@ -43,6 +43,7 @@ def runner(data: BunchOfFiles, prefix:str=""):
     output_file = WORK_DIR / filename
     cmd = data.get_command(output_file)
     subprocess.run(cmd, shell=True)
+    assert output_file.exists()
     assert filecmp.cmp(data.ref, output_file)
     output_file.unlink(missing_ok=True)
 

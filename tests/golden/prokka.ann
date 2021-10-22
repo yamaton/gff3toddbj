@@ -31152,3 +31152,9 @@ ERS324955|SC|contig000030	source	1..1475	organism	Drosophila melanogaster
 			product	putative immunity protein
 			codon_start	1
 			transl_table	11
+ERS324955|SC|contig000031	source	1..1228	organism	Drosophila melanogaster
+			mol_type	genomic DNA
+ERS324955|SC|contig000032	source	1..412	organism	Drosophila melanogaster
+			mol_type	genomic DNA
+ERS324955|SC|contig000033	source	1..321	organism	Drosophila melanogaster
+			mol_type	genomic DNA

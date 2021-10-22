@@ -619,7 +619,7 @@ def _handle_source_rec(
         logging.warning(msg)
 
     if "source" in metadata:
-        if rec.features and rec.features[0].type != "source":
+        if (not rec.features) or (rec.features and rec.features[0].type != "source"):
             is_inserting = True
             src_length = id_to_seqlen[rec.id] if id_to_seqlen else len(rec.seq)
             src_qualifiers = metadata["source"]
@@ -819,10 +819,14 @@ def run(
     id_to_seqlen = io.get_seqlens(faidx)
     fasta_ids = list(id_to_seqlen.keys())
 
-    # Create record from GFF3 (or dummy if unavailable)
+    # Create records from GFF3 (or dummy if unavailable)
     if path_gff3 is not None:
         records = io.load_gff3_as_seqrecords(path_gff3)
 
+        # Add extra if FASTA contains more entries
+        gff_seqids = {rec.id for rec in records}
+        records_extra = [SeqRecord("", id=fasta_id) for fasta_id in fasta_ids if fasta_id not in gff_seqids]
+        records += records_extra
     else:
         # Create dummy SeqRecords with IDs from FASTA
         records = [SeqRecord("", id=seq_id) for seq_id in fasta_ids]

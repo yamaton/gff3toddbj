@@ -22,6 +22,9 @@
 * Add preliminary handling of "between-position" location like `138683^138684`
     * Without `BetweenPosition` because `Bio.SeqIO.parse()` creates `FeatureLocation` instead.
 * Fix representation of a single-position location with a partial markup (form `<100..100,200..300` to `<100,200..300`).
+* Fix missing FASTA entries that are absent in GFF3
+    * Respect the entry order in GFF3 (if provided), and append the only-in-FASTS entries.
+
 
 ## v0.3.0 (2021-10-12)
 * Add `genbank-to-ddbj` for Genbank → DDBJ conversion
