@@ -43,7 +43,7 @@ DDBJへの登録には指定された形式の[アノテーションファイル
 
 ## 出力の「正しさ」について
 
-DDBJアノテーション出力には幾多の守るべきルールはあるものの、正解には曖昧さが伴います。そのため当ツールではRefSeqの出すGFF3とGenBank形式の対応をもって「正解」と定義しています。これに基づいて、RefSeqのGenBank形式をできるだけシンプルにDDBJアノテーション形式に変換した正解例を、当ツールで作られるDDBJアノテーション出力とを比べることで評価をしています。[評価の詳細ページはこちら](https://github.com/yamaton/gff3toddbj/tree/main/evaluation)。
+DDBJアノテーション出力には幾多の守るべきルールはあるものの、正解には曖昧さが伴います。そのため当ツールではRefSeqの出すGFF3とGenBank形式の対応をもって「正解」と定義しています。（ただし指針がDDBJと異なるばあいにはDDBJのほうを優先しています。）これに基づいて、RefSeqのGenBank形式をできるだけシンプルにDDBJアノテーション形式に変換した正解例を、当ツールで作られるDDBJアノテーション出力とを比べることで評価をしています。[評価の詳細ページはこちら](https://github.com/yamaton/gff3toddbj/tree/main/evaluation)。
 
 なお評価の副産物としてのGenBankからDDBJアノテーションの変換ツール `genbank-to-ddbj` を同梱しています。良い品質のGenBank形式があるときにはGFF3から作るよりも有用かもしれません。
 

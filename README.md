@@ -47,7 +47,7 @@ Please take a look at our [test directory](https://github.com/yamaton/gff3toddbj
 ## How accurate is the conversion?
 
 While there are many rules a DDBJ annotation file needs to comply with, it's difficult to tell what the correct GFF3→DDBJ conversion is.
-There is no example of full-fledged GFF3 → DDBJ conversion available, either. So, we define GFF3-GenBank correspondence in RefSeq as the "correct" examples. To evaluate GFF3-to-DDBJ, we use RefSeq data and compare `gff3-to-ddbj` output with the other DDBJ annotation from `genbank-to-ddbj` using the GenBank format. Please take a look at our evaluation dcoument for the detail as well as the current status. ([TODO] Add the page...)
+There is no examples of fully-functional GFF3 → DDBJ conversion, either. So, we define GFF3-GenBank correspondence in RefSeq as the "correct" examples. (We take the DDBJ side when instructions differ, though.) To evaluate GFF3-to-DDBJ, we use RefSeq data and compare `gff3-to-ddbj` output with the other DDBJ annotation from `genbank-to-ddbj` using the GenBank format. Please take a look at our evaluation dcoument for the detail as well as the current status. ([TODO] Add the page...)
 
 Here `genbank-to-ddbj` is an executable included in this package. It shares codebase with `gff3-to-ddbj`, but we believe it does not bring any complexity to our evaluation due to its much simpler internals.
 
