@@ -292,6 +292,6 @@ BPTQ01000001.1  source  strain
 BPTQ01000001.1  source  submitter_seqid
 ```
 
-この内容から、デフォルト設定のメタデータの`source`項目にに `collection_date` などの項目が無かったためと分かりました。
+この内容から、デフォルト設定のメタデータの`source`項目に `collection_date` などの項目が無かったためと分かりました。
 デフォルト設定のメタデータはサンプルとしてのみの役割で、実用では[TOMLファイルを設定](https://github.com/yamaton/gff3toddbj/blob/main/README-ja.md#%E3%83%A1%E3%82%BF%E3%83%87%E3%83%BC%E3%82%BF%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB)したうえで `--metadata`オプションからロードして頂くことを想定しています。
 
