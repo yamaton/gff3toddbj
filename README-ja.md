@@ -5,7 +5,7 @@
 [![PyPI](https://img.shields.io/pypi/v/gff3toddbj?style=for-the-badge)](https://pypi.org/project/gff3toddbj/)
 
 * [これは何？](#これは何)
-* [出力の「正しさ」について](#出力の「正しさ」について)
+* [出力の「正しさ」について](#出力の正しさについて)
 * [セットアップ](#セットアップ)
     - [biocondaからconda環境にインストールする場合](#biocondaからconda環境にインストールする場合)
     - [pipからconda環境にインストールする場合](#pipからconda環境にインストールする場合)
@@ -120,7 +120,7 @@ gff3-to-ddbj \
 
 * `--gff3 <FILE>` には入力GFF3ファイルへのパスを指定
 * `--fasta <FILE>` には入力FASTAファイルへのパスを指定
-* `--metadata <FILE>` にはTOML形式のメタデータファイルを指定
+* `--metadata <FILE>` にはTOML形式の[メタデータファイル](#メタデータファイル)を指定
 * `--locus_tag_prefix <STRING>` には [BioSampleの申請時に得られたもの](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#locus_tag)を指定
 * `--transl_table <INT>` は [The Genetic Codes](https://www.ddbj.nig.ac.jp/ddbj/geneticcode.html) から適切な数字を選ぶ
 * `--output <FILE>` には出力ファイル（＝アノテーション）のパスを指定
@@ -131,18 +131,21 @@ gff3-to-ddbj \
 
 表示形式を変えるほかに以下のようなことをしています。
 
-* FASTAファイルがgzipで圧縮されているばあい[bgzip](https://www.htslib.org/doc/bgzip.html)圧縮に置き換え
+* FASTAファイルがgzipで圧縮されているばあい[bgzip](https://www.htslib.org/doc/bgzip.html)圧縮を作成
   * FASTAのインデックス化とメモリ節約のため
   * `myname_bgzip.fa.gz` のように `_bgzip` の付いたファイルが作成されます
   * bgzipfファイルはgzipと互換性があるのでそのまま他での利用も可能です
 
-* Features / Qualifiersの[変換テーブル](#attribute--qualifier-keyのリネーム)に基づいたリネーム
+* Features / Qualifiersの[変換テーブル](https://github.com/yamaton/gff3toddbj/blob/main/gff3toddbj/translate_features_qualifiers.toml)に基づいたリネーム
+  * **これが当プログラムのコア機能になります**
+  * [Sequence Ontology （略称SO）](http://sequenceontology.org)をベースに、実際例により拡張したものとなっています
+  * たとえば GFF3 の3列目("type")に現れる "transcript" は ([SO:0000673](http://sequenceontology.org/browser/current_svn/term/SO:0000673))にて "INSDC_feature:misc_RNA" とあるため `misc_RNA` feature に置き換えられます。
 
-* assembly_gap の検索・追加
+* `assembly_gap` の検索・追加
 
-* /transl_table のCDSへの追加
+* `/transl_table` の`CDS`への追加
 
-* メタデータ中のsource情報を各エントリに追加
+* [メタデータファイル](#メタデータファイル)中の`source`情報を各エントリに追加
 
 * GFF3が `Is_circular=true` を含むばあい `TOPOLOGY` を `/circular` 付で追加して環状ゲノムであることを明示
   * このとき[始点・終点をまたぐ featureのlocation処理](https://www.ddbj.nig.ac.jp/faq/ja/how-to-describe-location-circular-genome.html)も行う
@@ -158,7 +161,7 @@ gff3-to-ddbj \
 
 * CDS下の `/product` が値をひとつだけ持つよう変更。値が無いときには "hypothetical protein" に。複数値の残りは `/note` へ。
 
-  * [DDBJ の/product 詳細](https://www.ddbj.nig.ac.jp/ddbj/qualifiers.html#product)を参照ください
+  * 参照: [DDBJ の/product 詳細](https://www.ddbj.nig.ac.jp/ddbj/qualifiers.html#product)
 
     > * 一般名が複数ある場合でも, 複数の名称を記載しないで下さい。また, そのために不必要な区切り記号を使用しないで下さい。一般名の複数記載を希望される場合は, 代表的な名称を /product qualifier に記載し, その他の名称を /note qualifier に記載して下さい。
     > * 機能, 名称等が不明な蛋白質の場合は, hypothetical protein と記載することを推奨します。
@@ -171,9 +174,24 @@ gff3-to-ddbj \
 * Qualifier値に重複があるとき冗長分を削除
 
 * アノテーション行の並び替え
+  * (開始位置、Feature Keyによる優先度、終了位置) をもってソートします
+  * 優先度はこちらで[定義](https://github.com/yamaton/gff3toddbj/blob/1cea725cca2a8f3edb45bac45d7983e255285d5e/gff3toddbj/transforms.py#L763)。`source`, `TOPOLOGY` が先頭にくるようにしています。
 
 * [DDBJのFeature-Qualifier一覧表](https://www.ddbj.nig.ac.jp/assets/files/pdf/ddbj/fq-j.pdf)に基づいた出力のフィルタリング
-  * `gene` feature は無くなるので注意。
+  * 多くのGFF3に記載されている `gene` feature はここで無くなります。注意。
+  * フィルタによって捨てられる項目は、実行時に標準エラー出力として以下のようにずらっと並びます。
+    ```
+    WARNING: [Discarded] feature ------->  gene  <-------    (count: 49911)
+    WARNING: [Discarded] feature ------->  cDNA_match  <-------      (count: 10692)
+    WARNING: [Discarded] feature ------->  match  <-------   (count: 101)
+    WARNING: [Discarded] feature ------->  sequence_conflict  <-------   (count: 81)
+    WARNING: [Discarded] (Feature, Qualifier) = (source, db_xref)    (count: 687)
+    WARNING: [Discarded] (Feature, Qualifier) = (source, Name)   (count: 687)
+    WARNING: [Discarded] (Feature, Qualifier) = (source, gbkey)      (count: 687)
+    WARNING: [Discarded] (Feature, Qualifier) = (source, genome)     (count: 685)
+    WARNING: [Discarded] (Feature, Qualifier) = (mRNA, Parent)   (count: 57304)
+    WARNING: [Discarded] (Feature, Qualifier) = (mRNA, db_xref)      (count: 114608)
+    ```
 
 
 
@@ -182,7 +200,7 @@ gff3-to-ddbj \
 
 ### メタデータファイル
 
-GFF3とFASTAに無い情報をアノテーションファイルに入れるためメタデータファイルを用意します。たとえば [DDBJサイトのアノテーション例](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#annotation)に対応するメタデータはTOML形式で以下のように書かれます。
+GFF3とFASTAに無い情報をアノテーションファイルに入れるためメタデータファイルを用意します。たとえば [DDBJサイトのアノテーション例](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#annotation)に対応するメタデータはTOML形式で以下のように書かれます。なお省略なしのサンプルは[こちら](https://github.com/yamaton/gff3toddbj/blob/main/examples/metadata/metadata_ddbj_example.toml)になります。
 
 ```toml
 [COMMON]
@@ -204,7 +222,7 @@ line = [
 
 ```
 
-ファイルには以下の情報を入れられます。なおファイルに何も書かれていなくともプログラムは一応動作します。
+メタデータファイルには以下の情報を入れられます。なおファイルが空でもプログラムは一応動作します。
 
 * COMMONに入れる[基本情報](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#annotation)
 
@@ -235,8 +253,9 @@ line = [
     linkage_evidence = "paired-ends"
     ```
 
-    * FeatureごとのQualifier値の挿入を **gff3-to-ddbj がつくるアノテーションファイルに対して**行います。上記「COMMONに入れるメタ情報」と実質的に同じですが、アノテーションファイルの時点で Feature毎に値が入れられる点が違います。使い方は `[COMMON.assembly_gap]` ではなく `[assembly_gap]` に置き換えるだけになります。現在のところ `[source]` と `[assembly_gap]` のみ対応しています。
+    * FeatureごとのQualifier値の挿入を **gff3-to-ddbj がつくるアノテーションファイルに対して**行います。現在のところ `[source]` と `[assembly_gap]` にのみ対応しています。上記「COMMONに入れるメタ情報」と実質的に同じことですが、アノテーションファイルの時点でFeature毎に値が入る点が違います。使い方は `[COMMON.assembly_gap]` を `[assembly_gap]` に置き換えるだけになります。
 
+`gff3-to-ddbj` 実行時にメタデータファイルが指定されない場合は、「とりあえず」として用意された[デフォルト設定](https://github.com/yamaton/gff3toddbj/blob/main/gff3toddbj/metadata_without_COMMON.toml)がロードされます。
 
 さらなる例としては、DDBJの[サンプルアノテーション](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#sample)の [WGS in COMMON](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=1110334278) と [WGS](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=382116224)に対応するメタデータファイル [metadata_WGS_COMMON.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/metadata/metadata_WGS_COMMON.toml) と [metadata_WGS.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/metadata/metadata_WGS.toml) を用意しています。参考にしてください。
 

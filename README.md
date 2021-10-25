@@ -31,7 +31,7 @@
   + [Validate GFF3](#validate-gff3)
   + [Split FASTA from GFF3 (if needed)](#split-fasta-from-gff3-if-needed)
   + [Normalize entry names (if needed)](#normalize-entry-names-if-needed)
-* [Known Problems](#knownproblems)
+* [Known Issues](#knownissues)
 * [Credit](#credit)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
@@ -144,7 +144,10 @@ Here is the list of operations `gff3-to-ddbj` will do:
   * For indexing and saving memory
   * The bgzip file should be compatible with gzip
 
-* Rename features and qualifiers following the [renaming scheme](#advanced-rename-features-and-qualifiers).
+* Rename features and qualifiers following the [renaming rules](#advanced-rename-features-and-qualifiers) defined [here](https://github.com/yamaton/gff3toddbj/blob/main/gff3toddbj/translate_features_qualifiers.toml).
+  * **This is the core function** of `gff3-to-ddbj`.
+  * The rules are based on [Sequence Ontology](http://sequenceontology.org) plus real-world examples.
+  * For examples, `transcript` in the 3rd column (= called "type") is translated to `misc_RNA` feature because [SO:0000673](http://sequenceontology.org/browser/current_svn/term/SO:0000673) setes "INSDC_feature:misc_RNA".
 
 * Search for `assembly_gap`s in FASTA, and add the feature.
 
@@ -180,9 +183,24 @@ Here is the list of operations `gff3-to-ddbj` will do:
 * Remove duplicates in qualifier values.
 
 * Sort lines in annotation
+  * Sort is based on the key (start position, priority of features, end position)
+  * The priorities are [defined here]((https://github.com/yamaton/gff3toddbj/blob/1cea725cca2a8f3edb45bac45d7983e255285d5e/gff3toddbj/transforms.py#L763), and they move `source` and `TOPOLOGY` to the top.
 
 * Filter features and qualifiers following [the matrix](https://www.ddbj.nig.ac.jp/assets/files/pdf/ddbj/fq-e.pdf).
   * `gene` feature will be discarded in this process.
+  * Discarded features, and discarded feature-qualifier pairs are displayed as standard error at execution. They look like following:
+    ```
+    WARNING: [Discarded] feature ------->  gene  <-------    (count: 49911)
+    WARNING: [Discarded] feature ------->  cDNA_match  <-------      (count: 10692)
+    WARNING: [Discarded] feature ------->  match  <-------   (count: 101)
+    WARNING: [Discarded] feature ------->  sequence_conflict  <-------   (count: 81)
+    WARNING: [Discarded] (Feature, Qualifier) = (source, db_xref)    (count: 687)
+    WARNING: [Discarded] (Feature, Qualifier) = (source, Name)   (count: 687)
+    WARNING: [Discarded] (Feature, Qualifier) = (source, gbkey)      (count: 687)
+    WARNING: [Discarded] (Feature, Qualifier) = (source, genome)     (count: 685)
+    WARNING: [Discarded] (Feature, Qualifier) = (mRNA, Parent)   (count: 57304)
+    WARNING: [Discarded] (Feature, Qualifier) = (mRNA, db_xref)      (count: 114608)
+    ```
 
 
 
@@ -226,7 +244,10 @@ The file accommodates following and they are all optional. That is, GFF3-to-DDBJ
 
   * Currently supporting `[source]` and `[assembly_gap]` only.
 
-For more examples, see [WGS in COMMON](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=1110334278) and [WGS](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=382116224) provided by DDBJ as annotation examples, and corresponding metadata files [metadata_WGS_COMMON.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/metadata/metadata_WGS_COMMON.toml) and [metadata_WGS.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/metadata/metadata_WGS.toml) in this repository.
+
+If metadata file is not specified via `--metadata` option, a tentative fallback configuration [here](https://github.com/yamaton/gff3toddbj/blob/main/gff3toddbj/metadata_without_COMMON.toml) is loaded.
+
+For more examples, see annotation examples provided by DDBJ, such as [WGS in COMMON](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=1110334278) and [WGS](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=382116224), and the corresponding metadata files [metadata_WGS_COMMON.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/metadata/metadata_WGS_COMMON.toml) and [metadata_WGS.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/metadata/metadata_WGS.toml) in this repository.
 
 
 ### [Advanced] Rename Features and Qualifiers
