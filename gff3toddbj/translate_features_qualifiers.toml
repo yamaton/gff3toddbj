@@ -958,6 +958,50 @@ qualifier_value = "vault_RNA"
 #--------------------------------------------
 # Manual additions
 
+# https://www.ddbj.nig.ac.jp/ddbj/features-e.html
+[GC_signal]
+feature_key = "regulatory"
+qualifier_key = "regulatory_class"
+qualifier_value = "GC_signal"
+
+# https://www.ddbj.nig.ac.jp/ddbj/features-e.html
+[-35_signal]
+feature_key = "regulatory"
+qualifier_key = "regulatory_class"
+qualifier_value = "minus_35_signal"
+
+# https://www.ddbj.nig.ac.jp/ddbj/features-e.html
+[-10_signal]
+feature_key = "regulatory"
+qualifier_key = "regulatory_class"
+qualifier_value = "minus_10_signal"
+
+# https://www.ddbj.nig.ac.jp/ddbj/features-e.html
+[polyA_signal]
+feature_key = "regulatory"
+qualifier_key = "regulatory_class"
+qualifier_value = "polyA_signal"
+
+# https://www.ddbj.nig.ac.jp/ddbj/features-e.html
+[RBS]
+feature_key = "regulatory"
+qualifier_key = "regulatory_class"
+qualifier_value = "ribosome_binding_site"
+
+# https://www.ddbj.nig.ac.jp/ddbj/features-e.html
+[misc_signal]
+feature_key = "regulatory"
+qualifier_key = "regulatory_class"
+qualifier_value = "other"
+
+# Deduced from /regulatory_class and the SO entry
+# https://www.insdc.org/controlled-vocabulary-regulatoryclass
+[uORF]
+feature_key = "regulatory"
+qualifier_key = "regulatory_class"
+qualifier_value = "uORF"
+
+
 # SO does not limit the feature to CDS, though
 [translational_frameshift]
 feature = "CDS"
