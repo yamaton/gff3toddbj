@@ -1,5 +1,6 @@
 ## v0.4.1 (2025-12-23)
 * Pin dependencies to make existing code work.
+* Update to modern Python packaging (PEP 621)
 
 ## v0.4.0 (2021-10-22)
 * Change the structure of renaming config in TOML.

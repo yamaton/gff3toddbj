@@ -1,4 +1,51 @@
 [build-system]
-requires = ["setuptools", "wheel"]
+requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
-description-file = "README.md"
+
+[project]
+name = "gff3toddbj"
+dynamic = ["version"]
+description = "Create a DDBJ annotation file from GFF3 and FASTA files"
+readme = "README.md"
+requires-python = ">=3.9, <3.12"
+authors = [
+  { name = "Yamato Matsuoka", email = "yamaton@gmail.com" },
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: OS Independent",
+    "Development Status :: 3 - Alpha",
+]
+dependencies = [
+    "biopython<=1.79",
+    "bcbio-gff<=0.7.0",
+    "pysam",
+    "toml",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/yamaton/gff3toddbj"
+"Bug Tracker" = "https://github.com/yamaton/gff3toddbj/issues"
+
+[project.scripts]
+gff3-to-ddbj = "gff3toddbj:main"
+genbank-to-ddbj = "gff3toddbj.genbank_to_ddbj:main"
+split-fasta = "tools.splitfasta:main"
+normalize-entry-names = "tools.normalize_seqids:main"
+list-products = "tools.list_products:main"
+compare-ddbj = "gff3toddbj.evaluate:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["gff3toddbj", "gff3toddbj.*", "tools", "tools.*"]
+exclude = ["images", "notebooks", "evaluation", "tests"]
+namespaces = false
+
+[tool.setuptools.dynamic]
+version = {attr = "gff3toddbj.version.__version__"}
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4.2",
+]
