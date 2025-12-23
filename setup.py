@@ -29,10 +29,10 @@ setuptools.setup(
 
     packages=setuptools.find_packages(),
     package_data={"": ["*.toml"]},
-    python_requires=">=3.6",
+    python_requires=">=3.9, <3.12",
     install_requires=[
-        "biopython >= 1.75",
-        "bcbio-gff >= 0.6.6",
+        "biopython <= 1.79",
+        "bcbio-gff <= 0.7.0",
         "pysam",
         "toml",
     ],
