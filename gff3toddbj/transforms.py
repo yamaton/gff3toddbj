@@ -817,11 +817,11 @@ def run(
 
         # Add extra if FASTA contains more entries
         gff_seqids = {rec.id for rec in records}
-        records_extra = [SeqRecord("", id=fasta_id) for fasta_id in fasta_ids if fasta_id not in gff_seqids]
+        records_extra = [SeqRecord(Seq(None, 0), id=fasta_id) for fasta_id in fasta_ids if fasta_id not in gff_seqids]
         records += records_extra
     else:
         # Create dummy SeqRecords with IDs from FASTA
-        records = [SeqRecord("", id=seq_id) for seq_id in fasta_ids]
+        records = [SeqRecord(Seq(None, 0), id=seq_id) for seq_id in fasta_ids]
 
     # Rename feature keys and/or qualifier keys/values
     f = RenameHandler(path_rename_scheme, locus_tag_prefix).run

@@ -1,3 +1,6 @@
+## v0.4.3 (2025-12-24)
+* fix: Create SeqRecord with Seq, not with a plain string for Biopython 1.86
+
 ## v0.4.2 (2025-12-24)
 * fix: restore compatibility with Biopython 1.80+ unhashable SeqFeatures
 * Pin biopython 1.81 for compatibility

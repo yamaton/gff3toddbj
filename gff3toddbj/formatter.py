@@ -2,6 +2,7 @@ import collections
 import logging
 from typing import Any, DefaultDict, Dict, FrozenSet, List, Optional, Tuple, Iterable, Union, Generator
 
+from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import BeforePosition, CompoundLocation, ExactPosition, SimpleLocation, SeqFeature
 
@@ -89,7 +90,7 @@ def get_common(header_info: DefaultDict[str, DefaultDict[str, Any]]) -> Optional
 
     record = None
     if features:
-        record = SeqRecord("", id="COMMON", features=features)
+        record = SeqRecord(Seq(None, 0), id="COMMON", features=features)
     return record
 
 
