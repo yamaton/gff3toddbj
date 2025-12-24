@@ -6,219 +6,157 @@
 [![PyPI](https://img.shields.io/pypi/v/gff3toddbj?style=for-the-badge)](https://pypi.org/project/gff3toddbj/)
 
 
-[TOC]
+## Overview
 
-## Table of Contents
-* [What is this?](#what-is-this)
-* [How accurate is the conversion?](#how-accurate-is-the-conversion)
-* [Initial setup](#initial-setup)
-  + [Install with bioconda](#install-with-bioconda)
-  + [Install with pip](#install-with-pip)
-  + [Install from the source](#install-from-the-source)
-* [Create DDBJ annotation from GFF3 and FASTA](#create-ddbj-annotation-from-gff3-and-fasta)
-  + [Run `gff3-to-ddbj`](#run-gff3-to-ddbj)
-* [Under the Hood](#under-the-hood)
-* [Customize the behavior](#customize-the-behavior)
-  + [Metadata file](#metadata-file)
-  + [[Advanced] Rename features and qualifiers](#advanced-rename-features-and-qualifiers)
-    + [Rename types/feature keys](#rename-typesfeature-keys)
-    + [Rename attributes/qualifier keys](#rename-attributesqualifier-keys)
-    + [Translate GFF3 types to features with qualifiers](#translate-gff3-types-to-features-with-qualifiers)
-    + [Translate (type, attribute) items to features](#translate-type-attribute-item-to-feature)
-    + [Run with custom configuration](#run-with-custom-configuration)
-  + [[Advanced] Filter features and qualifiers](#advanced-filter-features-and-qualifiers)
-* [Troubleshooting](#troubleshooting)
-  + [Validate GFF3](#validate-gff3)
-  + [Split FASTA from GFF3 (if needed)](#split-fasta-from-gff3-if-needed)
-  + [Normalize entry names (if needed)](#normalize-entry-names-if-needed)
-* [Known Issues](#knownissues)
-* [Credit](#credit)
+GFF3-to-DDBJ converts GFF3 and FASTA files into the [DDBJ annotation format](https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#annotation) required for submission. It is the DDBJ-specific equivalent of tools like `table2asn` (NCBI) or `EMBLmyGFF3` (ENA).
 
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
-
-## What is this?
-
-GFF3-to-DDBJ creates [the annotation file for submission to DDBJ](https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#annotation) by taking GFF3 and FASTA files as input. It also works with FASTA alone.
-
-Analogous programs are [table2asn](https://ftp.ncbi.nih.gov/toolbox/ncbi_tools/converters/by_program/table2asn_GFF/) and [GAG](https://github.com/genomeannotation/GAG) for submissions to NCBI, and [EMBLmyGFF3](https://github.com/NBISweden/EMBLmyGFF3) for submissions to EMBL.
-
-Please take a look at our [test directory](https://github.com/yamaton/gff3toddbj/tree/main/tests/golden) for examples. Files ending with .ann are the DDBJ annotation files produced by thie program.
-
-## How accurate is the conversion?
-
-While there are many rules a DDBJ annotation file needs to comply with, it's difficult to tell what the correct GFF3→DDBJ conversion is.
-There is no examples of fully-functional GFF3 → DDBJ conversion, either. So, we define GFF3-GenBank correspondence in RefSeq as the "correct" examples. (We take the DDBJ side when instructions differ, though.) To evaluate GFF3-to-DDBJ, we use RefSeq data and compare `gff3-to-ddbj` output with the other DDBJ annotation from `genbank-to-ddbj` using the GenBank format. Please take a look at our evaluation dcoument for the detail as well as the current status. ([TODO] Add the page...)
-
-Here `genbank-to-ddbj` is an executable included in this package. It shares codebase with `gff3-to-ddbj`, but we believe it does not bring any complexity to our evaluation due to its much simpler internals.
-
-Also note that we also use DDBJ's [Parser](https://www.ddbj.nig.ac.jp/ddbj/parser-e.html) for checking the annotation files.
+View the [tests/golden](https://github.com/yamaton/gff3toddbj/tree/main/tests/golden) directory for example output (`.ann` files).
 
 
-## Initial setup
 
-### Install with bioconda
+## Accuracy and Validation
+
+Since "perfect" GFF3-to-DDBJ conversion is not formally defined, this tool uses RefSeq GFF3-GenBank correspondence as a gold standard. We validate output by:
+
+1. Comparing `gff3-to-ddbj` results against GenBank-sourced annotations via an internal `genbank-to-ddbj` tool.
+2. Passing all output through the [DDBJ BioProject/BioSample/Sequence Data (MSS) Parser](https://www.ddbj.nig.ac.jp/ddbj/parser-e.html).
+
+
+
+## Installation
+
+### Via Bioconda
 
 ```shell
-# Create a conda environment named "ddbj", and install relevant packages from bioconda channel
-conda create -n ddbj -c bioconda -c conda-forge gff3toddbj
-
-# Activate the environment "ddbj"
+conda create -n ddbj -c conda-forge -c bioconda gff3toddbj
 conda activate ddbj
 ```
 
-### Install with pip
+
+
+### Via PyPI
+
+```
+conda create -n ddbj -c conda-forge -c bioconda pip samtools
+conda activate ddbj
+python -m pip install gff3toddbj
+```
+
+
+
+### Via GitHub (Nightly)
 
 ```shell
-# Create a conda environment named "ddbj" and install pip
 conda create -n ddbj pip
-
-# Activate the environment "ddbj"
 conda activate ddbj
-
-# Need bgzip executable in samtools
-conda install -c bioconda samtools
-
-# Install from pip
-pip install gff3toddbj
-```
-
-
-### Install from the source
-
-```shell
-# Download
-wget https://github.com/yamaton/gff3_to_ddbj/archive/refs/heads/main.zip
-
-# Extract, rename, and change directory
-unzip main.zip && mv gff3toddbj-main gff3toddbj && cd gff3toddbj
-
-# Create a conda environment named "ddbj"
-conda create -n ddbj
-
-# Activate the environment "ddbj"
-conda activate ddbj
-
-# Install dependencies to "ddbj"
-conda install -c bioconda -c conda-forge biopython bcbio-gff toml pysam samtools pip build
-
-# Install gff3-to-ddbj and extra tools
-python -m build && pip install -e ./
+python -m pip install 'git+https://github.com/yamaton/gff3toddbj'
 ```
 
 
 
-## Create DDBJ annotation from GFF3 and FASTA
-
-
-
-### Run `gff3-to-ddbj`
-
-Let's run the main program to get some ideas.
+## Usage
 
 ```shell
 gff3-to-ddbj \
-  --gff3 myfile.gff3 \                # bare-minimum output if omitted
-  --fasta myfile.fa \                 # <<REQUIRED>>
-  --metadata mymetadata.toml \        # example metadata used if omitted
-  --locus_tag_prefix MYOWNPREFIX_ \   # default is "LOCUSTAGPREFIX_"
-  --transl_table 1 \                  # default is 1
-  --output myawesome_output.ann       # standard output if omitted
+  --fasta myfile.fa \               # Required
+  --gff3 myfile.gff3 \              # Strongly Recommended (bare-minimum if absent)
+  --metadata mymetadata.toml \      # Optional
+  --locus_tag_prefix PREFIX_ \      # Required for BioSample
+  --transl_table 1 \                # Default: 1 (Standard)
+  --output output.ann               # Optional: stdout by default
 ```
 
-Here is the options:
-* `--gff3 <FILE>` takes GFF3 file
-* `--fasta <FILE>` takes FASTA file
-* `--metadata <FILE>` takes the metadata file in TOML
-* `--locus_tag_prefix <STRING>` takes the prefix of locus tag [obtained from BioSample](https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#locus_tag). You can skip this for now.
-* `--transl_table <INT>`: Choose appropriate one from [The Genetic Codes](https://www.ddbj.nig.ac.jp/ddbj/geneticcode-e.html). The default value is 1 ("standard").
-* `--output <FILE>` sets the path the annotation output.
+
+
+### Argument Details
+
+- `--locus_tag_prefix`: The prefix [assigned by BioSample](https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#locus_tag).
+- `--transl_table`: Genetic code index (e.g., 11 for Bacteria). See [DDBJ Genetic Codes](https://www.ddbj.nig.ac.jp/ddbj/geneticcode-e.html).
 
 
 
 ## Under the Hood
 
-Here is the list of operations `gff3-to-ddbj` will do:
+GFF3-to-DDBJ processes your data through the following pipeline:
 
-* Re-compress FASTA with [bgzip](https://www.htslib.org/doc/bgzip.html) if the FASTA input is compressed with gzip
-  * A bgzip file is created if absent like `myfile_bgzip.fa.gz`.
-  * For indexing and saving memory
-  * The bgzip file should be compatible with gzip
+### 1. Data Preparation
 
-* Rename features and qualifiers following the [renaming rules](#advanced-rename-features-and-qualifiers) defined [here](https://github.com/yamaton/gff3toddbj/blob/main/gff3toddbj/translate_features_qualifiers.toml).
-  * **This is the core function** of `gff3-to-ddbj`.
-  * The rules are based on [Sequence Ontology](http://sequenceontology.org) plus real-world examples.
-  * For examples, `transcript` in the 3rd column (= called "type") is translated to `misc_RNA` feature because [SO:0000673](http://sequenceontology.org/browser/current_svn/term/SO:0000673) setes "INSDC_feature:misc_RNA".
+- **FASTA Compression:** If the input is standard Gzip, the tool re-compresses it using `bgzip` (e.g., creating `myfile_bgzip.fa.gz`). This enables indexing and reduces memory usage; the resulting file remains compatible with standard `gzip` tools.
+- **Gap Detection:** Scans FASTA sequences for `N` runs and automatically generates `assembly_gap` features.
+- **Topology Handling:** If GFF3 has `Is_circular=true`, the tool inserts a `TOPOLOGY` feature and manages [origin-spanning features](https://www.ncbi.nlm.nih.gov/datasets/docs/v2/reference-docs/file-formats/annotation-files/about-ncbi-gff3/#origin-spanning-features).
 
-* Search for `assembly_gap`s in FASTA, and add the feature.
 
-* Add `/transl_table` to each CDS.
 
-* Insert `source` information from the [metadata fie](#metadata-file).
+### 2. Feature & Qualifier Mapping
 
-* Insert `TOPOLOGY` feature if GFF3 has `Is_circular=true` in an entry.
-  * Also handle [origin-spaning features](https://https.ncbi.nlm.nih.gov/datasets/docs/v1/reference-docs/file-formats/about-ncbi-gff3/#origin-spanning-features).
+- **SO-to-INSDC Translation:** Maps GFF3 "types" to DDBJ "Features" based on [Sequence Ontology](http://sequenceontology.org).
+    - *Example:* `transcript` (SO:0000673) is translated to a `misc_RNA` feature.
+- **Qualifier Renaming:** Converts GFF3 attributes to DDBJ-compliant qualifiers based on [renaming rules](https://github.com/yamaton/gff3toddbj/blob/main/gff3toddbj/translate_features_qualifiers.toml).
+    - *Example:* `ID=foobar` becomes `/note="ID:foobar"`.
+- **Genetic Code Assignment:** Automatically adds the `/transl_table` qualifier to every `CDS` feature based on the user-provided index (default: 1).
 
-* Join locations of features having the same parent with `join` notation.
-  * `CDS`, `exon`, `mat_peptide`, `V_segment`, `C_region`, `D-loop`, and `misc_feature` may be joined.
-  * `exon`s are NOT joined if having `gene` as the direct parent.
 
-* Set the location of joined exons as its parent RNA's location, and discard the exons.
 
-* Add partialness markup (`<` and `>`) to `CDS` locations if start/stop codon is absent.
-  * See [Offset of the frame at translation initiation by codon_start](https://www.ddbj.nig.ac.jp/ddbj/cds-e.html#frame)
+### 3. Coordinate Processing
 
-* Let CDS have a single `/product` value: Set it to "hypothetical protein" if absent. Move the rest of exising values to `/note`.
+- **Joining:** Features sharing a parent are merged using `join()` notation. This applies to `CDS`, `exon`, `mat_peptide`, `V_segment`, `C_region`, `D-loop`, and `misc_feature`.
+- **RNA/Exon Logic:** The location of joined `exons` is assigned to the parent RNA's location, and individual `exon` entries are discarded.
+    - *Note:* `exons` are **not** joined if their direct parent is a `gene`.
+- **Partialness:** Adds partial indicators (`<` or `>`) to `CDS` locations if start or stop codons are missing. (See: [Offset of the frame at translation initiation by codon_start](https://www.ddbj.nig.ac.jp/ddbj/cds-e.html#frame)).
 
-  * This is to conform the [instruction](https://www.ddbj.nig.ac.jp/ddbj/qualifiers-e.html#product) on `/product`.
 
-    > * Even if there are multiple general names for the same product, do  not enter multiple names in 'product'. Do not use needless symbolic  letters as delimiter for multiple names. If you would like to describe  more than two names, please enter one of the most representative name in /product qualifier, and other(s) in /[note](https://www.ddbj.nig.ac.jp/ddbj/qualifiers-e.html#note) qualifier.
-    >
-    > * If the name and function are not known, we recommend to describe as "hypothetical protein".
 
-* If a `gene` feature has `/gene` and/or `/gene_synonym`, copy these qualifiers to its children.
+### 4. DDBJ Compliance Logic (Product & Gene)
 
-* Make `/gene` have a single value, and put the rest to `/gene_synonym`.
-  * Reference: [Definition of Qualifier key: /gene](https://www.ddbj.nig.ac.jp/ddbj/qualifiers-e.html#gene).
+- **Product Enforcement:** To conform to [DDBJ instructions](https://www.ddbj.nig.ac.jp/ddbj/qualifiers-e.html#product), each `CDS` is restricted to a single `/product`:
+    * Even if there are multiple general names for the same product, do not enter multiple names in 'product'. Do not use needless symbolic letters as delimiter for multiple names. If you would like to describe more than two names, please enter one of the most representative name in /product qualifier, and other(s) in /note qualifier.
+    * If the name and function are not known, we recommend to describe as "hypothetical protein".
+- **Gene Consistency:**
+    - Ensures the `/gene` qualifier has a single value; additional values move to `/gene_synonym`. (Reference: [Definition of Qualifier key: /gene](https://www.ddbj.nig.ac.jp/ddbj/qualifiers-e.html#gene)).
+    - Copies `/gene` and `/gene_synonym` qualifiers from parent `gene` features to all children (e.g., `mRNA`, `CDS`).
 
-* Remove duplicates in qualifier values.
 
-* Sort lines in annotation
-  * Sort is based on the key (start position, priority of features, end position)
-  * The priorities are [defined here]((https://github.com/yamaton/gff3toddbj/blob/1cea725cca2a8f3edb45bac45d7983e255285d5e/gff3toddbj/transforms.py#L763), and they move `source` and `TOPOLOGY` to the top.
 
-* Filter features and qualifiers following [the matrix](https://www.ddbj.nig.ac.jp/assets/files/pdf/ddbj/fq-e.pdf).
-  * `gene` feature will be discarded in this process.
-  * Discarded features, and discarded feature-qualifier pairs are displayed as standard error at execution. They look like following:
-    ```
-    WARNING: [Discarded] feature ------->  gene  <-------    (count: 49911)
-    WARNING: [Discarded] feature ------->  cDNA_match  <-------      (count: 10692)
-    WARNING: [Discarded] feature ------->  match  <-------   (count: 101)
-    WARNING: [Discarded] feature ------->  sequence_conflict  <-------   (count: 81)
-    WARNING: [Discarded] (Feature, Qualifier) = (source, db_xref)    (count: 687)
-    WARNING: [Discarded] (Feature, Qualifier) = (source, Name)   (count: 687)
-    WARNING: [Discarded] (Feature, Qualifier) = (source, gbkey)      (count: 687)
-    WARNING: [Discarded] (Feature, Qualifier) = (source, genome)     (count: 685)
-    WARNING: [Discarded] (Feature, Qualifier) = (mRNA, Parent)   (count: 57304)
-    WARNING: [Discarded] (Feature, Qualifier) = (mRNA, db_xref)      (count: 114608)
+### 5. Metadata & Filtering
+
+- **Metadata Injection:** Inserts `source` information and global qualifiers from the metadata file. See "Metadata Configuration" in "Customization" below.
+- **Compliance Filtering:** Removes features and qualifiers violating the [DDBJ usage matrix](https://www.ddbj.nig.ac.jp/assets/files/pdf/ddbj/fq-e.pdf).
+    - *Note:* The `gene` feature is discarded by default in this process.
+- **Deduplication:** Removes redundant qualifier values generated during processing.
+
+
+
+### 6. Final Formatting
+
+- **Sorting:** Lines are ordered by start position, [feature priority](https://github.com/yamaton/gff3toddbj/blob/1cea725cca2a8f3edb45bac45d7983e255285d5e/gff3toddbj/transforms.py#L763) (placing `source` and `TOPOLOGY` at the top), and end position.
+
+- **Validation Logs:** Displays all discarded items via `stderr`:
+
+    ```plaintext
+    WARNING: [Discarded] feature -------> gene (count: 49911)
+    WARNING: [Discarded] (Feature, Qualifier) = (mRNA, Parent) (count: 57304)
     ```
 
+    
 
 
-## Customize the behavior
 
-### Metadata file
+## Customization
 
-To enter information missing in GFF3 or FASTA, such as submitter names and certain qualifier values, you need to feed a metadata file in TOML, say `mymetadata.toml`. Take a look at [an example](https://github.com/yamaton/gff3toddbj/blob/main/examples/metadata/metadata_ddbj_example.toml) matching [the example annotation in the DDBJ page](https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#annotation).
+### Metadata Configuration
 
-The file accommodates following and they are all optional. That is, GFF3-to-DDBJ works even with an empty file.
+Use a TOML file (e.g., `metadata.toml`) to provide information absent from GFF3/FASTA files, such as submitter details and common qualifiers.
 
-* Basic features in the [COMMON](https://www.ddbj.nig.ac.jp/ddbj/file-format-e.html#common) entry
+- **Example:** See [metadata_ddbj_example.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/metadata/metadata_ddbj_example.toml).
+- **Default:** If `--metadata` is omitted, the tool uses this [default configuration](https://github.com/yamaton/gff3toddbj/blob/main/gff3toddbj/metadata_without_COMMON.toml).
 
-  * ... such as `SUBMITTER`, `REFERENCE`, and `COMMENT`.
 
-* "meta-description" in the COMMON entry
 
-  * Here is an example with this notation:
+#### Key Sections
+
+1. **COMMON Entry**: Define `SUBMITTER`, `REFERENCE`, and `COMMENT` blocks.
+
+2. **Global Qualifiers (DDBJ-side injection)**: Use the `[COMMON.feature]` syntax to instruct the DDBJ system to insert qualifiers into every occurrence of a feature.
 
     ```toml
     [COMMON.assembly_gap]
@@ -227,136 +165,74 @@ The file accommodates following and they are all optional. That is, GFF3-to-DDBJ
     linkage_evidence = "paired-ends"
     ```
 
-  * DDBJ annotation supports "meta" values with features under COMMON such that the items are inserted to each occurrence **in the resulting flat file** produced by DDBJ. Here is an example to insert `assembly_gap` feature under `COMMON` entry.
-
-* Feature-qualifier items inserted to each occurrence
-
-  * Here is an example: Difference from the previous case is only at `[assembly_gap]` as opposed to`[COMMON.assembly_gap]`.
+3. **Local Injection (Tool-side injection)**: Use the `[feature]` syntax (without the `COMMON` prefix) to have `gff3-to-ddbj` explicitly insert these qualifiers into the generated `.ann` file.
 
     ```toml
     [assembly_gap]
-    estimated_length = "unknown"   # Set it "<COMPUTE>" to count the number of N's
+    estimated_length = "<COMPUTE>"  # Automatically calculate gap size from "N" runs
     gap_type = "within scaffold"
     linkage_evidence = "paired-ends"
     ```
 
-  * While this should work effectively the same as the "meta-description" item above, use this notation if you insert values repeatedly **in the annotation file** produced by GFF3-to-DDBJ.
-
-  * Currently supporting `[source]` and `[assembly_gap]` only.
+    *Note: Currently, only `[source]` and `[assembly_gap]` are supported for local injection.*
 
 
-If metadata file is not specified via `--metadata` option, a tentative fallback configuration [here](https://github.com/yamaton/gff3toddbj/blob/main/gff3toddbj/metadata_without_COMMON.toml) is loaded.
 
-For more examples, see annotation examples provided by DDBJ, such as [WGS in COMMON](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=1110334278) and [WGS](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=382116224), and the corresponding metadata files [metadata_WGS_COMMON.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/metadata/metadata_WGS_COMMON.toml) and [metadata_WGS.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/metadata/metadata_WGS.toml) in this repository.
+### [Advanced] Feature and Qualifier Renaming
 
+GFF3 and DDBJ formats do not share a 1:1 nomenclature. GFF3 "types" (column 3) map to DDBJ "Features," while GFF3 "attributes" (column 9) map to DDBJ "Qualifiers."
 
-### [Advanced] Rename Features and Qualifiers
-
-GFF3 and DDBJ annotation have rough correspondence like:
-
-1. GFF3 column 3 "type" →  DDBJ annotation column 2 as "Feature"
-2. GFF3 column 9 "attribute" →  DDBJ annotation column 4 and 5 as "Qualifier key", and "Qualifier value"
-
-but nomenclatures in GFF3 often do not conform the annotations set by INSDC. Furthermore, DDBJ lists up the [feature-qualifier pairs they accepts](https://docs.google.com/spreadsheets/d/1qosakEKo-y9JjwUO_OFcmGCUfssxhbFAm5NXUAnT3eM/edit#gid=0), a subset of the INSDC definitions.
-
-To meet convensions with the requirement, GFF3-to-DDBJ comes with [a default configuration in TOML](https://github.com/yamaton/gff3toddbj/blob/main/gff3toddbj/translate_features_qualifiers.toml) to rename (or even translate) feature keys and qualifier keys/values. Note that [the Sequence Ontology](http://sequenceontology.org/browser) is helpful in translating a type into a INSDC feature and qualifier(s).
-
-Here is how to customize the renaming configuration.
-
-#### Rename types/feature keys
-
-The default setting renames `five_prime_UTR` "type" in GFF3 into `5'UTR` "feature key" in the annotation. This transformation is expressed in TOML as follows:
-
-```toml
-[five_prime_UTR]
-feature_key = "5'UTR"
-```
-
-#### Rename attributes/qualifier keys
-
-This is about renaming attributes under arbitrary types. By default, `ID=foobar` "attribute" in a GFF3 becomes `/note="ID:foobar"` qualifier in the annotation. (Here I follow the convention putting slash (like `/note`) to denote qualifier. But DDBJ annotation does NOT include slash hence no slash is used in any of TOML files.)
-
-Here is the TOML defining the transformation. `__ANY__` is the special name representing arbitrary types. `ID` is the original attribute key. `note` is the name of corresponding qualifier key. `ID:` is attached as the prefix of the qualifier value.
-
-```toml
-[__ANY__.ID]
-qualifier_key = "note"
-qualifier_value_prefix = "ID:"  # optional
-```
-
-One can also set a qualifier key and a value together. For example, `/pseudo` qualifier is discouraged by DDBJ regardless of features. We may enforce the replacement by,
-
-```toml
-# /pseudo is always replaced by /pseudogene="unknown"
-[__ANY__.pseudo]
-qualifier_key = "pseudogene"
-qualifier_value = "unknown"
-```
+`gff3-to-ddbj` uses a [default translation table](https://github.com/yamaton/gff3toddbj/blob/main/gff3toddbj/translate_features_qualifiers.toml) to handle these conversions. You can override these rules using `--config_rename <FILE>`.
 
 
-#### Translate GFF3 types to features with qualifiers
 
-Sometimes we want to replace a certain types with features WITH qualifiers. For example, `snRNA` is an invalid feature in INSDC/DDBJ hence we replace it with `ncRNA` feature with `/ncRNA_class="snRNA"` qualifier. Such transformation is written in TOML as following.
+#### Customization Examples:
+
+* **Renaming Types:** Map a GFF3 type to a specific DDBJ feature key.
+
+    ```toml
+    [five_prime_UTR]
+    feature_key = "5'UTR"
+    ```
+
+* **Renaming Attributes:** Map GFF3 attributes to DDBJ qualifiers. Use `__ANY__` to apply a rule across all feature types.
+
+    ```toml
+    [__ANY__.ID]
+    qualifier_key = "note"
+    qualifier_value_prefix = "ID:"  # optional
+    ```
+
+* **Complex Translations:** Map a GFF3 type to a DDBJ feature/qualifier pair (e.g., `snRNA` to `ncRNA` with a class).
+
+    ```toml
+    [snRNA]
+    feature_key = "ncRNA"
+    qualifier_key = "ncRNA_class"
+    qualifier_value = "snRNA"
+    ```
+
+* **Attribute-to-Feature Mapping:** Convert specific attribute values into distinct DDBJ features (e.g., `RNA` type with `biotype=misc_RNA` attribute becomes a `misc_RNA` feature).
+
+    ```toml
+    [RNA.biotype.misc_RNA]
+    feature_key = "misc_RNA"
+    ```
+
+
+
+### [Advanced] Feature and Qualifier Filtering
+
+To comply with the [DDBJ usage matrix](https://www.ddbj.nig.ac.jp/assets/files/pdf/ddbj/fq-e.pdf), output is filtered by a [default configuration](https://github.com/yamaton/gff3toddbj/blob/main/gff3toddbj/ddbj_filter.toml). Only features and qualifiers explicitly allowed in this TOML file will appear in the final output.
+
+To use a custom filter, provide a TOML file via `--config_filter <FILE>` using the following structure:
 
 ```toml
-[snRNA]
-feature_key = "ncRNA"
-qualifier_key = "ncRNA_class"
-qualifier_value = "snRNA"
-```
-
-#### Translate (type, attribute) items to features
-
-Here is a story in setting the default renaming scheme: Some annotation programs produce a GFF3 line containing `RNA` as the type and `biotype=misc_RNA` as one of the attributes. But it should be treated as `misc_RNA` feature in DDBJ annoation. In such case, we join (feature key, qualifier key, qualifier value) with dot as delimiter, and write as follows.
-
-```toml
-[RNA.biotype.misc_RNA]
-feature_key = "misc_RNA"
+# Only these qualifiers will be kept for the CDS feature
+CDS = ["EC_number", "inference", "locus_tag", "note", "product"]
 ```
 
 
-#### Run with custom configuration
-
-To feed a custom translation table, use the CLI option:
-
-* `--config_rename <FILE>`
-
-And here is an example call:
-
-```shell
-gff3-to-ddbj \
-  --gff3 myfile.gff3 \
-  --fasta myfile.fa \
-  --metadata mymetadata.toml \
-  --locus_tag_prefix MYOWNPREFIX_ \
-  --transl_table 1 \
-  --config_rename my_translate_features_qualifiers.toml \  # Set your customized file here
-  --output myawesome_output.ann
-```
-
-### [Advanced] Filter features and qualifiers
-
-DDBJ specifies recommended [Feature/Qualifier usage matrix](https://www.ddbj.nig.ac.jp/assets/files/pdf/ddbj/fq-e.pdf). To conform this rule, features and qualifiers appearing in the annotation output are filtered by [the filtering file in TOML](https://github.com/yamaton/gff3toddbj/blob/main/gff3toddbj/ddbj_filter.toml) by default. The file is in TOML format with the structure like this:
-
-```toml
-CDS = [
-"EC_number",
-"inference",
-"locus_tag",
-"note",
-"product",
-]
-
-exon = [
-"gene",
-"locus_tag",
-"note",
-]
-```
-
-The left-hand side of the equal sign `=` represents an allowed feature key, and the right-hand side is a list of allowed qualifier keys. In this example, only `CDS` and `exon` features will show up in the annotation, and qualifiers are limited to the listed items. To customize this filtering function, edit the TOML file first and pass the file with the CLI option:
-
-* `--config_filter <FILE>`
 
 
 ## Troubleshooting
@@ -393,12 +269,19 @@ This command create as files `myannotation_output_renamed.txt` *if* the invalid 
 
 ## Known Issues
 
-* Need to handle location correction and feature `join()` in presence of `/trans_splicing`
-* Need to handle location correction in presence of `/transl_except` at start/stop codon
-* Needs `/translation` when `/exception` exists.
-* GFF3 handling when the flatfile is supposed to have "between-position" location like `123^124`
-* Currently the development focuses on accuracy; the software runs slow using a single process.
+### Biological & Sequence Logic
 
-## Credit
+- **Trans-splicing:** The tool does not currently support coordinate correction or the `join()` syntax for features containing the `/trans_splicing` qualifier.
+- **Translation Exceptions:** Coordinate handling for `/transl_except` at start or stop codons is not yet implemented.
+- **Missing Qualifiers:** The tool does not automatically generate a `/translation` qualifier when an `/exception` qualifier is present, which may lead to DDBJ validation errors.
+- **Inter-base Coordinates:** "Between-position" locations (e.g., `123^124`) are not currently supported and may be processed incorrectly.
 
-GFF3-to-DDBJ's design is deeply indebted to [EMBLmyGFF3](https://github.com/NBISweden/EMBLmyGFF3), a versatile coversion for EMBL annotation format.
+### Performance
+
+- **Execution Speed:** To ensure maximum accuracy, the tool currently utilizes a single-process architecture. Expect longer runtimes on large genomic datasets.
+
+
+
+## Acknowledgments
+
+The design of GFF3-to-DDBJ is inspired by [EMBLmyGFF3](https://github.com/NBISweden/EMBLmyGFF3), a versatile tool used for converting GFF3 data into the EMBL annotation format.
