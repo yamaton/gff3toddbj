@@ -9,7 +9,7 @@ import collections
 from . import parser
 
 from Bio.SeqRecord import SeqRecord
-from Bio.SeqFeature import CompoundLocation, FeatureLocation, SeqFeature
+from Bio.SeqFeature import CompoundLocation, SimpleLocation, SeqFeature
 
 
 _EXEC_NAME = "compare-ddbj"
@@ -30,7 +30,7 @@ def remove_short_introns(record: SeqRecord, gap_size_to: int=5) -> None:
             if hasattr(f, "sub_features"):
                 _runner(f.sub_features)
 
-    def _fix(loc: CompoundLocation) -> Union[CompoundLocation, FeatureLocation]:
+    def _fix(loc: CompoundLocation) -> Union[CompoundLocation, SimpleLocation]:
         parts = sorted(loc.parts, key=lambda x: (x.start.position, x.end.position))
         acc = []
         for curr in parts:
@@ -41,7 +41,7 @@ def remove_short_introns(record: SeqRecord, gap_size_to: int=5) -> None:
             else:
                 prev = acc.pop()
                 assert prev.strand == curr.strand, "Unmatched strand!"
-                x = FeatureLocation(prev.start, curr.end, strand=curr.strand)
+                x = SimpleLocation(prev.start, curr.end, strand=curr.strand)
                 acc.append(x)
 
         if len(acc) == 1:

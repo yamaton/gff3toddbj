@@ -8,32 +8,32 @@ import logging
 
 from Bio.SeqRecord import SeqRecord
 from Bio.Seq import Seq
-from Bio.SeqFeature import ExactPosition, SeqFeature, FeatureLocation, CompoundLocation, BeforePosition, AfterPosition
+from Bio.SeqFeature import ExactPosition, SeqFeature, SimpleLocation, CompoundLocation, BeforePosition, AfterPosition
 
 
 FALLBACK_SEQLEN = 0
 
-def _to_featureloc(s: str, is_positive_strand: bool) -> FeatureLocation:
+def _to_featureloc(s: str, is_positive_strand: bool) -> SimpleLocation:
     """Parse simple location of the form.
 
-    Note that FeatureLocation takes 0-based both-inclusive indexing
+    Note that SimpleLocation takes 0-based both-inclusive indexing
     while texts from GFF3/DDBJ/flatfile have 1-based left-inclusive
     right-exclusive indexing.
 
     >>> _to_featureloc("123", False)
-    FeatureLocation(ExactPosition(122), ExactPosition(123), strand=-1)
+    SimpleLocation(ExactPosition(122), ExactPosition(123), strand=-1)
 
     >>> _to_featureloc("<23..35", True)
-    FeatureLocation(BeforePosition(22), ExactPosition(35), strand=1)
+    SimpleLocation(BeforePosition(22), ExactPosition(35), strand=1)
 
     >>> _to_featureloc("123^124", True)
-    FeatureLocation(ExactPosition(122), ExactPosition(123), strand=1)
+    SimpleLocation(ExactPosition(122), ExactPosition(123), strand=1)
 
     >>> _to_featureloc("<123", True)
-    FeatureLocation(BeforePosition(122), ExactPosition(123), strand=1)
+    SimpleLocation(BeforePosition(122), ExactPosition(123), strand=1)
 
     >>> _to_featureloc(">123", True)
-    FeatureLocation(ExactPosition(122), AfterPosition(123), strand=1)
+    SimpleLocation(ExactPosition(122), AfterPosition(123), strand=1)
     """
     if ".." in s:
         start, end = s.split("..")
@@ -60,23 +60,23 @@ def _to_featureloc(s: str, is_positive_strand: bool) -> FeatureLocation:
         end = start + 1
 
     strand = +1 if is_positive_strand else -1
-    return FeatureLocation(start, end, strand=strand)
+    return SimpleLocation(start, end, strand=strand)
 
 
-def _parse_loc(s: str) -> Union[FeatureLocation, CompoundLocation]:
-    """Parse location item as either FeatureLocation or CompoundLocation
+def _parse_loc(s: str) -> Union[SimpleLocation, CompoundLocation]:
+    """Parse location item as either SimpleLocation or CompoundLocation
 
     >>> _parse_loc("10")
-    FeatureLocation(ExactPosition(9), ExactPosition(10), strand=1)
+    SimpleLocation(ExactPosition(9), ExactPosition(10), strand=1)
 
     >>> _parse_loc("complement(333..>350)")
-    FeatureLocation(ExactPosition(332), AfterPosition(350), strand=-1)
+    SimpleLocation(ExactPosition(332), AfterPosition(350), strand=-1)
 
     >>> _parse_loc("join(1..5,100..>200)")
-    CompoundLocation([FeatureLocation(ExactPosition(0), ExactPosition(5), strand=1), FeatureLocation(ExactPosition(99), AfterPosition(200), strand=1)], 'join')
+    CompoundLocation([SimpleLocation(ExactPosition(0), ExactPosition(5), strand=1), SimpleLocation(ExactPosition(99), AfterPosition(200), strand=1)], 'join')
 
     >>> _parse_loc("complement(join(1..5,100..>200))")
-    CompoundLocation([FeatureLocation(ExactPosition(0), ExactPosition(5), strand=-1), FeatureLocation(ExactPosition(99), AfterPosition(200), strand=-1)], 'join')
+    CompoundLocation([SimpleLocation(ExactPosition(0), ExactPosition(5), strand=-1), SimpleLocation(ExactPosition(99), AfterPosition(200), strand=-1)], 'join')
     """
     is_positive_strand = True
 

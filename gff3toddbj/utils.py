@@ -7,7 +7,7 @@ import toml
 from Bio.Seq import Seq
 from Bio.Data import CodonTable
 from Bio.SeqRecord import SeqRecord
-from Bio.SeqFeature import CompoundLocation, FeatureLocation, SeqFeature
+from Bio.SeqFeature import CompoundLocation, SimpleLocation, SeqFeature
 
 # Dummy name of exon after joining them to suppress outputs
 DUMMY_ORIGINALLY_EXON = "__exon"
@@ -96,7 +96,7 @@ def is_invalid_as_seqid(name: str) -> bool:
 
 def has_start_codon(
     seq: Seq,
-    location: Union[FeatureLocation, CompoundLocation],
+    location: Union[SimpleLocation, CompoundLocation],
     transl_table: int,
     phase: int = 0,
 ) -> bool:
@@ -106,7 +106,7 @@ def has_start_codon(
 
     >>> from Bio.Seq import Seq
     >>> seq = Seq("AATTCGAGGGG")
-    >>> loc = FeatureLocation(1, 7, strand=1)
+    >>> loc = SimpleLocation(1, 7, strand=1)
     >>> genetic_code = 11
     >>> phase = 0
     >>> has_start_codon(seq, loc, genetic_code, phase)
@@ -142,7 +142,7 @@ def has_start_codon(
 
 def has_stop_codon(
     seq: Seq,
-    location: Union[FeatureLocation, CompoundLocation],
+    location: Union[SimpleLocation, CompoundLocation],
     transl_table: int,
     phase : int,
 ) -> bool:
@@ -151,7 +151,7 @@ def has_stop_codon(
 
     >>> from Bio.Seq import Seq
     >>> seq = Seq("GAATGCGAGGGTAGT")
-    >>> loc = FeatureLocation(2, 14, strand=1)
+    >>> loc = SimpleLocation(2, 14, strand=1)
     >>> genetic_code = 1
     >>> has_stop_codon(seq, loc, genetic_code, phase=0)
     True
@@ -177,19 +177,19 @@ def has_stop_codon(
     return str(codon) in stop_codons
 
 
-def _get_cds(seq: Seq, location: Union[FeatureLocation, CompoundLocation]) -> Seq:
+def _get_cds(seq: Seq, location: Union[SimpleLocation, CompoundLocation]) -> Seq:
     """wrapper of SeqFeature.extract()
 
-    CompoundLocation.part is ordered by (loc.start.position, loc.end.position)
+    CompoundLocation.part is ordered by (loc.start, loc.end)
     in this code base, hence loc.extract() gives wrong answer if loc is
     a CompoundLocation with strand (-1).
 
     Ref: https://github.com/biopython/biopython/issues/570
     """
-    if isinstance(location, FeatureLocation) or location.strand > 0:
+    if isinstance(location, SimpleLocation) or location.strand > 0:
         f = SeqFeature(location, type="tmp")
     else:
-        location = sorted(location.parts, key=lambda x: (x.end.position, x.start.position), reverse=True)
+        location = sorted(location.parts, key=lambda x: (x.end, x.start), reverse=True)
         x = CompoundLocation(location)
         f = SeqFeature(x, type="domain")
     return f.extract(seq)

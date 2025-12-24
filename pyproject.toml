@@ -7,7 +7,7 @@ name = "gff3toddbj"
 dynamic = ["version"]
 description = "Create a DDBJ annotation file from GFF3 and FASTA files"
 readme = "README.md"
-requires-python = ">=3.9, <3.12"
+requires-python = ">=3.9, <3.13"
 authors = [
   { name = "Yamato Matsuoka", email = "yamaton@gmail.com" },
 ]
@@ -18,8 +18,8 @@ classifiers = [
     "Development Status :: 3 - Alpha",
 ]
 dependencies = [
-    "biopython<=1.79",
-    "bcbio-gff<=0.7.0",
+    "biopython==1.81",
+    "bcbio-gff<=0.7.1",
     "pysam",
     "toml",
 ]

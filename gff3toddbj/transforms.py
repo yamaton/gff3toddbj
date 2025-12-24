@@ -6,7 +6,7 @@ import logging
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import (
-    FeatureLocation,
+    SimpleLocation,
     SeqFeature,
     CompoundLocation,
     BeforePosition,
@@ -43,7 +43,7 @@ def _get_assembly_gap(seq: str, qualifiers: OrderedDict[str, Any]) -> List[SeqFe
         qualifiers (dict): qualifier values
     """
     locs = [
-        FeatureLocation(start, end, strand=1)
+        SimpleLocation(start, end, strand=1)
         for (start, end) in _get_assembly_gap_locations(seq)
     ]
 
@@ -82,7 +82,7 @@ def _get_assembly_gap_locations(seq: str) -> List[Interval]:
 
 def _get_source(length: int, source_qualifiers: Dict[str, Any]) -> SeqFeature:
     """Create "source" feature"""
-    loc = FeatureLocation(0, length, strand=1)  # 0-based and [0, length)
+    loc = SimpleLocation(0, length, strand=1)  # 0-based and [0, length)
     return SeqFeature(loc, type="source", qualifiers=source_qualifiers)
 
 
@@ -512,7 +512,7 @@ def _fix_locations(record: SeqRecord, faidx: Optional[io.Faidx]=None) -> None:
             if hasattr(f, "sub_features"):
                 _runner(f.sub_features, seq)
 
-    def _fix_loc(location: FeatureLocation, is_at_start=True) -> FeatureLocation:
+    def _fix_loc(location: SimpleLocation, is_at_start=True) -> SimpleLocation:
         """Credit: EMBLmyGFF3"""
 
         if location.strand is None:
@@ -530,13 +530,13 @@ def _fix_locations(record: SeqRecord, faidx: Optional[io.Faidx]=None) -> None:
             #    start of strand (+)   OR   end of strand (-)
             if len(location.parts) > 1:
                 idx = 0  # always 5' terminal
-                location.parts[idx] = FeatureLocation(
+                location.parts[idx] = SimpleLocation(
                     BeforePosition(location.parts[idx].start),
                     location.parts[idx].end,
                     strand=location.parts[idx].strand,
                 )
             else:
-                location = FeatureLocation(
+                location = SimpleLocation(
                     BeforePosition(location.start), location.end, strand=location.strand
                 )
         else:
@@ -544,21 +544,21 @@ def _fix_locations(record: SeqRecord, faidx: Optional[io.Faidx]=None) -> None:
             #    end of strand (+)   OR   start of strand (-)
             if len(location.parts) > 1:
                 idx = -1  # always 3' terminal
-                location.parts[idx] = FeatureLocation(
+                location.parts[idx] = SimpleLocation(
                     location.parts[idx].start,
                     AfterPosition(location.parts[idx].end),
                     strand=location.parts[idx].strand,
                 )
             else:
-                location = FeatureLocation(
+                location = SimpleLocation(
                     location.start, AfterPosition(location.end), strand=location.strand
                 )
         return location
 
-    def _fix_absent_start_codon(location: FeatureLocation) -> FeatureLocation:
+    def _fix_absent_start_codon(location: SimpleLocation) -> SimpleLocation:
         return _fix_loc(location, is_at_start=True)
 
-    def _fix_absent_stop_codon(location: FeatureLocation) -> FeatureLocation:
+    def _fix_absent_stop_codon(location: SimpleLocation) -> SimpleLocation:
         return _fix_loc(location, is_at_start=False)
 
     s = record.seq if faidx is None else io.get_seq(faidx, record.id)
@@ -652,9 +652,9 @@ def _handle_topology(rec: SeqRecord) -> None:
             except (AttributeError, TypeError, ValueError):
                 continue
             if end > record_end_pos:
-                before_origin = FeatureLocation(start, record_end_pos, strand=f.location.strand)
+                before_origin = SimpleLocation(start, record_end_pos, strand=f.location.strand)
                 end_true = end - record_end_pos
-                after_origin = FeatureLocation(0, end_true, strand=f.location.strand)
+                after_origin = SimpleLocation(0, end_true, strand=f.location.strand)
                 f.location = CompoundLocation([before_origin, after_origin])
 
                 # scan only the children of matched features

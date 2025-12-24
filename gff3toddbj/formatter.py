@@ -3,11 +3,11 @@ import logging
 from typing import Any, DefaultDict, Dict, FrozenSet, List, Optional, Tuple, Iterable, Union, Generator
 
 from Bio.SeqRecord import SeqRecord
-from Bio.SeqFeature import BeforePosition, CompoundLocation, ExactPosition, FeatureLocation, SeqFeature
+from Bio.SeqFeature import BeforePosition, CompoundLocation, ExactPosition, SimpleLocation, SeqFeature
 
 from . import utils
 
-Location = Union[FeatureLocation, CompoundLocation]
+Location = Union[SimpleLocation, CompoundLocation]
 
 def format_location(loc: Location) -> str:
     """Format location
@@ -16,7 +16,7 @@ def format_location(loc: Location) -> str:
     while Annotation is 1-based, both-inclusive.
     """
 
-    def _format_part(loc: FeatureLocation) -> str:
+    def _format_part(loc: SimpleLocation) -> str:
         n_start_pos = loc.start.position + 1   # 1-based
         n_end_pos = loc.end.position           # 1-based
         type_start = type(loc.start)
@@ -32,7 +32,7 @@ def format_location(loc: Location) -> str:
             try:
                 if n_start_pos > n_end_pos:
                     # this is ad-hoc workaround because Bio.parse() creates a strange location like
-                    # FeatureLocation(ExactPosition(138683), ExactPosition(138683), strand=1)
+                    # SimpleLocation(ExactPosition(138683), ExactPosition(138683), strand=1)
                     # which satisfies `start > end` in 1-based both-inclusive indexing.
                     # Confirmed this with biopython=1.79 when Bio.SeqIO.parse() takes
                     # a genbank format using BetweenLocation notation 138683^138684
@@ -54,7 +54,7 @@ def format_location(loc: Location) -> str:
         s = "join({})".format(parts)
         return s
 
-    if isinstance(loc, FeatureLocation):
+    if isinstance(loc, SimpleLocation):
         s = _format_part(loc)
     elif isinstance(loc, CompoundLocation):
         s = _format_compound(loc)
