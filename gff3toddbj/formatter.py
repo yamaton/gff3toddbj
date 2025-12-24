@@ -17,8 +17,8 @@ def format_location(loc: Location) -> str:
     """
 
     def _format_part(loc: SimpleLocation) -> str:
-        n_start_pos = loc.start.position + 1   # 1-based
-        n_end_pos = loc.end.position           # 1-based
+        n_start_pos = loc.start + 1   # 1-based
+        n_end_pos = loc.end           # 1-based
         type_start = type(loc.start)
         type_end = type(loc.end)
         start = str(type_start(n_start_pos))

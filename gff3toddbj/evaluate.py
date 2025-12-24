@@ -31,12 +31,12 @@ def remove_short_introns(record: SeqRecord, gap_size_to: int=5) -> None:
                 _runner(f.sub_features)
 
     def _fix(loc: CompoundLocation) -> Union[CompoundLocation, SimpleLocation]:
-        parts = sorted(loc.parts, key=lambda x: (x.start.position, x.end.position))
+        parts = sorted(loc.parts, key=lambda x: (x.start, x.end))
         acc = []
         for curr in parts:
             if not acc:
                 acc.append(curr)
-            elif curr.start.position - acc[-1].end.position - 1 > gap_size_to:
+            elif curr.start - acc[-1].end - 1 > gap_size_to:
                 acc.append(curr)
             else:
                 prev = acc.pop()

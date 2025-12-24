@@ -50,7 +50,7 @@ def _get_assembly_gap(seq: str, qualifiers: OrderedDict[str, Any]) -> List[SeqFe
     features = []
     for loc in locs:
         f = SeqFeature(loc, type="assembly_gap", qualifiers=qualifiers)
-        length = loc.end.position - loc.start.position
+        length = loc.end - loc.start
         if f.qualifiers.get("estimated_length", None) == ["<COMPUTE>"]:
             f.qualifiers["estimated_length"] = [length]
         if length >= 10:
@@ -270,7 +270,7 @@ def _join_features(record: SeqRecord, joinables: Optional[Tuple[str, ...]]) -> S
     joinables_ = [] if joinables is None else joinables
 
     def sortkey(f: SeqFeature) -> Tuple[int, int]:
-        return (f.location.start.position, f.location.end.position)
+        return (int(f.location.start), int(f.location.end))
 
     def _join(features: List[SeqFeature]) -> SeqFeature:
         """Join features into a single feature assuming the list already has right members"""
@@ -647,8 +647,8 @@ def _handle_topology(rec: SeqRecord) -> None:
             if f.location is None:
                 continue
             try:
-                start = int(f.location.start.position)
-                end = int(f.location.end.position)
+                start = int(f.location.start)
+                end = int(f.location.end)
             except (AttributeError, TypeError, ValueError):
                 continue
             if end > record_end_pos:
@@ -671,7 +671,7 @@ def _handle_topology(rec: SeqRecord) -> None:
             new_feature = SeqFeature(None, type="TOPOLOGY", qualifiers={"circular": [""]})
             rec.features.insert(1, new_feature)
 
-            record_end_pos = int(first_feature.location.end.position)
+            record_end_pos = int(first_feature.location.end)
             _scan_origin_spannig(rec.features, record_end_pos)
 
 
