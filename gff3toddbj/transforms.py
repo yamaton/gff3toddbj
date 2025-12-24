@@ -1,4 +1,4 @@
-from typing import Any, Dict, FrozenSet, Generator, List, Optional, Tuple, Iterable, OrderedDict
+from typing import Any, Dict, FrozenSet, Generator, List, Optional, Tuple, Iterable, OrderedDict, DefaultDict
 import collections
 import re
 import logging
@@ -311,57 +311,49 @@ def _join_features(record: SeqRecord, joinables: Optional[Tuple[str, ...]]) -> S
     def _runner(features: List[SeqFeature], parent: Optional[str]) -> List[SeqFeature]:
         """Scan features and apply _join """
 
-        # Don't join features if the parent is None
         if parent is None:
             for f in features:
                 if hasattr(f, "sub_features") and f.sub_features:
                     f.sub_features = _runner(f.sub_features, f.type)
             return features
 
-        # Otherwise, group features that are joined.
-        # `groups_or_features` is a bag both to-be-joined and not-joined features.
-        # Type of `groups_or_features` key is either `SeqFeature` or a group defined as (type, product).
-        # Values for `SeqFeature` keys are dummy, while the type of values for the tuple keys are
-        # List[SeqFeature] that are to be joined.
-        groups_or_features = collections.defaultdict(list)
+        # Use a dictionary where the key is a Hashable identifier.
+        # For non-joinable features, use the object's memory ID.
+        # For joinable features, use the (type, product) tuple.
+        groups: DefaultDict[Any, List[SeqFeature]] = collections.defaultdict(list)
+
+        # We need to maintain order, so keep track of the keys as they appear
+        order = []
+
         for f in features:
             if f.type not in joinables_:
-                groups_or_features[f] = [True]  # dummy values
+                key = id(f)  # Use memory address as a unique, hashable key
             else:
-                if "product" in f.qualifiers:
-                    prod = tuple(f.qualifiers["product"])
-                else:
-                    prod = None
-                group = (f.type, prod)
-                groups_or_features[group].append(f)
+                prod = tuple(f.qualifiers.get("product", []))
+                key = (f.type, prod)
+
+            if key not in groups:
+                order.append(key)
+            groups[key].append(f)
 
         res = []
-        seen = set()
-        for group_or_f, fs in groups_or_features.items():
-            if isinstance(group_or_f, SeqFeature):
-                res.append(group_or_f)
+        for key in order:
+            fs = groups[key]
+
+            # If the key is an integer, it's a non-joinable feature (the id)
+            if isinstance(key, int):
+                res.extend(fs)
             elif len(fs) == 1:
                 res.extend(fs)
             elif parent == "gene":
-                # join features only if /ribosomal_slippage exists
-                xs = []
-                rest = []
-                for f in fs:
-                    if "ribosomal_slippage" in f.qualifiers:
-                        xs.append(f)
-                    else:
-                        rest.append(f)
+                xs = [f for f in fs if "ribosomal_slippage" in f.qualifiers]
+                rest = [f for f in fs if "ribosomal_slippage" not in f.qualifiers]
                 if xs:
-                    joined = _join(xs)
-                    res.append(joined)
+                    res.append(_join(xs))
                 res.extend(rest)
             else:
-                if group_or_f not in seen:
-                    seen.add(group_or_f)
-                    joined_feature = _join(fs)
-                    res.append(joined_feature)
+                res.append(_join(fs))
 
-        # join sublevels after the current level
         for f in res:
             if hasattr(f, "sub_features") and f.sub_features:
                 f.sub_features = _runner(f.sub_features, f.type)

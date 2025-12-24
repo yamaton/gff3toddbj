@@ -1,3 +1,7 @@
+## v0.4.2 (2025-12-24)
+* fix: restore compatibility with Biopython 1.80+ unhashable SeqFeatures
+* Pin biopython 1.81 for compatibility
+
 ## v0.4.1 (2025-12-23)
 * Pin dependencies to make existing code work.
 * Update to modern Python packaging (PEP 621)
