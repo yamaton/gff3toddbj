@@ -1,236 +1,142 @@
 # GFF3-to-DDBJ
 
-![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/yamaton/gff3toddbj?style=for-the-badge)
-[![Conda (channel only)](https://img.shields.io/conda/vn/bioconda/gff3toddbj?style=for-the-badge)](https://bioconda.github.io/recipes/gff3toddbj/README.html)
-[![PyPI](https://img.shields.io/pypi/v/gff3toddbj?style=for-the-badge)](https://pypi.org/project/gff3toddbj/)
-
-* [これは何？](#これは何)
-* [出力の「正しさ」について](#出力の正しさについて)
-* [セットアップ](#セットアップ)
-    - [biocondaからconda環境にインストールする場合](#biocondaからconda環境にインストールする場合)
-    - [pipからconda環境にインストールする場合](#pipからconda環境にインストールする場合)
-    - [GitHubソースコードからconda環境にインストールする場合](#githubソースコードからconda環境にインストールする場合)
-* [GFF3とFASTAからDDBJアノテーションをつくる](#gff3とfastaからddbjアノテーションをつくる)
-  + [`gff3-to-ddbj` を動かしてみる](#gff3-to-ddbj-を動かしてみる)
-* [当プログラムが行うこと](#当プログラムが行うこと)
-* [設定いろいろ](#設定いろいろ)
-  + [メタデータファイル](#メタデータファイル)
-  + [[パワーユーザ向け] FeaturesとQualifiersのリネーム](#パワーユーザ向け-featuresとqualifiersのリネーム)
-    + [Type / Feature keyのリネーム](#type--feature-keyのリネーム)
-    + [Attribute / Qualifier keyのリネーム](#attribute--qualifier-keyのリネーム)
-    + [指定のTypeをQualifier付きFeatureに置き換え](#指定のtypeをqualifier付きfeatureに置き換え)
-    + [指定の (type, attribute) をFeatureに置き換え](#指定の-type-attribute-をfeatureに置き換え)
-    + [カスタムしたリネーム設定で `gff3-to-ddbj` を実行する](#カスタムしたリネーム設定で-gff3-to-ddbj-を実行する)
-  + [[パワーユーザ向け] Features-Qualifiers出力のカスタマイズ](#パワーユーザ向け-features-qualifiers出力のカスタマイズ)
-* [トラブルシューティング](#トラブルシューティング)
-  + [GFF3の正当性チェック](#gff3の正当性チェック)
-  + [GFF3とFASTAの分離（必要に応じて）](#gff3とfastaの分離必要に応じて)
-  + [Entry名の正規化（必要に応じて）](#entry名の正規化必要に応じて)
-* [既知の問題](#既知の問題)
-* [謝辞](#謝辞)
+English version is [here](https://github.com/yamaton/gff3toddbj/blob/main/README.md).
 
 
-[TOC]
 
-## これは何？
+## 概要
 
-DDBJへの登録には指定された形式の[アノテーションファイル](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#annotation)が必要です。GFF3-to-DDBJ はこの**アノテーションファイルをFASTA と GFF3ファイルから作る**プログラムです。**FASTA 単体から最小限のアノテーションファイルを作ることも可能**です。
+GFF3-to-DDBJ は、GFF3 および FASTA ファイルを、登録に必要な [DDBJ アノテーション形式](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#annotation) に変換するツールです。これは `table2asn` (NCBI) や `EMBLmyGFF3` (ENA) の DDBJ 版に相当します。
 
-同種のプログラムは、NCBI登録には[table2asn](https://ftp.ncbi.nih.gov/toolbox/ncbi_tools/converters/by_program/table2asn_GFF/)や[GAG](https://github.com/genomeannotation/GAG)、EMBL登録には[EMBLmyGFF3](https://github.com/NBISweden/EMBLmyGFF3)などがあります。
+出力例 (`.ann` ファイル) は [tests/golden](https://github.com/yamaton/gff3toddbj/tree/main/tests/golden) ディレクトリで確認できます。
 
-[テストフォルダ](https://github.com/yamaton/gff3toddbj/tree/main/tests/golden)に入出力のファイルの例があるのでご覧ください。.annの拡張子付きがDDBJアノテーションファイルになります。同じファイル名のFASTAとGFF3から生成しています。
+## 精度と検証
 
+「完璧な」GFF3 から DDBJ への変換についての厳密な定義は存在しないため、本ツールでは RefSeq の GFF3 と GenBank の対応関係をゴールドスタンダード（正解データ）としています。出力結果は以下の方法で検証しています：
 
-## 出力の「正しさ」について
+1. 内部ツール `genbank-to-ddbj` を介して GenBank 由来のアノテーションと `gff3-to-ddbj` の結果を比較。
+2. すべての出力を [DDBJ BioProject/BioSample/Sequence Data (MSS) Parser](https://www.ddbj.nig.ac.jp/ddbj/parser.html) に通して検証。
 
-DDBJアノテーション出力には幾多の守るべきルールはあるものの、正解には曖昧さが伴います。そのため当ツールではRefSeqの出すGFF3とGenBank形式の対応をもって「正解」と定義しています。（ただし指針がDDBJと異なるばあいにはDDBJのほうを優先しています。）これに基づいて、RefSeqのGenBank形式をできるだけシンプルにDDBJアノテーション形式に変換した正解例を、当ツールで作られるDDBJアノテーション出力とを比べることで評価をしています。[評価の詳細ページはこちら](https://github.com/yamaton/gff3toddbj/tree/main/evaluation)。
+## インストール
 
-なお評価の副産物としてのGenBankからDDBJアノテーションの変換ツール `genbank-to-ddbj` を同梱しています。良い品質のGenBank形式があるときにはGFF3から作るよりも有用かもしれません。
-
-評価の一環として、DDBJ公開の[Parser](https://www.ddbj.nig.ac.jp/ddbj/parser.html)も利用しています。
-
-
-## セットアップ
-
-#### biocondaからconda環境にインストールする場合
+### Bioconda 経由
 
 ```shell
-# ddbjという名前でconda環境をつくってbiocondaからパッケージをインストール
-conda create -n ddbj -c bioconda -c conda-forge gff3toddbj
-
-# 環境ddbjをアクティベート
+conda create -n ddbj -c conda-forge -c bioconda gff3toddbj
 conda activate ddbj
 ```
 
-### pipからconda環境にインストールする場合
+
+
+### PyPI 経由
 
 ```shell
-# ddbjという名前でconda環境をつくってpipコマンドをインストール
+conda create -n ddbj -c conda-forge -c bioconda pip samtools
+conda activate ddbj
+python -m pip install gff3toddbj
+```
+
+
+
+### GitHub 経由 (Nightly)
+
+```shell
 conda create -n ddbj pip
-
-# 環境ddbjをアクティベート
 conda activate ddbj
-
-# samtoolsに含まれる実行ファイルbgzipが必要
-conda install -c bioconda samtools
-
-# pipからgff3toddbjをインストール
-pip install gff3toddbj
-```
-
-#### GitHubソースコードからconda環境にインストールする場合
-
-```shell
-# ソースをzipでダウンロード
-wget https://github.com/yamaton/gff3_to_ddbj/archive/refs/heads/main.zip
-
-# zipを展開、リネーム
-unzip main.zip && mv gff3toddbj-main gff3toddbj && cd gff3toddbj
-
-# ddbjという名前でconda環境をつくる
-conda create -n ddbj
-
-# 環境ddbjをアクティベート
-conda activate ddbj
-
-# ddbjに依存パッケージ (bioconda, bcbio-gff, toml, setuptools) をインストール
-conda install -c bioconda -c conda-forge biopython bcbio-gff toml pysam samtools pip build
-
-# gff3-to-ddbj および付属ツールをインストール
-python -m build && pip install -e ./
+python -m pip install 'git+https://github.com/yamaton/gff3toddbj'
 ```
 
 
 
-## GFF3とFASTAからDDBJアノテーションをつくる
-
-### `gff3-to-ddbj` を動かしてみる
-
-まずはスクリプトを動かしてみます。
+## 使用方法
 
 ```shell
 gff3-to-ddbj \
-  --gff3 myfile.gff3 \               # この行を削除すると source, assembly_gap のみになります
-  --fasta myfile.fa \                # <<必須>>
-  --metadata mymetadata.toml \       # この行を削除するとCOMMON項目無しのデフォルト値が入ります
-  --locus_tag_prefix MYOWNPREFIX \   # この行を削除すると LOCUSTAGPREFIX_ に設定されます
-  --transl_table 1 \                 # この行を削除すると 1 に設定されます
-  --output myawesome_output.ann      # この行を削除すると標準出力に
+  --fasta myfile.fa \               # 必須
+  --gff3 myfile.gff3 \              # 推奨 (ない場合は最低限の情報のみ生成)
+  --metadata mymetadata.toml \      # 任意
+  --locus_tag_prefix PREFIX_ \      # BioSample に登録がある場合は必須
+  --transl_table 1 \                # デフォルト: 1 (標準)
+  --output output.ann               # 任意: デフォルトは標準出力
 ```
 
-* `--gff3 <FILE>` には入力GFF3ファイルへのパスを指定
-* `--fasta <FILE>` には入力FASTAファイルへのパスを指定
-* `--metadata <FILE>` にはTOML形式の[メタデータファイル](#メタデータファイル)を指定
-* `--locus_tag_prefix <STRING>` には [BioSampleの申請時に得られたもの](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#locus_tag)を指定
-* `--transl_table <INT>` は [The Genetic Codes](https://www.ddbj.nig.ac.jp/ddbj/geneticcode.html) から適切な数字を選ぶ
-* `--output <FILE>` には出力ファイル（＝アノテーション）のパスを指定
+
+
+### 引数の詳細
+
+- `--locus_tag_prefix`: [BioSample で割り当てられた](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#locus_tag)プレフィックス。
+- `--transl_table`: 遺伝暗号表のインデックス (例: バクテリアの場合は 11)。詳細は [DDBJ 遺伝暗号表](https://www.ddbj.nig.ac.jp/ddbj/geneticcode.html) を参照してください。
 
 
 
-## 当プログラムが行うこと
+## 内部処理の仕組み
 
-表示形式を変えるほかに以下のようなことをしています。
+GFF3-to-DDBJ は以下のパイプラインを通じてデータを処理します。
 
-* FASTAファイルがgzipで圧縮されているばあい[bgzip](https://www.htslib.org/doc/bgzip.html)圧縮を作成
-  * FASTAのインデックス化とメモリ節約のため
-  * `myname_bgzip.fa.gz` のように `_bgzip` の付いたファイルが作成されます
-  * bgzipfファイルはgzipと互換性があるのでそのまま他での利用も可能です
+### 1. データ準備 (Data Preparation)
 
-* Features / Qualifiersの[変換テーブル](https://github.com/yamaton/gff3toddbj/blob/main/gff3toddbj/translate_features_qualifiers.toml)に基づいたリネーム
-  * **これが当プログラムのコア機能になります**
-  * [Sequence Ontology （略称SO）](http://sequenceontology.org)をベースに、実際例により拡張したものとなっています
-  * たとえば GFF3 の3列目("type")に現れる "transcript" は ([SO:0000673](http://sequenceontology.org/browser/current_svn/term/SO:0000673))にて "INSDC_feature:misc_RNA" とあるため `misc_RNA` feature に置き換えられます。
+- **FASTA 圧縮:** 入力が標準的な Gzip 形式の場合、`bgzip` を使用して再圧縮します (例: `myfile_bgzip.fa.gz` を作成)。これによりインデックス作成が可能になり、メモリ使用量が削減されます。生成されたファイルは標準の `gzip` ツールとも互換性があります。
+- **ギャップ検出:** FASTA 配列をスキャンして `N` の連なりを検出し、自動的に `assembly_gap` Feature を生成します。
+- **トポロジー処理:** GFF3 に `Is_circular=true` がある場合、ツールは `TOPOLOGY` Feature を挿入し、[原点をまたぐ Feature (origin-spanning features)](https://www.ncbi.nlm.nih.gov/datasets/docs/v2/reference-docs/file-formats/annotation-files/about-ncbi-gff3/#origin-spanning-features) を処理します。
 
-* `assembly_gap` の検索・追加
+### 2. Feature と Qualifier のマッピング
 
-* `/transl_table` の`CDS`への追加
+- **SO から INSDC への変換:** [Sequence Ontology](http://sequenceontology.org) に基づき、GFF3 の "types" を DDBJ の "Features" にマッピングします。
+    - *例:* `transcript` (SO:0000673) は `misc_RNA` Feature に変換されます。
+- **Qualifier のリネーム:** [リネームルール](https://github.com/yamaton/gff3toddbj/blob/main/gff3toddbj/translate_features_qualifiers.toml) に基づき、GFF3 の属性 (attributes) を DDBJ 準拠の Qualifier に変換します。
+    - *例:* `ID=foobar` は `/note="ID:foobar"` になります。
+- **遺伝暗号の割り当て:** ユーザー指定のインデックス (デフォルト: 1) に基づき、すべての `CDS` Feature に `/transl_table` Qualifier を自動的に追加します。
 
-* [メタデータファイル](#メタデータファイル)中の`source`情報を各エントリに追加
+### 3. 座標処理 (Coordinate Processing)
 
-* GFF3が `Is_circular=true` を含むばあい `TOPOLOGY` を `/circular` 付で追加して環状ゲノムであることを明示
-  * このとき[始点・終点をまたぐ featureのlocation処理](https://www.ddbj.nig.ac.jp/faq/ja/how-to-describe-location-circular-genome.html)も行う
+- **結合 (Joining):** 親 (Parent) を共有する Feature は `join()` 表記を使用してマージされます。これは `CDS`、`exon`、`mat_peptide`、`V_segment`、`C_region`、`D-loop`、および `misc_feature` に適用されます。
+- **RNA/Exon ロジック:** 結合された `exon` の位置情報は親となる RNA の位置情報として割り当てられ、個々の `exon` エントリは破棄されます。
+    - *注意:* 直接の親が `gene` である場合、`exon` は**結合されません**。
+- **部分性の処理 (Partialness):** 開始コドンまたは終止コドンが欠落している場合、`CDS` の位置情報に部分性を示す記号 (`<` または `>`) を追加します。(参照: [codon_start による翻訳開始フレームのずれ](https://www.ddbj.nig.ac.jp/ddbj/cds.html#frame))。
 
-* 同じ親をもつfeatureを`join`記法で結合
-  *  `CDS`, `exon`, `mat_peptide`, `V_segment`, `C_region`, `D-loop`, `misc_feature` に対して適用
-  * 例外として `gene`を直接の親に持つ `exon` は結合しない
+### 4. DDBJ 準拠ロジック (Product & Gene)
 
-* RNAの位置情報を、ぶら下がる結合されたexonの位置情報で置き換える
+- **Product の制限:** [DDBJ の記載要領](https://www.ddbj.nig.ac.jp/ddbj/qualifiers.html#product) に準拠するため、各 `CDS` は単一の `/product` に制限されます：
+    - 同一産物に複数の一般名がある場合でも、'product' に複数の名前を入力しないでください。複数の名前の区切り文字として不必要な記号を使用しないでください。2つ以上の名前を記載したい場合は、最も代表的な名前を1つ `/product` Qualifier に入力し、他は `/note` Qualifier に入力してください。
+    - 名前や機能が不明な場合は、"hypothetical protein" と記載することを推奨します。
+- **Gene の整合性:**
+    - `/gene` Qualifier が単一の値を持つことを保証します。追加の値は `/gene_synonym` に移動されます。(参照: [Qualifier キーの定義: /gene](https://www.ddbj.nig.ac.jp/ddbj/qualifiers.html#gene))。
+    - 親となる `gene` Feature から、すべての子要素 (例: `mRNA`, `CDS`) へ `/gene` および `/gene_synonym` Qualifier をコピーします。
 
-* CDSに開始・終了コドンが無い場合マークアップ (`<`, `>`) で位置の補正
-  * 参照: [codon_start qualifier による翻訳開始の位置補正](https://www.ddbj.nig.ac.jp/ddbj/cds.html#frame)
+### 5. メタデータとフィルタリング
 
-* CDS下の `/product` が値をひとつだけ持つよう変更。値が無いときには "hypothetical protein" に。複数値の残りは `/note` へ。
+- **メタデータの注入:** メタデータファイル から `source` 情報とグローバル Qualifier を挿入します。カスタマイズの「メタデータ設定」参照。
+- **準拠フィルタリング:** [DDBJ 使用規定マトリックス](https://www.ddbj.nig.ac.jp/assets/files/pdf/ddbj/fq-j.pdf) に違反する Feature や Qualifier を削除します。
+    - *注意:* このプロセスにおいて、`gene` Feature はデフォルトで破棄されます。
+- **重複排除:** 処理中に生成された冗長な Qualifier 値を削除します。
 
-  * 参照: [DDBJ の/product 詳細](https://www.ddbj.nig.ac.jp/ddbj/qualifiers.html#product)
+### 6. 最終フォーマット
 
-    > * 一般名が複数ある場合でも, 複数の名称を記載しないで下さい。また, そのために不必要な区切り記号を使用しないで下さい。一般名の複数記載を希望される場合は, 代表的な名称を /product qualifier に記載し, その他の名称を /note qualifier に記載して下さい。
-    > * 機能, 名称等が不明な蛋白質の場合は, hypothetical protein と記載することを推奨します。
+- **ソート:** 行は開始位置、[Feature の優先順位](https://github.com/yamaton/gff3toddbj/blob/1cea725cca2a8f3edb45bac45d7983e255285d5e/gff3toddbj/transforms.py#L763) (`source` と `TOPOLOGY` を最上部に配置)、および終了位置の順に並べ替えられます。
 
-* `gene` featureが `/gene` または `/gene_synonym` を持つ場合、同qualifiersを下層featuresに対しコピー。
+- **検証ログ:** 破棄された項目はすべて `stderr` に表示されます:
 
-* `/gene` が値を複数持つときには、ひとつだけを `/gene` の値とする。残りを `/gene_synonym` の値に。
-  * 参照: [Qualifier Key の定義: /gene](https://www.ddbj.nig.ac.jp/ddbj/qualifiers.html#gene).
-
-* Qualifier値に重複があるとき冗長分を削除
-
-* アノテーション行の並び替え
-  * (開始位置、Feature Keyによる優先度、終了位置) をもってソートします
-  * 優先度はこちらで[定義](https://github.com/yamaton/gff3toddbj/blob/1cea725cca2a8f3edb45bac45d7983e255285d5e/gff3toddbj/transforms.py#L763)。`source`, `TOPOLOGY` が先頭にくるようにしています。
-
-* [DDBJのFeature-Qualifier一覧表](https://www.ddbj.nig.ac.jp/assets/files/pdf/ddbj/fq-j.pdf)に基づいた出力のフィルタリング
-  * 多くのGFF3に記載されている `gene` feature はここで無くなります。注意。
-  * フィルタによって捨てられる項目は、実行時に標準エラー出力として以下のようにずらっと並びます。
     ```
-    WARNING: [Discarded] feature ------->  gene  <-------    (count: 49911)
-    WARNING: [Discarded] feature ------->  cDNA_match  <-------      (count: 10692)
-    WARNING: [Discarded] feature ------->  match  <-------   (count: 101)
-    WARNING: [Discarded] feature ------->  sequence_conflict  <-------   (count: 81)
-    WARNING: [Discarded] (Feature, Qualifier) = (source, db_xref)    (count: 687)
-    WARNING: [Discarded] (Feature, Qualifier) = (source, Name)   (count: 687)
-    WARNING: [Discarded] (Feature, Qualifier) = (source, gbkey)      (count: 687)
-    WARNING: [Discarded] (Feature, Qualifier) = (source, genome)     (count: 685)
-    WARNING: [Discarded] (Feature, Qualifier) = (mRNA, Parent)   (count: 57304)
-    WARNING: [Discarded] (Feature, Qualifier) = (mRNA, db_xref)      (count: 114608)
+    WARNING: [Discarded] feature -------> gene (count: 49911)
+    WARNING: [Discarded] (Feature, Qualifier) = (mRNA, Parent) (count: 57304)
     ```
 
 
 
+## カスタマイズ
 
-## 設定いろいろ
+### メタデータ設定
 
-### メタデータファイル
+GFF3/FASTA ファイルに含まれていない情報（登録者情報や共通の Qualifier など）を提供するには、TOML ファイル (例: `metadata.toml`) を使用します。
 
-GFF3とFASTAに無い情報をアノテーションファイルに入れるためメタデータファイルを用意します。たとえば [DDBJサイトのアノテーション例](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#annotation)に対応するメタデータはTOML形式で以下のように書かれます。なお省略なしのサンプルは[こちら](https://github.com/yamaton/gff3toddbj/blob/main/examples/metadata/metadata_ddbj_example.toml)になります。
+- **例:** [metadata_ddbj_example.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/metadata/metadata_ddbj_example.toml) を参照してください。
+- **デフォルト:** `--metadata` が省略された場合、ツールはこの[デフォルト設定](https://github.com/yamaton/gff3toddbj/blob/main/gff3toddbj/metadata_without_COMMON.toml)を使用します。
 
-```toml
-[COMMON]
-[COMMON.SUBMITTER]
-ab_name = [
-    "Robertson,G.R.",
-    "Mishima,H."
-]
-contact = "Hanako Mishima"
-email = "mishima@ddbj.nig.ac.jp"
+#### 主要セクション
 
-## ... 中略 ...
+1. **COMMON エントリ**: `SUBMITTER`、`REFERENCE`、`COMMENT` ブロックを定義します。
 
-[COMMON.COMMENT]
-line = [
-    "Please visit our website URL",
-    "http://www.ddbj.nig.ac.jp/"
-]
-
-```
-
-メタデータファイルには以下の情報を入れられます。なおファイルが空でもプログラムは一応動作します。
-
-* COMMONに入れる[基本情報](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#annotation)
-
-  * `SUBMITTER`, `REFERENCE` といった Features
-
-* COMMONに入れる[メタ表記](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#common)
-
-  * 例
+2. **グローバル Qualifier (DDBJ 側の注入)**: `[COMMON.feature]` 構文を使用して、その Feature が出現するたびに特定の Qualifier を挿入するよう DDBJ システムに指示します。
 
     ```toml
     [COMMON.assembly_gap]
@@ -239,185 +145,111 @@ line = [
     linkage_evidence = "paired-ends"
     ```
 
-  * COMMONの下にFeatureを入れておくことで、DDBJでつくられる最終記載（＝フラットファイル）に一律にQualifiersが挿入される機能があるようです。たとえば以下のようにしておくと、gff3-to-ddbjの生成するアノテーションファイルにおいてCOMMONエントリの下に `assembly_gap` 以下の項目が追加されます。これは最終記載において `assembly_gap` 毎に同じQualifier値が挿入されることになります。
+*注意: 現在、ローカル注入でサポートされているのは `[source]` と `[assembly_gap]` のみです。*
 
 
-* Featureごとに挿入するQualifier情報
 
-  * 例: COMMON記法とは `[COMMON.assembly_gap]` → `[assembly_gap]` が違うだけです
+### [高度な設定] Feature と Qualifier のリネーム
+
+GFF3 と DDBJ のフォーマットは 1:1 に対応していません。GFF3 の "types" (3列目) は DDBJ の "Features" に、GFF3 の "attributes" (9列目) は DDBJ の "Qualifiers" にマッピングされます。
+
+`gff3-to-ddbj` は [デフォルトの変換テーブル](https://github.com/yamaton/gff3toddbj/blob/main/gff3toddbj/translate_features_qualifiers.toml) を使用してこれらを変換します。`--config_rename <FILE>` を使用してこれらのルールを上書きできます。
+
+#### カスタマイズ例:
+
+- **Type のリネーム:** GFF3 の type を特定の DDBJ Feature キーにマッピングします。
 
     ```toml
-    [assembly_gap]
-    estimated_length = "unknown"
-    gap_type = "within scaffold"
-    linkage_evidence = "paired-ends"
+    [five_prime_UTR]
+    feature_key = "5'UTR"
     ```
 
-    * FeatureごとのQualifier値の挿入を **gff3-to-ddbj がつくるアノテーションファイルに対して**行います。現在のところ `[source]` と `[assembly_gap]` にのみ対応しています。上記「COMMONに入れるメタ情報」と実質的に同じことですが、アノテーションファイルの時点でFeature毎に値が入る点が違います。使い方は `[COMMON.assembly_gap]` を `[assembly_gap]` に置き換えるだけになります。
+- **Attribute のリネーム:** GFF3 の attribute を DDBJ の Qualifier にマッピングします。`__ANY__` を使用すると、すべての Feature タイプにルールを適用できます。
 
-`gff3-to-ddbj` 実行時にメタデータファイルが指定されない場合は、「とりあえず」として用意された[デフォルト設定](https://github.com/yamaton/gff3toddbj/blob/main/gff3toddbj/metadata_without_COMMON.toml)がロードされます。
+    ```toml
+    [__ANY__.ID]
+    qualifier_key = "note"
+    qualifier_value_prefix = "ID:"  # オプション
+    ```
 
-さらなる例としては、DDBJの[サンプルアノテーション](https://www.ddbj.nig.ac.jp/ddbj/file-format.html#sample)の [WGS in COMMON](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=1110334278) と [WGS](https://docs.google.com/spreadsheets/d/15gLGL5FMV8gRt46ezc2Gmb-R1NbYsIGMssB0MyHkcwE/edit#gid=382116224)に対応するメタデータファイル [metadata_WGS_COMMON.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/metadata/metadata_WGS_COMMON.toml) と [metadata_WGS.toml](https://github.com/yamaton/gff3toddbj/blob/main/examples/metadata/metadata_WGS.toml) を用意しています。参考にしてください。
+- **複雑な変換:** GFF3 の type を DDBJ の Feature/Qualifier ペアにマッピングします (例: `snRNA` を `ncRNA` に変換し、class を付与)。
+
+    ```toml
+    [snRNA]
+    feature_key = "ncRNA"
+    qualifier_key = "ncRNA_class"
+    qualifier_value = "snRNA"
+    ```
+
+- **Attribute から Feature へのマッピング:** 特定の attribute 値を別の DDBJ Feature に変換します (例: `biotype=misc_RNA` 属性を持つ `RNA` type を `misc_RNA` Feature に変換)。
+
+    ```toml
+    [RNA.biotype.misc_RNA]
+    feature_key = "misc_RNA"
+    ```
 
 
 
-### [パワーユーザ向け] FeaturesとQualifiersのリネーム
+### [高度な設定] Feature と Qualifier のフィルタリング
 
-GFF3 と DDBJ アノテーションには大まかに以下のような対応があります。
+[DDBJ 使用規定マトリックス](https://www.ddbj.nig.ac.jp/assets/files/pdf/ddbj/fq-j.pdf) に準拠するため、出力は [デフォルト設定](https://github.com/yamaton/gff3toddbj/blob/main/gff3toddbj/ddbj_filter.toml) によってフィルタリングされます。この TOML ファイルで明示的に許可された Feature と Qualifier のみが最終出力に含まれます。
 
-1.  GFF3 の3列目 "type" → DDBJ アノテーション 2列目 Feature Key
-2.  GFF3 の9列目 "attribute" → DDBJ アノテーション 4，5列目 Qualifier Key, Value
-
-そしてDDBJアノテーションとして許されるFeaturesとQualifiersの名前には規定があります [[Feature-Qualifier 一覧表](https://docs.google.com/spreadsheets/d/1qosakEKo-y9JjwUO_OFcmGCUfssxhbFAm5NXUAnT3eM/edit#gid=0)]。
-
-GFF3で使われる名前・値とINSDCやDDBJで定められた名前・値の橋渡しをするため、GFF3-to-DDBJはTOML形式の変換設定 を読み込んでリネームを行っています。[デフォルトの変換設定](https://github.com/yamaton/gff3toddbj/blob/main/gff3toddbj/translate_features_qualifiers.toml)は[the Sequence Ontology (SO)](http://sequenceontology.org/browser)や類似ツールを参考に頑張って作ってありますが、まだまだ改善の余地があるでしょうし、またGFF3アノテーションのSequence Ontology準拠レベルにも依存すると思われます。
-
-以下は、デフォルトの変換テーブルで不十分な場合のカスタマイズについてです。
-
-
-#### Type / Feature keyのリネーム
-
-GFF3 の type として現れるものがそのままFeature keyになってほしくないときには、このリネームを行います。
-たとえばデフォルト設定では `five_prime_UTR` としてGFF3の3列目 ("type") に現れるものは、アノテーションファイルでは `5'UTR` というFeature keyに置き換えられます。この変換はTOMLで以下のように書きます。
-
-```toml
-[five_prime_UTR]
-feature_key = "5'UTR"
-```
-
-#### Attribute / Qualifier のリネーム
-
-Typeに関係なく指定のattributeについて一律リネームを行うばあいです。このケースでは値にprefixを付けることも可能です。たとえばデフォルト設定ではGFF3での `ID=foobar` というattributeはすべて `/note` qualifierとして `/note=ID:foobar` のように置き換えています。(なお Qualifier key を明示するとき `/note` のように `/`をつけて表記する慣習に従っています。ただしアノテーションではスラッシュを付けない規則のため TOMLファイル中にて `/note` のように書くことはありません。)
-
-対応する設定はこちらです。`__ANY__` という決め打ちのtype名の下にattributeを書きます。
+カスタムフィルタを使用するには、`--config_filter <FILE>` で以下の構造を持つ TOML ファイルを指定してください:
 
 ```toml
-[__ANY__.ID]
-qualifier_key = "note"
-qualifier_value_prefix = "ID:"   # qualifier_value_prefixは省略可
+# CDS Feature にはこれらの Qualifier のみが保持されます
+CDS = ["EC_number", "inference", "locus_tag", "note", "product"]
 ```
 
-またqualifierキーと値の両方を設定するには以下のように書きます。たとえば `/pseudo` DDBJ新規登録において非推奨のため、 `/pseudo=true`といった値に関係なく `/pseudogene="unknown"` で置き換える措置をデフォルトで行っています。
-
-```toml
-# /pseudo は常に /pseudogene="unknown" に置き換える
-[__ANY__.pseudo]
-qualifier_key = "pseudogene"
-qualifier_value = "unknown"
-```
-
-
-#### 指定のTypeをQualifier付きFeatureに置き換え
-
-GFF3の特定typeについて、Qualifier key, valueの付いたFeatureで置き換えることもできます。たとえばデフォルト設定では `snRNA` というtypeを `/ncRNA_class="snRNA"` というqualifierを付けたFeature `ncRNA` に変換しています。
-
-```toml
-[snRNA]
-feature_key = "ncRNA"
-qualifier_key = "ncRNA_class"
-qualifier_value = "snRNA"
-```
-
-
-#### 指定の (type, attribute) をFeatureに置き換え
-
-GFF3にてとある (type名, attributeキー, attribute value) があるとき、これを Feature key として表す必要に迫られることがあります。たとえばデフォルト設定では、GFF3の３列目が `RNA` かつ９列目が `biotype="misc_RNA"` であるとき `misc_RNA` Featureとして扱うよう変換をかけています。マッチさせたい単語をドット区切りで、featureキー、qualifierキー、qualifier値の順に書きます。
-
-```toml
-[RNA.biotype.misc_RNA]
-feature_key = "misc_RNA"
-```
-
-#### カスタムしたリネーム設定で `gff3-to-ddbj` を実行する
-
-デフォルト設定 [translate_features_qualifiers.toml](https://github.com/yamaton/gff3toddbj/blob/main/gff3toddbj/translate_features_qualifiers.toml) を参考にカスタマイズしたファイルを用意してください。カスタマイズしたTOMLファイルを読み込ませるには
-
-* `--config_rename <FILE>`
-
-のコマンドラインオプションを使います。これを利用した呼び出し例は以下のようになります。
-
-```shell
-gff3-to-ddbj \
-  --gff3 myfile.gff3 \
-  --fasta myfile.fa \
-  --metadata mymetadata.toml \
-  --locus_tag_prefix MYOWNPREFIX_ \
-  --transl_table 1 \
-  --config_rename my_translate_features_qualifiers.toml \    # リネーム変換用ファイルを指定
-  --output myawesome_output.ann
-```
-
-
-### [パワーユーザ向け] Features-Qualifiers出力のカスタマイズ
-
-DDBJの登録にて推奨される(Feature, Qualifier)の組は限定されているため、アノテーションの出力にフィルタリングを行っています。
-デフォルトでは[DDBJのFeature/Qualifier 対応一覧表](https://www.ddbj.nig.ac.jp/assets/files/pdf/ddbj/fq-j.pdf)に準じた[TOML形式の設定](https://github.com/yamaton/gff3toddbj/blob/main/gff3toddbj/ddbj_filter.toml)を読みこみます。このファイルでは以下のような構造を取ります。
-
-```toml
-CDS = [
-"EC_number",
-"inference",
-"locus_tag",
-"note",
-"product",
-]
-
-exon = [
-"gene",
-"locus_tag",
-"note",
-]
-```
-
-出力として許される Features および Qualifiers を、左辺にFeature名、右辺にQualifier名を要素にもつリストを書くことで表しています。
-
-たとえば上記の設定では、出力は `CDS` および `exon` のFeatures のみ、そして対応する Qualifiers は記述されたキーに限定されます。
-この機能をカスタマイズするばあいには、TOMLファイルを編集したうえで
-
-* `--config_filter <FILE>`
-
-のコマンドラインオプションを使ってファイルを入力してください。
 
 
 ## トラブルシューティング
 
-### GFF3の正当性チェック
+### GFF3 の検証
 
-アノテーションファイルへの変換を始めるまえに、手持ちのファイルがGFF3形式を満たしているかチェックをかけておくのが良いプラクティスです。オンラインで利用可能なものは [GFF3 online validator](http://genometools.org/cgi-bin/gff3validator.cgi) が便利です。ファイル上限が 50MB なのが玉に瑕です。
+GFF3 ファイルを検証することをお勧めします。[GFF3 online validator](http://genometools.org/cgi-bin/gff3validator.cgi) が便利ですが、ファイルサイズは 50MB に制限されています。
 
+### GFF3 から FASTA を分離する (必要な場合)
 
-
-### GFF3とFASTA の分離
-
-GFF3 ファイル中に `##FASTA` を使っての塩基配列が含まれている場合にはその旨のエラーが出ます。同梱のツールを使うなどして分割してください。
+GFF3_to_DDBJ は、GFF3 ファイル内に `##FASTA` ディレクティブを使って FASTA 情報が含まれている場合、動作しません。付属のツール `split-fasta` は GFF3 ファイルを読み込み、GFF3 (FASTA 情報なし) と FASTA ファイルを保存します。
 
 ```shell
 split-fasta path/to/myfile.gff3 --suffix "_splitted"
 ```
 
-このばあい `myfile_splitted.gff3` と `myfile_splitted.fa` の2つのファイルが作られます。
+これにより、`myfile_splitted.gff3` と `myfile_splitted.fa` という2つのファイルが作成されます。
 
 
 
-### Entry名の正規化
+### エントリー名の正規化 (必要な場合)
 
-DDBJ のアノテーションチェックによると `=|>" []` といった文字は Entry として使えないとのことです。違反文字が含まれるときにはアノテーションの1列目エントリ名を正規化する（＝リネームする）必要があり、同梱のツール `normalize-entry-names`が役立ちます。これはたとえば `ERS324955|SC|contig000013` というエントリ名を `ERS324955:SC:contig000013` に直します。
+DDBJ アノテーションの1列目 (= "Entry") には、`=|>" []` のような文字は使用できません。付属のプログラム `normalize-entry-names` は、そのようなエントリをリネームします。このプログラムは、例えば `ERS324955|SC|contig000013` のような ID を `ERS324955:SC:contig000013` に変換します。
 
 ```shell
-normalize-entry-names myannotation_output.ann
+normalize-entry-names myannotation_output.txt
 ```
-アノテーションファイルのエントリ名に正規化の必要があるときには `myannotation_output_renamed.ann` のファイルが作られます。無いときには `Entry names are fine: No need to normalize.` のメッセージが出て終了します。
+
+
+
+このコマンドは、無効な文字が見つかった*場合*、ファイル `myannotation_output_renamed.txt` を作成します。そうでない場合、出力はありません。
+
 
 
 ## 既知の問題
 
-* `/trans_splicing` があるときの位置補正およびFeature `join()`
-* `/transl_except` が端に来るときの位置補正
-* `/exception` があるときの `/translation` 対応
-* 位置表記 `123^124` がフラットファイルに記載されるようなケースのGFF3側での表現・処理
-* 現段階は仕様を固めているところなので、処理速度が後回しになっています
+### 生物学的・配列ロジック
+
+- **トランススプライシング:** 本ツールは現在、`/trans_splicing` Qualifier を含む Feature の座標補正や `join()` 構文をサポートしていません。
+- **翻訳の例外:** 開始コドンまたは終止コドンにおける `/transl_except` の座標処理はまだ実装されていません。
+- **Qualifier の欠落:** `/exception` Qualifier が存在する場合でも、`/translation` Qualifier を自動生成しないため、DDBJ の検証エラーが発生する可能性があります。
+- **塩基間座標:** "塩基間" の位置指定 (例: `123^124`) は現在サポートされておらず、正しく処理されない可能性があります。
+
+### パフォーマンス
+
+- **実行速度:** 最大限の精度を確保するため、本ツールは現在シングルプロセス構成で動作しています。大規模なゲノムデータセットでは実行時間が長くなることを想定してください。
+
 
 
 ## 謝辞
-このプログラムの設計には、EMBL向けGFF3の変換ソフトである [EMBLmyGFF3](https://github.com/NBISweden/EMBLmyGFF3) のつくりを参考にさせていただきました。
 
+GFF3-to-DDBJ の設計は、GFF3 データを EMBL アノテーション形式に変換するための汎用ツールである [EMBLmyGFF3](https://github.com/NBISweden/EMBLmyGFF3) に触発されました。
