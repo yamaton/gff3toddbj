@@ -280,6 +280,9 @@ pytest --doctest-modules tests/
 
 ### Latest Commits
 ```
+22e70db  Update .gitignore
+49dc1c9  Add CLAUDE.md
+0e59e4d  Add uv.lock
 0267ad3  Update README-ja
 85c66d1  Update README
 6009353  Bump setuptools for build-system
@@ -288,6 +291,11 @@ ecce883  Handle SeqFeatures as unhashable objects
 ```
 
 ### Key Improvements
+- **Repository management** (2026-01-13):
+  - Added `uv.lock` for reproducible builds
+  - Added `CLAUDE.md` knowledge base
+  - Updated `.gitignore` to exclude output files (*.ann, *.err, prokka.*, etc.)
+  - Repository cleanup completed
 - **Biopython 1.86 compatibility**: Fixed SeqRecord creation
 - **Unhashable SeqFeatures**: Proper handling in data structures
 - **Modern packaging**: Updated to setuptools >= 77.0.3
@@ -313,26 +321,64 @@ ecce883  Handle SeqFeatures as unhashable objects
 
 ---
 
-## 10. UNTRACKED FILES (Git Status)
+## 10. REPOSITORY MANAGEMENT
 
-### Current Untracked Files
-```
-GCF_017312705.1_Mj_TUMSAT_v1.0.err
-GCF_017312705.1_Mj_TUMSAT_v1.0_genomic.ann
-notebooks/start-stop-codons.ipynb
-prokka.dr, prokka.ecn, prokka.fixedproducts
-prokka.sqn, prokka.stats, prokka.val
-template.sbt
-tests/golden/prokka_renamed.gff3
-tests/golden/pytest__*.ann (4 files)
-uv.lock
+### Git Status
+**Status**: Clean ✓ (as of 2026-01-13)
+
+All important files are now under version control:
+- ✓ `uv.lock` - Committed for reproducible builds
+- ✓ `CLAUDE.md` - Knowledge base committed
+- ✓ `.gitignore` - Updated to exclude output files
+
+### .gitignore Coverage
+Output and temporary files are now properly ignored:
+
+```gitignore
+# DDBJ annotation output files
+*.ann
+*.err
+
+# Prokka output files (NCBI submission formats)
+*.dr
+*.ecn
+*.fixedproducts
+*.sqn
+*.stats
+*.val
+
+# NCBI submission templates
+*.sbt
+
+# Test output files with UUIDs (pytest generates these)
+pytest__*.ann
+*_renamed.gff3
+
+# Comparison/diff output files
+entry_names_*.txt
+loc_*.txt
+quals_*.txt
 ```
 
-### Recommendations
-- **Annotation files** (`.ann`, `.err`): Consider adding to `.gitignore`
-- **Prokka temp files**: Likely test artifacts, could be cleaned up
-- **uv.lock**: Should be committed (user is actively using `uv`)
-- **Notebooks**: Review `start-stop-codons.ipynb` for insights
+### What's Tracked vs Ignored
+
+**Version Controlled:**
+- Source code (`gff3toddbj/*.py`)
+- Configuration files (`*.toml`)
+- Tests (`tests/*.py`)
+- Golden test data (`tests/golden/*.{fa,gff3,ann}` - reference files only)
+- Documentation (`README*.md`, `CHANGELOG.md`, `CLAUDE.md`)
+- Build files (`pyproject.toml`, `uv.lock`)
+- License and misc (`LICENSE`, `.gitignore`)
+
+**Ignored (Generated/Output):**
+- DDBJ annotation outputs (`*.ann`, `*.err`)
+- Prokka/NCBI submission files (`*.sqn`, `*.dr`, etc.)
+- Test artifacts (UUID-named files)
+- Comparison diff files (`*_left-only.txt`, etc.)
+- Python artifacts (`__pycache__`, `*.pyc`, etc.)
+- Virtual environments (`.venv`, `venv/`, etc.)
+- FASTA indices (`*.fai`, `*.gzi`)
 
 ---
 
@@ -537,8 +583,6 @@ Dependencies: All resolved via uv.lock
 ## 15. FUTURE WORK TRACKER
 
 ### Pending Tasks
-- [ ] Review `start-stop-codons.ipynb` for new insights
-- [ ] Clean up untracked prokka temp files
 - [ ] Consider multi-process support for large genomes
 - [ ] Enhance trans-splicing coordinate handling
 - [ ] Implement automatic `/translation` generation
@@ -552,6 +596,12 @@ Dependencies: All resolved via uv.lock
   - CLI commands verified working
   - End-to-end conversion test successful (augustus dataset)
   - Output matches golden files exactly
+- [x] Repository cleanup and .gitignore update (2026-01-13)
+  - Committed `uv.lock` for reproducible builds
+  - Committed `CLAUDE.md` knowledge base
+  - Updated `.gitignore` to exclude output files (*.ann, *.err, prokka.*, etc.)
+  - Removed untracked notebook and temporary files
+  - Repository now has clean git status
 
 ---
 
