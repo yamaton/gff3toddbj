@@ -45,6 +45,9 @@ namespaces = false
 [tool.setuptools.dynamic]
 version = {attr = "gff3toddbj.version.__version__"}
 
+[tool.setuptools.package-data]
+gff3toddbj = ["*.toml"]
+
 [dependency-groups]
 dev = [
     "pytest>=8.4.2",
