@@ -135,3 +135,27 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# DDBJ annotation output files
+*.ann
+*.err
+
+# Prokka output files (NCBI submission formats)
+*.dr
+*.ecn
+*.fixedproducts
+*.sqn
+*.stats
+*.val
+
+# NCBI submission templates
+*.sbt
+
+# Test output files with UUIDs (pytest generates these)
+pytest__*.ann
+*_renamed.gff3
+
+# Comparison/diff output files
+entry_names_*.txt
+loc_*.txt
+quals_*.txt
