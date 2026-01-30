@@ -287,7 +287,7 @@ def _join_features(record: SeqRecord, joinables: Optional[Tuple[str, ...]]) -> S
         compound_loc = CompoundLocation(locations)
         if compound_loc.strand is None:
             ids = [f.id for f in features]
-            logging.error("Something is wrong in joining features:\n    ids = {}".format(ids))
+            logging.error("Cannot determine strand when joining features: ids={}".format(ids))
 
         # set qualifiers of the joined feature from
         # head of the parts. Here "head" is meant by
@@ -435,7 +435,7 @@ def _regularize_qualifier_value_letters(rec: SeqRecord) -> None:
                                 f.qualifiers[key][i] = x.replace("\\", " ")
                 else:
                     logging.warning(
-                        "WTF?? qualifier value type is not a list:  ({}, {}, {})".format(
+                        "Unexpected qualifier value type (expected list): feature={}, key={}, value={}".format(
                             f.type, key, xs
                         )
                     )
@@ -486,10 +486,10 @@ def _fix_locations(record: SeqRecord, faidx: Optional[io.Faidx]=None) -> None:
                 codon_start = int(cs_list[0])
                 phase = codon_start - 1  # to 0-based phase index
                 if f.location is None:
-                    logging.error("f.location is None. Something is wrong: {}".format(f))
+                    logging.error("CDS feature has no location: {}".format(f))
                     continue
                 if f.location.strand is None:
-                    logging.error("f.location.strand is None! Something is wrong: {}".format(f))
+                    logging.error("CDS feature has no strand information: {}".format(f))
                     continue
 
                 # CDS must have the qualifier "transl_table" as done in _add_transl_table_to_cds
@@ -508,7 +508,7 @@ def _fix_locations(record: SeqRecord, faidx: Optional[io.Faidx]=None) -> None:
         """Credit: EMBLmyGFF3"""
 
         if location.strand is None:
-            logging.error("location.starnd is unavailable!")
+            logging.error("location.strand is unavailable")
             return location
 
         # Note that elements in location.parts should be already sorted
@@ -574,7 +574,7 @@ def _merge_exons_with_parent(rec: SeqRecord) -> None:
             if any(kwd in f.type for kwd in ["RNA", "_segment", "_region"]):
                 joined_exons = [subf for subf in f.sub_features if subf.type == "exon"]
                 if len(joined_exons) > 1:
-                    logging.warning("Something is wrong with joining exons: {}".format(f))
+                    logging.warning("Multiple joined exons found for feature: {}".format(f))
                     continue
                 elif not joined_exons:
                     # when mRNA does not have exons as its children, just leave it as is

@@ -37,7 +37,7 @@ def main():
     parser.add_argument("--fasta", metavar="FILE", help="Input FASTA file", required=True)
     parser.add_argument(
         "--metadata",
-        help="Input metadata in TOML describing COMMON and other entires",
+        help="Input metadata in TOML describing COMMON and other entries",
         metavar="FILE",
         default=PATH_METADATA_DEFAULT,
     )
@@ -58,7 +58,7 @@ def main():
     )
     parser.add_argument(
         "--config_rename",
-        help="Rename setting for features and qualifiers",
+        help="TOML config for renaming features and qualifiers",
         metavar="FILE",
         default=PATH_TRANS_FEATURES_QUALIFIERS,
     )
@@ -71,7 +71,7 @@ def main():
     parser.add_argument(
         "-o", "--out", "--output",
         metavar="FILE",
-        help="Specify annotation file name as output",
+        help="Output annotation file path",
     )
     parser.add_argument(
         "-v", "--version",
@@ -83,7 +83,7 @@ def main():
         "--log",
         default="INFO",
         metavar="STR",
-        help="[debug] Choose log level from (DEBUG, INFO, WARNING, ERROR) (default: INFO).",
+        help="Set log level: DEBUG, INFO, WARNING, or ERROR (default: INFO)",
     )
     args = parser.parse_args()
 

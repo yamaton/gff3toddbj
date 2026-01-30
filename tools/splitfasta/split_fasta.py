@@ -81,12 +81,12 @@ def main():
     logging.basicConfig(level=logging.INFO)
 
     parser = argparse.ArgumentParser(
-        description="Split FASTA from GFF3",
+        description="Extract embedded FASTA from GFF3 file into separate files",
         prog=_PROG_NAME,
     )
-    parser.add_argument("gff3", help="Input GFF3")
+    parser.add_argument("gff3", help="Input GFF3 file with embedded FASTA")
     parser.add_argument(
-        "--suffix", help="Suffix added to the output filenames", default="_splitted"
+        "--suffix", help="Suffix added to the output filenames", default="_split"
     )
     parser.add_argument(
         "-v", "--version",

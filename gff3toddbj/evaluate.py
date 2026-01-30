@@ -159,13 +159,13 @@ def set_accession_as_entry_name(rec: SeqRecord):
 
 def main():
     argparser = argparse.ArgumentParser(prog=_EXEC_NAME)
-    argparser.add_argument("ddbj1", help="Input DDBJ annotation 1")
-    argparser.add_argument("ddbj2", help="Input DDBJ annotation 2")
+    argparser.add_argument("ddbj1", help="First DDBJ annotation file to compare")
+    argparser.add_argument("ddbj2", help="Second DDBJ annotation file to compare")
     argparser.add_argument(
         "--no-rename-entry",
         default=False,
         action="store_true",
-        help="Disable renaming of entries by extracting accession part assuming dbj|accession|locus format",
+        help="Keep original entry names (do not extract accession from dbj|accession|locus format)",
     )
     argparser.add_argument(
         "--patch-features",
@@ -177,7 +177,7 @@ def main():
         "--log",
         default="INFO",
         metavar="STR",
-        help="[debug] Choose log level from (DEBUG, INFO, WARNING, ERROR) (default: INFO).",
+        help="Set log level: DEBUG, INFO, WARNING, or ERROR (default: INFO)",
     )
 
     args = argparser.parse_args()

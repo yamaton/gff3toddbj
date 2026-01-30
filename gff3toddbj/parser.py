@@ -136,7 +136,7 @@ def load_ddbj(path_ddbj) -> Generator[SeqRecord, None, None]:
                 logging.warning(f"Location missing after a feature: {row}")
                 continue
             if record is None:
-                logging.error(f"Something is wrong: {row}")
+                logging.error(f"Feature found before any entry record: {row}")
                 continue
             record.features.append(feature)
 
@@ -152,7 +152,7 @@ def load_ddbj(path_ddbj) -> Generator[SeqRecord, None, None]:
                 feature.qualifiers[qkey] = [qval]
 
     if record is None:
-        logging.warning(f"No record in the data?")
+        logging.warning("No records found in the annotation file")
     else:
         yield record
 

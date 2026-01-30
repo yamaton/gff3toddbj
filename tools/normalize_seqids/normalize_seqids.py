@@ -54,7 +54,7 @@ def main():
     logging.basicConfig(level=logging.INFO)
 
     parser = argparse.ArgumentParser(prog=_PROG_NAME)
-    parser.add_argument("file", help="Input annotation file")
+    parser.add_argument("file", help="Input DDBJ annotation file")
     parser.add_argument(
         "--suffix", help="Suffix to output filenames", default="_renamed"
     )
@@ -80,7 +80,7 @@ def main():
 
         p = pathlib.Path(path_input)
         path_output = p.parent / (p.stem + out_filename_suffix + p.suffix)
-        logging.info("Output GFF   : {}".format(str(path_output)))
+        logging.info("Output annotation: {}".format(str(path_output)))
         save_renamed_annotation(path_input, path_output, table)
     else:
         logging.info("=====================================================")
